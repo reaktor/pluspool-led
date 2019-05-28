@@ -1,10 +1,13 @@
 import React from 'react';
+// import VisualizationA from './components/VisualizationA';
+import VisualizationB from './components/VisualizationB';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <VisualizationB />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
