@@ -158,6 +158,7 @@ class PoolPaper {
 
     this.pool = {
       paths: [null],
+      layers: [null],
     };
 
     paper.settings.applyMatrix = false;
@@ -189,9 +190,14 @@ class PoolPaper {
   };
 
   initializeLayers() {    
-    this.water.layers[0] = new paper.Layer();
-    this.water.layers[1] = new paper.Layer();
+    this.water.layers[0] = new paper.Group();
+    this.water.layers[1] = new paper.Group();
     this.water.layers[1].translate(new paper.Point(10, 10));
+
+    this.pool.layers[0] = new paper.Group();
+
+    this.pool.layers[0].sendToBack();
+    this.water.layers[0].sendToBack();
   }
 
   /**
@@ -247,8 +253,6 @@ class PoolPaper {
 
   drawPoolPaths() {
     const POOL_PATH_SCALE = 50;
-    const {height} = paper.view.size;
-    const center = paper.view.center;
 
     POOL_PATHS.map((path, index) => {
       this.pool.paths[index] = new paper.Path();
@@ -261,6 +265,8 @@ class PoolPaper {
 
       this.pool.paths[index].strokeColor = 'black';
       this.pool.paths[index].strokeCap = 'round';
+
+      this.pool.layers[0].addChild(this.pool.paths[index]);
     });
   }
 
