@@ -4,8 +4,6 @@ import './index.css';
 
 const PI = Math.PI.toFixed(4);
 
-const POINTS = 10;
-const NOISE_HEIGHT = 20;
 const COLORS = {
   darkBlue: '#0073E5',
   lightBlue: '#00E7D8',
@@ -14,6 +12,10 @@ const COLORS = {
   gray: '#C9C9C9',
 };
 
+// WAVES
+const POINTS = 10;
+const NOISE_HEIGHT = 20;
+
 const sinNoise = seed => {
   const SPEED1 = 200;
   const SPEED2 = 100;
@@ -21,6 +23,85 @@ const sinNoise = seed => {
   const sin2 = Math.sin(seed / SPEED2) * sin1;
   return sin2;
 }
+
+// POOL
+/**
+ * Start from 12 o'clock and go clock wise
+ */
+const POOL_PATHS = [
+  [
+    [-1, -5],
+    [1, -5],
+  ],
+  [
+    [1, -5],
+    [1, -3],
+  ],
+  [
+    [1, -3],
+    [1, -1],
+  ],
+  [
+    [1, -1],
+    [5, -1],
+  ],
+  [
+    [5, -1],
+    [5, 1],
+  ],
+  [
+    [5, 1],
+    [1, 1],
+  ],
+  [
+    [1, 1],
+    [1, 3],
+  ],
+  [
+    [1, 3],
+    [1, 5],
+  ],
+  [
+    [1, 5],
+    [-1, 5],
+  ],
+  [
+    [-1, 5],
+    [-1, 3]
+  ],
+  [
+    [-1, 3],
+    [-1, 1],
+  ],
+  [
+    [-1, 1],
+    [-3, 1],
+  ],
+  [
+    [-3, 1],
+    [-5, 1],
+  ],
+  [
+    [-5, 1],
+    [-5, -1],
+  ],
+  [
+    [-5, -1],
+    [-3, -1],
+  ],
+  [
+    [-3, -1],
+    [-1, -1],
+  ],
+  [
+    [-1, -1],
+    [-1, -3],
+  ],
+  [
+    [-1, -3],
+    [-1, -5],
+  ],
+];
 
 /**
  * 
@@ -85,7 +166,7 @@ class PoolPaper {
     this.initializeLayers();
     this.drawWaterPaths();
     this.drawPoolPaths();
-    this.colorPoolPaths(0.9);
+    this.colorPoolPaths();
 
     paper.view.onFrame = this.onFrame.bind(this);
   }
@@ -101,10 +182,10 @@ class PoolPaper {
     this.wrapper.appendChild(canvas);
     paper.setup(canvas);
   
-    const { height } = paper.view.size;
+    const { height, width } = paper.view.size;
   
     // Shift our global vertical center to be the middle
-    paper.view.translate([0, height/2]);
+    paper.view.translate([width/2, height/2]);
   };
 
   initializeLayers() {    
@@ -112,6 +193,10 @@ class PoolPaper {
     this.water.layers[1] = new paper.Layer();
     this.water.layers[1].translate(new paper.Point(10, 10));
   }
+
+  /**
+   * WATER
+   */
 
   drawWaterPaths() {
     const { width } = paper.view.size;
@@ -122,16 +207,16 @@ class PoolPaper {
     this.water.paths[0].strokeWidth = 2;
   
     // first point
-    this.water.paths[0].add([0, 0]);
+    this.water.paths[0].add([width/-2, 0]);
   
     // middle points
     for (var i = 1; i < POINTS; i++) {
-      const point = new paper.Point(width / POINTS * i, center.y);
+      const point = new paper.Point((width / POINTS * i) - width/2, center.y);
       this.water.paths[0].add(point);
     }
   
     // last point
-    this.water.paths[0].add([width, 0]);
+    this.water.paths[0].add([width/2, 0]);
   
     // DEBUG: Show points on path
     // this.water.paths[0].fullySelected = true;
@@ -141,26 +226,6 @@ class PoolPaper {
 
     this.water.layers[0].addChild(this.water.paths[0]);
     this.water.layers[1].addChild(this.water.paths[1]);
-  }
-
-  drawPoolPaths() {
-    const POOL_PATH_LENGTH = 200;
-    const {height} = paper.view.size;
-    const center = paper.view.center;
-
-    this.pool.paths[0] = new paper.Path();
-    this.pool.paths[0].strokeWidth = 5;
-
-    this.pool.paths[0].add([center.x, height / -2]);
-    this.pool.paths[0].add([center.x, (height / -2) + POOL_PATH_LENGTH]);
-  }
-
-  colorPoolPaths(phase = 0) {
-    const {topLeft, bottomLeft} = this.pool.paths[0].bounds;
-    const generatedGradient = generateGradient(new paper.Color(COLORS.gray), new paper.Color(COLORS.purple), phase);
-    const gradientColor = new paper.Color(generatedGradient, topLeft, bottomLeft);
-    this.pool.paths[0].strokeColor = gradientColor;
-    this.pool.paths[0].strokeColor.highlight = topLeft;
   }
 
   animateWaterPaths(event) {
@@ -174,6 +239,39 @@ class PoolPaper {
     // Apply smooth
     this.water.paths[0].smooth({ type: 'continuous' });
     this.water.paths[1].smooth({ type: 'continuous' });
+  }
+
+  /**
+   * POOL
+   */
+
+  drawPoolPaths() {
+    const POOL_PATH_SCALE = 50;
+    const {height} = paper.view.size;
+    const center = paper.view.center;
+
+    POOL_PATHS.map((path, index) => {
+      this.pool.paths[index] = new paper.Path();
+      this.pool.paths[index].strokeWidth = 5;
+      const point1 = [path[0][0] * POOL_PATH_SCALE, path[0][1] * POOL_PATH_SCALE];
+      const point2 = [path[1][0] * POOL_PATH_SCALE, path[1][1] * POOL_PATH_SCALE];
+
+      this.pool.paths[index].add(point1);
+      this.pool.paths[index].add(point2);
+
+      this.pool.paths[index].strokeColor = 'black';
+      this.pool.paths[index].strokeCap = 'round';
+    });
+  }
+
+  colorPoolPaths(phase = 0) {
+    this.pool.paths.map((path, index) => {
+      const startPoint = path.segments[0].curve.point1;
+      const endPoint = path.segments[1].curve.point2;
+      const generatedGradient = generateGradient(new paper.Color(COLORS.gray), new paper.Color(COLORS.purple), phase);
+      const gradientColor = new paper.Color(generatedGradient, startPoint, endPoint);
+      this.pool.paths[index].strokeColor = gradientColor;
+    });
   }
 
   animatePoolPaths(event) {
