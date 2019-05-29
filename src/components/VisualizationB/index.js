@@ -20,17 +20,18 @@ const sinNoise = seed => {
 class PoolPaper {
   constructor(props) {
     this.wrapper = props.wrapper;
-    this.path1 = null;
-    this.path2 = null;
-    this.layer1 = null;
-    this.layer2 = null;
+
+    this.water = {
+      paths: [null, null],
+      layers: [null, null],
+    };
 
     paper.settings.applyMatrix = false;
 
     this.initializeCanvas();
     this.initializeLayers();
     this.drawWaterPaths();
-    paper.view.onFrame = this.onFrame.bind(this);
+    paper.view.onFrame = this.animateWaterPaths.bind(this);
   }
 
   initializeCanvas() {
@@ -46,52 +47,52 @@ class PoolPaper {
   };
 
   initializeLayers() {    
-    this.layer1 = new paper.Layer();
-    this.layer2 = new paper.Layer();
-    this.layer2.translate(new paper.Point(10, 10));
+    this.water.layers[0] = new paper.Layer();
+    this.water.layers[1] = new paper.Layer();
+    this.water.layers[1].translate(new paper.Point(10, 10));
   }
 
   drawWaterPaths() {
     const { width } = paper.view.size;
     const center = paper.view.center;
 
-    this.path1 = new paper.Path();
-    this.path1.strokeColor = COLORS.darkBlue;
-    this.path1.strokeWidth = 2;
+    this.water.paths[0] = new paper.Path();
+    this.water.paths[0].strokeColor = COLORS.darkBlue;
+    this.water.paths[0].strokeWidth = 2;
   
     // first point
-    this.path1.add([0, 0]);
+    this.water.paths[0].add([0, 0]);
   
     // middle points
     for (var i = 1; i < POINTS; i++) {
       const point = new paper.Point(width / POINTS * i, center.y);
-      this.path1.add(point);
+      this.water.paths[0].add(point);
     }
   
     // last point
-    this.path1.add([width, 0]);
+    this.water.paths[0].add([width, 0]);
   
     // DEBUG: Show points on path
-    // this.path1.fullySelected = true;
+    // this.water.paths[0].fullySelected = true;
 
-    this.path2 = this.path1.clone();
-    this.path2.strokeColor = COLORS.lightBlue;
+    this.water.paths[1] = this.water.paths[0].clone();
+    this.water.paths[1].strokeColor = COLORS.lightBlue;
 
-    this.layer1.addChild(this.path1);
-    this.layer2.addChild(this.path2);
+    this.water.layers[0].addChild(this.water.paths[0]);
+    this.water.layers[1].addChild(this.water.paths[1]);
   }
 
-  onFrame(event) {
+  animateWaterPaths(event) {
     for (var i = 1; i < POINTS; i++) {
       const sinSeed = event.count + (i + i % 10) * 100;
       const yPos = sinNoise(sinSeed);
-      this.path1.segments[i].point.y = yPos;
-      this.path2.segments[i].point.y = yPos;
+      this.water.paths[0].segments[i].point.y = yPos;
+      this.water.paths[1].segments[i].point.y = yPos;
     }
      
     // Apply smooth
-    this.path1.smooth({ type: 'continuous' });
-    this.path2.smooth({ type: 'continuous' });
+    this.water.paths[0].smooth({ type: 'continuous' });
+    this.water.paths[1].smooth({ type: 'continuous' });
   }
 }
 
