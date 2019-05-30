@@ -1,0 +1,23 @@
+.databar {
+  margin: 16px;
+}
+
+.databar__item {
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 16px;
+}
+
+.databar__item__label {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.databar__item__value {
+  font-size: 3em;
+}
+
+.databar__button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 16px;
+}
