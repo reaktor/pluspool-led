@@ -1,28 +1,8 @@
 import React, {Component} from 'react';
 import paper from 'paper';
+import {COLORS, POINTS} from './constants.js';
+import {gradientWave, waveSine} from './functions.js';
 import './index.css';
-
-const PI = Math.PI.toFixed(4);
-
-const COLORS = {
-  darkBlue: '#0073E5',
-  lightBlue: '#00E7D8',
-  black: '#000000',
-  purple: '#F900FD',
-  gray: '#C9C9C9',
-};
-
-// WAVES
-const POINTS = 10;
-const NOISE_HEIGHT = 20;
-
-const sinNoise = seed => {
-  const SPEED1 = 200;
-  const SPEED2 = 100;
-  const sin1 = Math.sin(seed / SPEED1) * NOISE_HEIGHT;
-  const sin2 = Math.sin(seed / SPEED2) * sin1;
-  return sin2;
-}
 
 // POOL
 /**
@@ -104,20 +84,9 @@ const POOL_PATHS = [
 ];
 
 /**
- * 
- * Expect:
- * 0 -> 0
- * 0.5 -> 1
- * 1 -> 0
- */
-const wave = (x, phase = 0) => {
-  return Math.sin(PI * 2 * x  - (PI / 2) - (phase * 2 * PI)).toFixed(4) * 0.5 + 0.5;
-}
-
-/**
  * Takes 2 colors and returns an array of gradient stops between those colors.
  * Phase allows us to shift the gradient.
- * wave() function is used to interpolate between colors.
+ * gradientWave() function is used to interpolate between colors.
  */
 const generateGradient = (color1, color2, phase) => {
   const colorDelta = {
@@ -136,9 +105,9 @@ const generateGradient = (color1, color2, phase) => {
 
   const yPoints = xPoints.map(point => {
     return new paper.Color([
-      color1.red + (colorDelta.red * wave(point, phase)),
-      color1.green + (colorDelta.green * wave(point, phase)),
-      color1.blue + (colorDelta.blue * wave(point, phase)),
+      color1.red + (colorDelta.red * gradientWave(point, phase)),
+      color1.green + (colorDelta.green * gradientWave(point, phase)),
+      color1.blue + (colorDelta.blue * gradientWave(point, phase)),
     ]);
   });
 
@@ -237,7 +206,7 @@ class PoolPaper {
   animateWaterPaths(event) {
     for (var i = 1; i < POINTS; i++) {
       const sinSeed = event.count + (i + i % 10) * 100;
-      const yPos = sinNoise(sinSeed);
+      const yPos = waveSine(sinSeed);
       this.water.paths[0].segments[i].point.y = yPos;
       this.water.paths[1].segments[i].point.y = yPos;
     }
@@ -267,6 +236,7 @@ class PoolPaper {
       this.pool.paths[index].strokeCap = 'round';
 
       this.pool.layers[0].addChild(this.pool.paths[index]);
+      return path;
     });
   }
 
@@ -277,6 +247,7 @@ class PoolPaper {
       const generatedGradient = generateGradient(new paper.Color(COLORS.gray), new paper.Color(COLORS.purple), phase);
       const gradientColor = new paper.Color(generatedGradient, startPoint, endPoint);
       this.pool.paths[index].strokeColor = gradientColor;
+      return path;
     });
   }
 
