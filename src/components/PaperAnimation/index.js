@@ -36,16 +36,16 @@ class PaperAnimation {
   initializeCanvas() {
     const canvas = document.createElement('canvas');
     canvas.id = 'paper-canvas';
-    this.wrapper.appendChild(canvas);
+    this.wrapper.append(canvas);
     paper.setup(canvas);
-  
-    const { height, width } = paper.view.size;
-  
-    // Shift our global vertical center to be the middle
-    paper.view.translate([width/2, height/2]);
-  };
 
-  initializeLayers() {    
+    const {height, width} = paper.view.size;
+
+    // Shift our global vertical center to be the middle
+    paper.view.translate([width / 2, height / 2]);
+  }
+
+  initializeLayers() {
     this.water.layers[0] = new paper.Group();
     this.water.layers[1] = new paper.Group();
     this.water.layers[1].translate(new paper.Point(10, 10));

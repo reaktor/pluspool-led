@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {labels, units} from '../../helpers/data';
-import './index.css';
+import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 class Databar extends Component {
   render() {
@@ -10,18 +10,16 @@ class Databar extends Component {
       <div className={`${className} databar`}>
         {Object.keys(data).map(key => (
           <div key={key} className="databar__item">
-            <div className="databar__item__label">
-              {labels[key]}
-            </div>
+            <div className="databar__item__label">{labels[key]}</div>
             <div className="databar__item__value">
               {data[key]}
-                <span className="databar__item__unit">
-                  {units[key]}
-                </span>
+              <span className="databar__item__unit">{units[key]}</span>
             </div>
           </div>
         ))}
-        <button className="databar__button" type="button" onClick={changeData}>Change data</button>
+        <button className="databar__button" type="button" onClick={changeData}>
+          Change data
+        </button>
       </div>
     );
   }

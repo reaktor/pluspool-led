@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "pluspool-visualization-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,7 +13,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "xo"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,5 +30,27 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-xo-react": "^0.19.0",
+    "xo": "^0.24.0"
+  },
+  "prettier": {
+    "trailingComma": "es5"
+  },
+  "xo": {
+    "prettier": true,
+    "space": true,
+    "extends": "xo-react",
+    "parser": "babel-eslint",
+    "envs": [
+      "browser",
+      "node",
+      "jest"
+    ],
+    "rules": {
+      "unicorn/filename-case": false,
+      "react/default-props-match-prop-types": false
+    }
   }
 }

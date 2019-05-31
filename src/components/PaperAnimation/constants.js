@@ -14,10 +14,4 @@ const POINTS = 10;
 const WAVE_SPEED = 20;
 const WAVE_HEIGHT = 30;
 
-export {
-  PI,
-  COLORS,
-  POINTS,
-  WAVE_HEIGHT,
-  WAVE_SPEED,
-};
+export {PI, COLORS, POINTS, WAVE_HEIGHT, WAVE_SPEED};

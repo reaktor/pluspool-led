@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Databar from '../Databar';
 import PaperAnimation from '../PaperAnimation';
-import './index.css';
+import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 const dummyData = [
   {
@@ -45,8 +45,8 @@ class Visualization extends Component {
   componentDidMount() {
     const {data} = this.state;
     const wrapper = this.wrapper.current;
-    
-    this.paperAnimation = new PaperAnimation({ wrapper, data });
+
+    this.paperAnimation = new PaperAnimation({wrapper, data});
   }
 
   componentDidUpdate(_prevProps, prevState) {
@@ -67,15 +67,19 @@ class Visualization extends Component {
     this.setState({
       data: randomData(),
     });
-  }
+  };
 
   render() {
     const {data} = this.state;
 
     return (
       <div className="visualization">
-        <div className="visualization__animation" ref={this.wrapper} />
-        <Databar className="visualization__databar" changeData={this.changeData} data={data} />
+        <div ref={this.wrapper} className="visualization__animation" />
+        <Databar
+          className="visualization__databar"
+          changeData={this.changeData}
+          data={data}
+        />
       </div>
     );
   }
