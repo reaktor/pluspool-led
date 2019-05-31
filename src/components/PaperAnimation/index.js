@@ -4,12 +4,14 @@ import WaveAnimation from './WaveAnimation';
 
 class PaperAnimation {
   constructor(props) {
+    const {wrapper, data} = props;
     paper.settings.applyMatrix = false;
 
-    this.wrapper = props.wrapper;
+    this.wrapper = wrapper;
+    this.data = data;
 
-    this.water = new WaveAnimation();
-    this.pool = new PoolAnimation();
+    this.water = new WaveAnimation({data});
+    this.pool = new PoolAnimation({data});
 
     this.initializeCanvas();
     this.initializeLayers();
@@ -17,6 +19,13 @@ class PaperAnimation {
     this.pool.draw();
 
     paper.view.onFrame = this.onFrame.bind(this);
+  }
+
+  updateProps({data}) {
+    this.data = data;
+
+    this.water.updateProps({data});
+    this.pool.updateProps({data});
   }
 
   onFrame(event) {

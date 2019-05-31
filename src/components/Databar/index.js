@@ -14,7 +14,10 @@ class Databar extends Component {
               {labels[key]}
             </div>
             <div className="databar__item__value">
-              {data[key]}{units[key]}
+              {data[key]}
+                <span className="databar__item__unit">
+                  {units[key]}
+                </span>
             </div>
           </div>
         ))}

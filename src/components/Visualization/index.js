@@ -36,13 +36,28 @@ class Visualization extends Component {
       data: randomData(),
     };
 
+    this.paperAnimation = null;
+
     // Wrapper ref to inject canvas into
     this.wrapper = React.createRef();
   }
 
   componentDidMount() {
+    const {data} = this.state;
     const wrapper = this.wrapper.current;
-    new PaperAnimation({ wrapper });
+    
+    this.paperAnimation = new PaperAnimation({ wrapper, data });
+  }
+
+  componentDidUpdate(_prevProps, prevState) {
+    const {data} = this.state;
+
+    if (
+      data.bacteria !== prevState.data.bacteria ||
+      data.oxygen !== prevState.data.oxygen
+    ) {
+      this.paperAnimation.updateProps({data});
+    }
   }
 
   /**

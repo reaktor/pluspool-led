@@ -1,4 +1,4 @@
-.Visualization {
+.visualization {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,7 +7,20 @@
   z-index: 1;
 }
 
-.Visualization canvas {
+.visualization__databar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+}
+
+.visualization__animation {
+  width: 100%;
+  height: 100%;
+}
+
+.visualization canvas {
   height: 100%;
   width: 100%;
 }

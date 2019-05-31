@@ -1,6 +1,7 @@
 import paper from 'paper';
 import {COLORS} from './constants.js';
 import {gradientWave} from './functions.js';
+import {transforms} from '../../helpers/data';
 
 /**
  * Start from 12 o'clock and go clock wise
@@ -113,10 +114,32 @@ const generateGradient = (color1, color2, phase) => {
   return new paper.Gradient(xyPoints);
 }
 
+const blend = (num1, num2, value) => ((num2 - num1) * value) + num1;
+
+/**
+ * 
+ * @param {First color} color1 
+ * @param {Second color} color2 
+ * @param {Blend value} value 
+ */
+const blendColors = (color1, color2, value) => (
+  {
+    red: blend(color1.red, color2.red, value),
+    green: blend(color1.green, color2.green, value),
+    blue: blend(color1.blue, color2.blue, value),
+  }
+);
+
 class PoolAnimation {
   constructor(props) {
+    const {data} = props;
+    this.data = data;
     this.paths = [null];
     this.layers = [null];
+  }
+
+  updateProps({data}) {
+    this.data = data;
   }
 
   draw() {
@@ -142,10 +165,28 @@ class PoolAnimation {
   }
 
   color(phase = 0) {
+    const color1 = blendColors(
+      new paper.Color(COLORS.gray),
+      new paper.Color(COLORS.white),
+      transforms['oxygen'](this.data.oxygen)
+    );
+
+    const color2 = blendColors(
+      new paper.Color(COLORS.purple),
+      new paper.Color(COLORS.yellow),
+      transforms['bacteria'](this.data.bacteria)
+    );
+
+    console.log(color1, color2);
+
     this.paths.map((path, index) => {
       const startPoint = path.segments[0].curve.point1;
       const endPoint = path.segments[1].curve.point2;
-      const generatedGradient = generateGradient(new paper.Color(COLORS.gray), new paper.Color(COLORS.purple), phase);
+      const generatedGradient = generateGradient(
+        color1,
+        color2,
+        phase
+      );
       const gradientColor = new paper.Color(generatedGradient, startPoint, endPoint);
       this.paths[index].strokeColor = gradientColor;
       return path;
