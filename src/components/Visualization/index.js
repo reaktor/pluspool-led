@@ -1,31 +1,17 @@
 import React, {Component} from 'react';
+import datagarrison from 'datagarrison';
 import Databar from '../Databar';
 import PaperAnimation from '../PaperAnimation';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
-const dummyData = [
-  {
-    oxygen: 90,
-    bacteria: 'high',
-  },
-  {
-    oxygen: 20,
-    bacteria: 'high',
-  },
-  {
-    oxygen: 80,
-    bacteria: 'low',
-  },
-  {
-    oxygen: 50,
-    bacteria: 'low',
-  },
-];
-
-const randomData = () => {
-  const random = Math.floor(Math.random() * dummyData.length);
-  const data = dummyData[random];
-  return data;
+const getSampleFromData = (data, index) => {
+  if (data && data.samples) {
+    const sample = data.samples[index];
+    return data.header.reduce((acc, column, i) => {
+      acc[column] = sample[i];
+      return acc;
+    }, {});
+  }
 };
 
 class Visualization extends Component {
@@ -33,7 +19,8 @@ class Visualization extends Component {
     super(props);
 
     this.state = {
-      data: randomData(),
+      stationData: {},
+      sampleIndex: 0,
     };
 
     this.paperAnimation = null;
@@ -43,34 +30,56 @@ class Visualization extends Component {
   }
 
   componentDidMount() {
-    const {data} = this.state;
-    const wrapper = this.wrapper.current;
+    fetch('/data/351579054854805_live.txt', {
+      method: 'GET',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+    }).then(response => {
+      response.text().then(text => {
+        const parsedData = datagarrison.parse(text);
+        const latestSampleIndex = parsedData.samples.length - 2;
 
-    this.paperAnimation = new PaperAnimation({wrapper, data});
+        this.setState(
+          {
+            stationData: parsedData,
+            sampleIndex: latestSampleIndex,
+          },
+          () => {
+            const {stationData, sampleIndex} = this.state;
+            const wrapper = this.wrapper.current;
+            const sample = getSampleFromData(stationData, sampleIndex);
+
+            this.paperAnimation = new PaperAnimation({wrapper, sample});
+          }
+        );
+      });
+    });
   }
 
   componentDidUpdate(_prevProps, prevState) {
-    const {data} = this.state;
-
-    if (
-      data.bacteria !== prevState.data.bacteria ||
-      data.oxygen !== prevState.data.oxygen
-    ) {
-      this.paperAnimation.updateProps({data});
-    }
+    // Const {data} = this.state;
+    // TODO: update correctly
+    // if (
+    //   data.bacteria !== prevState.data.bacteria ||
+    //   data.oxygen !== prevState.data.oxygen
+    // ) {
+    //   this.paperAnimation.updateProps({data});
+    // }
   }
 
   /**
    * This is a temporary function to mimic data updating
    */
   changeData = () => {
-    this.setState({
-      data: randomData(),
-    });
+    // This.setState({
+    //   data: randomData(),
+    // });
   };
 
   render() {
-    const {data} = this.state;
+    const {stationData, sampleIndex} = this.state;
 
     return (
       <div className="visualization">
@@ -78,7 +87,8 @@ class Visualization extends Component {
         <Databar
           className="visualization__databar"
           changeData={this.changeData}
-          data={data}
+          stationData={stationData}
+          sampleIndex={sampleIndex}
         />
       </div>
     );

@@ -76,14 +76,14 @@ const blendColors = (color1, color2, value) => ({
 
 class PoolAnimation {
   constructor(props) {
-    const {data} = props;
-    this.data = data;
+    const {sample} = props;
+    this.sample = sample;
     this.paths = [null];
     this.layers = [null];
   }
 
-  updateProps({data}) {
-    this.data = data;
+  updateProps({sample}) {
+    this.sample = sample;
   }
 
   draw() {
@@ -118,13 +118,15 @@ class PoolAnimation {
     const color1 = blendColors(
       new paper.Color(COLORS.gray),
       new paper.Color(COLORS.white),
-      transforms.oxygen(this.data.oxygen)
+      1
     );
 
     const color2 = blendColors(
       new paper.Color(COLORS.purple),
       new paper.Color(COLORS.yellow),
-      transforms.bacteria(this.data.bacteria)
+      transforms['Percent Oxygen_SDI_0_10_%'](
+        this.sample['Percent Oxygen_SDI_0_10_%']
+      )
     );
 
     this.paths.map((path, index) => {

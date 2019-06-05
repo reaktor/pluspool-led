@@ -4,14 +4,14 @@ import {waveSine} from './functions';
 
 class WaveAnimation {
   constructor(props) {
-    const {data} = props;
-    this.data = data;
+    const {sample} = props;
+    this.sample = sample;
     this.paths = [null, null];
     this.layers = [null, null];
   }
 
-  updateProps({data}) {
-    this.data = data;
+  updateProps({sample}) {
+    this.sample = sample;
   }
 
   draw() {

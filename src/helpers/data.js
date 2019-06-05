@@ -1,11 +1,13 @@
 const labels = {
-  oxygen: 'Oxygen',
-  bacteria: 'Bacteria',
+  'Percent Oxygen_SDI_0_10_%': 'Percent Oxygen',
+  'Salinity_SDI_0_4_ppt': 'Salinity',
+  'Turbidity_SDI_0_8_NTU': 'Turbidity',
 };
 
 const units = {
-  oxygen: '%',
-  bacteria: '',
+  'Percent Oxygen_SDI_0_10_%': '%',
+  'Salinity_SDI_0_4_ppt': 'PPT',
+  'Turbidity_SDI_0_8_NTU': 'NTU',
 };
 
 const scale = (num, inMin, inMax, outMin, outMax) =>
@@ -16,8 +18,8 @@ const scale = (num, inMin, inMax, outMin, outMax) =>
  * and return a value mapped between 0 -> 1.
  */
 const transforms = {
-  oxygen: value => scale(value, 20, 90, 0, 1),
-  bacteria: value => (value === 'high' ? 1 : 0),
+  'Percent Oxygen_SDI_0_10_%': value => scale(value, 0, 100, 0, 1),
+  // bacteria: value => (value === 'high' ? 1 : 0),
 };
 
 export {labels, units, transforms};
