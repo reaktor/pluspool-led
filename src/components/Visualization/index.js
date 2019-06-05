@@ -59,12 +59,9 @@ class Visualization extends Component {
 
   componentDidUpdate(_prevProps, prevState) {
     const {stationData, sampleIndex} = this.state;
-    
-    if (
-      sampleIndex !== prevState.sampleIndex
-    ) {
+
+    if (sampleIndex !== prevState.sampleIndex) {
       const sample = getSampleFromData(stationData, sampleIndex);
-      console.dir(this)
       if (this.paperAnimation) this.paperAnimation.updateProps({sample});
     }
   }
@@ -73,10 +70,10 @@ class Visualization extends Component {
    * This is a temporary function to mimic data updating
    */
   changeSampleIndex = () => {
-    const { stationData } = this.state;
+    const {stationData} = this.state;
 
     this.setState({
-      sampleIndex: Math.floor(Math.random() * (stationData.samples.length - 2))
+      sampleIndex: Math.floor(Math.random() * (stationData.samples.length - 2)),
     });
   };
 
