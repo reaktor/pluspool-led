@@ -26,4 +26,15 @@
   width: 100%;
   padding: 16px;
   margin-top: 16px;
+
+  background-color: #2676DD;
+  color: white;
+  border-radius: 100px;
+  border: 1px solid white;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  
 }
