@@ -24,8 +24,8 @@ class PaperAnimation {
   updateProps({sample}) {
     this.sample = sample;
 
-    // this.water.updateProps({data});
-    // this.pool.updateProps({data});
+    this.water.updateProps({sample});
+    this.pool.updateProps({sample});
   }
 
   onFrame(event) {
