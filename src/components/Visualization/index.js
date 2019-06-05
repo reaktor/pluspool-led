@@ -50,7 +50,6 @@ class Visualization extends Component {
             const {stationData, sampleIndex} = this.state;
             const wrapper = this.wrapper.current;
             const sample = getSampleFromData(stationData, sampleIndex);
-
             this.paperAnimation = new PaperAnimation({wrapper, sample});
           }
         );
@@ -59,23 +58,26 @@ class Visualization extends Component {
   }
 
   componentDidUpdate(_prevProps, prevState) {
-    // Const {data} = this.state;
-    // TODO: update correctly
-    // if (
-    //   data.bacteria !== prevState.data.bacteria ||
-    //   data.oxygen !== prevState.data.oxygen
-    // ) {
-    //   this.paperAnimation.updateProps({data});
-    // }
+    const {stationData, sampleIndex} = this.state;
+    
+    if (
+      sampleIndex !== prevState.sampleIndex
+    ) {
+      const sample = getSampleFromData(stationData, sampleIndex);
+      console.dir(this)
+      if (this.paperAnimation) this.paperAnimation.updateProps({sample});
+    }
   }
 
   /**
    * This is a temporary function to mimic data updating
    */
-  changeData = () => {
-    // This.setState({
-    //   data: randomData(),
-    // });
+  changeSampleIndex = () => {
+    const { stationData } = this.state;
+
+    this.setState({
+      sampleIndex: Math.floor(Math.random() * (stationData.samples.length - 2))
+    });
   };
 
   render() {
@@ -86,7 +88,7 @@ class Visualization extends Component {
         <div ref={this.wrapper} className="visualization__animation" />
         <Databar
           className="visualization__databar"
-          changeData={this.changeData}
+          changeData={this.changeSampleIndex}
           stationData={stationData}
           sampleIndex={sampleIndex}
         />
