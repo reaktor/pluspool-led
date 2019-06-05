@@ -12,6 +12,8 @@ const getSampleFromData = (data, index) => {
       return acc;
     }, {});
   }
+
+  return {};
 };
 
 class Visualization extends Component {
@@ -86,8 +88,7 @@ class Visualization extends Component {
         <Databar
           className="visualization__databar"
           changeData={this.changeSampleIndex}
-          stationData={stationData}
-          sampleIndex={sampleIndex}
+          sample={getSampleFromData(stationData, sampleIndex)}
         />
       </div>
     );

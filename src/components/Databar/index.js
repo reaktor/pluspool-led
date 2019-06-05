@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {labels, units} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
+/**
+ * A whitelist of headers we want to display in the Databar
+ */
 const displayedHeaders = [
   'Percent Oxygen_SDI_0_10_%',
   'Salinity_SDI_0_4_ppt',
@@ -9,24 +13,23 @@ const displayedHeaders = [
 ];
 
 class Databar extends Component {
+  static defaultProps = {
+    changeData: () => {},
+    className: '',
+    sample: {},
+  };
+
   render() {
-    const {changeData, className, stationData, sampleIndex} = this.props;
-
-    if (!stationData || !stationData.samples || !sampleIndex) {
-      return null;
-    }
-
-    const {samples, header} = stationData;
-    const sample = samples[sampleIndex];
+    const {changeData, className, sample} = this.props;
 
     return (
       <div className={`${className} databar`}>
-        {header.map((column, index) =>
+        {Object.keys(sample).map(column =>
           displayedHeaders.includes(column) ? (
             <div key={column} className="databar__item">
               <div className="databar__item__label">{labels[column]}</div>
               <div className="databar__item__value">
-                {sample[index]}
+                {sample[column]}
                 <span className="databar__item__unit">{units[column]}</span>
               </div>
             </div>
@@ -39,5 +42,11 @@ class Databar extends Component {
     );
   }
 }
+
+Databar.propTypes = {
+  changeData: PropTypes.func,
+  className: PropTypes.string,
+  sample: PropTypes.object,
+};
 
 export default Databar;
