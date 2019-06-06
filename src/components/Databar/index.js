@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {labels, units} from '../../helpers/data';
+import DatabarItem from '../DatabarItem';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 /**
@@ -24,17 +25,11 @@ class Databar extends Component {
 
     return (
       <div className={`${className} databar`}>
-        {Object.keys(sample).map(column =>
-          displayedHeaders.includes(column) ? (
-            <div key={column} className="databar__item">
-              <div className="databar__item__label">{labels[column]}</div>
-              <div className="databar__item__value">
-                {sample[column]}
-                <span className="databar__item__unit">{units[column]}</span>
-              </div>
-            </div>
-          ) : null
-        )}
+        {Object.keys(sample)
+        .filter(key => displayedHeaders.includes(key))
+        .map(column => (
+        <DatabarItem key={column} label={labels[column]} value={sample[column]} unit={units[column]} />
+        ))}
         <button className="databar__button" type="button" onClick={changeData}>
           Change data
         </button>
