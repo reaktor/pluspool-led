@@ -1,6 +1,6 @@
 import paper from 'paper';
-import {COLORS, POINTS} from './constants';
-import {waveSine} from './functions';
+import {COLORS, POINTS} from '../../helpers/constants';
+import {waveSine} from '../../helpers/functions';
 
 class WaveAnimation {
   constructor(props) {

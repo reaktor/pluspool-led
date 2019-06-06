@@ -1,7 +1,7 @@
 import paper from 'paper';
 import {transforms} from '../../helpers/data';
-import {COLORS} from './constants';
-import {gradientWave} from './functions';
+import {COLORS} from '../../helpers/constants';
+import {gradientWave} from '../../helpers/functions';
 
 /**
  * Start from 12 o'clock and go clock wise

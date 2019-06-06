@@ -2,19 +2,9 @@ import React, {Component} from 'react';
 import datagarrison from 'datagarrison';
 import Databar from '../Databar';
 import PaperAnimation from '../PaperAnimation';
+import {ENDPOINTS} from '../../helpers/constants';
+import {getSampleFromData} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
-
-const getSampleFromData = (data, index) => {
-  if (data && data.samples) {
-    const sample = data.samples[index];
-    return data.header.reduce((acc, column, i) => {
-      acc[column] = sample[i];
-      return acc;
-    }, {});
-  }
-
-  return {};
-};
 
 class Visualization extends Component {
   constructor(props) {
@@ -32,7 +22,7 @@ class Visualization extends Component {
   }
 
   componentDidMount() {
-    fetch('/data/351579054854805_live.txt', {
+    fetch(ENDPOINTS.datagarrison, {
       method: 'GET',
       mode: 'no-cors',
       headers: {
@@ -68,9 +58,6 @@ class Visualization extends Component {
     }
   }
 
-  /**
-   * This is a temporary function to mimic data updating
-   */
   changeSampleIndex = () => {
     const {stationData} = this.state;
 
