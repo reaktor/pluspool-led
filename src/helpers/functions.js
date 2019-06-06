@@ -15,6 +15,9 @@ const waveSine = seed => {
  * 0 -> 0
  * 0.5 -> 1
  * 1 -> 0
+ * @param {number} x time
+ * @param {number} phase phase shift
+ * @returns {number} y value along sin wave
  */
 const gradientWave = (x, phase = 0) => {
   return Math.sin(PI * 2 * x - PI / 2 - phase * 2 * PI).toFixed(4) * 0.5 + 0.5;

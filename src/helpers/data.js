@@ -25,6 +25,7 @@ const units = {
 };
 
 /**
+ *
  * A function that allows us to take a number and an initial range
  * and remap that number to a new range.
  *
@@ -41,7 +42,10 @@ const units = {
  * @param {number} inMax - The high end value for the scale that `num` is originally mapped to.
  * @param {number} outMin - The low end value for the scale that `num` will be mapped to.
  * @param {number} outMax - The high end value for the scale that `num` will be mapped to.
+ * @return {number} the scaled numbmer
  */
+
+// eslint-disable-next-line max-params
 const scale = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 
@@ -53,19 +57,23 @@ const transforms = {
   'Percent Oxygen_SDI_0_10_%': value => scale(value, 0, 100, 0, 1),
 };
 
+const displayedHeaders = [
+  'Percent Oxygen_SDI_0_10_%',
+  'Salinity_SDI_0_4_ppt',
+  'Turbidity_SDI_0_8_NTU',
+];
+
 /**
- *
- * @param {Object} data
- * @param {Array} data.header
- * @param {Array} data.samples
- * @param {string} data.timezone
- * @param {number} index
+ * Grabs a single sample from all the samples
+ * @param {Object} data all the samples
+ * @param {number} index which sample to take
+ * @returns {Object} sample
  */
 const getSampleFromData = (data, index) => {
-  if (data && data.samples) {
+  if (data && data.samples && index) {
     const sample = data.samples[index];
     return data.header.reduce((acc, column, i) => {
-      acc[column] = sample[i];
+      if (displayedHeaders.includes(column)) acc[column] = sample[i];
       return acc;
     }, {});
   }

@@ -4,7 +4,8 @@ import WaveAnimation from './WaveAnimation';
 
 class PaperAnimation {
   constructor(props) {
-    const {wrapper, sample} = props;
+    const {wrapper, sample = {}} = props;
+    console.log('constructed');
     paper.settings.applyMatrix = false;
 
     this.wrapper = wrapper;
@@ -36,7 +37,7 @@ class PaperAnimation {
   initializeCanvas() {
     const canvas = document.createElement('canvas');
     canvas.id = 'paper-canvas';
-    this.wrapper.append(canvas);
+    if (this.wrapper) this.wrapper.append(canvas);
     paper.setup(canvas);
 
     const {height, width} = paper.view.size;
