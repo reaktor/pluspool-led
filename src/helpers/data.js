@@ -73,7 +73,7 @@ const getSampleFromData = (data, index) => {
   return {};
 };
 
-const fetchDataGarrisonData = () => {
+const fetchDatagarrisonData = () => {
   return fetch(ENDPOINTS.datagarrison, {
     method: 'GET',
     mode: 'no-cors',
@@ -85,4 +85,4 @@ const fetchDataGarrisonData = () => {
   });
 };
 
-export {labels, units, transforms, getSampleFromData, fetchDataGarrisonData};
+export {labels, units, transforms, getSampleFromData, fetchDatagarrisonData};

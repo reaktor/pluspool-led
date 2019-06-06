@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import datagarrison from 'datagarrison';
 import Databar from '../Databar';
 import PaperAnimation from '../PaperAnimation';
-import {getSampleFromData, fetchDataGarrisonData} from '../../helpers/data';
+import {getSampleFromData, fetchDatagarrisonData} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 class Visualization extends Component {
@@ -21,7 +21,7 @@ class Visualization extends Component {
   }
 
   componentDidMount() {
-    fetchDataGarrisonData().then(text => {
+    fetchDatagarrisonData().then(text => {
       const parsedData = datagarrison.parse(text);
       const latestSampleIndex = parsedData.samples.length - 2;
 
