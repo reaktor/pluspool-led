@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import datagarrison from 'datagarrison';
 import Databar from '../Databar';
 import PaperAnimation from '../PaperAnimation';
-import {ENDPOINTS} from '../../helpers/constants';
-import {getSampleFromData} from '../../helpers/data';
+import {getSampleFromData, fetchDataGarrisonData} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 class Visualization extends Component {
@@ -22,30 +21,22 @@ class Visualization extends Component {
   }
 
   componentDidMount() {
-    fetch(ENDPOINTS.datagarrison, {
-      method: 'GET',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'text/plain',
-      },
-    }).then(response => {
-      response.text().then(text => {
-        const parsedData = datagarrison.parse(text);
-        const latestSampleIndex = parsedData.samples.length - 2;
+    fetchDataGarrisonData().then(text => {
+      const parsedData = datagarrison.parse(text);
+      const latestSampleIndex = parsedData.samples.length - 2;
 
-        this.setState(
-          {
-            stationData: parsedData,
-            sampleIndex: latestSampleIndex,
-          },
-          () => {
-            const {stationData, sampleIndex} = this.state;
-            const wrapper = this.wrapper.current;
-            const sample = getSampleFromData(stationData, sampleIndex);
-            this.paperAnimation = new PaperAnimation({wrapper, sample});
-          }
-        );
-      });
+      this.setState(
+        {
+          stationData: parsedData,
+          sampleIndex: latestSampleIndex,
+        },
+        () => {
+          const {stationData, sampleIndex} = this.state;
+          const wrapper = this.wrapper.current;
+          const sample = getSampleFromData(stationData, sampleIndex);
+          this.paperAnimation = new PaperAnimation({wrapper, sample});
+        }
+      );
     });
   }
 

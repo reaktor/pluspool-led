@@ -1,3 +1,5 @@
+import {ENDPOINTS} from './constants';
+
 /**
  * Look up table that takes our data header as the key
  * and returns a human readible label.
@@ -60,7 +62,6 @@ const transforms = {
  * @param {number} index
  */
 const getSampleFromData = (data, index) => {
-  console.log(data);
   if (data && data.samples) {
     const sample = data.samples[index];
     return data.header.reduce((acc, column, i) => {
@@ -72,4 +73,16 @@ const getSampleFromData = (data, index) => {
   return {};
 };
 
-export {labels, units, transforms, getSampleFromData};
+const fetchDataGarrisonData = () => {
+  return fetch(ENDPOINTS.datagarrison, {
+    method: 'GET',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+  }).then(response => {
+    return response.text();
+  });
+};
+
+export {labels, units, transforms, getSampleFromData, fetchDataGarrisonData};
