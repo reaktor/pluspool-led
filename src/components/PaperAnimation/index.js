@@ -5,7 +5,6 @@ import WaveAnimation from './WaveAnimation';
 class PaperAnimation {
   constructor(props) {
     const {wrapper, sample = {}} = props;
-    console.log('constructed');
     paper.settings.applyMatrix = false;
 
     this.wrapper = wrapper;

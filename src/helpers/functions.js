@@ -15,8 +15,8 @@ const waveSine = seed => {
  * 0 -> 0
  * 0.5 -> 1
  * 1 -> 0
- * @param {number} x time
- * @param {number} phase phase shift
+ * @param {number} x distance along the wave
+ * @param {number} phase how far to shift the phase
  * @returns {number} y value along sin wave
  */
 const gradientWave = (x, phase = 0) => {

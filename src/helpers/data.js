@@ -57,12 +57,6 @@ const transforms = {
   'Percent Oxygen_SDI_0_10_%': value => scale(value, 0, 100, 0, 1),
 };
 
-const displayedHeaders = [
-  'Percent Oxygen_SDI_0_10_%',
-  'Salinity_SDI_0_4_ppt',
-  'Turbidity_SDI_0_8_NTU',
-];
-
 /**
  * Grabs a single sample from all the samples
  * @param {Object} data all the samples
@@ -70,10 +64,16 @@ const displayedHeaders = [
  * @returns {Object} sample
  */
 const getSampleFromData = (data, index) => {
+  const columns = [
+    'Percent Oxygen_SDI_0_10_%',
+    'Salinity_SDI_0_4_ppt',
+    'Turbidity_SDI_0_8_NTU',
+  ];
+
   if (data && data.samples && index) {
     const sample = data.samples[index];
     return data.header.reduce((acc, column, i) => {
-      if (displayedHeaders.includes(column)) acc[column] = sample[i];
+      if (columns.includes(column)) acc[column] = sample[i];
       return acc;
     }, {});
   }

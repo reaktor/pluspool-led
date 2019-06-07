@@ -36,8 +36,9 @@ const Visualization = () => {
   };
 
   useEffect(() => {
-    fetchDatagarrisonData()
-      .then(text => setStationData(datagarrison.parse(text)));
+    fetchDatagarrisonData().then(text =>
+      setStationData(datagarrison.parse(text))
+    );
   }, []);
 
   useEffect(setLatestSampleIndex, [stationData]);
