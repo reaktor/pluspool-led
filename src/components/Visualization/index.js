@@ -1,76 +1,61 @@
-import React, {Component} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import datagarrison from 'datagarrison';
 import Databar from '../Databar';
 import PaperAnimation from '../PaperAnimation';
 import {getSampleFromData, fetchDatagarrisonData} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
-class Visualization extends Component {
-  constructor(props) {
-    super(props);
+const Visualization = () => {
+  const [stationData, setStationData] = useState();
+  const [sampleIndex, setSampleIndex] = useState();
+  const wrapper = useRef(null);
+  const paperAnimation = useRef(null);
 
-    this.state = {
-      stationData: {},
-      sampleIndex: 0,
-    };
+  const sample = getSampleFromData(stationData, sampleIndex);
 
-    this.paperAnimation = null;
-
-    // Wrapper ref to inject canvas into
-    this.wrapper = React.createRef();
-  }
-
-  componentDidMount() {
-    fetchDatagarrisonData().then(text => {
-      const parsedData = datagarrison.parse(text);
-      const latestSampleIndex = parsedData.samples.length - 2;
-
-      this.setState(
-        {
-          stationData: parsedData,
-          sampleIndex: latestSampleIndex,
-        },
-        () => {
-          const {stationData, sampleIndex} = this.state;
-          const wrapper = this.wrapper.current;
-          const sample = getSampleFromData(stationData, sampleIndex);
-          this.paperAnimation = new PaperAnimation({wrapper, sample});
-        }
-      );
-    });
-  }
-
-  componentDidUpdate(_prevProps, prevState) {
-    const {stationData, sampleIndex} = this.state;
-
-    if (sampleIndex !== prevState.sampleIndex) {
-      const sample = getSampleFromData(stationData, sampleIndex);
-      if (this.paperAnimation) this.paperAnimation.updateProps({sample});
-    }
-  }
-
-  changeSampleIndex = () => {
-    const {stationData} = this.state;
-
-    this.setState({
-      sampleIndex: Math.floor(Math.random() * (stationData.samples.length - 2)),
-    });
+  const initPaperAnimation = () => {
+    paperAnimation.current = new PaperAnimation({wrapper: wrapper.current});
   };
 
-  render() {
-    const {stationData, sampleIndex} = this.state;
+  const updatePaperAnimation = () => {
+    paperAnimation.current.updateProps({sample});
+  };
 
-    return (
-      <div className="visualization">
-        <div ref={this.wrapper} className="visualization__animation" />
-        <Databar
-          className="visualization__databar"
-          changeData={this.changeSampleIndex}
-          sample={getSampleFromData(stationData, sampleIndex)}
-        />
-      </div>
+  const fetchStationData = () => {
+    fetchDatagarrisonData().then(text =>
+      setStationData(datagarrison.parse(text))
     );
-  }
-}
+  };
+
+  const setSampleIndexToLatest = () => {
+    setSampleIndex(stationData && stationData.samples.length - 2);
+  };
+
+  const changeSampleIndex = () => {
+    if (!stationData) return;
+    setSampleIndex(
+      Math.floor(Math.random() * (stationData.samples.length - 2))
+    );
+  };
+
+  useEffect(initPaperAnimation, []);
+
+  useEffect(updatePaperAnimation, [paperAnimation, sample]);
+
+  useEffect(fetchStationData, []);
+
+  useEffect(setSampleIndexToLatest, [stationData]);
+
+  return (
+    <div className="visualization">
+      <div ref={wrapper} className="visualization__animation" />
+      <Databar
+        className="visualization__databar"
+        changeSample={changeSampleIndex}
+        sample={sample}
+      />
+    </div>
+  );
+};
 
 export default Visualization;

@@ -31,12 +31,16 @@ const POOL_PATHS = [
  * Takes 2 colors and returns an array of gradient stops between those colors.
  * Phase allows us to shift the gradient.
  * gradientWave() function is used to interpolate between colors.
+ * @param {paper.Color} from starting color
+ * @param {paper.Color} to ending color
+ * @param {number} phase how quickly to blend
+ * @returns {paper.Gradient} a bunch of colors
  */
-const generateGradient = (color1, color2, phase) => {
+const generateGradient = (from, to, phase) => {
   const colorDelta = {
-    red: color2.red - color1.red,
-    green: color2.green - color1.green,
-    blue: color2.blue - color1.blue,
+    red: to.red - from.red,
+    green: to.green - from.green,
+    blue: to.blue - from.blue,
   };
 
   const xPoints = [
@@ -49,9 +53,9 @@ const generateGradient = (color1, color2, phase) => {
 
   const yPoints = xPoints.map(point => {
     return new paper.Color([
-      color1.red + colorDelta.red * gradientWave(point, phase),
-      color1.green + colorDelta.green * gradientWave(point, phase),
-      color1.blue + colorDelta.blue * gradientWave(point, phase),
+      from.red + colorDelta.red * gradientWave(point, phase),
+      from.green + colorDelta.green * gradientWave(point, phase),
+      from.blue + colorDelta.blue * gradientWave(point, phase),
     ]);
   });
 
@@ -62,16 +66,16 @@ const generateGradient = (color1, color2, phase) => {
 
 const blend = (num1, num2, value) => (num2 - num1) * value + num1;
 
-/**
- *
- * @param {First color} color1
- * @param {Second color} color2
- * @param {Blend value} value
+/*
+ * Blend two colors into a single color
+ * @param {First color} from color to blend from
+ * @param {Second color} to color to blend to
+ * @param {Blend value} value how much to blend (0-1)
  */
-const blendColors = (color1, color2, value) => ({
-  red: blend(color1.red, color2.red, value),
-  green: blend(color1.green, color2.green, value),
-  blue: blend(color1.blue, color2.blue, value),
+const blendColors = (from, to, value) => ({
+  red: blend(from.red, to.red, value),
+  green: blend(from.green, to.green, value),
+  blue: blend(from.blue, to.blue, value),
 });
 
 class PoolAnimation {
@@ -110,20 +114,20 @@ class PoolAnimation {
       this.layers[0].addChild(this.paths[index]);
       return path;
     });
-
-    this.color();
   }
 
   color(phase = 0) {
-    const color1 = blendColors(
+    if (!this.sample) return;
+    const from = blendColors(
       new paper.Color(COLORS.gray),
       new paper.Color(COLORS.white),
       1
     );
 
-    const color2 = blendColors(
+    const to = blendColors(
       new paper.Color(COLORS.purple),
       new paper.Color(COLORS.yellow),
+      // eslint-disable-next-line new-cap
       transforms['Percent Oxygen_SDI_0_10_%'](
         this.sample['Percent Oxygen_SDI_0_10_%']
       )
@@ -132,7 +136,7 @@ class PoolAnimation {
     this.paths.map((path, index) => {
       const startPoint = path.segments[0].curve.point1;
       const endPoint = path.segments[1].curve.point2;
-      const generatedGradient = generateGradient(color1, color2, phase);
+      const generatedGradient = generateGradient(from, to, phase);
       const gradientColor = new paper.Color(
         generatedGradient,
         startPoint,
