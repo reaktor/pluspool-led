@@ -114,11 +114,10 @@ class PoolAnimation {
       this.layers[0].addChild(this.paths[index]);
       return path;
     });
-
-    this.color();
   }
 
   color(phase = 0) {
+    if (!this.sample) return;
     const from = blendColors(
       new paper.Color(COLORS.gray),
       new paper.Color(COLORS.white),

@@ -14,9 +14,7 @@ const Visualization = () => {
   const sample = getSampleFromData(stationData, sampleIndex);
 
   const initPaperAnimation = () => {
-    paperAnimation.current = new PaperAnimation({
-      wrapper: wrapper.current,
-    });
+    paperAnimation.current = new PaperAnimation({wrapper: wrapper.current});
   };
 
   const updatePaperAnimation = () => {
@@ -47,8 +45,6 @@ const Visualization = () => {
   useEffect(fetchStationData, []);
 
   useEffect(setSampleIndexToLatest, [stationData]);
-
-  if (!(sample && wrapper)) return null;
 
   return (
     <div className="visualization">

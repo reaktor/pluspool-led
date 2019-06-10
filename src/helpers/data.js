@@ -64,19 +64,15 @@ const transforms = {
  * @returns {Object} sample
  */
 const getSampleFromData = (data, index) => {
-  const columns = [
-    'Percent Oxygen_SDI_0_10_%',
-    'Salinity_SDI_0_4_ppt',
-    'Turbidity_SDI_0_8_NTU',
-  ];
-
   if (data && data.samples && index) {
     const sample = data.samples[index];
     return data.header.reduce((acc, column, i) => {
-      if (columns.includes(column)) acc[column] = sample[i];
+      acc[column] = sample[i];
       return acc;
     }, {});
   }
+
+  return {};
 };
 
 const fetchDatagarrisonData = () => {
