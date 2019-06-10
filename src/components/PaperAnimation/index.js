@@ -23,7 +23,6 @@ class PaperAnimation {
 
   updateProps({sample}) {
     this.sample = sample;
-
     this.water.updateProps({sample});
     this.pool.updateProps({sample});
   }

@@ -9,39 +9,44 @@ const Visualization = () => {
   const [stationData, setStationData] = useState();
   const [sampleIndex, setSampleIndex] = useState();
   const wrapper = useRef(null);
-
   const paperAnimation = useRef(null);
+
   const sample = getSampleFromData(stationData, sampleIndex);
 
-  useEffect(() => {
+  const initPaperAnimation = () => {
     paperAnimation.current = new PaperAnimation({
       wrapper: wrapper.current,
     });
-  }, []);
+  };
 
-  useEffect(() => {
+  const updatePaperAnimation = () => {
     paperAnimation.current.updateProps({sample});
-  }, [paperAnimation, sample]);
-
-  const changeSampleIndex = () => {
-    if (!stationData) return;
-    setSampleIndex(
-      Math.floor(Math.random() * (stationData.samples.length - 2))
-    );
   };
 
-  const setLatestSampleIndex = () => {
-    if (!stationData) return;
-    setSampleIndex(stationData.samples.length - 2);
-  };
-
-  useEffect(() => {
+  const fetchStationData = () => {
     fetchDatagarrisonData().then(text =>
       setStationData(datagarrison.parse(text))
     );
-  }, []);
+  };
 
-  useEffect(setLatestSampleIndex, [stationData]);
+  const setSampleIndexToLatest = () => {
+    setSampleIndex(stationData && stationData.samples.length - 2);
+  };
+
+  const changeSampleIndex = () => {
+    setSampleIndex(
+      stationData &&
+        Math.floor(Math.random() * (stationData.samples.length - 2))
+    );
+  };
+
+  useEffect(initPaperAnimation, []);
+
+  useEffect(updatePaperAnimation, [paperAnimation, sample]);
+
+  useEffect(fetchStationData, []);
+
+  useEffect(setSampleIndexToLatest, [stationData]);
 
   if (!(sample && wrapper)) return null;
 

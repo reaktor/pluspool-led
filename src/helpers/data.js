@@ -77,8 +77,6 @@ const getSampleFromData = (data, index) => {
       return acc;
     }, {});
   }
-
-  return {};
 };
 
 const fetchDatagarrisonData = () => {

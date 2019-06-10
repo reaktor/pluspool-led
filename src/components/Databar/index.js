@@ -5,7 +5,7 @@ import DatabarItem from '../DatabarItem';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 const Databar = ({changeSample, className, sample}) => {
-  const displayedColumns = useState(Object.keys(sample));
+  const [displayedColumns] = useState(Object.keys(sample));
 
   return (
     <div className={`${className} databar`}>
