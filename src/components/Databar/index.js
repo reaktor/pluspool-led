@@ -13,14 +13,17 @@ const displayedColumns = [
 const Databar = ({changeSample, className, sample}) => {
   return (
     <div className={`${className} databar`}>
-      {displayedColumns.map(column => (
-        <DatabarItem
-          key={column}
-          label={labels[column]}
-          value={sample[column]}
-          unit={units[column]}
-        />
-      ))}
+      {displayedColumns.map(
+        column =>
+          sample[column] && (
+            <DatabarItem
+              key={column}
+              label={labels[column]}
+              value={sample[column]}
+              unit={units[column]}
+            />
+          )
+      )}
       <button className="databar__button" type="button" onClick={changeSample}>
         Change data
       </button>
