@@ -35,7 +35,7 @@ class PaperAnimation {
   initializeCanvas() {
     const canvas = document.createElement('canvas');
     canvas.id = 'paper-canvas';
-    if (this.wrapper) this.wrapper.append(canvas);
+    this.wrapper.append(canvas);
     paper.setup(canvas);
 
     const {height, width} = paper.view.size;

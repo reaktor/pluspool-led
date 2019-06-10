@@ -32,9 +32,9 @@ const Visualization = () => {
   };
 
   const changeSampleIndex = () => {
+    if (!stationData) return;
     setSampleIndex(
-      stationData &&
-        Math.floor(Math.random() * (stationData.samples.length - 2))
+      Math.floor(Math.random() * (stationData.samples.length - 2))
     );
   };
 
