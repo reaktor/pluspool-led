@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import datagarrison from 'datagarrison';
 import {fetchStationData, fetchNoaaData} from './helpers/data';
+import Graphs from './components/Graphs';
 import Visualization from './components/Visualization';
 
 function App() {
@@ -23,6 +24,11 @@ function App() {
       <Visualization noaaData={noaaData} stationData={stationData} />
       <section className="wrapper">
         <h1>+Pool</h1>
+      </section>
+      <div className="spacer" />
+      <section className="wrapper shaded-wrapper">
+        <h2>Graphs</h2>
+        <Graphs noaaData={noaaData} stationData={stationData} />
       </section>
       <div className="spacer" />
       <section className="wrapper shaded-wrapper">
