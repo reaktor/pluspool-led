@@ -1,5 +1,5 @@
 import paper from 'paper';
-import {transforms} from '../../helpers/data';
+import {normalizations} from '../../helpers/data';
 import {COLORS} from '../../helpers/constants';
 import {gradientWave} from '../../helpers/functions';
 
@@ -128,7 +128,7 @@ class PoolAnimation {
       new paper.Color(COLORS.purple),
       new paper.Color(COLORS.yellow),
       // eslint-disable-next-line new-cap
-      transforms['Percent Oxygen_SDI_0_10_%'](
+      normalizations['Percent Oxygen_SDI_0_10_%'](
         this.sample['Percent Oxygen_SDI_0_10_%']
       )
     );

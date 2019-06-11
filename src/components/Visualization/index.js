@@ -2,16 +2,27 @@ import React, {useState, useRef, useEffect} from 'react';
 import datagarrison from 'datagarrison';
 import Databar from '../Databar';
 import PaperAnimation from '../PaperAnimation';
-import {getSampleFromData, fetchDatagarrisonData} from '../../helpers/data';
+import {
+  deriveSampleFromData,
+  fetchStationData,
+  fetchNoaaData,
+} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 const Visualization = () => {
   const [stationData, setStationData] = useState();
-  const [sampleIndex, setSampleIndex] = useState();
+  const [noaaData, setNoaaData] = useState();
+  const [stationSampleIndex, setStationSampleIndex] = useState();
+  const [noaaSampleIndex, setNoaaSampleIndex] = useState();
   const wrapper = useRef(null);
   const paperAnimation = useRef(null);
 
-  const sample = getSampleFromData(stationData, sampleIndex);
+  const sample = deriveSampleFromData({
+    noaaData,
+    stationData,
+    stationSampleIndex,
+    noaaSampleIndex,
+  });
 
   const initPaperAnimation = () => {
     paperAnimation.current = new PaperAnimation({wrapper: wrapper.current});
@@ -21,30 +32,48 @@ const Visualization = () => {
     paperAnimation.current.updateProps({sample});
   };
 
-  const fetchStationData = () => {
-    fetchDatagarrisonData().then(text =>
-      setStationData(datagarrison.parse(text))
+  const getStationData = () => {
+    fetchStationData().then(text => setStationData(datagarrison.parse(text)));
+  };
+
+  const getNoaaData = () => {
+    fetchNoaaData().then(response => setNoaaData(response.data));
+  };
+
+  const setStationSampleIndexToLatest = () => {
+    setStationSampleIndex(stationData && stationData.samples.length - 2);
+  };
+
+  const setNoaaSampleIndexToLatest = () => {
+    setNoaaSampleIndex(noaaData && noaaData.length - 1);
+  };
+
+  const changeStationSampleIndex = () => {
+    if (!stationData) return;
+    setStationSampleIndex(
+      Math.floor(Math.random() * (stationData.samples.length - 2))
     );
   };
 
-  const setSampleIndexToLatest = () => {
-    setSampleIndex(stationData && stationData.samples.length - 2);
+  const changeNoaaSampleIndex = () => {
+    if (!noaaData) return;
+    setNoaaSampleIndex(Math.floor(Math.random() * (noaaData.length - 1)));
   };
 
   const changeSampleIndex = () => {
-    if (!stationData) return;
-    setSampleIndex(
-      Math.floor(Math.random() * (stationData.samples.length - 2))
-    );
+    changeStationSampleIndex();
+    changeNoaaSampleIndex();
   };
 
   useEffect(initPaperAnimation, []);
 
   useEffect(updatePaperAnimation, [paperAnimation, sample]);
 
-  useEffect(fetchStationData, []);
+  useEffect(getStationData, []);
+  useEffect(getNoaaData, []);
 
-  useEffect(setSampleIndexToLatest, [stationData]);
+  useEffect(setStationSampleIndexToLatest, [stationData]);
+  useEffect(setNoaaSampleIndexToLatest, [noaaData]);
 
   return (
     <div className="visualization">

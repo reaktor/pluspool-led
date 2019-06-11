@@ -1,4 +1,4 @@
-import {ENDPOINTS} from './constants';
+import {DIRECTIONS, ENDPOINTS} from './constants';
 
 /**
  * Look up table that takes our data header as the key
@@ -9,7 +9,9 @@ const labels = {
   // prettier-ignore
   'Salinity_SDI_0_4_ppt': 'Salinity',
   // prettier-ignore
-  'Turbidity_SDI_0_8_NTU': 'Turbidity'
+  'Turbidity_SDI_0_8_NTU': 'Turbidity',
+  s: 'Water Speed',
+  d: 'Water Direction',
 };
 
 /**
@@ -21,7 +23,17 @@ const units = {
   // prettier-ignore
   'Salinity_SDI_0_4_ppt': 'PPT',
   // prettier-ignore
-  'Turbidity_SDI_0_8_NTU': 'NTU'
+  'Turbidity_SDI_0_8_NTU': 'NTU',
+  s: 'KN',
+  d: '',
+};
+
+/**
+ * Look up table that takes our data header as the key
+ * and returns a function that takes the value and returns a new value.
+ */
+const transforms = {
+  d: value => DIRECTIONS[Math.floor(value / 45)],
 };
 
 /**
@@ -50,23 +62,41 @@ const scale = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 
 /**
- * `transforms` contains functions that will take a value from the data
+ * `normalizations` contains functions that will take a value from the data
  * and return a value mapped between 0 -> 1.
  */
-const transforms = {
+const normalizations = {
   'Percent Oxygen_SDI_0_10_%': value => scale(value, 0, 100, 0, 1),
 };
 
 /**
- * Grabs a single sample from all the samples
- * @param {Object} data all the samples
- * @param {number} index which sample to take
- * @returns {Object} sample
+ *
+ * @param {Object} props - Props we pass to all derive data functions.
+ * @returns {Object} The merged data from all sources.
  */
-const getSampleFromData = (data, index) => {
-  if (data && data.samples && index) {
-    const sample = data.samples[index];
-    return data.header.reduce((acc, column, i) => {
+const deriveSampleFromData = props => {
+  const stationDataSample = deriveSampleFromStationData(props);
+  const noaaDataSample = deriveSampleFromNoaaData(props);
+
+  return {
+    ...stationDataSample,
+    ...noaaDataSample,
+  };
+};
+
+/**
+ *
+ * @param {Object} stationData - Data retrieved from the Datagarrison weather station.
+ * @param {Array} stationData.header - A list of labels for each column of data.
+ * @param {Array} stationData.samples - The data samples.
+ * @param {string} stationData.timezone - Timezone for data
+ * @param {number} stationSampleIndex - Temporary index for which sample to grab.
+ * @returns {Object} A sample of data.
+ */
+const deriveSampleFromStationData = ({stationData, stationSampleIndex}) => {
+  if (stationData && stationData.samples && stationSampleIndex) {
+    const sample = stationData.samples[stationSampleIndex];
+    return stationData.header.reduce((acc, column, i) => {
       acc[column] = sample[i];
       return acc;
     }, {});
@@ -75,7 +105,22 @@ const getSampleFromData = (data, index) => {
   return {};
 };
 
-const fetchDatagarrisonData = () => {
+/**
+ *
+ * @param {Object} noaaData - Data retrieved from the NOAA tides and currents api.
+ * @param {number} noaaSampleIndex - Temporary index for which sample to grab.
+ * @returns {Object} A sample of data.
+ */
+const deriveSampleFromNoaaData = ({noaaData, noaaSampleIndex}) => {
+  if (noaaData && noaaData.length > 0 && noaaSampleIndex) {
+    const noaaSample = noaaData[noaaSampleIndex];
+    return noaaSample;
+  }
+
+  return {};
+};
+
+const fetchStationData = () => {
   return fetch(ENDPOINTS.datagarrison, {
     method: 'GET',
     mode: 'no-cors',
@@ -87,4 +132,20 @@ const fetchDatagarrisonData = () => {
   });
 };
 
-export {labels, units, transforms, getSampleFromData, fetchDatagarrisonData};
+const fetchNoaaData = () => {
+  return fetch(ENDPOINTS.noaaCurrent, {
+    method: 'GET',
+  }).then(response => {
+    return response.json();
+  });
+};
+
+export {
+  labels,
+  units,
+  normalizations,
+  transforms,
+  deriveSampleFromData,
+  fetchStationData,
+  fetchNoaaData,
+};
