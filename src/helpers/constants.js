@@ -1,6 +1,6 @@
 const ENDPOINTS = {
   datagarrison: '/data/351579054854805_live.txt',
-  noaaTides:
+  noaaCurrent:
     'https://tidesandcurrents.noaa.gov/api/datagetter?date=recent&station=n03020&product=currents&units=english&time_zone=gmt&&format=json',
 };
 
@@ -20,4 +20,6 @@ const POINTS = 10;
 const WAVE_SPEED = 20;
 const WAVE_HEIGHT = 30;
 
-export {ENDPOINTS, PI, COLORS, POINTS, WAVE_HEIGHT, WAVE_SPEED};
+const DIRECTIONS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+
+export {DIRECTIONS, ENDPOINTS, PI, COLORS, POINTS, WAVE_HEIGHT, WAVE_SPEED};
