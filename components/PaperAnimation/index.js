@@ -1,4 +1,4 @@
-import paper from 'paper';
+import paper from 'paper-jsdom-canvas';
 import PoolAnimation from './PoolAnimation';
 import WaveAnimation from './WaveAnimation';
 

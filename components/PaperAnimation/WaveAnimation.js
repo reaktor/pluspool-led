@@ -1,4 +1,4 @@
-import paper from 'paper';
+import paper from 'paper-jsdom-canvas';
 import {COLORS, POINTS} from '../../helpers/constants';
 import {waveSine} from '../../helpers/functions';
 

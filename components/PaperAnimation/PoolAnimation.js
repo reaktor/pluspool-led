@@ -1,4 +1,4 @@
-import paper from 'paper';
+import paper from 'paper-jsdom-canvas';
 import {normalizations} from '../../helpers/data';
 import {COLORS} from '../../helpers/constants';
 import {gradientWave} from '../../helpers/functions';
