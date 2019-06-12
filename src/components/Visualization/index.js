@@ -1,17 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react';
-import datagarrison from 'datagarrison';
+import PropTypes from 'prop-types';
 import Databar from '../Databar';
 import PaperAnimation from '../PaperAnimation';
-import {
-  deriveSampleFromData,
-  fetchStationData,
-  fetchNoaaData,
-} from '../../helpers/data';
+import {deriveSampleFromData} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
-const Visualization = () => {
-  const [stationData, setStationData] = useState();
-  const [noaaData, setNoaaData] = useState();
+const Visualization = ({noaaData, stationData}) => {
   const [stationSampleIndex, setStationSampleIndex] = useState();
   const [noaaSampleIndex, setNoaaSampleIndex] = useState();
   const wrapper = useRef(null);
@@ -30,14 +24,6 @@ const Visualization = () => {
 
   const updatePaperAnimation = () => {
     paperAnimation.current.updateProps({sample});
-  };
-
-  const getStationData = () => {
-    fetchStationData().then(text => setStationData(datagarrison.parse(text)));
-  };
-
-  const getNoaaData = () => {
-    fetchNoaaData().then(response => setNoaaData(response.data));
   };
 
   const setStationSampleIndexToLatest = () => {
@@ -69,9 +55,6 @@ const Visualization = () => {
 
   useEffect(updatePaperAnimation, [paperAnimation, sample]);
 
-  useEffect(getStationData, []);
-  useEffect(getNoaaData, []);
-
   useEffect(setStationSampleIndexToLatest, [stationData]);
   useEffect(setNoaaSampleIndexToLatest, [noaaData]);
 
@@ -85,6 +68,16 @@ const Visualization = () => {
       />
     </div>
   );
+};
+
+Visualization.defaultProps = {
+  noaaData: null,
+  stationData: null,
+};
+
+Visualization.propTypes = {
+  noaaData: PropTypes.array,
+  stationData: PropTypes.object,
 };
 
 export default Visualization;

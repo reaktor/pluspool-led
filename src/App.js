@@ -1,12 +1,34 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import datagarrison from 'datagarrison';
+import {fetchStationData, fetchNoaaData} from './helpers/data';
+import Graphs from './components/Graphs';
 import Visualization from './components/Visualization';
 
 function App() {
+  const [stationData, setStationData] = useState();
+  const [noaaData, setNoaaData] = useState();
+
+  const getStationData = () => {
+    fetchStationData().then(text => setStationData(datagarrison.parse(text)));
+  };
+
+  const getNoaaData = () => {
+    fetchNoaaData().then(response => setNoaaData(response.data));
+  };
+
+  useEffect(getStationData, []);
+  useEffect(getNoaaData, []);
+
   return (
     <div>
-      <Visualization />
+      <Visualization noaaData={noaaData} stationData={stationData} />
       <section className="wrapper">
         <h1>+Pool</h1>
+      </section>
+      <div className="spacer" />
+      <section className="wrapper shaded-wrapper">
+        <h2>Graphs</h2>
+        <Graphs noaaData={noaaData} stationData={stationData} />
       </section>
       <div className="spacer" />
       <section className="wrapper shaded-wrapper">

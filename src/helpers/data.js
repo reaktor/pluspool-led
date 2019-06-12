@@ -107,6 +107,27 @@ const deriveSampleFromStationData = ({stationData, stationSampleIndex}) => {
 
 /**
  *
+ * @param {Object} stationData - Data retrieved from the Datagarrison weather station.
+ * @param {Array} stationData.header - A list of labels for each column of data.
+ * @param {Array} stationData.samples - The data samples.
+ * @param {string} stationData.timezone - Timezone for data
+ * @returns {Object} Samples of data.
+ */
+const deriveSamplesFromStationData = ({stationData}) => {
+  if (stationData && stationData.samples) {
+    return stationData.samples.map(sample => {
+      return stationData.header.reduce((acc, column, i) => {
+        acc[column] = sample[i];
+        return acc;
+      }, {});
+    });
+  }
+
+  return {};
+};
+
+/**
+ *
  * @param {Object} noaaData - Data retrieved from the NOAA tides and currents api.
  * @param {number} noaaSampleIndex - Temporary index for which sample to grab.
  * @returns {Object} A sample of data.
@@ -146,6 +167,7 @@ export {
   normalizations,
   transforms,
   deriveSampleFromData,
+  deriveSamplesFromStationData,
   fetchStationData,
   fetchNoaaData,
 };
