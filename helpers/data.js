@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-unfetch';
 import {DIRECTIONS, ENDPOINTS} from './constants';
 
 /**
@@ -149,7 +150,11 @@ const fetchStationData = () => {
       'Content-Type': 'text/plain',
     },
   }).then(response => {
-    return response.text();
+    if (response.ok) {
+      return response.text();
+    }
+
+    throw new Error(`Request rejected with status ${response.status}`);
   });
 };
 
