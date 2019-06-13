@@ -26,6 +26,8 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
+    "export": "next export",
+    "deploy": "npm run build && npm run export",
     "start": "NODE_ENV=production node server.js",
     "lint": "xo"
   },
@@ -61,5 +63,8 @@
       "unicorn/filename-case": false,
       "react/default-props-match-prop-types": false
     }
+  },
+  "engines" : {
+    "node" : "~v10.8.0"
   }
 }

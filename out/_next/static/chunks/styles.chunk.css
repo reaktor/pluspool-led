@@ -1,0 +1,150 @@
+.graphs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 40px;
+}
+.databar__item {
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 16px;
+}
+
+.databar__item__label {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.databar__item__value {
+  font-size: 3em;
+  text-align: right;
+}
+
+.databar__item__unit {
+  font-size: 0.5em;
+  vertical-align: super;
+  margin-left: 2px;
+}
+.databar {
+  margin: 16px;
+}
+
+.databar__button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 16px;
+
+  background-color: #2676DD;
+  color: white;
+  border-radius: 100px;
+  border: 1px solid white;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  
+}
+.visualization {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.visualization__databar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+}
+
+.visualization__animation {
+  width: 100%;
+  height: 100%;
+}
+
+.visualization canvas {
+  height: 100%;
+  width: 100%;
+}
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1D1D1D;
+  color: #FAFAFA;
+}
+
+p {
+  line-height: 1.5;
+  max-width: 48em;
+}
+
+h1 {
+  font-size: 68px;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+h2 {
+  font-size: 52px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.wrapper {
+  padding-left: 80px;
+  padding-right: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.shaded-wrapper {
+  background-color: #1D1D1D;
+
+  /* Uncollapse margin hack */
+  display: inline-block;
+  width: 100%;
+}
+
+.shaded-wrapper:before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 100%;
+  height: 200px;
+  background: linear-gradient(transparent, #1D1D1D);
+}
+
+.shaded-wrapper:after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 100%;
+  height: 200px;
+  background: linear-gradient(#1D1D1D, transparent);
+}
+
+.spacer {
+  height: 100vh;
+}
+
+/*# sourceMappingURL=styles.chunk.css.map*/
