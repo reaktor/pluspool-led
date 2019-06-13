@@ -15,5 +15,3 @@ app.prepare().then(() => {
     console.log('> Ready on http://localhost:3000');
   });
 });
-
-// Needed to do this: https://stackoverflow.com/questions/22875270/error-installing-bcrypt-with-pip-on-os-x-cant-find-ffi-h-libffi-is-installed/25854749#25854749
