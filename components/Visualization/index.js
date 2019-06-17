@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import Databar from '../Databar';
 import PaperAnimation from '../PaperAnimation';
@@ -6,49 +6,49 @@ import {getSampleAtTimestamp} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 const Visualization = ({noaaData, stationData}) => {
-  const ranges = [0, Date.now()]
+  const constrain = (range, by) => [
+    Math.max(range[0], by[0]),
+    Math.min(range[1], by[1])
+  ]
+  const [range, constrainRange] = useReducer(constrain, [0, Date.now()]);
+  const [timestamp, setTimestamp] = useState(range[1]);
+  const [sample, updateSample] = useReducer(getSampleAtTimestamp, {});
 
-  if (noaaData && noaaData.length > 0) {
-    ranges.push([
-      noaaData[0] && Date.parse(noaaData[0].t),
-      noaaData[noaaData.length - 1] &&
-        Date.parse(noaaData[noaaData.length - 1].t),
-    ])
-  }
+  // constrain the date range when we get new noaa data
+  useEffect(() => {
+    if (noaaData && noaaData.length > 0) {
+      constrainRange([noaaData[0].t, noaaData[noaaData.length - 1].t].map(Date.parse))
+    }
+  }, [noaaData])
 
-  if (stationData && stationData.samples && stationData.samples.length > 0) {
-    ranges.push([
-      stationData.samples[0] && stationData.samples[0][0],
-      stationData.samples[stationData.samples.length - 2] &&
-        stationData.samples[stationData.samples.length - 2][0],
-    ])
-  }
+  // constrain the date range when we get new station data
+  useEffect(() => {
+    if (stationData && stationData.samples && stationData.samples.length > 1) {
+      constrainRange([
+        stationData.samples[0][0], stationData.samples[stationData.samples.length - 2][0]
+      ])
+    }
+  }, [stationData])
 
-  const range = {
-    max: Math.min(...ranges.map(range => range[1])),
-    min: Math.max(...ranges.map(range => range[0]))
-  };
-
-  const [timestamp, setTimestamp] = useState();
-  const [sample, setSample] = useState();
+  // make sure timestamp is within our range
+  useEffect(() => {
+    setTimestamp(timestamp => Math.min(Math.max(timestamp, range[0]), range[1]))
+  }, [range])
 
   const wrapper = useRef(null);
   const paperAnimation = useRef(null);
 
   useEffect(() => {
-    if (!timestamp) return;
-    setSample(
-      getSampleAtTimestamp({
-        noaaData,
-        stationData,
-        timestamp,
-      })
-    );
+    updateSample({
+      noaaData,
+      stationData,
+      timestamp,
+    })
   }, [noaaData, stationData, timestamp]);
 
   const changeTimestamp = () => {
     setTimestamp(
-      range.min + Math.floor(Math.random() * (range.max - range.min))
+      range[0] + Math.floor(Math.random() * (range[1] - range[0]))
     );
   };
 

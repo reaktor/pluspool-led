@@ -75,7 +75,7 @@ const normalizations = {
  * @param {Object} props - Props we pass to all derive data functions.
  * @returns {Object} The merged data from all sources.
  */
-const getSampleAtTimestamp = ({noaaData, stationData, timestamp}) => {
+const getSampleAtTimestamp = (previousState, {noaaData, stationData, timestamp}) => {
   const stationSample = deriveSampleFromStationData({stationData, timestamp});
   const noaaSample = deriveSampleFromNoaaData({noaaData, timestamp});
   const sample = {...stationSample, ...noaaSample};
@@ -94,7 +94,7 @@ const getSampleAtTimestamp = ({noaaData, stationData, timestamp}) => {
 const deriveSampleFromStationData = ({stationData, timestamp}) => {
   if (stationData && stationData.samples && timestamp) {
     const index = stationData.samples.findIndex(
-      sample => sample[0] > timestamp
+      sample => sample[0] >= timestamp
     );
 
     if (index - 1 < 0) return {};
@@ -118,7 +118,7 @@ const deriveSampleFromStationData = ({stationData, timestamp}) => {
 const deriveSampleFromNoaaData = ({noaaData, timestamp}) => {
   if (noaaData && noaaData.length > 0 && timestamp) {
     const index = noaaData.findIndex(
-      sample => Date.parse(sample.t) > timestamp
+      sample => Date.parse(sample.t) >= timestamp
     );
     if (index - 1 < 0) return {};
     return noaaData[index - 1];
