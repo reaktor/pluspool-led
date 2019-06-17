@@ -8,32 +8,37 @@ import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 const Visualization = ({noaaData, stationData}) => {
   const constrain = (range, by) => [
     Math.max(range[0], by[0]),
-    Math.min(range[1], by[1])
-  ]
+    Math.min(range[1], by[1]),
+  ];
   const [range, constrainRange] = useReducer(constrain, [0, Date.now()]);
   const [timestamp, setTimestamp] = useState(range[1]);
   const [sample, updateSample] = useReducer(getSampleAtTimestamp, {});
 
-  // constrain the date range when we get new noaa data
+  // Constrain the date range when we get new noaa data
   useEffect(() => {
     if (noaaData && noaaData.length > 0) {
-      constrainRange([noaaData[0].t, noaaData[noaaData.length - 1].t].map(Date.parse))
+      constrainRange(
+        [noaaData[0].t, noaaData[noaaData.length - 1].t].map(Date.parse)
+      );
     }
-  }, [noaaData])
+  }, [noaaData]);
 
-  // constrain the date range when we get new station data
+  // Constrain the date range when we get new station data
   useEffect(() => {
     if (stationData && stationData.samples && stationData.samples.length > 1) {
       constrainRange([
-        stationData.samples[0][0], stationData.samples[stationData.samples.length - 2][0]
-      ])
+        stationData.samples[0][0],
+        stationData.samples[stationData.samples.length - 2][0],
+      ]);
     }
-  }, [stationData])
+  }, [stationData]);
 
-  // make sure timestamp is within our range
+  // Make sure timestamp is within our range
   useEffect(() => {
-    setTimestamp(timestamp => Math.min(Math.max(timestamp, range[0]), range[1]))
-  }, [range])
+    setTimestamp(timestamp =>
+      Math.min(Math.max(timestamp, range[0]), range[1])
+    );
+  }, [range]);
 
   const wrapper = useRef(null);
   const paperAnimation = useRef(null);
@@ -43,13 +48,11 @@ const Visualization = ({noaaData, stationData}) => {
       noaaData,
       stationData,
       timestamp,
-    })
+    });
   }, [noaaData, stationData, timestamp]);
 
   const changeTimestamp = () => {
-    setTimestamp(
-      range[0] + Math.floor(Math.random() * (range[1] - range[0]))
-    );
+    setTimestamp(range[0] + Math.floor(Math.random() * (range[1] - range[0])));
   };
 
   const initPaperAnimation = () => {
