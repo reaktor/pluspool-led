@@ -6,38 +6,32 @@ import {getSampleAtTimestamp} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 const Visualization = ({noaaData, stationData}) => {
+  const noaaRange =
+    noaaData && noaaData.length > 0
+      ? [
+          noaaData[0] && Date.parse(noaaData[0].t),
+          noaaData[noaaData.length - 1] &&
+            Date.parse(noaaData[noaaData.length - 1].t),
+        ]
+      : [null, null];
+
+  const stationRange =
+    stationData && stationData.samples && stationData.samples.length > 0
+      ? [
+          stationData.samples[0] && stationData.samples[0][0],
+          stationData.samples[stationData.samples.length - 2] &&
+            stationData.samples[stationData.samples.length - 2][0],
+        ]
+      : [null, null];
+
   const range = {
     max: Math.min(
-      (noaaData &&
-        noaaData.data &&
-        noaaData.data.length &&
-        noaaData.data[noaaData.data.length - 1] &&
-        Date.parse(noaaData.data[noaaData.data.length - 1].t)) ||
-        Date.now(),
-      (stationData &&
-        stationData.samples &&
-        stationData.samples.length &&
-        stationData.samples[stationData.samples.length - 2] &&
-        stationData.samples[stationData.samples.length - 2][0]) ||
-        Date.now()
+      ...[Date.now(), stationRange[1], noaaRange[1]].filter(Boolean)
     ),
-    min: Math.max(
-      0,
-      (noaaData &&
-        noaaData.data &&
-        noaaData.data &&
-        noaaData.data[0] &&
-        Date.parse(noaaData.data[0].t)) ||
-        0,
-      (stationData &&
-        stationData.samples &&
-        stationData.samples[0] &&
-        stationData.samples[0][0]) ||
-        0
-    ),
+    min: Math.max(...[0, stationRange[0], noaaRange[0]].filter(Boolean)),
   };
 
-  const [timestamp, setTimestamp] = useState(range.max);
+  const [timestamp, setTimestamp] = useState();
   const [sample, setSample] = useState();
 
   const wrapper = useRef(null);

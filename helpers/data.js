@@ -116,7 +116,7 @@ const deriveSampleFromStationData = ({stationData, timestamp}) => {
  * @returns {Object} A sample of data.
  */
 const deriveSampleFromNoaaData = ({noaaData, timestamp}) => {
-  if (noaaData && noaaData.length && timestamp) {
+  if (noaaData && noaaData.length > 0 && timestamp) {
     const index = noaaData.findIndex(
       sample => Date.parse(sample.t) > timestamp
     );
