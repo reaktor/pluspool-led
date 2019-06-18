@@ -6,37 +6,38 @@ import {getSampleAtTimestamp} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 const Visualization = ({noaaData, stationData}) => {
-  const constrain = (range, by) => [
-    Math.max(range[0], by[0]),
-    Math.min(range[1], by[1]),
-  ];
-  const [range, constrainRange] = useReducer(constrain, [0, Date.now()]);
-  const [timestamp, setTimestamp] = useState(range[1]);
+  const constrain = (range, by) => ({
+    start: Math.max(range.start, by.start),
+    end: Math.min(range.end, by.end),
+  });
+  const [range, constrainRange] = useReducer(constrain, {start: 0, end: Date.now()});
+  const [timestamp, setTimestamp] = useState(range.end);
   const [sample, updateSample] = useReducer(getSampleAtTimestamp, {});
 
   // Constrain the date range when we get new noaa data
   useEffect(() => {
     if (noaaData && noaaData.length > 0) {
-      constrainRange(
-        [noaaData[0].t, noaaData[noaaData.length - 1].t].map(Date.parse)
-      );
+      constrainRange({
+        start: Date.parse(noaaData[0].t),
+        end: Date.parse(noaaData[noaaData.length - 1].t),
+      });
     }
   }, [noaaData]);
 
   // Constrain the date range when we get new station data
   useEffect(() => {
     if (stationData && stationData.samples && stationData.samples.length > 1) {
-      constrainRange([
-        stationData.samples[0][0],
-        stationData.samples[stationData.samples.length - 2][0],
-      ]);
+      constrainRange({
+        start: stationData.samples[0][0],
+        end: stationData.samples[stationData.samples.length - 2][0],
+      });
     }
   }, [stationData]);
 
   // Make sure timestamp is within our range
   useEffect(() => {
     setTimestamp(timestamp =>
-      Math.min(Math.max(timestamp, range[0]), range[1])
+      Math.min(Math.max(timestamp, range.start), range.end)
     );
   }, [range]);
 
@@ -52,7 +53,7 @@ const Visualization = ({noaaData, stationData}) => {
   }, [noaaData, stationData, timestamp]);
 
   const changeTimestamp = () => {
-    setTimestamp(range[0] + Math.floor(Math.random() * (range[1] - range[0])));
+    setTimestamp(range.start + Math.floor(Math.random() * (range.start - range.end)));
   };
 
   const initPaperAnimation = () => {
