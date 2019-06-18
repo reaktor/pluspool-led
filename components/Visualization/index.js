@@ -2,14 +2,10 @@ import React, {useState, useRef, useEffect, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import Databar from '../Databar';
 import PaperAnimation from '../PaperAnimation';
-import {getSampleAtTimestamp} from '../../helpers/data';
+import {getSampleAtTimestamp, constrain} from '../../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
 const Visualization = ({noaaData, stationData}) => {
-  const constrain = (range, by) => ({
-    start: Math.max(range.start, by.start),
-    end: Math.min(range.end, by.end),
-  });
   const [range, constrainRange] = useReducer(constrain, {start: 0, end: Date.now()});
   const [timestamp, setTimestamp] = useState(range.end);
   const [sample, updateSample] = useReducer(getSampleAtTimestamp, {});

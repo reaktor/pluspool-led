@@ -173,7 +173,19 @@ const fetchNoaaData = () => {
   });
 };
 
+/**
+ * Takes two range objects and returns their intersection
+ * 
+ * @param {start: timestamp, end: timestamp} range - first range to constrain by 
+ * @param {start: timestamp, end: timestamp} by -  second range to constain by
+ */
+const constrain = (range, by) => ({
+  start: Math.max(range.start, by.start),
+  end: Math.min(range.end, by.end),
+});
+
 export {
+  constrain,
   labels,
   units,
   normalizations,
