@@ -2,7 +2,7 @@ import paper from 'paper-jsdom-canvas'
 import { COLORS, POINTS } from '../../helpers/constants'
 import { waveSine } from '../../helpers/functions'
 
-class WaveAnimation {
+class IconAnimation {
   constructor (props) {
     const { sample } = props
     this.sample = sample
@@ -58,4 +58,4 @@ class WaveAnimation {
   }
 }
 
-export default WaveAnimation
+export default IconAnimation
