@@ -1,5 +1,5 @@
 const ENDPOINTS = {
-  datagarrison: '/data/351579054854805_live.txt',
+  datagarrison: '/static/data/351579054854805_live.txt',
   noaaCurrent:
     'https://tidesandcurrents.noaa.gov/api/datagetter?date=recent&station=n03020&product=currents&units=english&time_zone=gmt&&format=json',
 };
