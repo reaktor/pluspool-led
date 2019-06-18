@@ -6,7 +6,7 @@ import Visualization from '../components/Visualization';
 import {fetchStationData, fetchNoaaData} from '../helpers/data';
 import './index.css'; /* eslint-disable-line import/no-unassigned-import */
 
-function App() {
+function IndexPage() {
   const [stationData, setStationData] = useState();
   const [noaaData, setNoaaData] = useState();
 
@@ -89,4 +89,4 @@ function App() {
   );
 }
 
-export default App;
+export default IndexPage;
