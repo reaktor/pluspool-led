@@ -71,18 +71,20 @@ const normalizations = {
 };
 
 /**
- *
- * @param {Object} props - Props we pass to all derive data functions.
+ * GetSampleAtTimestamp is actually a react-style reducer.
+ * It takes the previous and current state and
+ * @param {Object} previousState - unused but maybe useful in the future
+ * @param {Object} currentState - all sample data we know about plus a timestamp.
  * @returns {Object} The merged data from all sources.
  */
-const deriveSampleFromData = props => {
-  const stationDataSample = deriveSampleFromStationData(props);
-  const noaaDataSample = deriveSampleFromNoaaData(props);
-
-  return {
-    ...stationDataSample,
-    ...noaaDataSample,
-  };
+const getSampleAtTimestamp = (
+  previousState,
+  {noaaData, stationData, timestamp}
+) => {
+  const stationSample = deriveSampleFromStationData({stationData, timestamp});
+  const noaaSample = deriveSampleFromNoaaData({noaaData, timestamp});
+  const sample = {...stationSample, ...noaaSample};
+  return sample;
 };
 
 /**
@@ -94,9 +96,15 @@ const deriveSampleFromData = props => {
  * @param {number} stationSampleIndex - Temporary index for which sample to grab.
  * @returns {Object} A sample of data.
  */
-const deriveSampleFromStationData = ({stationData, stationSampleIndex}) => {
-  if (stationData && stationData.samples && stationSampleIndex) {
-    const sample = stationData.samples[stationSampleIndex];
+const deriveSampleFromStationData = ({stationData, timestamp}) => {
+  if (stationData && stationData.samples && timestamp) {
+    const index = stationData.samples.findIndex(
+      sample => sample[0] >= timestamp
+    );
+
+    if (index - 1 < 0) return {};
+    const sample = stationData.samples[index - 1];
+
     return stationData.header.reduce((acc, column, i) => {
       acc[column] = sample[i];
       return acc;
@@ -108,9 +116,23 @@ const deriveSampleFromStationData = ({stationData, stationSampleIndex}) => {
 
 /**
  *
- * @param {Object} stationData - Data retrieved from the Datagarrison weather station.
- * @param {Array} stationData.header - A list of labels for each column of data.
- * @param {Array} stationData.samples - The data samples.
+ * @param {Object} noaaData - Data retrieved from the NOAA tides and currents api.
+ * @param {number} timestamp - timestamp.
+ * @returns {Object} A sample of data.
+ */
+const deriveSampleFromNoaaData = ({noaaData, timestamp}) => {
+  if (noaaData && noaaData.length > 0 && timestamp) {
+    const index = noaaData.findIndex(
+      sample => Date.parse(sample.t) >= timestamp
+    );
+    if (index - 1 < 0) return {};
+    return noaaData[index - 1];
+  }
+
+  return {};
+};
+
+/**
  * @param {string} stationData.timezone - Timezone for data
  * @returns {Object} Samples of data.
  */
@@ -122,21 +144,6 @@ const deriveSamplesFromStationData = ({stationData}) => {
         return acc;
       }, {});
     });
-  }
-
-  return {};
-};
-
-/**
- *
- * @param {Object} noaaData - Data retrieved from the NOAA tides and currents api.
- * @param {number} noaaSampleIndex - Temporary index for which sample to grab.
- * @returns {Object} A sample of data.
- */
-const deriveSampleFromNoaaData = ({noaaData, noaaSampleIndex}) => {
-  if (noaaData && noaaData.length > 0 && noaaSampleIndex) {
-    const noaaSample = noaaData[noaaSampleIndex];
-    return noaaSample;
   }
 
   return {};
@@ -166,12 +173,24 @@ const fetchNoaaData = () => {
   });
 };
 
+/**
+ * Takes two range objects and returns their intersection
+ * 
+ * @param {start: timestamp, end: timestamp} range - first range to constrain by 
+ * @param {start: timestamp, end: timestamp} by -  second range to constain by
+ */
+const constrain = (range, by) => ({
+  start: Math.max(range.start, by.start),
+  end: Math.min(range.end, by.end),
+});
+
 export {
+  constrain,
   labels,
   units,
   normalizations,
   transforms,
-  deriveSampleFromData,
+  getSampleAtTimestamp,
   deriveSamplesFromStationData,
   fetchStationData,
   fetchNoaaData,
