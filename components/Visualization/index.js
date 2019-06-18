@@ -49,7 +49,7 @@ const Visualization = ({noaaData, stationData}) => {
   }, [noaaData, stationData, timestamp]);
 
   const changeTimestamp = () => {
-    setTimestamp(range.start + Math.floor(Math.random() * (range.start - range.end)));
+    setTimestamp(range.start + Math.floor(Math.random() * (range.end - range.start)));
   };
 
   const initPaperAnimation = () => {
