@@ -46,9 +46,6 @@ class PaperAnimation {
 
   initializeLayers () {
     this.iconAnimation.layers[0] = new paper.Group()
-    this.iconAnimation.layers[1] = new paper.Group()
-    this.iconAnimation.layers[1].translate(new paper.Point(10, 10))
-
     this.poolAnimation.layers[0] = new paper.Group()
 
     this.poolAnimation.layers[0].sendToBack()

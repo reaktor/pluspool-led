@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>Triangle</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Wireframes-v1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="data-visualization" transform="translate(-520.000000, -270.000000)" stroke="#515154">
+            <g id="Group" transform="translate(36.000000, 23.000000)">
+                <path d="M491,248.118034 L484.809017,260.5 L497.190983,260.5 L491,248.118034 Z" id="Triangle"></path>
+            </g>
+        </g>
+    </g>
+</svg>
