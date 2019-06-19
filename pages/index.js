@@ -1,26 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import datagarrison from 'datagarrison'
 import Head from 'next/head'
 import Graphs from '../components/Graphs'
 import Visualization from '../components/Visualization'
 import { fetchStationData, fetchNoaaData } from '../helpers/data'
-import './index.css' /* eslint-disable-line import/no-unassigned-import */
+import './index.css'
 
-function IndexPage () {
-  const [stationData, setStationData] = useState()
-  const [noaaData, setNoaaData] = useState()
-
-  const getStationData = () => {
-    fetchStationData().then(text => setStationData(datagarrison.parse(text)))
-  }
-
-  const getNoaaData = () => {
-    fetchNoaaData().then(response => setNoaaData(response.data))
-  }
-
-  useEffect(getStationData, [])
-  useEffect(getNoaaData, [])
-
+function IndexPage ({ stationData, noaaData }) {
   return (
     <div>
       <Head>
@@ -87,6 +73,16 @@ function IndexPage () {
       <div className='spacer' />
     </div>
   )
+}
+
+IndexPage.getInitialProps = async () => {
+  const rawStationData = await fetchStationData()
+  const stationData = datagarrison.parse(rawStationData)
+
+  const rawNoaaData = await fetchNoaaData()
+  const noaaData = rawNoaaData.data
+
+  return { stationData, noaaData }
 }
 
 export default IndexPage
