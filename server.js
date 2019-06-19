@@ -1,5 +1,5 @@
 const { createServer } = require('http')
-const { parse } = require('url') /* eslint-disable-line node/no-deprecated-api */
+const { parse } = require('url')
 const next = require('next')
 
 const dev = process.env.NODE_ENV !== 'production'

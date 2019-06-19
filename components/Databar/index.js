@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { labels, units, transforms } from '../../helpers/data'
 import DatabarItem from '../DatabarItem'
-import './index.css' /* eslint-disable-line import/no-unassigned-import */
+import './index.css'
 
 const displayedColumns = [
   'Percent Oxygen_SDI_0_10_%',

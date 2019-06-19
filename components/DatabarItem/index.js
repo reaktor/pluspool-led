@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './index.css' /* eslint-disable-line import/no-unassigned-import */
+import './index.css'
 
 const DatabarItem = ({ label, value, unit, transform }) => (
   <div className='databar__item'>

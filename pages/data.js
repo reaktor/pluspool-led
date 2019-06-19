@@ -3,7 +3,7 @@ import datagarrison from 'datagarrison'
 import Head from 'next/head'
 import Graphs from '../components/Graphs'
 import { fetchStationData, fetchNoaaData } from '../helpers/data'
-import './index.css' /* eslint-disable-line import/no-unassigned-import */
+import './index.css'
 
 function DataPage () {
   const [stationData, setStationData] = useState()

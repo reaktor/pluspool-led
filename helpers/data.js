@@ -58,7 +58,6 @@ const transforms = {
  * @return {number} the scaled numbmer
  */
 
-// eslint-disable-next-line max-params
 const scale = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
 

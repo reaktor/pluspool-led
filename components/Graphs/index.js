@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Line, XAxis, YAxis } from 'recharts'
 import { deriveSamplesFromStationData } from '../../helpers/data'
 import Graph from '../Graph'
-import './index.css' /* eslint-disable-line import/no-unassigned-import */
+import './index.css'
 
 const Graphs = ({ noaaData, stationData }) => {
   if (!noaaData || !stationData) return null

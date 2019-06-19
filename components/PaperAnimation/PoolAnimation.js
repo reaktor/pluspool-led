@@ -127,7 +127,7 @@ class PoolAnimation {
     const to = blendColors(
       new paper.Color(COLORS.purple),
       new paper.Color(COLORS.yellow),
-      // eslint-disable-next-line new-cap
+
       normalizations['Percent Oxygen_SDI_0_10_%'](
         this.sample['Percent Oxygen_SDI_0_10_%']
       )
