@@ -17,23 +17,14 @@ const Visualization = ({ noaaData, stationData }) => {
 
   const [timestamp, setTimestamp] = useState(range.end)
 
-  const initialSample = getSampleAtTimestamp({}, {
+  const sample = getSampleAtTimestamp({
     noaaData,
     stationData,
     timestamp
   })
-  const [sample, updateSample] = useReducer(getSampleAtTimestamp, initialSample)
 
   const wrapper = useRef(null)
   const paperAnimation = useRef(null)
-
-  useEffect(() => {
-    updateSample({
-      noaaData,
-      stationData,
-      timestamp
-    })
-  }, [timestamp])
 
   const changeTimestamp = () => {
     setTimestamp(range.start + Math.floor(Math.random() * (range.end - range.start)))

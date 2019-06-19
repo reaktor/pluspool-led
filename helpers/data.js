@@ -76,10 +76,7 @@ const normalizations = {
  * @param {Object} currentState - all sample data we know about plus a timestamp.
  * @returns {Object} The merged data from all sources.
  */
-const getSampleAtTimestamp = (
-  previousState,
-  { noaaData, stationData, timestamp }
-) => {
+const getSampleAtTimestamp = ({ noaaData, stationData, timestamp }) => {
   const stationSample = deriveSampleFromStationData({ stationData, timestamp })
   const noaaSample = deriveSampleFromNoaaData({ noaaData, timestamp })
   const sample = { ...stationSample, ...noaaSample }
