@@ -1,10 +1,10 @@
 const ENDPOINTS = {
   datagarrison: '/static/data/351579054854805_live.txt',
   noaaCurrent:
-    'https://tidesandcurrents.noaa.gov/api/datagetter?date=recent&station=n03020&product=currents&units=english&time_zone=gmt&&format=json',
-};
+    'https://tidesandcurrents.noaa.gov/api/datagetter?date=recent&station=n03020&product=currents&units=english&time_zone=gmt&&format=json'
+}
 
-const PI = Math.PI.toFixed(4);
+const PI = Math.PI.toFixed(4)
 
 const COLORS = {
   darkBlue: '#0073E5',
@@ -12,14 +12,14 @@ const COLORS = {
   black: '#000000',
   purple: '#F900FD',
   gray: '#C9C9C9',
-  yellow: '#FEAA46',
-};
+  yellow: '#FEAA46'
+}
 
 // WAVES
-const POINTS = 10;
-const WAVE_SPEED = 20;
-const WAVE_HEIGHT = 30;
+const POINTS = 10
+const WAVE_SPEED = 20
+const WAVE_HEIGHT = 30
 
-const DIRECTIONS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+const DIRECTIONS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
 
-export {DIRECTIONS, ENDPOINTS, PI, COLORS, POINTS, WAVE_HEIGHT, WAVE_SPEED};
+export { DIRECTIONS, ENDPOINTS, PI, COLORS, POINTS, WAVE_HEIGHT, WAVE_SPEED }

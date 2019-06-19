@@ -1,5 +1,5 @@
-import fetch from 'isomorphic-unfetch';
-import {DIRECTIONS, ENDPOINTS} from './constants';
+import fetch from 'isomorphic-unfetch'
+import { DIRECTIONS, ENDPOINTS } from './constants'
 
 /**
  * Look up table that takes our data header as the key
@@ -12,8 +12,8 @@ const labels = {
   // prettier-ignore
   'Turbidity_SDI_0_8_NTU': 'Turbidity',
   s: 'Water Speed',
-  d: 'Water Direction',
-};
+  d: 'Water Direction'
+}
 
 /**
  * Look up table that takes our data header as the key
@@ -26,16 +26,16 @@ const units = {
   // prettier-ignore
   'Turbidity_SDI_0_8_NTU': 'NTU',
   s: 'KN',
-  d: '',
-};
+  d: ''
+}
 
 /**
  * Look up table that takes our data header as the key
  * and returns a function that takes the value and returns a new value.
  */
 const transforms = {
-  d: value => DIRECTIONS[Math.floor(value / 45)],
-};
+  d: value => DIRECTIONS[Math.floor(value / 45)]
+}
 
 /**
  *
@@ -60,15 +60,15 @@ const transforms = {
 
 // eslint-disable-next-line max-params
 const scale = (num, inMin, inMax, outMin, outMax) =>
-  ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+  ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
 
 /**
  * `normalizations` contains functions that will take a value from the data
  * and return a value mapped between 0 -> 1.
  */
 const normalizations = {
-  'Percent Oxygen_SDI_0_10_%': value => scale(value, 0, 100, 0, 1),
-};
+  'Percent Oxygen_SDI_0_10_%': value => scale(value, 0, 100, 0, 1)
+}
 
 /**
  * GetSampleAtTimestamp is actually a react-style reducer.
@@ -79,13 +79,13 @@ const normalizations = {
  */
 const getSampleAtTimestamp = (
   previousState,
-  {noaaData, stationData, timestamp}
+  { noaaData, stationData, timestamp }
 ) => {
-  const stationSample = deriveSampleFromStationData({stationData, timestamp});
-  const noaaSample = deriveSampleFromNoaaData({noaaData, timestamp});
-  const sample = {...stationSample, ...noaaSample};
-  return sample;
-};
+  const stationSample = deriveSampleFromStationData({ stationData, timestamp })
+  const noaaSample = deriveSampleFromNoaaData({ noaaData, timestamp })
+  const sample = { ...stationSample, ...noaaSample }
+  return sample
+}
 
 /**
  *
@@ -96,23 +96,23 @@ const getSampleAtTimestamp = (
  * @param {number} stationSampleIndex - Temporary index for which sample to grab.
  * @returns {Object} A sample of data.
  */
-const deriveSampleFromStationData = ({stationData, timestamp}) => {
+const deriveSampleFromStationData = ({ stationData, timestamp }) => {
   if (stationData && stationData.samples && timestamp) {
     const index = stationData.samples.findIndex(
       sample => sample[0] >= timestamp
-    );
+    )
 
-    if (index - 1 < 0) return {};
-    const sample = stationData.samples[index - 1];
+    if (index - 1 < 0) return {}
+    const sample = stationData.samples[index - 1]
 
     return stationData.header.reduce((acc, column, i) => {
-      acc[column] = sample[i];
-      return acc;
-    }, {});
+      acc[column] = sample[i]
+      return acc
+    }, {})
   }
 
-  return {};
-};
+  return {}
+}
 
 /**
  *
@@ -120,69 +120,69 @@ const deriveSampleFromStationData = ({stationData, timestamp}) => {
  * @param {number} timestamp - timestamp.
  * @returns {Object} A sample of data.
  */
-const deriveSampleFromNoaaData = ({noaaData, timestamp}) => {
+const deriveSampleFromNoaaData = ({ noaaData, timestamp }) => {
   if (noaaData && noaaData.length > 0 && timestamp) {
     const index = noaaData.findIndex(
       sample => Date.parse(sample.t) >= timestamp
-    );
-    if (index - 1 < 0) return {};
-    return noaaData[index - 1];
+    )
+    if (index - 1 < 0) return {}
+    return noaaData[index - 1]
   }
 
-  return {};
-};
+  return {}
+}
 
 /**
  * @param {string} stationData.timezone - Timezone for data
  * @returns {Object} Samples of data.
  */
-const deriveSamplesFromStationData = ({stationData}) => {
+const deriveSamplesFromStationData = ({ stationData }) => {
   if (stationData && stationData.samples) {
     return stationData.samples.map(sample => {
       return stationData.header.reduce((acc, column, i) => {
-        acc[column] = sample[i];
-        return acc;
-      }, {});
-    });
+        acc[column] = sample[i]
+        return acc
+      }, {})
+    })
   }
 
-  return {};
-};
+  return {}
+}
 
 const fetchStationData = () => {
   return fetch(ENDPOINTS.datagarrison, {
     method: 'GET',
     mode: 'no-cors',
     headers: {
-      'Content-Type': 'text/plain',
-    },
+      'Content-Type': 'text/plain'
+    }
   }).then(response => {
     if (response.ok) {
-      return response.text();
+      return response.text()
     }
 
-    throw new Error(`Request rejected with status ${response.status}`);
-  });
-};
+    throw new Error(`Request rejected with status ${response.status}`)
+  })
+}
 
 const fetchNoaaData = () => {
   return fetch(ENDPOINTS.noaaCurrent, {
-    method: 'GET',
+    method: 'GET'
   }).then(response => {
-    return response.json();
-  });
-};
+    return response.json()
+  })
+}
 
 /**
  * Takes two range objects and returns their intersection
- * 
- * @param {start: timestamp, end: timestamp} range - first range to constrain by 
+ *
+ * @param {start: timestamp, end: timestamp} range - first range to constrain by
  * @param {start: timestamp, end: timestamp} by -  second range to constain by
  */
 const constrain = (range, by) => ({
   start: Math.max(range.start, by.start),
-  end: Math.min(range.end, by.end),
-});
+  end: Math.min(range.end, by.end)
+})
 
 export {
   constrain,
@@ -193,5 +193,5 @@ export {
   getSampleAtTimestamp,
   deriveSamplesFromStationData,
   fetchStationData,
-  fetchNoaaData,
-};
+  fetchNoaaData
+}
