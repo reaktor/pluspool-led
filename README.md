@@ -8,9 +8,9 @@ To start developing:
 
      npm install
      npm start
-     open http://localhost:3000 || xdg-open http://localhost:3000
-     
-If you run into an error with `libffi` you might need to export it's path in your package config. 
+     xdg-open http://localhost:3000 || open $_
+
+If you run into an error with `libffi` you might need to export it's path in your package config.
 
      export PKG_CONFIG_PATH=/usr/local/Cellar/libffi/3.2.1/lib/pkgconfig/
 
