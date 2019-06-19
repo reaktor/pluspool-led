@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Databar from '../Databar'
 import PaperAnimation from '../PaperAnimation'
 import { getSampleAtTimestamp, constrain } from '../../helpers/data'
-import './index.css' /* eslint-disable-line import/no-unassigned-import */
+import './index.css'
 
 const Visualization = ({ noaaData, stationData }) => {
   const range = constrain({
