@@ -6,28 +6,28 @@ import { getSampleAtTimestamp, constrain } from '../../helpers/data'
 import './index.css'
 
 const Visualization = ({ noaaData, stationData }) => {
-  const range = constrain({
-    start: Date.parse(noaaData[0].t),
-    end: Date.parse(noaaData[noaaData.length - 1].t)
-  },
-  {
-    start: stationData.samples[0][0],
-    end: stationData.samples[stationData.samples.length - 2][0]
-  })
+  const range = constrain(
+    {
+      start: Date.parse(noaaData[0].t),
+      end: Date.parse(noaaData[noaaData.length - 1].t)
+    },
+    {
+      start: stationData.samples[0][0],
+      end: stationData.samples[stationData.samples.length - 2][0]
+    }
+  )
 
   const [timestamp, setTimestamp] = useState(range.end)
 
-  const sample = getSampleAtTimestamp({
-    noaaData,
-    stationData,
-    timestamp
-  })
+  const sample = getSampleAtTimestamp({ noaaData, stationData, timestamp })
 
   const wrapper = useRef(null)
   const paperAnimation = useRef(null)
 
   const changeTimestamp = () => {
-    setTimestamp(range.start + Math.floor(Math.random() * (range.end - range.start)))
+    setTimestamp(
+      range.start + Math.floor(Math.random() * (range.end - range.start))
+    )
   }
 
   const initPaperAnimation = () => {
