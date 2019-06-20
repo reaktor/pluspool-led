@@ -1,0 +1,6 @@
+.data-range-picker {
+  display: flex;
+}
+.data-range-picker__slider {
+  flex-grow: 1;
+}

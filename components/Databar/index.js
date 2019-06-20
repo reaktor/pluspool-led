@@ -12,9 +12,9 @@ const displayedColumns = [
   'd'
 ]
 
-const Databar = ({ changeSample, className, sample }) => {
+const Databar = ({ sample }) => {
   return (
-    <div className={`${className} databar`}>
+    <div className='databar'>
       {displayedColumns.map(
         column =>
           sample[column] && (
@@ -27,16 +27,11 @@ const Databar = ({ changeSample, className, sample }) => {
             />
           )
       )}
-      <button className='databar__button' type='button' onClick={changeSample}>
-        Change data
-      </button>
     </div>
   )
 }
 
 Databar.propTypes = {
-  changeSample: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
   sample: PropTypes.object
 }
 

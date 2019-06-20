@@ -1,8 +1,10 @@
 .databar {
-  margin: 16px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 16px;
 }
 
-.databar__button {
+/* .databar__button {
   width: 100%;
   padding: 16px;
   margin-top: 16px;
@@ -16,5 +18,4 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
-  
-}
+} */
