@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Databar from '../Databar'
-import VisualizationDate from '../VisualizationDate'
 import DataRangePicker from '../DataRangePicker'
 import PaperAnimation from '../PaperAnimation'
 import { getSampleAtTimestamp, constrain } from '../../helpers/data'
