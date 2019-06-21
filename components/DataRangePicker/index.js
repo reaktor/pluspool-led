@@ -11,9 +11,10 @@ const RcHandle = Slider.Handle
 
 const handle = ({ atStart, atEnd, label, value, dragging, index, ...restProps }) => {
   const visible = !atStart && !atEnd
+  const visibleClassName = visible ? '--visible' : '' // cannot do this with a data-attr in Preact for some reason
   return (
     <RcHandle value={value} {...restProps}>
-      <div className='data-range-picker__handle-label' data-visible={visible}>{label}</div>
+      <div className={`data-range-picker__handle-label ${visibleClassName}`}>{label}</div>
     </RcHandle>
   )
 }
@@ -66,12 +67,6 @@ class DataRangePicker extends React.Component {
             value={this.scaleTo(timestamp)}
             onChange={value => this.onChange(value)}
             handle={(props) =>
-              // <Handle
-              //   label={formatTime(diff)}
-              //   atStart={atStart}
-              //   atEnd={atEnd}
-              //   {...props}
-              // />
               handle({
                 label: formatTime(diff),
                 atStart,
