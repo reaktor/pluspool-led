@@ -26,7 +26,7 @@ class DataRangePicker extends React.Component {
     this.changeTimestampThrottled = throttle((value) => {
       const { changeTimestamp } = this.props
       changeTimestamp(value)
-    }, 100)
+    }, 1000 / 60)
   }
 
   onChange (value) {
