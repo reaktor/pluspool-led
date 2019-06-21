@@ -185,6 +185,7 @@ export {
   units,
   normalizations,
   transforms,
+  scale,
   getSampleAtTimestamp,
   deriveSamplesFromStationData,
   fetchStationData,

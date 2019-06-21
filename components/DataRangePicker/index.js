@@ -1,12 +1,20 @@
 import React from 'react'
-// import useThrottleFn from 'react-use/lib/useThrottleFn'
-// import { useThrottle, useThrottleCallback } from '@react-hook/throttle'
-// import useDebouncedCallback from 'use-debounce/lib/callback'
+import Slider from 'rc-slider'
 import dayjs from 'dayjs'
-import { formatTime } from '../../helpers/date'
-import './index.css'
-
 import { throttle } from 'lodash'
+import { formatTime } from '../../helpers/date'
+import { scale } from '../../helpers/data'
+import './index.css'
+import 'rc-slider/assets/index.css'
+
+const RcHandle = Slider.Handle
+
+const handle = (props) => {
+  const { value, dragging, index, ...restProps } = props
+  return (
+    <RcHandle value={value} {...restProps} />
+  )
+}
 
 class DataRangePicker extends React.Component {
   constructor (props) {
@@ -24,6 +32,22 @@ class DataRangePicker extends React.Component {
     this.changeTimestampThrottled(valueInt)
   }
 
+  onChange2 (value) {
+    this.changeTimestampThrottled(this.scaleFrom(value))
+  }
+
+  // Scale from Slider value to our timestamp
+  scaleFrom (value) {
+    const { range: { start, end } } = this.props
+    return scale(value, 0, 100, end, start)
+  }
+
+  // Scale our timestamp to our Slider value
+  scaleTo (value) {
+    const { range: { start, end } } = this.props
+    return scale(value, end, start, 0, 100)
+  }
+
   render () {
     const { timestamp, range: { start, end } } = this.props
 
@@ -37,48 +61,15 @@ class DataRangePicker extends React.Component {
 
     return (
       <div className='data-range-picker'>
-        <label className='data-range-picker__label'>{formatTime(startDateDiff)}</label>
+        <label className='data-range-picker__label'>{formatTime(endDateDiff)}</label>
         <div className='data-range-picker__slider-container'>
           <time className='data-range-picker__current-time'>{formatTime(diff)}</time>
-          <input
-            className='data-range-picker__slider'
-            type='range'
-            onChange={event => this.onChange(event)}
-            value={timestamp}
-            min={start}
-            max={end}
-            step={1}
-          />
+          <Slider value={this.scaleTo(timestamp)} onChange={value => this.onChange2(value)} handle={handle} />
         </div>
-        <label className='data-range-picker__label'>{formatTime(endDateDiff)}</label>
+        <label className='data-range-picker__label'>{formatTime(startDateDiff)}</label>
       </div>
     )
   }
 }
-
-// const DataRangePicker = ({ changeTimestamp, timestamp, range: { start, end } }) => {
-//   // const [throttledTimestamp, setThrottledTimeStamp] = useState(timestamp)
-//   // const [throttledFunction] = useDebouncedCallback(value => {
-//   //   console.log(value);
-//   //   setThrottledTimeStamp(value)
-//   // }, 1000)
-//   const [value, setValue] = useThrottle(timestamp, 2000, false)
-
-//   return (
-//     <div className='data-range-picker'>
-//       <label>Past</label>
-//       {value}
-//       <input
-//         className='data-range-picker__slider'
-//         type='range'
-//         onChange={event => setValue(event.target.value)}
-//         min={start}
-//         max={end}
-//         step={1}
-//       />
-//       <label>Now</label>
-//     </div>
-//   )
-// }
 
 export default DataRangePicker
