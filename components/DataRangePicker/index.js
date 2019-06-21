@@ -9,10 +9,12 @@ import 'rc-slider/assets/index.css'
 
 const RcHandle = Slider.Handle
 
-const handle = (props) => {
-  const { value, dragging, index, ...restProps } = props
+const handle = ({ atStart, atEnd, label, value, dragging, index, ...restProps }) => {
+  const visible = !atStart && !atEnd
   return (
-    <RcHandle value={value} {...restProps} />
+    <RcHandle value={value} {...restProps}>
+      <div className='data-range-picker__handle-label' data-visible={visible}>{label}</div>
+    </RcHandle>
   )
 }
 
@@ -26,13 +28,7 @@ class DataRangePicker extends React.Component {
     }, 100)
   }
 
-  onChange ({ target }) {
-    const { value } = target
-    const valueInt = parseInt(value, 10)
-    this.changeTimestampThrottled(valueInt)
-  }
-
-  onChange2 (value) {
+  onChange (value) {
     this.changeTimestampThrottled(this.scaleFrom(value))
   }
 
@@ -51,20 +47,39 @@ class DataRangePicker extends React.Component {
   render () {
     const { timestamp, range: { start, end } } = this.props
 
+    const timestampDate = dayjs(timestamp)
     const diff = dayjs().diff(timestamp)
 
     const startDate = dayjs(start)
     const startDateDiff = dayjs().diff(startDate)
+    const atStart = startDate.isSame(timestampDate)
 
     const endDate = dayjs(end)
     const endDateDiff = dayjs().diff(endDate)
+    const atEnd = endDate.isSame(timestampDate)
 
     return (
       <div className='data-range-picker'>
         <label className='data-range-picker__label'>{formatTime(endDateDiff)}</label>
         <div className='data-range-picker__slider-container'>
-          <time className='data-range-picker__current-time'>{formatTime(diff)}</time>
-          <Slider value={this.scaleTo(timestamp)} onChange={value => this.onChange2(value)} handle={handle} />
+          <Slider
+            value={this.scaleTo(timestamp)}
+            onChange={value => this.onChange(value)}
+            handle={(props) =>
+              // <Handle
+              //   label={formatTime(diff)}
+              //   atStart={atStart}
+              //   atEnd={atEnd}
+              //   {...props}
+              // />
+              handle({
+                label: formatTime(diff),
+                atStart,
+                atEnd,
+                ...props
+              })
+            }
+          />
         </div>
         <label className='data-range-picker__label'>{formatTime(startDateDiff)}</label>
       </div>

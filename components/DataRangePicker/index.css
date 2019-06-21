@@ -9,16 +9,20 @@
   position: relative;
 }
 
-.data-range-picker__current-time {
+.data-range-picker__handle-label {
   position: absolute;
   bottom: 100%;
-  margin-bottom: 8px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 12px;
   width: 160px;
   text-align: center;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.data-range-picker__handle-label[data-visible="false"] {
+  opacity: 0;
 }
 
 .data-range-picker__slider {
