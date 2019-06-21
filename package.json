@@ -1,26 +1,23 @@
 {
   "name": "pluspool-visualization-client",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "dependencies": {
-    "@zeit/next-css": "^0.2.1-canary.4",
+  "devDependencies": {
+    "@zeit/next-css": "^1.0.1",
     "datagarrison": "^0.1.0",
     "isomorphic-unfetch": "^3.0.0",
+    "koa": "^2.7.0",
+    "module-alias": "^2.2.0",
     "next": "^8.1.0",
     "next-transpile-modules": "^2.3.1",
     "paper-jsdom-canvas": "^0.12.2",
-    "prop-types": "^15.7.2",
+    "preact": "^10.0.0-beta.2",
+    "preact-render-to-string": "^5.0.3",
+    "preact-ssr-prepass": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "recharts": "^1.6.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "koa": "^2.7.0",
-    "next": "^8.1.0",
-    "next-transpile-modules": "^2.3.1",
-    "standard": "^12.0.1",
-    "webpack": "^4.33.0"
+    "recharts": "^1.6.2",
+    "standard": "^12.0.1"
   },
   "scripts": {
     "dev": "node server.js",
@@ -29,6 +26,9 @@
     "deploy": "npm run build && npm run export",
     "lint": "standard",
     "lint:fix": "standard --fix"
+  },
+  "engines": {
+    "node": "~v12.4.0"
   },
   "browserslist": {
     "production": [
@@ -47,7 +47,9 @@
       "jest"
     ]
   },
-  "engines": {
-    "node": "~v12.4.0"
+  "_moduleAliases": {
+    "react": "node_modules/preact/compat",
+    "react-dom": "node_modules/preact/compat",
+    "react-ssr-prepass": "node_modules/preact-ssr-prepass"
   }
 }

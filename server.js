@@ -1,3 +1,5 @@
+require('module-alias/register')
+
 const Koa = require('koa')
 const next = require('next')
 
