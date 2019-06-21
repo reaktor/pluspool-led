@@ -23,16 +23,12 @@ class DataRangePicker extends React.Component {
   constructor (props) {
     super(props)
 
-    this.changeTimeStamp = throttle(this.changeTimeStamp, 1000 / 60)
-  }
-
-  changeTimeStamp (value) {
-    const { changeTimestamp } = this.props
-    changeTimestamp(value)
+    this.onChange = throttle(this.onChange, 1000 / 60)
   }
 
   onChange (value) {
-    this.changeTimeStamp(this.scaleFrom(value))
+    const { changeTimestamp } = this.props
+    changeTimestamp(this.scaleFrom(value))
   }
 
   // Scale from Slider value to our timestamp
