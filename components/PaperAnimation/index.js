@@ -32,21 +32,21 @@ class PaperAnimation {
   initializeCanvas () {
     const canvas = document.createElement('canvas')
     canvas.id = 'paper-canvas'
+    canvas.setAttribute('resize', '')
     this.wrapper.append(canvas)
     paper.setup(canvas)
 
     const { height, width } = paper.view.size
-
     // Shift our global vertical center to be the middle
     paper.view.translate([width / 2, height / 2])
   }
 
   initializeLayers () {
-    // this.iconAnimation.layers[0] = new paper.Group()
-    // this.poolAnimation.layers[0] = new paper.Group()
+    this.iconAnimation.layers[0] = new paper.Group()
+    this.poolAnimation.layers[0] = new paper.Group()
 
-    // this.poolAnimation.layers[0].sendToBack()
-    // this.iconAnimation.layers[0].sendToBack()
+    this.poolAnimation.layers[0].sendToBack()
+    this.iconAnimation.layers[0].sendToBack()
   }
 }
 

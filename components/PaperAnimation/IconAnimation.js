@@ -4,12 +4,14 @@ const ICON_SIZE = 40
 
 const icons = {
   bacteria: '/static/img/icons/bacteria.svg',
-  // direction: '/static/img/icons/direction.svg',
-  // oxygen: '/static/img/icons/oxygen.svg',
-  // salinity: '/static/img/icons/salinity.svg',
-  // speed: '/static/img/icons/speed.svg',
-  // turbidity: '/static/img/icons/turbidity.svg'
+  direction: '/static/img/icons/direction.svg',
+  oxygen: '/static/img/icons/oxygen.svg',
+  salinity: '/static/img/icons/salinity.svg',
+  speed: '/static/img/icons/speed.svg',
+  turbidity: '/static/img/icons/turbidity.svg'
 }
+
+const iconKeys = Object.keys(icons)
 
 class IconAnimation {
   constructor (props) {
@@ -46,7 +48,7 @@ class IconAnimation {
   }
 
   async loadIcons () {
-    const promises = Object.keys(icons).map((key) => {
+    const promises = iconKeys.map((key) => {
       const iconPath = icons[key]
       return this.loadIcon(iconPath).then(icon => {
         this.iconSymbols[key] = icon
@@ -66,10 +68,13 @@ class IconAnimation {
 
     for (let column = 0; column <= divisionsWidth; column++) {
       for (let row = 0; row <= divisionsHeight; row++) {
-        const instance = new paper.SymbolItem(this.iconSymbols.bacteria)
+        const randIconIndex = Math.floor(Math.random() * iconKeys.length)
+        const randIcon = iconKeys[randIconIndex]
+        const instance = new paper.SymbolItem(this.iconSymbols[randIcon])
         const xPos = (column * ICON_SIZE) - (width / 2) + (remainderWidth / 2)
         const yPos = (row * ICON_SIZE) - (height / 2) + (remainderHeight / 2)
         instance.position = new paper.Point(xPos, yPos)
+        this.layers[0].addChild(instance)
       }
     }
   }

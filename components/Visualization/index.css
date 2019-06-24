@@ -1,7 +1,6 @@
 .visualization {
   height: 100%;
   display: flex;
-  justify-content: flex-end;
   flex-direction: column;
 }
 
@@ -13,7 +12,6 @@
 }
 
 .visualization__animation {
-  height: 100%;
   flex-grow: 1;
 }
 
