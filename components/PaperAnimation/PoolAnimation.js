@@ -84,6 +84,9 @@ class PoolAnimation {
     this.sample = sample
     this.paths = [null]
     this.layers = [null]
+
+    this.layers[0] = new paper.Group()
+    this.draw()
   }
 
   updateProps ({ sample }) {

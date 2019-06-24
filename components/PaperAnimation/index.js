@@ -10,13 +10,10 @@ class PaperAnimation {
     this.wrapper = wrapper
     this.sample = sample
 
+    this.initializeCanvas()
+
     this.iconAnimation = new IconAnimation({ sample })
     this.poolAnimation = new PoolAnimation({ sample })
-
-    this.initializeCanvas()
-    this.initializeLayers()
-    this.iconAnimation.draw()
-    this.poolAnimation.draw()
 
     paper.view.onFrame = this.onFrame.bind(this)
   }
@@ -45,11 +42,11 @@ class PaperAnimation {
   }
 
   initializeLayers () {
-    this.iconAnimation.layers[0] = new paper.Group()
-    this.poolAnimation.layers[0] = new paper.Group()
+    // this.iconAnimation.layers[0] = new paper.Group()
+    // this.poolAnimation.layers[0] = new paper.Group()
 
-    this.poolAnimation.layers[0].sendToBack()
-    this.iconAnimation.layers[0].sendToBack()
+    // this.poolAnimation.layers[0].sendToBack()
+    // this.iconAnimation.layers[0].sendToBack()
   }
 }
 
