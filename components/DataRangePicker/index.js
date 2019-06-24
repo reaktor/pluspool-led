@@ -1,11 +1,13 @@
 import React from 'react'
 import RcSlider from 'rc-slider'
 import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import { throttle } from 'lodash'
-import { formatTime } from '../../helpers/date'
 import { scale } from '../../helpers/data'
 import './index.css'
 import 'rc-slider/assets/index.css'
+
+dayjs.extend(relativeTime)
 
 const SLIDER_MIN = 0
 const SLIDER_MAX = 100
@@ -49,19 +51,19 @@ class DataRangePicker extends React.Component {
     const { timestamp, range: { start, end } } = this.props
 
     const timestampDate = dayjs(timestamp)
-    const diff = dayjs().diff(timestamp)
+    const diff = dayjs().to(timestamp)
 
     const startDate = dayjs(start)
-    const startDateDiff = dayjs().diff(startDate)
+    const startDateDiff = dayjs().to(startDate)
     const atStart = startDate.isSame(timestampDate)
 
     const endDate = dayjs(end)
-    const endDateDiff = dayjs().diff(endDate)
+    const endDateDiff = dayjs().to(endDate)
     const atEnd = endDate.isSame(timestampDate)
 
     return (
       <div className='data-range-picker'>
-        <label className='data-range-picker__label'>{formatTime(endDateDiff)}</label>
+        <label className='data-range-picker__label'>{endDateDiff}</label>
         <div className='data-range-picker__slider-container'>
           <RcSlider
             min={SLIDER_MIN}
@@ -70,7 +72,7 @@ class DataRangePicker extends React.Component {
             onChange={value => this.onChange(value)}
             handle={(props) =>
               handle({
-                label: formatTime(diff),
+                label: diff,
                 atStart,
                 atEnd,
                 ...props
@@ -78,7 +80,7 @@ class DataRangePicker extends React.Component {
             }
           />
         </div>
-        <label className='data-range-picker__label'>{formatTime(startDateDiff)}</label>
+        <label className='data-range-picker__label'>{startDateDiff}</label>
       </div>
     )
   }
