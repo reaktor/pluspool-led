@@ -145,17 +145,10 @@ const deriveSamplesFromStationData = ({ stationData }) => {
 }
 
 const fetchStationData = () => {
-  return fetch(ENDPOINTS.datagarrison, {
-    method: 'GET',
-    mode: 'no-cors',
-    headers: {
-      'Content-Type': 'text/plain'
-    }
-  }).then(response => {
+  return fetch(ENDPOINTS.datagarrison).then(response => {
     if (response.ok) {
       return response.text()
     }
-
     throw new Error(`Request rejected with status ${response.status}`)
   })
 }

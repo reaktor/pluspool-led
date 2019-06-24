@@ -31,6 +31,15 @@ h1 {
   letter-spacing: 0.03em;
 }
 
+h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 a:hover {
+  color: #0073E5;
+}
+
 h2 {
   font-size: 52px;
   font-weight: 500;
@@ -42,36 +51,4 @@ h2 {
   padding-right: 40px;
   position: relative;
   z-index: 2;
-}
-
-.shaded-wrapper {
-  background-color: #1D1D1D;
-
-  /* Uncollapse margin hack */
-  display: inline-block;
-  width: 100%;
-}
-
-.shaded-wrapper:before {
-  content: "";
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  bottom: 100%;
-  height: 200px;
-  background: linear-gradient(transparent, #1D1D1D);
-}
-
-.shaded-wrapper:after {
-  content: "";
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 100%;
-  height: 200px;
-  background: linear-gradient(#1D1D1D, transparent);
-}
-
-.spacer {
-  height: 100vh;
 }

@@ -1,5 +1,11 @@
 .databar__item {
   font-family: 'IBM Plex Mono', monospace;
+  text-decoration: none;
+  color: inherit;
+}
+
+.databar__item:hover {
+  color: #0073E5;
 }
 
 .databar__item__label {
