@@ -1,40 +1,10 @@
 const withTM = require('next-transpile-modules')
 const withCSS = require('@zeit/next-css')
+const withPreact = require('next-preactx-plugin')
 
-const withPreact = (nextConfig = {}) => {
-  return Object.assign({}, nextConfig, {
-    webpack (config, options) {
-      if (!options.defaultLoaders) {
-        throw new Error(
-          'This plugin is not compatible with Next.js versions below 5.0.0 https://err.sh/next-plugins/upgrade'
-        )
-      }
-
-      if (options.isServer) {
-        config.externals = ['react', 'react-dom', ...config.externals]
-      }
-
-      config.resolve.alias = Object.assign({}, config.resolve.alias, {
-        react: 'preact/compat',
-        react$: 'preact/compat',
-        'react-dom': 'preact/compat',
-        'react-dom$': 'preact/compat'
-      })
-
-      if (typeof nextConfig.webpack === 'function') {
-        return nextConfig.webpack(config, options)
-      }
-
-      return config
-    }
-  })
+const options = {
+ transpileModules: ['jsdom']
 }
 
-module.exports = withPreact(withCSS(withTM({
-  transpileModules: ['jsdom'],
-  exportPathMap: () => {
-    return {
-      '/': { page: '/' }
-    }
-  }
-})))
+module.exports = [withTM, withCSS, withPreact]
+  .reduce((value, plugin) => plugin(value), options)
