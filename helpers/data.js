@@ -144,8 +144,10 @@ const deriveSamplesFromStationData = ({ stationData }) => {
   return {}
 }
 
-const fetchStationData = () => {
-  return fetch(ENDPOINTS.datagarrison, {
+const fetchStationData = ({ req }) => {
+  const baseUrl = 'http://localhost:3000'
+
+  return fetch(baseUrl + ENDPOINTS.datagarrison, {
     method: 'GET',
     mode: 'no-cors',
     headers: {

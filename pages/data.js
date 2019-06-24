@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import Link from 'next/link'
 import datagarrison from 'datagarrison'
 import Head from 'next/head'
 import Graphs from '../components/Graphs'
 import { fetchStationData, fetchNoaaData } from '../helpers/data'
 import './index.css'
 
-function DataPage () {
-  const [stationData, setStationData] = useState()
-  const [noaaData, setNoaaData] = useState()
-
-  const getStationData = () => {
-    fetchStationData().then(text => setStationData(datagarrison.parse(text)))
-  }
-
-  const getNoaaData = () => {
-    fetchNoaaData().then(response => setNoaaData(response.data))
-  }
-
-  useEffect(getStationData, [])
-  useEffect(getNoaaData, [])
-
+function DataPage ({ stationData, noaaData }) {
   return (
     <div>
       <Head>
@@ -32,11 +19,25 @@ function DataPage () {
         />
       </Head>
       <section className='wrapper shaded-wrapper'>
-        <h2>Graphs</h2>
+        <h1>
+          <Link href='/'>
+            <a>+ Pool</a>
+          </Link>
+        </h1>
         <Graphs noaaData={noaaData} stationData={stationData} />
       </section>
     </div>
   )
+}
+
+DataPage.getInitialProps = async ({ req }) => {
+  const rawStationData = await fetchStationData({ req })
+  const stationData = datagarrison.parse(rawStationData)
+
+  const rawNoaaData = await fetchNoaaData()
+  const noaaData = rawNoaaData.data
+
+  return { stationData, noaaData }
 }
 
 export default DataPage
