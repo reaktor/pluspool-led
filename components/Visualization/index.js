@@ -25,10 +25,6 @@ const Visualization = ({ noaaData, stationData }) => {
   const wrapper = useRef(null)
   const paperAnimation = useRef(null)
 
-  const changeTimestamp = (value) => {
-    setTimestamp(value)
-  }
-
   const initPaperAnimation = () => {
     paperAnimation.current = new PaperAnimation({ wrapper: wrapper.current })
   }
@@ -45,7 +41,7 @@ const Visualization = ({ noaaData, stationData }) => {
       <div ref={wrapper} className='visualization__animation' />
       <div className='visualization__bottom'>
         <Databar sample={sample} />
-        <DataRangePicker changeTimestamp={changeTimestamp} timestamp={timestamp} range={range} />
+        <DataRangePicker setTimestamp={setTimestamp} timestamp={timestamp} range={range} />
       </div>
     </div>
   )
