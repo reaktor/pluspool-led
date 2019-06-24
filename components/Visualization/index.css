@@ -5,19 +5,25 @@
   width: 100%;
   height: 100vh;
   z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 
-.visualization__databar {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 200px;
+.visualization__bottom {
+  display: grid;
+  grid-gap: 16px;
+  padding: 32px 24px;
+  max-width: 1000px;
 }
 
 .visualization__animation {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  z-index: -1;
 }
 
 .visualization canvas {

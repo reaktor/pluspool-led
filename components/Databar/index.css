@@ -1,20 +1,5 @@
 .databar {
-  margin: 16px;
-}
-
-.databar__button {
-  width: 100%;
-  padding: 16px;
-  margin-top: 16px;
-
-  background-color: #2676DD;
-  color: white;
-  border-radius: 100px;
-  border: 1px solid white;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 16px;
 }

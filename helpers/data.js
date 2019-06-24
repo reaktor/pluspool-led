@@ -72,7 +72,6 @@ const normalizations = {
 /**
  * GetSampleAtTimestamp is actually a react-style reducer.
  * It takes the previous and current state and
- * @param {Object} previousState - unused but maybe useful in the future
  * @param {Object} currentState - all sample data we know about plus a timestamp.
  * @returns {Object} The merged data from all sources.
  */
@@ -186,6 +185,7 @@ export {
   units,
   normalizations,
   transforms,
+  scale,
   getSampleAtTimestamp,
   deriveSamplesFromStationData,
   fetchStationData,

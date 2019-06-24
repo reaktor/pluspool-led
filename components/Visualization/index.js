@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Databar from '../Databar'
+import DataRangePicker from '../DataRangePicker'
 import PaperAnimation from '../PaperAnimation'
 import { getSampleAtTimestamp, constrain } from '../../helpers/data'
 import './index.css'
@@ -24,12 +25,6 @@ const Visualization = ({ noaaData, stationData }) => {
   const wrapper = useRef(null)
   const paperAnimation = useRef(null)
 
-  const changeTimestamp = () => {
-    setTimestamp(
-      range.start + Math.floor(Math.random() * (range.end - range.start))
-    )
-  }
-
   const initPaperAnimation = () => {
     paperAnimation.current = new PaperAnimation({ wrapper: wrapper.current })
   }
@@ -44,11 +39,10 @@ const Visualization = ({ noaaData, stationData }) => {
   return (
     <div className='visualization'>
       <div ref={wrapper} className='visualization__animation' />
-      <Databar
-        className='visualization__databar'
-        changeSample={changeTimestamp}
-        sample={sample}
-      />
+      <div className='visualization__bottom'>
+        <Databar sample={sample} />
+        <DataRangePicker setTimestamp={setTimestamp} timestamp={timestamp} range={range} />
+      </div>
     </div>
   )
 }

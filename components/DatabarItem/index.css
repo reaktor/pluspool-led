@@ -1,6 +1,5 @@
 .databar__item {
   font-family: 'IBM Plex Mono', monospace;
-  padding: 16px;
 }
 
 .databar__item__label {
@@ -9,8 +8,7 @@
 }
 
 .databar__item__value {
-  font-size: 3em;
-  text-align: right;
+  font-size: 2em;
 }
 
 .databar__item__unit {
