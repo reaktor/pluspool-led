@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-unfetch'
-import absoluteUrl from 'next-absolute-url'
 import { DIRECTIONS, ENDPOINTS } from './constants'
 
 /**
@@ -145,27 +144,11 @@ const deriveSamplesFromStationData = ({ stationData }) => {
   return {}
 }
 
-const fetchStationData = ({ req }) => {
-  let protocol = 'https:'
-  let host = req ? req.headers.host : window.location.hostname
-  if (host.indexOf('localhost') > -1) {
-    host = 'localhost:3000'
-    protocol = 'http:'
-  }
-  const baseUrl = `${protocol}//${host}`
-  const url = `${baseUrl}${ENDPOINTS.datagarrison}`
-
-  return fetch(url, {
-    method: 'GET',
-    mode: 'no-cors',
-    headers: {
-      'Content-Type': 'text/plain'
-    }
-  }).then(response => {
+const fetchStationData = () => {
+  return fetch(ENDPOINTS.datagarrison).then(response => {
     if (response.ok) {
       return response.text()
     }
-
     throw new Error(`Request rejected with status ${response.status}`)
   })
 }

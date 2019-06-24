@@ -30,8 +30,8 @@ function IndexPage ({ stationData, noaaData }) {
   )
 }
 
-IndexPage.getInitialProps = async ({ req }) => {
-  const rawStationData = await fetchStationData({ req })
+IndexPage.getInitialProps = async () => {
+  const rawStationData = await fetchStationData()
   const stationData = datagarrison.parse(rawStationData)
 
   const rawNoaaData = await fetchNoaaData()

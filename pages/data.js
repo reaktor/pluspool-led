@@ -30,8 +30,8 @@ function DataPage ({ stationData, noaaData }) {
   )
 }
 
-DataPage.getInitialProps = async ({ req }) => {
-  const rawStationData = await fetchStationData({ req })
+DataPage.getInitialProps = async () => {
+  const rawStationData = await fetchStationData()
   const stationData = datagarrison.parse(rawStationData)
 
   const rawNoaaData = await fetchNoaaData()
