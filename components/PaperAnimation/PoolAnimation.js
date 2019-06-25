@@ -27,6 +27,8 @@ const POOL_PATHS = [
   [[-1, -3], [-1, -5]]
 ]
 
+const POOL_PATH_SCALE = 44
+
 /**
  * Takes 2 colors and returns an array of gradient stops between those colors.
  * Phase allows us to shift the gradient.
@@ -82,6 +84,7 @@ class PoolAnimation {
   constructor (props) {
     const { sample } = props
     this.sample = sample
+    this.backgroundPath = null
     this.paths = [null]
     this.layers = [null]
 
@@ -94,8 +97,30 @@ class PoolAnimation {
   }
 
   draw () {
-    const POOL_PATH_SCALE = 50
+    /**
+     * Draw Background Shape
+     */
+    this.backgroundPath = new paper.Path()
+    this.backgroundPath.fillColor = COLORS.black
+    POOL_PATHS.map((path, index) => {
+      const point1 = [
+        path[0][0] * POOL_PATH_SCALE,
+        path[0][1] * POOL_PATH_SCALE
+      ]
+      const point2 = [
+        path[1][0] * POOL_PATH_SCALE,
+        path[1][1] * POOL_PATH_SCALE
+      ]
+      this.backgroundPath.add(point1)
+      this.backgroundPath.add(point2)
+    })
+    this.layers[0].addChild(this.backgroundPath)
 
+    /**
+     * Draw Gradient Paths
+     * To do the gradient paths we need to draw each line as a separate path
+     * in order to achieve gradients.
+     */
     POOL_PATHS.map((path, index) => {
       this.paths[index] = new paper.Path()
       this.paths[index].strokeWidth = 5

@@ -13,6 +13,7 @@
 
 .visualization__animation {
   flex-grow: 1;
+  overflow: hidden;
 }
 
 .visualization canvas {
