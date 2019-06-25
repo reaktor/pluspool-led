@@ -3,3 +3,26 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 40px;
 }
+
+.choices input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"]:checked + label {
+  color: black;
+  background-color: white;
+  border-radius: 4rem;
+  overflow: hidden;
+  transition: 0.25s ease all;
+}
+
+.choices label {
+  background-color: #333;
+  padding: 0.5em 1em 0.5em 1em;
+}
+
+.choices {
+  background-color: #333;
+  border-radius: 4rem;
+  padding: 1em;
+}

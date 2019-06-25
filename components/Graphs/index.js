@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Line, XAxis, YAxis } from 'recharts'
 import { getSamples, before } from '../../helpers/data'
@@ -10,19 +10,29 @@ const Choices = ({ name, choices, onChange }) => {
     onChange(value)
   }
 
+  const choiceToLabel = choice => {
+    switch (choice) {
+      case 'day': return 'Today'
+      case 'week': return 'Past Week'
+      case 'month': return 'Past Month'
+      case 'year': return 'Past Year'
+      default: return 'Select Date Range'
+    }
+  }
+
   return (
-    <div>
+    <span className='choices'>
       { choices.map(choice => (
-        <Choice name={name} choice={choice} onChange={innerOnChange} />
+        <Choice name={name} choice={choice} onChange={innerOnChange} label={choiceToLabel(choice)} />
       )) }
-    </div>
+    </span>
   )
 }
-const Choice = ({ name, choice, onChange }) => {
+const Choice = ({ name, choice, label, onChange }) => {
   return (
     <>
       <input type='radio' id={choice} name={name} value={choice} onChange={onChange} />
-      <label for={choice}>{choice}</label>
+      <label for={choice}>{label}</label>
     </>
   )
 }
