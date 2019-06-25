@@ -1,31 +1,53 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Line, XAxis, YAxis } from 'recharts'
-import { getSamples } from '../../helpers/data'
+import { getSamples, before } from '../../helpers/data'
 import Graph from '../Graph'
-import DataRangePicker from '../DataRangePicker'
 import './index.css'
+
+const Choices = ({ name, choices, onChange }) => {
+  const innerOnChange = ({ target: { value } }) => {
+    onChange(value)
+  }
+
+  return (
+    <div>
+      { choices.map(choice => (
+        <Choice name={name} choice={choice} onChange={innerOnChange} />
+      )) }
+    </div>
+  )
+}
+const Choice = ({ name, choice, onChange }) => {
+  return (
+    <>
+      <input type='radio' id={choice} name={name} value={choice} onChange={onChange} />
+      <label for={choice}>{choice}</label>
+    </>
+  )
+}
 
 const Graphs = ({ noaaData, stationData }) => {
   if (!noaaData || !stationData) return null
 
   const range = {
     start: Date.now() - (60 * 60 * 66 * 1000),
-    end: Date.now() - (60 * 60 * 68 * 1000)
+    end: Date.now()
   }
-  const [timestamp, setTimestamp] = useState(range.end)
+
   const [data, setData] = useState(() => getSamples({ noaaData, stationData, range }))
 
-  useEffect(() => {
-    setData(getSamples({
+  const setRange = (range) => {
+    const samples = getSamples({
       noaaData,
       stationData,
       range: {
-        start: timestamp,
+        start: before(range),
         end: Date.now()
       }
-    }))
-  }, [noaaData, stationData, timestamp])
+    })
+    setData(samples)
+  }
 
   const graphs = [
     {
@@ -86,14 +108,18 @@ const Graphs = ({ noaaData, stationData }) => {
     }
   ]
 
-  return (
-    <div className='graphs'>
-      <DataRangePicker setTimestamp={setTimestamp} timestamp={timestamp} range={range} />
+  const choices = ['day', 'week', 'month', 'year']
 
-      {graphs.map(graph => (
-        <Graph key={graph.header} {...graph} />
-      ))}
-    </div>
+  return (
+    <>
+      <Choices choices={choices} onChange={setRange} name='range' />
+      <div className='graphs'>
+
+        {graphs.map(graph => (
+          <Graph key={graph.header} {...graph} />
+        ))}
+      </div>
+    </>
   )
 }
 

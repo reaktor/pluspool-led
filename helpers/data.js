@@ -1,5 +1,11 @@
 import fetch from 'isomorphic-unfetch'
 import { DIRECTIONS, ENDPOINTS } from './constants'
+import dayjs from 'dayjs'
+
+/**
+ * Generate a timestamp in the past
+ */
+const before = unit => dayjs().subtract(1, unit)
 
 /**
  * Look up table that takes our data header as the key
@@ -148,6 +154,7 @@ export {
   constrain,
   labels,
   units,
+  before,
   normalizations,
   transforms,
   scale,
