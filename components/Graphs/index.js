@@ -9,10 +9,10 @@ import './index.css'
 const Graphs = ({ noaaData, stationData }) => {
   if (!noaaData || !stationData) return null
 
-  const [range, setRange] = useState({
-    start: Date.now() - (60 * 60 * 24 * 3 * 1000),
-    end: Date.now()
-  })
+  const range = {
+    start: Date.now() - (60 * 60 * 66 * 1000),
+    end: Date.now() - (60 * 60 * 68 * 1000)
+  }
   const [timestamp, setTimestamp] = useState(range.end)
   const [data, setData] = useState(() => getSamples({ noaaData, stationData, range }))
 
