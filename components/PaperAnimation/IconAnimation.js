@@ -1,9 +1,17 @@
 import paper from 'paper-jsdom-canvas'
 
 const makeEven = number => Math.floor(number / 2) * 2
-const makeOdd = number => Math.floor(number / 2) * 2 + 1
 
 const ICON_SIZE = 60
+
+const ICON_COLORS = {
+  bacteria: '#BB3D13',
+  oxygen: '#006093',
+  speed: '#FAA400',
+  salinity: '#672F98',
+  turbidity: '#A85A38',
+  direction: '#005037'
+}
 
 const icons = {
   bacteria: '/static/img/icons/bacteria.svg',
@@ -43,10 +51,7 @@ class IconAnimation {
   loadIcon (iconPath) {
     return new Promise(resolve => {
       paper.project.importSVG(iconPath, icon => {
-        const group = new paper.Group([icon])
-        const symbol = new paper.SymbolDefinition(group)
-        group.fillColor = '#6B6A6C'
-        resolve(symbol)
+        resolve(icon)
       })
     })
   }
@@ -55,7 +60,10 @@ class IconAnimation {
     const promises = iconKeys.map((key) => {
       const iconPath = icons[key]
       return this.loadIcon(iconPath).then(icon => {
-        this.iconSymbols[key] = icon
+        const group = new paper.Group([icon])
+        const symbol = new paper.SymbolDefinition(group)
+        icon.fillColor = ICON_COLORS[key]
+        this.iconSymbols[key] = symbol
       })
     })
 
