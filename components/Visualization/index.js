@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Databar from '../Databar'
 import DataRangePicker from '../DataRangePicker'
 import PaperAnimation from '../PaperAnimation'
-import { getSampleAtTimestamp, constrain } from '../../helpers/data'
+import { getSamples, constrain } from '../../helpers/data'
 import './index.css'
 
 const Visualization = ({
@@ -24,8 +24,8 @@ const Visualization = ({
   )
 
   const [timestamp, setTimestamp] = useState(range.end)
-
-  const sample = getSampleAtTimestamp({ noaaData, stationData, timestamp })
+  const nowRange = { start: timestamp, end: timestamp }
+  const sample = getSamples({ noaaData, stationData, range: nowRange })
 
   const wrapper = useRef(null)
   const paperAnimation = useRef(null)

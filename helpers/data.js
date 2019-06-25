@@ -84,16 +84,23 @@ const normalizations = {
 }
 
 /**
- * GetSampleAtTimestamp is actually a react-style reducer.
- * It takes the previous and current state and
- * @param {Object} currentState - all sample data we know about plus a timestamp.
- * @returns {Object} The merged data from all sources.
+ * GetSamples returns an array of samples between start (inclusive) and end (exclusive)
+ * @param {Object} noaaData - raw noaaData
+ * @param {Object} stationData - raw stationData
+ * @param {Object} range - object with start and end keys
+ *
+ * @returns {Object} Array of samples
  */
-const getSampleAtTimestamp = ({ noaaData, stationData, timestamp }) => {
-  const stationSample = deriveSampleFromStationData({ stationData, timestamp })
-  const noaaSample = deriveSampleFromNoaaData({ noaaData, timestamp })
-  const sample = { ...stationSample, ...noaaSample }
-  return sample
+const getSamples = ({ noaaData, stationData, range: { start, end } }) => {
+  return noaaData
+    .filter(sample => {
+      const timestamp = Date.parse(sample.t)
+      return timestamp >= start && timestamp < end
+    })
+    .map(noaaSample => {
+      const timestamp = Date.parse(noaaSample.t)
+      return { ...noaaSample, ...deriveSampleFromStationData({ stationData, timestamp }) }
+    })
 }
 
 /**
@@ -118,41 +125,6 @@ const deriveSampleFromStationData = ({ stationData, timestamp }) => {
       acc[column] = sample[i]
       return acc
     }, {})
-  }
-
-  return {}
-}
-
-/**
- *
- * @param {Object} noaaData - Data retrieved from the NOAA tides and currents api.
- * @param {number} timestamp - timestamp.
- * @returns {Object} A sample of data.
- */
-const deriveSampleFromNoaaData = ({ noaaData, timestamp }) => {
-  if (noaaData && noaaData.length > 0 && timestamp) {
-    const index = noaaData.findIndex(
-      sample => Date.parse(sample.t) >= timestamp
-    )
-    if (index - 1 < 0) return {}
-    return noaaData[index - 1]
-  }
-
-  return {}
-}
-
-/**
- * @param {string} stationData.timezone - Timezone for data
- * @returns {Object} Samples of data.
- */
-const deriveSamplesFromStationData = ({ stationData }) => {
-  if (stationData && stationData.samples) {
-    return stationData.samples.map(sample => {
-      return stationData.header.reduce((acc, column, i) => {
-        acc[column] = sample[i]
-        return acc
-      }, {})
-    })
   }
 
   return {}
@@ -194,8 +166,7 @@ export {
   normalizations,
   transforms,
   scale,
-  getSampleAtTimestamp,
-  deriveSamplesFromStationData,
+  getSamples,
   fetchStationData,
   fetchNoaaData
 }
