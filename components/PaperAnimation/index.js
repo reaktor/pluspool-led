@@ -5,7 +5,6 @@ import IconAnimation from './IconAnimation'
 class PaperAnimation {
   constructor (props) {
     const { wrapper, sample = {} } = props
-    paper.settings.applyMatrix = false
 
     this.wrapper = wrapper
     this.sample = sample
@@ -35,10 +34,6 @@ class PaperAnimation {
     canvas.setAttribute('resize', '')
     this.wrapper.append(canvas)
     paper.setup(canvas)
-
-    const { height, width } = paper.view.size
-    // Shift our global vertical center to be the middle
-    paper.view.translate([width / 2, height / 2])
   }
 
   initializeLayers () {

@@ -1,6 +1,9 @@
 import paper from 'paper-jsdom-canvas'
 
-const ICON_SIZE = 40
+const makeEven = number => Math.floor(number / 2) * 2
+const makeOdd = number => Math.floor(number / 2) * 2 + 1
+
+const ICON_SIZE = 60
 
 const icons = {
   bacteria: '/static/img/icons/bacteria.svg',
@@ -40,8 +43,9 @@ class IconAnimation {
   loadIcon (iconPath) {
     return new Promise(resolve => {
       paper.project.importSVG(iconPath, icon => {
-        const group = new paper.Group(icon)
+        const group = new paper.Group([icon])
         const symbol = new paper.SymbolDefinition(group)
+        group.fillColor = '#6B6A6C'
         resolve(symbol)
       })
     })
@@ -60,19 +64,18 @@ class IconAnimation {
 
   draw () {
     const { width, height } = paper.view.size
+    const divisionsWidth = makeEven(Math.floor(width / ICON_SIZE))
+    const divisionsHeight = makeEven(Math.floor(height / ICON_SIZE))
+    const remainderWidth = width - (divisionsWidth * ICON_SIZE)
+    const remainderHeight = height - (divisionsHeight * ICON_SIZE)
 
-    const divisionsWidth = Math.floor(width / ICON_SIZE)
-    const divisionsHeight = Math.floor(height / ICON_SIZE)
-    const remainderWidth = width % ICON_SIZE
-    const remainderHeight = height % ICON_SIZE
-
-    for (let column = 0; column <= divisionsWidth; column++) {
-      for (let row = 0; row <= divisionsHeight; row++) {
+    for (let column = 0; column < divisionsWidth; column++) {
+      for (let row = 0; row < divisionsHeight; row++) {
         const randIconIndex = Math.floor(Math.random() * iconKeys.length)
         const randIcon = iconKeys[randIconIndex]
         const instance = new paper.SymbolItem(this.iconSymbols[randIcon])
-        const xPos = (column * ICON_SIZE) - (width / 2) + (remainderWidth / 2)
-        const yPos = (row * ICON_SIZE) - (height / 2) + (remainderHeight / 2)
+        const xPos = (column * ICON_SIZE) + (ICON_SIZE / 2) + (remainderWidth / 2)
+        const yPos = (row * ICON_SIZE) + (ICON_SIZE / 2) + (remainderHeight / 2)
         instance.position = new paper.Point(xPos, yPos)
         this.layers[0].addChild(instance)
       }

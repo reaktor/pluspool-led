@@ -1,10 +1,15 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-  <title>turbidity</title>
-  <g id="Wireframes-v1">
-    <g id="data-visualization">
-      <g id="Group">
-        <path id="Triangle" d="M20,14.12,13.81,26.5H26.19Z" style="fill: none;stroke: #515154"/>
-      </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>turbidity</title>
+    <desc>Created with Sketch.</desc>
+    <g id="turbidity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="data.turbidity" transform="translate(17.000000, 16.000000)" fill="#000000" fill-rule="nonzero">
+            <polygon id="Line-3" points="12 -1 12 29 14 29 14 -1"></polygon>
+            <polygon id="Line-3" points="18 2.68421053 18 25.3157895 20 25.3157895 20 2.68421053"></polygon>
+            <polygon id="Line-3" points="6 2.68421053 6 25.3157895 8 25.3157895 8 2.68421053"></polygon>
+            <polygon id="Line-3" points="24 6.36842105 24 21.6315789 26 21.6315789 26 6.36842105"></polygon>
+            <polygon id="Line-3" points="-2.22044605e-16 6.36842105 -2.22044605e-16 21.6315789 2 21.6315789 2 6.36842105"></polygon>
+        </g>
     </g>
-  </g>
 </svg>

@@ -1,10 +1,14 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-  <title>direction</title>
-  <g id="Wireframes-v1">
-    <g id="data-visualization">
-      <g id="Group">
-        <path id="Line-4" d="M23.16,20.16H7.66a.5.5,0,0,1-.5-.5.5.5,0,0,1,.5-.5h15.5V15.69a.53.53,0,0,1,.53-.53.6.6,0,0,1,.24.05l7.93,4a.53.53,0,0,1,.24.72.56.56,0,0,1-.24.24l-7.93,4a.54.54,0,0,1-.72-.24.64.64,0,0,1-.05-.24Z" style="fill: #515154"/>
-      </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>direction</title>
+    <desc>Created with Sketch.</desc>
+    <g id="direction" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#000000" cx="30" cy="30" r="4"></circle>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" transform="translate(24.000000, 21.000000) rotate(-35.000000) translate(-24.000000, -21.000000) " points="25 32 25 10 23 10 23 32"></polygon>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" transform="translate(6.500000, 29.500000) rotate(90.000000) translate(-6.500000, -29.500000) " points="7.5 32 7.5 27 5.5 27 5.5 32"></polygon>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" transform="translate(53.500000, 29.500000) rotate(90.000000) translate(-53.500000, -29.500000) " points="54.5 32 54.5 27 52.5 27 52.5 32"></polygon>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" transform="translate(30.500000, 6.500000) rotate(180.000000) translate(-30.500000, -6.500000) " points="31.5 9 31.5 4 29.5 4 29.5 9"></polygon>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" transform="translate(30.500000, 53.500000) rotate(180.000000) translate(-30.500000, -53.500000) " points="31.5 56 31.5 51 29.5 51 29.5 56"></polygon>
     </g>
-  </g>
 </svg>

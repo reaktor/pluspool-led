@@ -27,7 +27,8 @@ const POOL_PATHS = [
   [[-1, -3], [-1, -5]]
 ]
 
-const POOL_PATH_SCALE = 44
+const POOL_PATH_SCALE = 60
+const POOL_PATH_OUTSET = 30
 
 /**
  * Takes 2 colors and returns an array of gradient stops between those colors.
@@ -97,51 +98,68 @@ class PoolAnimation {
   }
 
   draw () {
-    /**
-     * Draw Background Shape
-     */
+    const { height, width } = paper.view.size
+
     this.backgroundPath = new paper.Path()
     this.backgroundPath.fillColor = COLORS.black
+    this.backgroundPath.strokeWidth = POOL_PATH_SCALE
+    this.backgroundPath.strokeColor = COLORS.black
+
     POOL_PATHS.map((path, index) => {
+      // Grab our points
+      const segment1A = path[0][0]
+      const segment1B = path[0][1]
+      const segment2A = path[1][0]
+      const segment2B = path[1][1]
+
+      // Convert our points from unit of 1 scale to drawing scale
+      const scaledSegment1A = segment1A * POOL_PATH_SCALE
+      const scaledSegment1B = segment1B * POOL_PATH_SCALE
+      const scaledSegment2A = segment2A * POOL_PATH_SCALE
+      const scaledSegment2B = segment2B * POOL_PATH_SCALE
+
+      // Grow each point by our outset value
+      const outsetSegment1A = scaledSegment1A + (Math.sign(scaledSegment1A) * POOL_PATH_OUTSET)
+      const outsetSegment1B = scaledSegment1B + (Math.sign(scaledSegment1B) * POOL_PATH_OUTSET)
+      const outsetSegment2A = scaledSegment2A + (Math.sign(scaledSegment2A) * POOL_PATH_OUTSET)
+      const outsetSegment2B = scaledSegment2B + (Math.sign(scaledSegment2B) * POOL_PATH_OUTSET)
+
+      // Shift points to be in center of screen
+      const shiftedSegment1A = outsetSegment1A + (width / 2)
+      const shiftedSegment1B = outsetSegment1B + (height / 2)
+      const shiftedSegment2A = outsetSegment2A + (width / 2)
+      const shiftedSegment2B = outsetSegment2B + (height / 2)
+
       const point1 = [
-        path[0][0] * POOL_PATH_SCALE,
-        path[0][1] * POOL_PATH_SCALE
+        shiftedSegment1A,
+        shiftedSegment1B
       ]
       const point2 = [
-        path[1][0] * POOL_PATH_SCALE,
-        path[1][1] * POOL_PATH_SCALE
+        shiftedSegment2A,
+        shiftedSegment2B
       ]
-      this.backgroundPath.add(point1)
-      this.backgroundPath.add(point2)
-    })
-    this.layers[0].addChild(this.backgroundPath)
 
-    /**
-     * Draw Gradient Paths
-     * To do the gradient paths we need to draw each line as a separate path
-     * in order to achieve gradients.
-     */
-    POOL_PATHS.map((path, index) => {
+      /**
+       * Gradient line
+       */
       this.paths[index] = new paper.Path()
       this.paths[index].strokeWidth = 5
-      const point1 = [
-        path[0][0] * POOL_PATH_SCALE,
-        path[0][1] * POOL_PATH_SCALE
-      ]
-      const point2 = [
-        path[1][0] * POOL_PATH_SCALE,
-        path[1][1] * POOL_PATH_SCALE
-      ]
+      this.paths[index].strokeCap = 'round'
 
       this.paths[index].add(point1)
       this.paths[index].add(point2)
 
-      this.paths[index].strokeColor = 'black'
-      this.paths[index].strokeCap = 'round'
-
       this.layers[0].addChild(this.paths[index])
-      return path
+
+      /**
+       * Background shape
+       */
+      this.backgroundPath.add(point1)
+      this.backgroundPath.add(point2)
     })
+
+    this.backgroundPath.closed = true
+    this.layers[0].insertChild(0, this.backgroundPath)
   }
 
   color (phase = 0) {
