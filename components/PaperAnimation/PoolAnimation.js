@@ -1,7 +1,7 @@
 import paper from 'paper-jsdom-canvas'
 import { normalizations } from '../../helpers/data'
 import { COLORS } from '../../helpers/constants'
-import { gradientWave } from '../../helpers/functions'
+import { iconSize, gradientWave } from '../../helpers/drawing'
 
 /**
  * Start from 12 o'clock and go clock wise
@@ -26,9 +26,6 @@ const POOL_PATHS = [
   [[-1, -1], [-1, -3]],
   [[-1, -3], [-1, -5]]
 ]
-
-const POOL_PATH_SCALE = 60
-const POOL_PATH_OUTSET = 30
 
 /**
  * Takes 2 colors and returns an array of gradient stops between those colors.
@@ -100,9 +97,12 @@ class PoolAnimation {
   draw () {
     const { height, width } = paper.view.size
 
+    const scale = iconSize({ width, height })
+    const outset = scale / 2
+
     this.backgroundPath = new paper.Path()
     this.backgroundPath.fillColor = COLORS.black
-    this.backgroundPath.strokeWidth = POOL_PATH_SCALE
+    this.backgroundPath.strokeWidth = scale
     this.backgroundPath.strokeColor = COLORS.black
 
     POOL_PATHS.map((path, index) => {
@@ -113,16 +113,16 @@ class PoolAnimation {
       const segment2B = path[1][1]
 
       // Convert our points from unit of 1 scale to drawing scale
-      const scaledSegment1A = segment1A * POOL_PATH_SCALE
-      const scaledSegment1B = segment1B * POOL_PATH_SCALE
-      const scaledSegment2A = segment2A * POOL_PATH_SCALE
-      const scaledSegment2B = segment2B * POOL_PATH_SCALE
+      const scaledSegment1A = segment1A * scale
+      const scaledSegment1B = segment1B * scale
+      const scaledSegment2A = segment2A * scale
+      const scaledSegment2B = segment2B * scale
 
       // Grow each point by our outset value
-      const outsetSegment1A = scaledSegment1A + (Math.sign(scaledSegment1A) * POOL_PATH_OUTSET)
-      const outsetSegment1B = scaledSegment1B + (Math.sign(scaledSegment1B) * POOL_PATH_OUTSET)
-      const outsetSegment2A = scaledSegment2A + (Math.sign(scaledSegment2A) * POOL_PATH_OUTSET)
-      const outsetSegment2B = scaledSegment2B + (Math.sign(scaledSegment2B) * POOL_PATH_OUTSET)
+      const outsetSegment1A = scaledSegment1A + (Math.sign(scaledSegment1A) * outset)
+      const outsetSegment1B = scaledSegment1B + (Math.sign(scaledSegment1B) * outset)
+      const outsetSegment2A = scaledSegment2A + (Math.sign(scaledSegment2A) * outset)
+      const outsetSegment2B = scaledSegment2B + (Math.sign(scaledSegment2B) * outset)
 
       // Shift points to be in center of screen
       const shiftedSegment1A = outsetSegment1A + (width / 2)

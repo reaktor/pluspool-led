@@ -14,11 +14,8 @@ const COLORS = {
   yellow: '#FEAA46'
 }
 
-// WAVES
-const POINTS = 10
-const WAVE_SPEED = 20
-const WAVE_HEIGHT = 30
+const ICON_SIZE = 65
 
 const DIRECTIONS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
 
-export { DIRECTIONS, ENDPOINTS, PI, COLORS, POINTS, WAVE_HEIGHT, WAVE_SPEED }
+export { DIRECTIONS, ENDPOINTS, PI, COLORS, ICON_SIZE }
