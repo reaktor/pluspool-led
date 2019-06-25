@@ -25,7 +25,7 @@ const Visualization = ({
 
   const [timestamp, setTimestamp] = useState(range.end)
   const nowRange = { start: timestamp, end: timestamp }
-  const sample = getSamples({ noaaData, stationData, range: nowRange })
+  const sample = getSamples({ noaaData, stationData, range: nowRange })[0]
 
   const wrapper = useRef(null)
   const paperAnimation = useRef(null)
