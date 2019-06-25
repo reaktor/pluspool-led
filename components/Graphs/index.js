@@ -1,15 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Line, XAxis, YAxis } from 'recharts'
 import { getSamples } from '../../helpers/data'
 import Graph from '../Graph'
+import DataRangePicker from '../DataRangePicker'
 import './index.css'
 
 const Graphs = ({ noaaData, stationData }) => {
   if (!noaaData || !stationData) return null
-  const [range] = useState({ start: 0, end: Date.now() })
 
-  const data = getSamples({ noaaData, stationData, range })
+  const [range, setRange] = useState({
+    start: Date.now() - (60 * 60 * 24 * 3 * 1000),
+    end: Date.now()
+  })
+  const [timestamp, setTimestamp] = useState(range.end)
+  const [data, setData] = useState(() => getSamples({ noaaData, stationData, range }))
+
+  useEffect(() => {
+    setData(getSamples({
+      noaaData,
+      stationData,
+      range: {
+        start: timestamp,
+        end: Date.now()
+      }
+    }))
+  }, [noaaData, stationData, timestamp])
 
   const graphs = [
     {
@@ -72,6 +88,8 @@ const Graphs = ({ noaaData, stationData }) => {
 
   return (
     <div className='graphs'>
+      <DataRangePicker setTimestamp={setTimestamp} timestamp={timestamp} range={range} />
+
       {graphs.map(graph => (
         <Graph key={graph.header} {...graph} />
       ))}
