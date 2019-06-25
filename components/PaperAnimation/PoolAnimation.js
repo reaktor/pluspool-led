@@ -106,38 +106,22 @@ class PoolAnimation {
     this.backgroundPath.strokeColor = COLORS.black
 
     POOL_PATHS.map((path, index) => {
-      // Grab our points
-      const segment1A = path[0][0]
-      const segment1B = path[0][1]
-      const segment2A = path[1][0]
-      const segment2B = path[1][1]
+      const points = path.map(([x, y]) => (
+        // Convert our points from unit of 1 scale to drawing scale
+        [x * scale, y * scale]
+      )).map(([x, y]) => (
+        // Grow each point by our outset value
+        [
+          x + (Math.sign(x) * outset),
+          y + (Math.sign(y) * outset)
+        ]
+      )).map(([x, y]) => (
+        // Shift points to be in center of screen
+        [x + (width / 2), y + (height / 2)]
+      ))
 
-      // Convert our points from unit of 1 scale to drawing scale
-      const scaledSegment1A = segment1A * scale
-      const scaledSegment1B = segment1B * scale
-      const scaledSegment2A = segment2A * scale
-      const scaledSegment2B = segment2B * scale
-
-      // Grow each point by our outset value
-      const outsetSegment1A = scaledSegment1A + (Math.sign(scaledSegment1A) * outset)
-      const outsetSegment1B = scaledSegment1B + (Math.sign(scaledSegment1B) * outset)
-      const outsetSegment2A = scaledSegment2A + (Math.sign(scaledSegment2A) * outset)
-      const outsetSegment2B = scaledSegment2B + (Math.sign(scaledSegment2B) * outset)
-
-      // Shift points to be in center of screen
-      const shiftedSegment1A = outsetSegment1A + (width / 2)
-      const shiftedSegment1B = outsetSegment1B + (height / 2)
-      const shiftedSegment2A = outsetSegment2A + (width / 2)
-      const shiftedSegment2B = outsetSegment2B + (height / 2)
-
-      const point1 = [
-        shiftedSegment1A,
-        shiftedSegment1B
-      ]
-      const point2 = [
-        shiftedSegment2A,
-        shiftedSegment2B
-      ]
+      const point1 = points[0]
+      const point2 = points[1]
 
       /**
        * Gradient line
