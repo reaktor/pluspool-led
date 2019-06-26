@@ -8,17 +8,14 @@ const PI = Math.PI.toFixed(4)
 const COLORS = {
   darkBlue: '#0073E5',
   lightBlue: '#00E7D8',
-  black: '#000000',
+  black: '#1D1D1D',
   purple: '#F900FD',
   gray: '#C9C9C9',
   yellow: '#FEAA46'
 }
 
-// WAVES
-const POINTS = 10
-const WAVE_SPEED = 20
-const WAVE_HEIGHT = 30
+const ICON_SIZE = 65
 
 const DIRECTIONS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
 
-export { DIRECTIONS, ENDPOINTS, PI, COLORS, POINTS, WAVE_HEIGHT, WAVE_SPEED }
+export { DIRECTIONS, ENDPOINTS, PI, COLORS, ICON_SIZE }

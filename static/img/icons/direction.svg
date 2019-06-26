@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="65px" height="65px" viewBox="0 0 65 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>data.icon.direction.grey.v4</title>
+    <desc>Created with Sketch.</desc>
+    <g id="data.icon.direction.grey.v4" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#000000" cx="33" cy="33" r="4"></circle>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" transform="translate(27.000000, 24.000000) rotate(-35.000000) translate(-27.000000, -24.000000) " points="28 35 28 13 26 13 26 35"></polygon>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" transform="translate(9.500000, 32.500000) rotate(90.000000) translate(-9.500000, -32.500000) " points="10.5 35 10.5 30 8.5 30 8.5 35"></polygon>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" transform="translate(56.500000, 32.500000) rotate(90.000000) translate(-56.500000, -32.500000) " points="57.5 35 57.5 30 55.5 30 55.5 35"></polygon>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" transform="translate(33.500000, 9.500000) rotate(180.000000) translate(-33.500000, -9.500000) " points="34.5 12 34.5 7 32.5 7 32.5 12"></polygon>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" transform="translate(33.500000, 56.500000) rotate(180.000000) translate(-33.500000, -56.500000) " points="34.5 59 34.5 54 32.5 54 32.5 59"></polygon>
+    </g>
+</svg>

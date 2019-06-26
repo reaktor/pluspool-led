@@ -1,58 +1,47 @@
 import paper from 'paper-jsdom-canvas'
 import PoolAnimation from './PoolAnimation'
-import WaveAnimation from './WaveAnimation'
+import IconAnimation from './IconAnimation'
 
 class PaperAnimation {
   constructor (props) {
     const { wrapper, sample = {} } = props
-    paper.settings.applyMatrix = false
 
     this.wrapper = wrapper
     this.sample = sample
 
-    this.water = new WaveAnimation({ sample })
-    this.pool = new PoolAnimation({ sample })
-
     this.initializeCanvas()
-    this.initializeLayers()
-    this.water.draw()
-    this.pool.draw()
+
+    this.iconAnimation = new IconAnimation({ sample })
+    this.poolAnimation = new PoolAnimation({ sample })
 
     paper.view.onFrame = this.onFrame.bind(this)
   }
 
   updateProps ({ sample }) {
     this.sample = sample
-    this.water.updateProps({ sample })
-    this.pool.updateProps({ sample })
+    this.iconAnimation.updateProps({ sample })
+    this.poolAnimation.updateProps({ sample })
   }
 
   onFrame (event) {
-    this.water.animate(event)
-    this.pool.animate(event)
+    this.iconAnimation.animate(event)
+    this.poolAnimation.animate(event)
   }
 
   initializeCanvas () {
     const canvas = document.createElement('canvas')
     canvas.id = 'paper-canvas'
+    canvas.setAttribute('resize', '')
     this.wrapper.append(canvas)
     paper.setup(canvas)
-
-    const { height, width } = paper.view.size
-
-    // Shift our global vertical center to be the middle
-    paper.view.translate([width / 2, height / 2])
   }
 
   initializeLayers () {
-    this.water.layers[0] = new paper.Group()
-    this.water.layers[1] = new paper.Group()
-    this.water.layers[1].translate(new paper.Point(10, 10))
+    this.iconAnimation.layers[0] = new paper.Group()
+    this.poolAnimation.layers[0] = new paper.Group()
 
-    this.pool.layers[0] = new paper.Group()
-
-    this.pool.layers[0].sendToBack()
-    this.water.layers[0].sendToBack()
+    this.poolAnimation.layers[0].sendToBack()
+    this.iconAnimation.layers[0].sendToBack()
   }
 }
 

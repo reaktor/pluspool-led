@@ -19,13 +19,6 @@ function IndexPage ({ stationData, noaaData }) {
         />
       </Head>
       <Visualization noaaData={noaaData} stationData={stationData} />
-      <section className='wrapper'>
-        <h1>
-          <Link href='/'>
-            <a>+ Pool</a>
-          </Link>
-        </h1>
-      </section>
     </div>
   )
 }

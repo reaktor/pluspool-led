@@ -1,7 +1,7 @@
 import paper from 'paper-jsdom-canvas'
 import { normalizations } from '../../helpers/data'
 import { COLORS } from '../../helpers/constants'
-import { gradientWave } from '../../helpers/functions'
+import { iconSize, gradientWave } from '../../helpers/drawing'
 
 /**
  * Start from 12 o'clock and go clock wise
@@ -82,8 +82,12 @@ class PoolAnimation {
   constructor (props) {
     const { sample } = props
     this.sample = sample
+    this.backgroundPath = null
     this.paths = [null]
     this.layers = [null]
+
+    this.layers[0] = new paper.Group()
+    this.draw()
   }
 
   updateProps ({ sample }) {
@@ -91,29 +95,55 @@ class PoolAnimation {
   }
 
   draw () {
-    const POOL_PATH_SCALE = 50
+    const { height, width } = paper.view.size
+
+    const scale = iconSize({ width, height })
+    const outset = scale / 2
+
+    this.backgroundPath = new paper.Path()
+    this.backgroundPath.fillColor = COLORS.black
+    this.backgroundPath.strokeWidth = scale
+    this.backgroundPath.strokeColor = COLORS.black
 
     POOL_PATHS.map((path, index) => {
+      const points = path.map(([x, y]) => (
+        // Convert our points from unit of 1 scale to drawing scale
+        [x * scale, y * scale]
+      )).map(([x, y]) => (
+        // Grow each point by our outset value
+        [
+          x + (Math.sign(x) * outset),
+          y + (Math.sign(y) * outset)
+        ]
+      )).map(([x, y]) => (
+        // Shift points to be in center of screen
+        [x + (width / 2), y + (height / 2)]
+      ))
+
+      const lineStart = points[0]
+      const lineEnd = points[1]
+
+      /**
+       * Gradient line
+       */
       this.paths[index] = new paper.Path()
       this.paths[index].strokeWidth = 5
-      const point1 = [
-        path[0][0] * POOL_PATH_SCALE,
-        path[0][1] * POOL_PATH_SCALE
-      ]
-      const point2 = [
-        path[1][0] * POOL_PATH_SCALE,
-        path[1][1] * POOL_PATH_SCALE
-      ]
-
-      this.paths[index].add(point1)
-      this.paths[index].add(point2)
-
-      this.paths[index].strokeColor = 'black'
       this.paths[index].strokeCap = 'round'
 
+      this.paths[index].add(lineStart)
+      this.paths[index].add(lineEnd)
+
       this.layers[0].addChild(this.paths[index])
-      return path
+
+      /**
+       * Background shape
+       */
+      this.backgroundPath.add(lineStart)
+      this.backgroundPath.add(lineEnd)
     })
+
+    this.backgroundPath.closed = true
+    this.layers[0].insertChild(0, this.backgroundPath)
   }
 
   color (phase = 0) {
