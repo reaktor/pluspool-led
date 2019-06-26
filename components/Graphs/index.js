@@ -45,14 +45,13 @@ const Graphs = ({ noaaData, stationData }) => {
 
   const [data, setData] = useState(() => getSamples({ noaaData, stationData, range }))
 
-  const setSpan = (unit) => {
+  const setSpan = unit => {
+    const range = { start: before(unit), end: Date.now() }
+
     setData(getSamples({
       noaaData,
       stationData,
-      range: {
-        start: before(unit),
-        end: Date.now()
-      }
+      range
     }))
   }
 
