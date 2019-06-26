@@ -1,12 +1,16 @@
-import React from 'react'
-import Link from 'next/link'
+import React, { useState } from 'react'
 import datagarrison from 'datagarrison'
 import Head from 'next/head'
 import Visualization from '../components/Visualization'
+import Tooltip from '../components/Tooltip'
 import { fetchStationData, fetchNoaaData } from '../helpers/data'
 import './index.css'
 
 function IndexPage ({ stationData, noaaData }) {
+  const [tooltopPosition] = useState({ x: 0, y: 0 })
+  const [tooltipOpen, setTooltipOpen] = useState(false)
+  const [tooltipKey, setTooltipKey] = useState(null)
+
   return (
     <div>
       <Head>
@@ -18,7 +22,18 @@ function IndexPage ({ stationData, noaaData }) {
           rel='stylesheet'
         />
       </Head>
-      <Visualization noaaData={noaaData} stationData={stationData} />
+      <Tooltip
+        open={tooltipOpen}
+        position={tooltopPosition}
+        tooltipKey={tooltipKey}
+        closeTooltip={() => setTooltipOpen(false)}
+      />
+      <Visualization
+        noaaData={noaaData}
+        stationData={stationData}
+        setTooltipKey={setTooltipKey}
+        setTooltipOpen={setTooltipOpen}
+      />
     </div>
   )
 }

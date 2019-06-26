@@ -17,6 +17,20 @@ const labels = {
 
 /**
  * Look up table that takes our data header as the key
+ * and returns a slug that can be used in other places.
+ */
+const slug = {
+  'Percent Oxygen_SDI_0_10_%': 'oxygen',
+  // prettier-ignore
+  'Salinity_SDI_0_4_ppt': 'salinity',
+  // prettier-ignore
+  'Turbidity_SDI_0_8_NTU': 'turbidity',
+  s: 'speed',
+  d: 'direction'
+}
+
+/**
+ * Look up table that takes our data header as the key
  * and returns a human readible unit.
  */
 const units = {
@@ -176,6 +190,7 @@ export {
   constrain,
   labels,
   units,
+  slug,
   normalizations,
   transforms,
   scale,

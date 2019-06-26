@@ -1,18 +1,15 @@
 import React from 'react'
-import Link from 'next/link'
 import PropTypes from 'prop-types'
 import './index.css'
 
-const DatabarItem = ({ label, value, unit, transform }) => (
-  <Link href='/data' prefetch>
-    <a className='databar__item'>
-      <div className='databar__item__label'>{label}</div>
-      <div className='databar__item__value'>
-        {transform ? transform(value) : value}
-        <span className='databar__item__unit'>{unit}</span>
-      </div>
-    </a>
-  </Link>
+const DatabarItem = ({ label, value, onClick, unit, transform }) => (
+  <button className='databar__item' type='button' onClick={onClick}>
+    <div className='databar__item__label'>{label}</div>
+    <div className='databar__item__value'>
+      {transform ? transform(value) : value}
+      <span className='databar__item__unit'>{unit}</span>
+    </div>
+  </button>
 )
 
 DatabarItem.defaultProps = {

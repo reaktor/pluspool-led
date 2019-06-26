@@ -52,10 +52,3 @@ h2 {
   font-weight: 500;
   letter-spacing: 0.03em;
 }
-
-.wrapper {
-  padding-left: 80px;
-  padding-right: 40px;
-  position: relative;
-  z-index: 2;
-}

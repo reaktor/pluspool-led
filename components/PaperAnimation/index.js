@@ -3,29 +3,30 @@ import PoolAnimation from './PoolAnimation'
 import IconAnimation from './IconAnimation'
 
 class PaperAnimation {
-  constructor (props) {
-    const { wrapper, sample = {} } = props
-
+  constructor ({ wrapper, ...rest }) {
     this.wrapper = wrapper
-    this.sample = sample
+    this.sample = {}
 
-    this.initializeCanvas()
-
-    this.iconAnimation = new IconAnimation({ sample })
-    this.poolAnimation = new PoolAnimation({ sample })
+    const canvas = this.initializeCanvas()
+    this.iconAnimation = new IconAnimation({ canvas, ...rest })
+    this.poolAnimation = new PoolAnimation()
 
     paper.view.onFrame = this.onFrame.bind(this)
   }
 
   updateProps ({ sample }) {
     this.sample = sample
-    this.iconAnimation.updateProps({ sample })
-    this.poolAnimation.updateProps({ sample })
   }
 
   onFrame (event) {
-    this.iconAnimation.animate(event)
-    this.poolAnimation.animate(event)
+    if (this.iconAnimation) {
+      this.iconAnimation.updateProps({ sample: this.sample })
+      this.iconAnimation.animate(event)
+    }
+    if (this.poolAnimation) {
+      this.poolAnimation.updateProps({ sample: this.sample })
+      this.poolAnimation.animate(event)
+    }
   }
 
   initializeCanvas () {
@@ -34,6 +35,7 @@ class PaperAnimation {
     canvas.setAttribute('resize', '')
     this.wrapper.append(canvas)
     paper.setup(canvas)
+    return canvas
   }
 
   initializeLayers () {

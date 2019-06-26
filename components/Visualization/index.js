@@ -6,7 +6,12 @@ import PaperAnimation from '../PaperAnimation'
 import { getSampleAtTimestamp, constrain } from '../../helpers/data'
 import './index.css'
 
-const Visualization = ({ noaaData, stationData }) => {
+const Visualization = ({
+  noaaData,
+  stationData,
+  setTooltipKey,
+  setTooltipOpen
+}) => {
   const range = constrain(
     {
       start: Date.parse(noaaData[0].t),
@@ -26,7 +31,14 @@ const Visualization = ({ noaaData, stationData }) => {
   const paperAnimation = useRef(null)
 
   const initPaperAnimation = () => {
-    paperAnimation.current = new PaperAnimation({ wrapper: wrapper.current })
+    paperAnimation.current = new PaperAnimation({
+      wrapper: wrapper.current,
+      onIconClick: ({ icon }) => {
+        setTooltipKey(icon)
+        setTooltipOpen(true)
+        // setTooltipPosition(point)
+      }
+    })
   }
 
   const updatePaperAnimation = () => {
@@ -40,7 +52,13 @@ const Visualization = ({ noaaData, stationData }) => {
     <div className='visualization'>
       <div ref={wrapper} className='visualization__animation' />
       <div className='visualization__bottom'>
-        <Databar sample={sample} />
+        <Databar
+          sample={sample}
+          onItemClick={(icon) => {
+            setTooltipKey(icon)
+            setTooltipOpen(true)
+          }}
+        />
         <DataRangePicker setTimestamp={setTimestamp} timestamp={timestamp} range={range} />
       </div>
     </div>
