@@ -84,13 +84,12 @@ const normalizations = {
  * @returns {Object} Array of samples
  */
 const getSamples = ({ noaaData, stationData, range: { start, end } }) => {
-  let data = noaaData.slice()
-  data.reverse()
-  const endIndex = data.findIndex(sample => Date.parse(sample.t) < end) + 1
-  data.reverse()
-  const startIndex = data.findIndex(sample => Date.parse(sample.t) >= start)
+  const endIndex = noaaData.findIndex(sample => Date.parse(sample.t) >= start)
 
-  return data.slice(startIndex, endIndex)
+  let startIndex = noaaData.length
+  while (startIndex--) if (Date.parse(noaaData[startIndex].t) < end) break
+  console.dir({ startIndex, endIndex })
+  return noaaData.slice(startIndex, endIndex)
     .map(noaaSample => {
       const timestamp = Date.parse(noaaSample.t)
       return { ...noaaSample, ...deriveSampleFromStationData({ stationData, timestamp }) }

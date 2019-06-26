@@ -6,9 +6,7 @@ import Graph from '../Graph'
 import './index.css'
 
 const Choices = ({ name, choices, onChange }) => {
-  const innerOnChange = ({ target: { value } }) => {
-    onChange(value)
-  }
+  const innerOnChange = ({ target: { value } }) => onChange(value)
 
   const choiceToLabel = choice => {
     switch (choice) {
@@ -47,16 +45,15 @@ const Graphs = ({ noaaData, stationData }) => {
 
   const [data, setData] = useState(() => getSamples({ noaaData, stationData, range }))
 
-  const setRange = (range) => {
-    const samples = getSamples({
+  const setSpan = (unit) => {
+    setData(getSamples({
       noaaData,
       stationData,
       range: {
-        start: before(range),
+        start: before(unit),
         end: Date.now()
       }
-    })
-    setData(samples)
+    }))
   }
 
   const graphs = [
@@ -122,7 +119,7 @@ const Graphs = ({ noaaData, stationData }) => {
 
   return (
     <>
-      <Choices choices={choices} onChange={setRange} name='range' />
+      <Choices choices={choices} onChange={setSpan} name='span' />
       <div className='graphs'>
 
         {graphs.map(graph => (
