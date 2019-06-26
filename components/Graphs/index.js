@@ -39,7 +39,7 @@ const Graphs = ({ noaaData, stationData }) => {
   if (!noaaData || !stationData) return null
 
   const range = {
-    start: Date.now() - (60 * 60 * 66 * 1000),
+    start: Date.now() - (60 * 60 * 72 * 1000),
     end: Date.now()
   }
 
