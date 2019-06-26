@@ -25,8 +25,7 @@ const icons = {
 const iconKeys = Object.keys(icons)
 
 class IconAnimation {
-  constructor (props) {
-    const { sample } = props
+  constructor ({ sample }) {
     this.sample = sample
     this.iconSymbols = {
       bacteria: null,
@@ -58,9 +57,9 @@ class IconAnimation {
   }
 
   async loadIcons () {
-    const promises = iconKeys.map((key) => {
-      const iconPath = icons[key]
-      return this.loadIcon(iconPath)
+    Object.entries(icons)
+    const promises = Object.entries(icons).map(([key, iconPath]) => (
+      this.loadIcon(iconPath)
         .then(icon => {
           icon.fillColor = ICON_COLORS[key]
           const group = new paper.Group([icon])
@@ -68,7 +67,7 @@ class IconAnimation {
           this.iconSymbols[key] = symbol
         })
         .catch(() => console.warn(`${key} icon was not loaded`))
-    })
+    ))
 
     await Promise.all(promises)
   }

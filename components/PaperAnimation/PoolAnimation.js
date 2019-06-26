@@ -120,8 +120,8 @@ class PoolAnimation {
         [x + (width / 2), y + (height / 2)]
       ))
 
-      const point1 = points[0]
-      const point2 = points[1]
+      const lineStart = points[0]
+      const lineEnd = points[1]
 
       /**
        * Gradient line
@@ -130,16 +130,16 @@ class PoolAnimation {
       this.paths[index].strokeWidth = 5
       this.paths[index].strokeCap = 'round'
 
-      this.paths[index].add(point1)
-      this.paths[index].add(point2)
+      this.paths[index].add(lineStart)
+      this.paths[index].add(lineEnd)
 
       this.layers[0].addChild(this.paths[index])
 
       /**
        * Background shape
        */
-      this.backgroundPath.add(point1)
-      this.backgroundPath.add(point2)
+      this.backgroundPath.add(lineStart)
+      this.backgroundPath.add(lineEnd)
     })
 
     this.backgroundPath.closed = true
