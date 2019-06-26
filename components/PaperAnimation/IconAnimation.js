@@ -49,9 +49,10 @@ class IconAnimation {
   }
 
   loadIcon (iconPath) {
-    return new Promise(resolve => {
-      paper.project.importSVG(iconPath, icon => {
-        resolve(icon)
+    return new Promise((resolve, reject) => {
+      paper.project.importSVG(iconPath, {
+        onLoad: resolve,
+        onError: reject
       })
     })
   }
@@ -59,12 +60,14 @@ class IconAnimation {
   async loadIcons () {
     const promises = iconKeys.map((key) => {
       const iconPath = icons[key]
-      return this.loadIcon(iconPath).then(icon => {
-        icon.fillColor = ICON_COLORS[key]
-        const group = new paper.Group([icon])
-        const symbol = new paper.SymbolDefinition(group)
-        this.iconSymbols[key] = symbol
-      })
+      return this.loadIcon(iconPath)
+        .then(icon => {
+          icon.fillColor = ICON_COLORS[key]
+          const group = new paper.Group([icon])
+          const symbol = new paper.SymbolDefinition(group)
+          this.iconSymbols[key] = symbol
+        })
+        .catch(() => console.warn(`${key} icon was not loaded`))
     })
 
     await Promise.all(promises)
@@ -82,12 +85,16 @@ class IconAnimation {
       for (let row = 0; row < divisionsHeight; row++) {
         const randIconIndex = Math.floor(Math.random() * iconKeys.length)
         const randIcon = iconKeys[randIconIndex]
-        const instance = new paper.SymbolItem(this.iconSymbols[randIcon])
-        instance.scale(size / ICON_SIZE)
-        const xPos = (column * size) + (size / 2) + (remainderWidth / 2)
-        const yPos = (row * size) + (size / 2) + (remainderHeight / 2)
-        instance.position = new paper.Point(xPos, yPos)
-        this.layers[0].addChild(instance)
+        const symbol = this.iconSymbols[randIcon]
+
+        if (symbol) {
+          const instance = new paper.SymbolItem(symbol)
+          instance.scale(size / ICON_SIZE)
+          const xPos = (column * size) + (size / 2) + (remainderWidth / 2)
+          const yPos = (row * size) + (size / 2) + (remainderHeight / 2)
+          instance.position = new paper.Point(xPos, yPos)
+          this.layers[0].addChild(instance)
+        }
       }
     }
   }
