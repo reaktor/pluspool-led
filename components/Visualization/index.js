@@ -14,8 +14,8 @@ const Visualization = ({
 }) => {
   const range = constrain(
     {
-      start: Date.parse(noaaData[noaaData.length - 1].t),
-      end: Date.parse(noaaData[0].t)
+      start: Date.parse(noaaData[0].t),
+      end: Date.parse(noaaData[noaaData.length - 1].t)
     },
     {
       start: stationData.samples[0][0],
