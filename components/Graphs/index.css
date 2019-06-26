@@ -4,16 +4,14 @@
   grid-gap: 40px;
 }
 
-.choices input[type="radio"] {
-  display: none;
+.choices {
+  background-color: #333;
+  border-radius: 4rem;
+  padding: 1em;
 }
 
-input[type="radio"]:checked + label {
-  color: black;
-  background-color: white;
-  border-radius: 4rem;
-  overflow: hidden;
-  transition: 0.25s ease all;
+.choices input[type="radio"] {
+  display: none;
 }
 
 .choices label {
@@ -21,8 +19,10 @@ input[type="radio"]:checked + label {
   padding: 0.5em 1em 0.5em 1em;
 }
 
-.choices {
-  background-color: #333;
+.choices input[type="radio"]:checked + label {
+  color: black;
+  background-color: white;
   border-radius: 4rem;
-  padding: 1em;
+  overflow: hidden;
+  transition: 0.25s ease all;
 }
