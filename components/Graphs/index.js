@@ -38,35 +38,36 @@ const Choice = ({ name, choice, label, onChange }) => {
 const Graphs = ({ noaaData, stationData }) => {
   if (!noaaData || !stationData) return null
 
-  const range = {
-    start: Date.now() - (60 * 60 * 72 * 1000),
+  const lastDayRange = {
+    start: before('month'),
     end: Date.now()
   }
 
-  const [data, setData] = useState(() => getSamples({ noaaData, stationData, range }))
+  const data = getSamples({ noaaData, stationData, range: lastDayRange })
 
-  const setSpan = unit => {
-    const range = { start: before(unit), end: Date.now() }
+  const [domain, setDomain] = useState([lastDayRange.start, lastDayRange.end])
 
-    setData(getSamples({
-      noaaData,
-      stationData,
-      range
-    }))
-  }
+  const setSpan = unit => setDomain([before(unit), Date.now()])
 
   const graphs = [
     {
       data,
       header: 'Water Direction',
-      xAxis: <XAxis dataKey='t' interval={0} />,
+      xAxis: <XAxis type='number' dataKey='Date_Time' interval={0} domain={domain} />,
+      yAxis: <YAxis type='number' unit='degrees' domain={[0, 360]} />,
+      line: <Line type='monotone' dataKey='d' stroke='#8884d8' />
+    },
+    {
+      data,
+      header: 'Water Direction',
+      xAxis: <XAxis dataKey='Date_Time' interval={0} domain={domain} />,
       yAxis: <YAxis type='number' unit='degrees' domain={[0, 360]} />,
       line: <Line type='monotone' dataKey='d' stroke='#8884d8' />
     },
     {
       data,
       header: 'Water Speed',
-      xAxis: <XAxis dataKey='t' interval={0} />,
+      xAxis: <XAxis dataKey='Date_Time' interval={0} domain={domain} />,
       yAxis: <YAxis type='number' unit='knots' domain={[0, 1.3]} />,
       line: <Line type='monotone' dataKey='s' stroke='#8884d8' />
     },
@@ -80,13 +81,14 @@ const Graphs = ({ noaaData, stationData }) => {
           type='monotone'
           dataKey='Percent Oxygen_SDI_0_10_%'
           stroke='#8884d8'
+          domain={domain}
         />
       )
     },
     {
       data,
       header: 'Salinity',
-      xAxis: <XAxis dataKey='Date_Time' interval={0} />,
+      xAxis: <XAxis dataKey='Date_Time' interval={0} domain={domain} />,
       yAxis: <YAxis type='number' unit='PPT' domain={[2, 5]} />,
       line: (
         <Line type='monotone' dataKey='Salinity_SDI_0_4_ppt' stroke='#8884d8' />
@@ -95,7 +97,7 @@ const Graphs = ({ noaaData, stationData }) => {
     {
       data,
       header: 'Turbidity',
-      xAxis: <XAxis dataKey='Date_Time' interval={0} />,
+      xAxis: <XAxis dataKey='Date_Time' interval={0} domain={domain} />,
       yAxis: <YAxis type='number' unit='NTU' domain={[0, 100]} />,
       line: (
         <Line
@@ -108,7 +110,7 @@ const Graphs = ({ noaaData, stationData }) => {
     {
       data,
       header: 'pH',
-      xAxis: <XAxis dataKey='Date_Time' interval={0} />,
+      xAxis: <XAxis dataKey='Date_Time' interval={0} domain={domain} />,
       yAxis: <YAxis type='number' unit='pH' domain={[-60, -60]} />,
       line: <Line type='monotone' dataKey='pH mV_SDI_0_7_V' stroke='#8884d8' />
     }

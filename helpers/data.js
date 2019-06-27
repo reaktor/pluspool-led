@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 /**
  * Generate a timestamp in the past
  */
-const before = unit => dayjs().subtract(1, unit)
+const before = unit => dayjs().subtract(1, unit).valueOf()
 
 /**
  * Look up table that takes our data header as the key
