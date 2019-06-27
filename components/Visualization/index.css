@@ -1,17 +1,4 @@
 .visualization {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.visualization__bottom {
-  display: grid;
-  grid-gap: 16px;
-  padding: 32px 24px;
-  max-width: 1000px;
-}
-
-.visualization__animation {
   flex-grow: 1;
   overflow: hidden;
 }

@@ -1,12 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import './index.css'
 
-const DatabarItem = ({ label, value, onClick, unit, transform }) => (
+const DatabarItem = ({ icon, color, label, value, onClick, unit, transform }) => (
   <button className='databar__item' type='button' onClick={onClick}>
-    <div className='databar__item__label'>{label}</div>
+    <div className='databar__item__icon' style={{ color }}>{icon}</div>
+    <div className='databar__item__label'>{label}</div>{' '}
     <div className='databar__item__value'>
-      {transform ? transform(value) : value}
+      {transform ? transform(value) : value}&thinsp;
       <span className='databar__item__unit'>{unit}</span>
     </div>
   </button>
