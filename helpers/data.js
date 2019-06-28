@@ -90,25 +90,33 @@ const normalizations = {
 }
 
 /**
- * GetSamples returns an array of samples between start (inclusive) and end (exclusive)
+ * GetSamples returns an array of samples
  * @param {Object} noaaData - raw noaaData
  * @param {Object} stationData - raw stationData
- * @param {Object} range - object with start and end keys
  *
  * @returns {Object} Array of samples
  */
-const getSamples = ({ noaaData, stationData, range: { start, end } }) => {
+const getSamples = ({ noaaData, stationData }) => {
+  const start = Math.max(Date.parse(noaaData[0].t), stationData.samples[0][0])
+  const end = Math.min(
+    Date.parse(noaaData[noaaData.length - 1].t),
+    stationData.samples[stationData.samples.length - 2][0]
+  )
+
   const startIndex = noaaData.findIndex(sample => Date.parse(sample.t) >= start)
 
   const data = noaaData.slice()
   data.reverse()
   const endIndex = data.length - data.findIndex(sample => Date.parse(sample.t) <= end)
 
-  return noaaData.slice(startIndex, endIndex + 1)
+  const samples = noaaData.slice(startIndex, endIndex + 1)
     .map(sample => {
       const timestamp = Date.parse(sample.t)
-      return { ...sample, ...deriveSampleFromStationData({ stationData, timestamp }) }
+      const stationSample = deriveSampleFromStationData({ stationData, timestamp })
+      return { ...sample, ...stationSample }
     })
+
+  return samples
 }
 
 /**
@@ -121,21 +129,19 @@ const getSamples = ({ noaaData, stationData, range: { start, end } }) => {
  * @returns {Object} A sample of data.
  */
 const deriveSampleFromStationData = ({ stationData, timestamp }) => {
-  if (stationData && stationData.samples && timestamp) {
-    const index = stationData.samples.findIndex(
-      sample => sample[0] >= timestamp
-    )
+  if (!timestamp || !stationData || !stationData.samples) return {}
 
-    if (index - 1 < 0) return {}
-    const sample = stationData.samples[index - 1]
+  const index = stationData.samples.findIndex(
+    sample => sample[0] >= timestamp
+  )
 
-    return stationData.header.reduce((acc, column, i) => {
-      acc[column] = sample[i]
-      return acc
-    }, {})
-  }
+  if (index - 1 < 0) return {}
+  const sample = stationData.samples[index - 1]
 
-  return {}
+  return stationData.header.reduce((acc, column, i) => {
+    acc[column] = sample[i]
+    return acc
+  }, {})
 }
 
 const fetchStationData = () => {
@@ -155,19 +161,7 @@ const fetchNoaaData = () => {
   })
 }
 
-/**
- * Takes two range objects and returns their intersection
- *
- * @param {start: timestamp, end: timestamp} range - first range to constrain by
- * @param {start: timestamp, end: timestamp} by -  second range to constain by
- */
-const constrain = (range, by) => ({
-  start: Math.max(range.start, by.start),
-  end: Math.min(range.end, by.end)
-})
-
 export {
-  constrain,
   labels,
   units,
   slug,

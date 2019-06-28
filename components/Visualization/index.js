@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Databar from '../Databar'
 import DataRangePicker from '../DataRangePicker'
 import PaperAnimation from '../PaperAnimation'
-import { getSamples, constrain } from '../../helpers/data'
+import { getSamples } from '../../helpers/data'
 import './index.css'
 
 const Visualization = ({
@@ -12,20 +12,15 @@ const Visualization = ({
   setTooltipKey,
   setTooltipOpen
 }) => {
-  const range = constrain(
-    {
-      start: Date.parse(noaaData[0].t),
-      end: Date.parse(noaaData[noaaData.length - 1].t)
-    },
-    {
-      start: stationData.samples[0][0],
-      end: stationData.samples[stationData.samples.length - 2][0]
-    }
-  )
+  const samples = getSamples({ noaaData, stationData })
+
+  const range = {
+    start: Date.parse(samples[0].t),
+    end: Date.parse(samples[samples.length - 1].t)
+  }
 
   const [timestamp, setTimestamp] = useState(range.end)
-  const nowRange = { start: timestamp, end: timestamp }
-  const sample = getSamples({ noaaData, stationData, range: nowRange })[0]
+  const sample = samples.find(({ t }) => Date.parse(t) >= timestamp)
 
   const wrapper = useRef(null)
   const paperAnimation = useRef(null)

@@ -37,14 +37,8 @@ const Choice = ({ name, choice, label, onChange }) => {
 const Graphs = ({ noaaData, stationData }) => {
   if (!noaaData || !stationData) return null
 
-  const lastDayRange = {
-    start: before('month'),
-    end: Date.now()
-  }
-
-  const data = getSamples({ noaaData, stationData, range: lastDayRange })
-
-  const [domain, setDomain] = useState([lastDayRange.start, lastDayRange.end])
+  const data = getSamples({ noaaData, stationData })
+  const [domain, setDomain] = useState([before('month'), Date.now()])
 
   const setSpan = unit => setDomain([before(unit), Date.now()])
 

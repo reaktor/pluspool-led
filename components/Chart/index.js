@@ -6,24 +6,20 @@ dayjs.extend(relativeTime)
 
 let startTime = 0
 
-const Tooltip = (props) => {
-  const { unit, point: { serieColor, data: { x, y } } } = props
-  return (
-    <div
-      style={{
-        background: 'black',
-        padding: '9px 12px',
-        border: `1px solid ${serieColor}`
-      }}
-    >
-      <div style={{ color: serieColor }}>{y} {unit}</div>
-      <div>{dayjs(x).format('HH:mm DD/MM/YYYY')}</div>
-    </div>
-  )
-}
+const Tooltip = ({ unit, point: { serieColor, data: { x, y } } }) => (
+  <div style={{
+    background: 'black',
+    padding: '9px 12px',
+    border: `1px solid ${serieColor}`
+  }}>
+    <div style={{ color: serieColor }}>{y} {unit}</div>
+    <div>{dayjs(x).format('HH:mm DD/MM/YYYY')}</div>
+  </div>
+)
 
 const Chart = ({ x, y, header, unit, data, domain: [min, max] }) => {
   if (typeof document === 'undefined') return null
+  if (!data[0][y]) return null // this should not happen
 
   useEffect(() => {
     console.log(`renderTime = ${new Date() - startTime}ms`)
@@ -49,7 +45,9 @@ const Chart = ({ x, y, header, unit, data, domain: [min, max] }) => {
 
   return (
     <div style={{ height: '600px', width: '960px' }}>
-      <ResponsiveLineCanvas data={dataRender} width={800} height={600} curve='monotoneX'
+      <ResponsiveLineCanvas width={800} height={600}
+        data={dataRender}
+        curve='monotoneX'
         margin={{ top: 50, right: 160, bottom: 50, left: 128 }}
         xScale={{ type: 'linear', min, max }}
         yScale={{ type: 'linear', stacked: false, min: 'auto', max: 'auto' }}
