@@ -47,11 +47,6 @@ const Chart = ({ x, y, header, unit, data, domain: [min, max] }) => {
     data: dataSeries
   }]
 
-  const tickValues = (divisions = 5) => {
-    const step = Math.round((max - min) / divisions)
-    return (new Array(divisions).fill(1)).map((_, i) => min + (i * step))
-  }
-
   return (
     <div style={{ height: '600px', width: '960px' }}>
       <ResponsiveLineCanvas data={dataRender} width={800} height={600} curve='monotoneX'
@@ -83,7 +78,7 @@ const Chart = ({ x, y, header, unit, data, domain: [min, max] }) => {
         tooltip={props => Tooltip({ unit, ...props })}
         axisBottom={{
           format: d => dayjs().to(dayjs(d)),
-          tickValues,
+          tickValues: 5,
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0
