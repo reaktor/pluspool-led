@@ -57,7 +57,7 @@ const Graphs = ({ noaaData, stationData }) => {
     {
       header: 'Water Speed',
       unit: 'knots',
-      dataKey: 's'
+      y: 's'
     },
     {
       header: 'Percent Oxygen',
@@ -67,7 +67,7 @@ const Graphs = ({ noaaData, stationData }) => {
     {
       header: 'Salinity',
       unit: 'PPT',
-      dataKey: 'Salinity_SDI_0_4_ppt'
+      y: 'Salinity_SDI_0_4_ppt'
     },
     {
       header: 'Turbidity',
@@ -87,9 +87,8 @@ const Graphs = ({ noaaData, stationData }) => {
     <>
       <Choices choices={choices} onChange={setSpan} name='span' />
       <div className='graphs'>
-
         {graphs.map(graph => (
-          <Chart x='Date_Time' domain={domain} data={data} {...graph} />
+          <Chart x='t' domain={domain} data={data} {...graph} />
         ))}
       </div>
     </>
