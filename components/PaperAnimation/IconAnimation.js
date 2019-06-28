@@ -6,6 +6,13 @@ const makeEven = number => Math.floor(number / 2) * 2
 
 const iconKeys = Object.keys(ICON_SVG_PATHS)
 
+const sineWave = ({
+  amplitude = 1,
+  frequency = 1,
+  phase = 1,
+  x
+}) => amplitude * Math.sin(frequency * x + phase)
+
 class IconAnimation {
   constructor ({ canvas, onIconClick }) {
     this.canvas = canvas
@@ -97,7 +104,7 @@ class IconAnimation {
     }
   }
 
-  animate () {
+  animate ({ count }) {
     const { width, height } = paper.view.size
     const size = iconSize({ width, height })
     const divisionsWidth = makeEven(Math.floor(width / size))
@@ -114,8 +121,14 @@ class IconAnimation {
       isHovered
         ? instance.scale((size * 1.4) / instanceWidth)
         : instance.scale(size / instanceWidth)
+      const yShift = sineWave({
+        amplitude: 5,
+        period: 0.2,
+        phase: count * 0.1,
+        x: column
+      })
       const xPos = (column * size) + (size / 2) + (remainderWidth / 2)
-      const yPos = (row * size) + (size / 2) + (remainderHeight / 2)
+      const yPos = (row * size) + (size / 2) + (remainderHeight / 2) + yShift
       instance.position = new paper.Point(xPos, yPos)
     })
   }
