@@ -19,7 +19,6 @@ const Tooltip = ({ unit, point: { serieColor, data: { x, y } } }) => (
 
 const Chart = ({ x, y, header, unit, data, domain: [min, max] }) => {
   if (typeof document === 'undefined') return null
-  if (!data[0][y]) return null // this should not happen
 
   useEffect(() => {
     console.log(`renderTime = ${new Date() - startTime}ms`)
@@ -30,7 +29,7 @@ const Chart = ({ x, y, header, unit, data, domain: [min, max] }) => {
   const dataSeries = data.map(datum => {
     return {
       x: Date.parse(datum[x]),
-      y: parseFloat(datum[y])
+      y: parseFloat(datum[y]) || null
     }
   })
 
