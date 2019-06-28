@@ -18,7 +18,7 @@ function DataPage ({ stationData, noaaData }) {
           rel='stylesheet'
         />
       </Head>
-      <section className='wrapper shaded-wrapper'>
+      <section>
         <h1>
           <Link href='/'>
             <a>+ Pool</a>

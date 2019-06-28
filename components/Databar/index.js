@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { labels, units, transforms } from '../../helpers/data'
+import { labels, units, slug, transforms } from '../../helpers/data'
 import DatabarItem from '../DatabarItem'
 import './index.css'
 
@@ -12,7 +12,7 @@ const displayedColumns = [
   'd'
 ]
 
-const Databar = ({ sample }) => {
+const Databar = ({ onItemClick, sample }) => {
   return (
     <div className='databar'>
       {displayedColumns.map(
@@ -24,6 +24,7 @@ const Databar = ({ sample }) => {
               value={sample[column]}
               unit={units[column]}
               transform={transforms[column]}
+              onClick={() => onItemClick(slug[column])}
             />
           )
       )}

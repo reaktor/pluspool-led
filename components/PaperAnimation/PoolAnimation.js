@@ -80,8 +80,7 @@ const blendColors = (from, to, value) => ({
 
 class PoolAnimation {
   constructor (props) {
-    const { sample } = props
-    this.sample = sample
+    this.sample = {}
     this.backgroundPath = null
     this.paths = [null]
     this.layers = [null]
@@ -149,13 +148,13 @@ class PoolAnimation {
   color (phase = 0) {
     if (!this.sample) return
     const from = blendColors(
-      new paper.Color(COLORS.gray),
-      new paper.Color(COLORS.white),
+      new paper.Color(COLORS.black),
+      new paper.Color(COLORS.black),
       1
     )
 
     const to = blendColors(
-      new paper.Color(COLORS.purple),
+      new paper.Color(COLORS.red),
       new paper.Color(COLORS.yellow),
 
       normalizations['Percent Oxygen_SDI_0_10_%'](
