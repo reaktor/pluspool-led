@@ -8,6 +8,7 @@
     "datagarrison": "^0.1.0",
     "dayjs": "^1.8.14",
     "isomorphic-unfetch": "^3.0.0",
+    "jest": "^24.8.0",
     "koa": "^2.7.0",
     "module-alias": "^2.2.0",
     "next": "^8.1.0",
@@ -29,7 +30,8 @@
     "export": "next export",
     "deploy": "npm run build && npm run export",
     "lint": "standard",
-    "lint:fix": "standard --fix"
+    "lint:fix": "standard --fix",
+    "test": "jest"
   },
   "engines": {
     "node": "~v12.4.0"

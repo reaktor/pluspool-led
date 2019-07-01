@@ -90,31 +90,33 @@ const normalizations = {
 }
 
 /**
- * GetSamples returns an array of samples
+ * getSamples returns an array of samples
  * @param {Object} noaaData - raw noaaData
  * @param {Object} stationData - raw stationData
  *
  * @returns {Object} Array of samples
  */
 const getSamples = ({ noaaData, stationData }) => {
-  const start = Math.max(Date.parse(noaaData[0].t), stationData.samples[0][0])
+  const start = Math.max(
+    Date.parse(noaaData[0].t),
+    stationData.samples[0][0]
+  )
   const end = Math.min(
     Date.parse(noaaData[noaaData.length - 1].t),
     stationData.samples[stationData.samples.length - 2][0]
   )
 
   const startIndex = noaaData.findIndex(sample => Date.parse(sample.t) >= start)
+  const reverseNoaaData = noaaData.slice().reverse()
+  const endIndex = reverseNoaaData.length - reverseNoaaData.findIndex(sample => Date.parse(sample.t) <= end)
 
-  const data = noaaData.slice()
-  data.reverse()
-  const endIndex = data.length - data.findIndex(sample => Date.parse(sample.t) <= end)
+  const samplesInRange = noaaData.slice(startIndex, endIndex)
 
-  const samples = noaaData.slice(startIndex, endIndex + 1)
-    .map(sample => {
-      const timestamp = Date.parse(sample.t)
-      const stationSample = deriveSampleFromStationData({ stationData, timestamp })
-      return { ...sample, ...stationSample }
-    })
+  const samples = samplesInRange.map(noaaSample => {
+    const timestamp = Date.parse(noaaSample.t)
+    const stationSample = deriveSampleFromStationData({ stationData, timestamp })
+    return { ...noaaSample, ...stationSample }
+  })
 
   return samples
 }
@@ -131,17 +133,32 @@ const getSamples = ({ noaaData, stationData }) => {
 const deriveSampleFromStationData = ({ stationData, timestamp }) => {
   if (!timestamp || !stationData || !stationData.samples) return {}
 
-  const index = stationData.samples.findIndex(
-    sample => sample[0] >= timestamp
-  )
-
-  if (index - 1 < 0) return {}
-  const sample = stationData.samples[index - 1]
+  const sample = getStationSampleAtTimestamp({ stationData, timestamp })
 
   return stationData.header.reduce((acc, column, i) => {
     acc[column] = sample[i]
     return acc
   }, {})
+}
+
+const getStationSampleAtTimestamp = ({ stationData, timestamp }) => {
+  const exactIndex = stationData.samples.findIndex(
+    sample => sample[0] === timestamp
+  )
+
+  if (exactIndex >= 0) {
+    return stationData.samples[exactIndex]
+  }
+
+  const closeIndex = stationData.samples.findIndex(
+    sample => sample[0] >= timestamp
+  ) - 1
+
+  if (closeIndex >= 0) {
+    return stationData.samples[closeIndex]
+  }
+
+  return {}
 }
 
 const fetchStationData = () => {

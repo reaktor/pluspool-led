@@ -3,10 +3,10 @@ import datagarrison from 'datagarrison'
 import Head from 'next/head'
 import Visualization from '../components/Visualization'
 import Tooltip from '../components/Tooltip'
-import { fetchStationData, fetchNoaaData } from '../helpers/data'
+import { fetchStationData, fetchNoaaData, getSamples } from '../helpers/data'
 import './index.css'
 
-function IndexPage ({ stationData, noaaData }) {
+function IndexPage ({ noaaData, stationData }) {
   const [tooltopPosition] = useState({ x: 0, y: 0 })
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipKey, setTooltipKey] = useState(null)
@@ -29,10 +29,10 @@ function IndexPage ({ stationData, noaaData }) {
         closeTooltip={() => setTooltipOpen(false)}
       />
       <Visualization
-        noaaData={noaaData}
-        stationData={stationData}
         setTooltipKey={setTooltipKey}
         setTooltipOpen={setTooltipOpen}
+        noaaData={noaaData}
+        stationData={stationData}
       />
     </div>
   )
