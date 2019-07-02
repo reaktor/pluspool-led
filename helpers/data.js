@@ -142,23 +142,11 @@ const deriveSampleFromStationData = ({ stationData, timestamp }) => {
 }
 
 const getStationSampleAtTimestamp = ({ stationData, timestamp }) => {
-  const exactIndex = stationData.samples.findIndex(
-    sample => sample[0] === timestamp
-  )
-
-  if (exactIndex >= 0) {
-    return stationData.samples[exactIndex]
-  }
-
-  const closeIndex = stationData.samples.findIndex(
-    sample => sample[0] >= timestamp
+  const index = stationData.samples.findIndex(
+    sample => sample[0] > timestamp
   ) - 1
 
-  if (closeIndex >= 0) {
-    return stationData.samples[closeIndex]
-  }
-
-  return {}
+  return stationData.samples[index] || {}
 }
 
 const fetchStationData = () => {
