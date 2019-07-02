@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import Databar from '../Databar'
 import DataRangePicker from '../DataRangePicker'
@@ -12,7 +12,7 @@ const Visualization = ({
   setTooltipKey,
   setTooltipOpen
 }) => {
-  const samples = getSamples({ noaaData, stationData })
+  const samples = useMemo(() => getSamples({ noaaData, stationData }), [noaaData, stationData])
 
   const range = {
     start: Date.parse(samples[0].t),

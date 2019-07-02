@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { before, getSamples } from '../../helpers/data'
 import Chart from '../Chart'
@@ -43,7 +43,7 @@ const graphs = [
 const Graphs = ({ noaaData, stationData }) => {
   if (!noaaData && !stationData) return null
 
-  const data = getSamples({ noaaData, stationData })
+  const data = useMemo(() => getSamples({ noaaData, stationData }), [noaaData, stationData])
   const [activeUnit, setActiveUnit] = useState('month')
   const [domain, setDomain] = useState([Date.now(), before(activeUnit)])
 
