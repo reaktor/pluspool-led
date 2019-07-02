@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import './index.css'
+
 dayjs.extend(relativeTime)
 
 let startTime = 0
@@ -43,44 +45,43 @@ const Chart = ({ x, y, header, unit, data, domain: [min, max] }) => {
   }]
 
   return (
-    <div style={{ height: '600px', width: '960px' }}>
-      <ResponsiveLineCanvas width={800} height={600}
-        data={dataRender}
-        curve='monotoneX'
-        margin={{ top: 50, right: 160, bottom: 50, left: 128 }}
-        xScale={{ type: 'linear', min, max }}
-        yScale={{ type: 'linear', stacked: false, min: 'auto', max: 'auto' }}
-        colors={{ scheme: 'nivo' }}
-        enableArea
-        enableGridX={false}
-        lineWidth={1}
-        pointSize={4}
-        pointColor={{ theme: 'background' }}
-        pointBorderWidth={1}
-        enablePointLabel
-        onClick={onClick}
-        axisLeft={{
-          format: d => `${d} ${unit}`,
-          legend: header,
-          legendOffset: -96,
-          legendPosition: 'middle'
-        }}
-        theme={{
-          tooltip: {
-            container: {
-              background: 'black'
+    <div>
+      <h2 className='chart__header'>{header}</h2>
+      <div style={{ height: '600px' }}>
+        <ResponsiveLineCanvas
+          data={dataRender}
+          curve='monotoneX'
+          margin={{ top: 0, right: 0, bottom: 50, left: 75 }}
+          xScale={{ type: 'linear', min, max }}
+          yScale={{ type: 'linear', stacked: false, min: 'auto', max: 'auto' }}
+          colors={{ scheme: 'nivo' }}
+          enableGridX={false}
+          lineWidth={1}
+          pointSize={4}
+          pointColor={{ theme: 'background' }}
+          pointBorderWidth={1}
+          enablePointLabel
+          onClick={onClick}
+          axisLeft={{
+            format: d => `${d} ${unit}`
+          }}
+          theme={{
+            tooltip: {
+              container: {
+                background: 'black'
+              }
             }
-          }
-        }}
-        tooltip={props => Tooltip({ unit, ...props })}
-        axisBottom={{
-          format: d => dayjs().to(dayjs(d)),
-          tickValues: 5,
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0
-        }}
-      />
+          }}
+          tooltip={props => Tooltip({ unit, ...props })}
+          axisBottom={{
+            format: d => dayjs().to(dayjs(d)),
+            tickValues: 5,
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0
+          }}
+        />
+      </div>
     </div>
   )
 }

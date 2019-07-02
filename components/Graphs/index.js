@@ -38,9 +38,9 @@ const Graphs = ({ noaaData, stationData, samples }) => {
   if (!noaaData || !stationData) return null
 
   const data = samples
-  const [domain, setDomain] = useState([before('month'), Date.now()])
+  const [domain, setDomain] = useState([Date.now(), before('month')])
 
-  const setSpan = unit => setDomain([before(unit), Date.now()])
+  const setSpan = unit => setDomain([Date.now(), before(unit)])
 
   const graphs = [
     {
