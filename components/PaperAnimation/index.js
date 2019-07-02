@@ -1,5 +1,4 @@
 import paper from 'paper-jsdom-canvas'
-import PoolAnimation from './PoolAnimation'
 import IconAnimation from './IconAnimation'
 
 class PaperAnimation {
@@ -9,7 +8,6 @@ class PaperAnimation {
 
     const canvas = this.initializeCanvas()
     this.iconAnimation = new IconAnimation({ canvas, ...rest })
-    this.poolAnimation = new PoolAnimation()
 
     paper.view.onFrame = this.onFrame.bind(this)
   }
@@ -22,10 +20,6 @@ class PaperAnimation {
     if (this.iconAnimation) {
       this.iconAnimation.updateProps({ sample: this.sample })
       this.iconAnimation.animate(event)
-    }
-    if (this.poolAnimation) {
-      this.poolAnimation.updateProps({ sample: this.sample })
-      this.poolAnimation.animate(event)
     }
   }
 
@@ -40,10 +34,6 @@ class PaperAnimation {
 
   initializeLayers () {
     this.iconAnimation.layers[0] = new paper.Group()
-    this.poolAnimation.layers[0] = new paper.Group()
-
-    this.poolAnimation.layers[0].sendToBack()
-    this.iconAnimation.layers[0].sendToBack()
   }
 }
 
