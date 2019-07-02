@@ -3,10 +3,10 @@ import Link from 'next/link'
 import datagarrison from 'datagarrison'
 import Head from 'next/head'
 import Graphs from '../components/Graphs'
-import { fetchStationData, fetchNoaaData } from '../helpers/data'
+import { fetchStationData, fetchNoaaData, getSamples } from '../helpers/data'
 import './index.css'
 
-function DataPage ({ stationData, noaaData }) {
+function DataPage (props) {
   return (
     <div>
       <Head>
@@ -24,7 +24,7 @@ function DataPage ({ stationData, noaaData }) {
             <a>+ Pool</a>
           </Link>
         </h1>
-        <Graphs noaaData={noaaData} stationData={stationData} />
+        <Graphs {...props} />
       </section>
     </div>
   )
@@ -37,7 +37,9 @@ DataPage.getInitialProps = async () => {
   const rawNoaaData = await fetchNoaaData()
   const noaaData = rawNoaaData.data
 
-  return { stationData, noaaData }
+  const samples = getSamples({ noaaData, stationData })
+
+  return { stationData, noaaData, samples }
 }
 
 export default DataPage

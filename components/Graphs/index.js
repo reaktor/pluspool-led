@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { getSamples, before } from '../../helpers/data'
+import { before } from '../../helpers/data'
 import Chart from '../Chart'
 import './index.css'
 
@@ -34,10 +34,10 @@ const Choice = ({ name, choice, label, onChange }) => {
   )
 }
 
-const Graphs = ({ noaaData, stationData }) => {
+const Graphs = ({ noaaData, stationData, samples }) => {
   if (!noaaData || !stationData) return null
 
-  const data = getSamples({ noaaData, stationData })
+  const data = samples
   const [domain, setDomain] = useState([before('month'), Date.now()])
 
   const setSpan = unit => setDomain([before(unit), Date.now()])
