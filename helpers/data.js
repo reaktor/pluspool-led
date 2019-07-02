@@ -7,54 +7,65 @@ import dayjs from 'dayjs'
  */
 const before = unit => dayjs().subtract(1, unit).valueOf()
 
-/**
- * Look up table that takes our data header as the key
- * and returns a human readible label.
- */
-const labels = {
-  'Percent Oxygen_SDI_0_10_%': 'Percent Oxygen',
-  // prettier-ignore
-  'Salinity_SDI_0_4_ppt': 'Salinity',
-  // prettier-ignore
-  'Turbidity_SDI_0_8_NTU': 'Turbidity',
-  s: 'Water Speed',
-  d: 'Water Direction'
-}
-
-/**
- * Look up table that takes our data header as the key
- * and returns a slug that can be used in other places.
- */
-const slugs = {
-  'Percent Oxygen_SDI_0_10_%': 'oxygen',
-  // prettier-ignore
-  'Salinity_SDI_0_4_ppt': 'salinity',
-  // prettier-ignore
-  'Turbidity_SDI_0_8_NTU': 'turbidity',
-  s: 'speed',
-  d: 'direction'
-}
-
-/**
- * Look up table that takes our data header as the key
- * and returns a human readible unit.
- */
-const units = {
-  'Percent Oxygen_SDI_0_10_%': '%',
-  // prettier-ignore
-  'Salinity_SDI_0_4_ppt': 'PPT',
-  // prettier-ignore
-  'Turbidity_SDI_0_8_NTU': 'NTU',
-  s: 'KN',
-  d: ''
-}
-
-/**
- * Look up table that takes our data header as the key
- * and returns a function that takes the value and returns a new value.
- */
-const transforms = {
-  d: value => DIRECTIONS[Math.floor(value / 45)]
+const dataValues = {
+  bacteria: {
+    column: 'bacteria',
+    label: 'Bacteria',
+    unit: 'MPN',
+    description: (
+      <p>While not generally harmful to humans, the presence of bacteria in the genus Enterococcus in a water body indicates possible fecal waste contamination. This waste is likely to contain pathogenic microbes and can cause disease in those using the water body directly (i.e. swimming) or indirectly (i.e. consuming marine life). The New York City Department of Health declares values under 35 Colony Forming Units (CFU) as acceptable, 35-104 CFU acceptable if transient, and greater than 104 CFU unacceptable. While the concentration of Enterococci generally takes 24 hours to be measured, we have developed a predictive algorithm based off highly correlated environmental parameters, such as precipitation, in order to present in real-time the probable concentration of Enterococci. Like the standard 24 hour measurement, this value is reported in Most Probable Number, or MPN.</p>
+    )
+  },
+  oxygen: {
+    column: 'Percent Oxygen_SDI_0_10_%',
+    label: 'Percent Oxygen',
+    unit: '%',
+    description: (
+      <p>Dissolved oxygen is introduced into the water by photosynthetic organisms and air-water gas exchange, and is consumed during respiration. Levels are highest during daylight and drop during the night as there is no photosynthesis to counteract consumption. Just like on land, oxygen is critical for many species of marine life, and low levels (hypoxia or anoxia) will stress or even suffocate organisms, resulting in large die-offs. Oxygen levels are primarily controlled by biological production and consumption, temperature (higher temperature decreases the solubility), and the physical mixing.</p>
+    ),
+    normalize: value => scale(value, 0, 100, 0, 1)
+  },
+  salinity: {
+    column: 'Salinity_SDI_0_4_ppt',
+    label: 'Salinity',
+    unit: 'PPT',
+    description: (
+      <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
+    )
+  },
+  turbidity: {
+    column: 'Turbidity_SDI_0_8_NTU',
+    label: 'Turbidity',
+    unit: 'NTU',
+    description: (
+      <p>Turbidity is a measurement of the clarity of water, and thus is indicative of how many particles are suspended. Turbidity is important parameter of water quality because microbes and heavy metals may adhere to these particles. Additionally, the clarity of the water affects light penetration, habitat quality, and sedimentation rates.</p>
+    )
+  },
+  speed: {
+    column: 's',
+    label: 'Water Speed',
+    unit: 'KN',
+    description: (
+      <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
+    )
+  },
+  direction: {
+    column: 'd',
+    label: 'Water Direction',
+    unit: '',
+    description: (
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lectus purus, euismod aliquam lacinia sit amet, semper in nulla. Aliquam erat volutpat. Proin consequat dapibus magna sit amet feugiat. Integer ultrices feugiat urna, pellentesque sagittis ante suscipit at. Duis pellentesque erat vitae accumsan vulputate. Quisque urna neque, luctus sed sapien non, euismod pharetra felis. Sed gravida porttitor elit mattis vehicula. Aenean nec est commodo, viverra turpis efficitur, tincidunt leo.</p>
+    ),
+    transform: value => DIRECTIONS[Math.floor(value / 45)]
+  },
+  ph: {
+    column: 'pH mV_SDI_0_7_V',
+    label: 'pH',
+    unit: 'pH',
+    description: (
+      <p>The pH refers to how acidic or basic a water body is. It is a critical component of water quality because the pH controls the solubility of minerals (including the shells of calcifying organisms) and the bioavailability of both nutrients and toxic compounds such as heavy metals. In general, lowering pH decreases environmental water quality, as heavy metals tend to become more soluble and marine organisms come under stress. There is a natural diel cycle in pH due to the increased release of acidic carbon dioxide during the night. Water temperature controls gas solubility, so colder temperatures can result in more uptake of carbon dioxide from the atmosphere and lower the pH as well.</p>
+    )
+  }
 }
 
 /**
@@ -80,14 +91,6 @@ const transforms = {
 
 const scale = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
-
-/**
- * `normalizations` contains functions that will take a value from the data
- * and return a value mapped between 0 -> 1.
- */
-const normalizations = {
-  'Percent Oxygen_SDI_0_10_%': value => scale(value, 0, 100, 0, 1)
-}
 
 /**
  * getSamples returns an array of samples
@@ -167,12 +170,8 @@ const fetchNoaaData = () => {
 }
 
 export {
-  labels,
-  units,
-  slugs,
+  dataValues,
   before,
-  normalizations,
-  transforms,
   scale,
   getSamples,
   fetchStationData,

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { labels, units, slugs, transforms } from '../../helpers/data'
+import { dataValues } from '../../helpers/data'
 import { ICON_COLORS } from '../../helpers/constants'
 import DatabarItem from '../DatabarItem'
 import './index.css'
@@ -18,15 +18,17 @@ const svgIcons = {
   oxygen: OxygenIcon,
   salinity: SalinityIcon,
   speed: SpeedIcon,
-  turbidity: TurbidityIcon
+  turbidity: TurbidityIcon,
+  ph: OxygenIcon
 }
 
 const displayedColumns = [
-  'Percent Oxygen_SDI_0_10_%',
-  'Salinity_SDI_0_4_ppt',
-  'Turbidity_SDI_0_8_NTU',
-  's',
-  'd'
+  'oxygen',
+  'salinity',
+  'turbidity',
+  'speed',
+  'direction',
+  'ph'
 ]
 
 const Databar = ({ onItemClick, sample }) => {
@@ -34,21 +36,19 @@ const Databar = ({ onItemClick, sample }) => {
     <div className='databar'>
       <div className='databar__wrapper'>
         {displayedColumns
-          .filter(column => column in sample)
+          .filter(column => dataValues[column].column in sample)
           .map(
-            column => {
-              const slug = slugs[column]
+            slug => {
               const Icon = svgIcons[slug]
+              const data = dataValues[slug]
               return (
                 <DatabarItem
-                  key={column}
+                  key={slug}
                   icon={<Icon />}
                   color={ICON_COLORS[slug]}
-                  label={labels[column]}
-                  value={sample[column]}
-                  unit={units[column]}
-                  transform={transforms[column]}
+                  value={sample[slug]}
                   onClick={() => onItemClick(slug)}
+                  {...data}
                 />
               )
             }
