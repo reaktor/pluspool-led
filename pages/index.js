@@ -3,7 +3,7 @@ import datagarrison from 'datagarrison'
 import Head from 'next/head'
 import Visualization from '../components/Visualization'
 import Tooltip from '../components/Tooltip'
-import { fetchStationData, fetchNoaaData, getSamples } from '../helpers/data'
+import { fetchStationData, fetchNoaaData } from '../helpers/data'
 import './index.css'
 
 function IndexPage ({ noaaData, stationData }) {

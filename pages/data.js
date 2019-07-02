@@ -3,7 +3,7 @@ import Link from 'next/link'
 import datagarrison from 'datagarrison'
 import Head from 'next/head'
 import Graphs from '../components/Graphs'
-import { fetchStationData, fetchNoaaData, getSamples } from '../helpers/data'
+import { fetchStationData, fetchNoaaData } from '../helpers/data'
 import './index.css'
 
 function DataPage (props) {
@@ -37,9 +37,7 @@ DataPage.getInitialProps = async () => {
   const rawNoaaData = await fetchNoaaData()
   const noaaData = rawNoaaData.data
 
-  const samples = getSamples({ noaaData, stationData })
-
-  return { stationData, noaaData, samples }
+  return { stationData, noaaData }
 }
 
 export default DataPage
