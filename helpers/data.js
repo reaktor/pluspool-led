@@ -1,5 +1,11 @@
 import fetch from 'isomorphic-unfetch'
 import { DIRECTIONS, ENDPOINTS } from './constants'
+import dayjs from 'dayjs'
+
+/**
+ * Generate a timestamp in the past
+ */
+const before = unit => dayjs().subtract(1, unit).valueOf()
 
 /**
  * Look up table that takes our data header as the key
@@ -84,16 +90,35 @@ const normalizations = {
 }
 
 /**
- * GetSampleAtTimestamp is actually a react-style reducer.
- * It takes the previous and current state and
- * @param {Object} currentState - all sample data we know about plus a timestamp.
- * @returns {Object} The merged data from all sources.
+ * getSamples returns an array of samples
+ * @param {Object} noaaData - raw noaaData
+ * @param {Object} stationData - raw stationData
+ *
+ * @returns {Object} Array of samples
  */
-const getSampleAtTimestamp = ({ noaaData, stationData, timestamp }) => {
-  const stationSample = deriveSampleFromStationData({ stationData, timestamp })
-  const noaaSample = deriveSampleFromNoaaData({ noaaData, timestamp })
-  const sample = { ...stationSample, ...noaaSample }
-  return sample
+const getSamples = ({ noaaData, stationData }) => {
+  const start = Math.max(
+    Date.parse(noaaData[0].t),
+    stationData.samples[0][0]
+  )
+  const end = Math.min(
+    Date.parse(noaaData[noaaData.length - 1].t),
+    stationData.samples[stationData.samples.length - 2][0]
+  )
+
+  const startIndex = noaaData.findIndex(sample => Date.parse(sample.t) >= start)
+  const reverseNoaaData = noaaData.slice().reverse()
+  const endIndex = reverseNoaaData.length - reverseNoaaData.findIndex(sample => Date.parse(sample.t) <= end)
+
+  const samplesInRange = noaaData.slice(startIndex, endIndex)
+
+  const samples = samplesInRange.map(noaaSample => {
+    const timestamp = Date.parse(noaaSample.t)
+    const stationSample = deriveSampleFromStationData({ stationData, timestamp })
+    return { ...noaaSample, ...stationSample }
+  })
+
+  return samples
 }
 
 /**
@@ -106,56 +131,22 @@ const getSampleAtTimestamp = ({ noaaData, stationData, timestamp }) => {
  * @returns {Object} A sample of data.
  */
 const deriveSampleFromStationData = ({ stationData, timestamp }) => {
-  if (stationData && stationData.samples && timestamp) {
-    const index = stationData.samples.findIndex(
-      sample => sample[0] >= timestamp
-    )
+  if (!timestamp || !stationData || !stationData.samples) return {}
 
-    if (index - 1 < 0) return {}
-    const sample = stationData.samples[index - 1]
+  const sample = getStationSampleAtTimestamp({ stationData, timestamp })
 
-    return stationData.header.reduce((acc, column, i) => {
-      acc[column] = sample[i]
-      return acc
-    }, {})
-  }
-
-  return {}
+  return stationData.header.reduce((acc, column, i) => {
+    acc[column] = sample[i]
+    return acc
+  }, {})
 }
 
-/**
- *
- * @param {Object} noaaData - Data retrieved from the NOAA tides and currents api.
- * @param {number} timestamp - timestamp.
- * @returns {Object} A sample of data.
- */
-const deriveSampleFromNoaaData = ({ noaaData, timestamp }) => {
-  if (noaaData && noaaData.length > 0 && timestamp) {
-    const index = noaaData.findIndex(
-      sample => Date.parse(sample.t) >= timestamp
-    )
-    if (index - 1 < 0) return {}
-    return noaaData[index - 1]
-  }
+const getStationSampleAtTimestamp = ({ stationData, timestamp }) => {
+  const index = stationData.samples.findIndex(
+    sample => sample[0] > timestamp
+  ) - 1
 
-  return {}
-}
-
-/**
- * @param {string} stationData.timezone - Timezone for data
- * @returns {Object} Samples of data.
- */
-const deriveSamplesFromStationData = ({ stationData }) => {
-  if (stationData && stationData.samples) {
-    return stationData.samples.map(sample => {
-      return stationData.header.reduce((acc, column, i) => {
-        acc[column] = sample[i]
-        return acc
-      }, {})
-    })
-  }
-
-  return {}
+  return stationData.samples[index] || {}
 }
 
 const fetchStationData = () => {
@@ -175,27 +166,15 @@ const fetchNoaaData = () => {
   })
 }
 
-/**
- * Takes two range objects and returns their intersection
- *
- * @param {start: timestamp, end: timestamp} range - first range to constrain by
- * @param {start: timestamp, end: timestamp} by -  second range to constain by
- */
-const constrain = (range, by) => ({
-  start: Math.max(range.start, by.start),
-  end: Math.min(range.end, by.end)
-})
-
 export {
-  constrain,
   labels,
   units,
   slug,
+  before,
   normalizations,
   transforms,
   scale,
-  getSampleAtTimestamp,
-  deriveSamplesFromStationData,
+  getSamples,
   fetchStationData,
   fetchNoaaData
 }
