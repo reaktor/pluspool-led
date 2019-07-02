@@ -1,6 +1,7 @@
 import paper from 'paper-jsdom-canvas'
 import { iconSize } from '../../helpers/drawing'
-import { ICON_COLORS, ICON_SVG_PATHS } from '../../helpers/constants'
+import { ICON_SVG_PATHS } from '../../helpers/constants'
+import { dataValues } from '../../helpers/data'
 
 const makeEven = number => Math.floor(number / 2) * 2
 
@@ -60,7 +61,7 @@ class IconAnimation {
       .map(([key, iconPath]) => (
         this.loadIcon(iconPath)
           .then(icon => {
-            icon.fillColor = ICON_COLORS[key]
+            icon.fillColor = dataValues[key].color
             const group = new paper.Group([icon])
             const symbol = new paper.SymbolDefinition(group)
             this.iconSymbols[key] = symbol

@@ -4,7 +4,7 @@ import PaperAnimation from '../PaperAnimation'
 import './index.css'
 
 const Visualization = ({
-  setTooltipKey,
+  setTooltipSlug,
   setTooltipOpen,
   sample
 }) => {
@@ -15,9 +15,8 @@ const Visualization = ({
     paperAnimation.current = new PaperAnimation({
       wrapper: wrapper.current,
       onIconClick: ({ icon }) => {
-        setTooltipKey(icon)
+        setTooltipSlug(icon)
         setTooltipOpen(true)
-        // setTooltipPosition(point)
       }
     })
   }
@@ -35,13 +34,13 @@ const Visualization = ({
 }
 
 Visualization.defaultProps = {
-  setTooltipKey: () => {},
+  setTooltipSlug: () => {},
   setTooltipOpen: () => {},
   sample: {}
 }
 
 Visualization.propTypes = {
-  setTooltipKey: PropTypes.func,
+  setTooltipSlug: PropTypes.func,
   setTooltipOpen: PropTypes.func,
   sample: PropTypes.object
 }

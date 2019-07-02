@@ -1,7 +1,7 @@
 import { ICON_SIZE } from './constants'
 
 const iconSize = ({ width, height }) => {
-  const minDivisions = 14
+  const minDivisions = 6
   const smallestDimension = width > height ? height : width
   const satisfiesSmallestDimension = smallestDimension / ICON_SIZE >= minDivisions
 
