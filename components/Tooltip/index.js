@@ -5,25 +5,23 @@ import { ICON_SVG_PATHS } from '../../helpers/constants'
 
 import './index.css'
 
-const generateTooltipObject = ({ label, description }) => ({
-  header: label,
-  body: description
-})
-
-const contents = {
-  bacteria: generateTooltipObject(dataValues.bacteria),
-  direction: generateTooltipObject(dataValues.direction),
-  oxygen: generateTooltipObject(dataValues.oxygen),
-  salinity: generateTooltipObject(dataValues.salinity),
-  speed: generateTooltipObject(dataValues.speed),
-  turbidity: generateTooltipObject(dataValues.turbidity),
-  ph: generateTooltipObject(dataValues.ph)
-}
+const Legend = ({ legend }) => (
+  <table className='tooltip__legend'>
+    <tbody>
+      {legend.map(({ color, value, label }) => (
+        <tr style={{ backgroundColor: color }}>
+          <td>{value}</td>
+          <td>{label}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+)
 
 const Tooltip = ({ closeTooltip, open, position: { x, y }, tooltipKey }) => {
   if (!tooltipKey) return null
-  const content = contents[tooltipKey]
-  const { header, body } = content
+  const content = dataValues[tooltipKey]
+  const { label, legend, description } = content
   const svgPath = ICON_SVG_PATHS[tooltipKey]
 
   return (
@@ -34,10 +32,11 @@ const Tooltip = ({ closeTooltip, open, position: { x, y }, tooltipKey }) => {
           type='button'
           onClick={closeTooltip}
         >&times;</button>
-        <img src={svgPath} alt={`${header} icon`} />
-        <h4 className='tooltip__header'>{header}</h4>
+        <img src={svgPath} alt={`${label} icon`} />
+        <h4 className='tooltip__header'>{label}</h4>
+        {legend && <Legend legend={legend} />}
         <div className='tooltip__body'>
-          {body}
+          {description}
         </div>
         <Link href='/data'>
           <a className='tooltip__link'>View the data</a>
