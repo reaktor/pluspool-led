@@ -107,20 +107,20 @@ it('gets data', () => {
   })
 
   // check timestamp of first sample
-  // expect(firstSample).toEqual(
-  //   expect.objectContaining({
-  //     t: '2019-07-01 13:30',
-  //     Date_Time: 1562001300000
-  //   })
-  // )
+  expect(firstSample).toEqual(
+    expect.objectContaining({
+      t: '2019-07-01 13:00',
+      Date_Time: 1562000400000
+    })
+  )
 
-  // // check timestamp of last sample
-  // expect(lastSample).toEqual(
-  //   expect.objectContaining({
-  //     t: '2019-07-01 13:42',
-  //     Date_Time: 1562002200000
-  //   })
-  // )
+  // check timestamp of last sample
+  expect(lastSample).toEqual(
+    expect.objectContaining({
+      t: '2019-07-01 13:42',
+      Date_Time: 1562002200000
+    })
+  )
 
   // check length
   expect(samples.length).toBe(8)
