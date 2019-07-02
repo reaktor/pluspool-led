@@ -1,5 +1,19 @@
 .databar {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 16px;
+  --databar__spacing-v: 7px;
+  --databar__spacing-h: 10px;
+  margin-top: 20px;
+}
+
+@media (min-width: 560px) {
+  .databar {
+    --databar__spacing-v: 10px;
+    --databar__spacing-h: 15px;
+    margin-top: 40px;
+  }
+}
+
+.databar__wrapper {
+  display: flex;
+  margin: calc(-1 * var(--databar__spacing-v)) calc(-1 * var(--databar__spacing-h));
+  overflow-x: auto;
 }

@@ -1,6 +1,6 @@
 .data-range-picker {
   display: flex;
-  padding-top: 32px;
+  margin-top: 32px;
   max-width: 600px;
 }
 

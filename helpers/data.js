@@ -25,7 +25,7 @@ const labels = {
  * Look up table that takes our data header as the key
  * and returns a slug that can be used in other places.
  */
-const slug = {
+const slugs = {
   'Percent Oxygen_SDI_0_10_%': 'oxygen',
   // prettier-ignore
   'Salinity_SDI_0_4_ppt': 'salinity',
@@ -169,7 +169,7 @@ const fetchNoaaData = () => {
 export {
   labels,
   units,
-  slug,
+  slugs,
   before,
   normalizations,
   transforms,

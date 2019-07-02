@@ -1,15 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import datagarrison from 'datagarrison'
 import Head from 'next/head'
+import Databar from '../components/Databar'
+import DataRangePicker from '../components/DataRangePicker'
+import TitleText from '../components/TitleText'
 import Visualization from '../components/Visualization'
 import Tooltip from '../components/Tooltip'
-import { fetchStationData, fetchNoaaData } from '../helpers/data'
+import { getSamples, fetchStationData, fetchNoaaData } from '../helpers/data'
 import './index.css'
 
 function IndexPage ({ noaaData, stationData }) {
   const [tooltopPosition] = useState({ x: 0, y: 0 })
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipKey, setTooltipKey] = useState(null)
+
+  const samples = useMemo(() => getSamples({ noaaData, stationData }), [noaaData, stationData])
+
+  const range = {
+    start: Date.parse(samples[0].t),
+    end: Date.parse(samples[samples.length - 1].t)
+  }
+
+  const [timestamp, setTimestamp] = useState(range.end)
+  const sample = samples.find(({ t }) => Date.parse(t) >= timestamp)
 
   return (
     <div>
@@ -28,12 +41,35 @@ function IndexPage ({ noaaData, stationData }) {
         tooltipKey={tooltipKey}
         closeTooltip={() => setTooltipOpen(false)}
       />
-      <Visualization
-        setTooltipKey={setTooltipKey}
-        setTooltipOpen={setTooltipOpen}
-        noaaData={noaaData}
-        stationData={stationData}
-      />
+      <div className='index-page'>
+        <div className='index-page__top'>
+          <div className='index-page__top-bar'>
+            <h2 className='index-page__label-title'>+ <span className='index-page__label-title__label'>Pool Water Quality Dashboard</span></h2>
+            <div className='index-page__link-out'>
+              <span className='index-page__link-out__label'>Want to learn more and get involved?{' '}</span>
+              <a className='index-page__link-out__link' href='https://pluspool.org' target='_BLANK' rel='noopener'>pluspool.org</a>
+            </div>
+          </div>
+          <TitleText timestamp={timestamp} sample={sample} />
+          <DataRangePicker
+            setTimestamp={setTimestamp}
+            timestamp={timestamp}
+            range={range}
+          />
+          <Databar
+            sample={sample}
+            onItemClick={(icon) => {
+              setTooltipKey(icon)
+              setTooltipOpen(true)
+            }}
+          />
+        </div>
+        <Visualization
+          setTooltipKey={setTooltipKey}
+          setTooltipOpen={setTooltipOpen}
+          sample={sample}
+        />
+      </div>
     </div>
   )
 }

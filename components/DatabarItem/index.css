@@ -12,24 +12,42 @@
   appearance: none;
   text-align: inherit;
 
-  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  font-weight: 300;
+  margin: var(--databar__spacing-v) var(--databar__spacing-h);
+  white-space: nowrap;
 }
 
 .databar__item:hover {
   color: #0073E5;
 }
 
+.databar__item__icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30px;
+}
+
+.databar__item__icon svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.databar__item__icon svg path,
+.databar__item__icon svg circle,
+.databar__item__icon svg polygon {
+  fill: currentColor;
+}
+
 .databar__item__label {
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  display: inline-block;
 }
 
 .databar__item__value {
-  font-size: 2em;
+  display: inline-block;
 }
 
 .databar__item__unit {
-  font-size: 0.5em;
-  vertical-align: super;
-  margin-left: 2px;
+  color: #AAAAAA;
 }
