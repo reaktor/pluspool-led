@@ -9,7 +9,8 @@ const ICON_SVG_PATHS = {
   oxygen: '/static/img/icons/oxygen.svg',
   salinity: '/static/img/icons/salinity.svg',
   speed: '/static/img/icons/speed.svg',
-  turbidity: '/static/img/icons/turbidity.svg'
+  turbidity: '/static/img/icons/turbidity.svg',
+  ph: '/static/img/icons/oxygen.svg'
 }
 
 const PI = Math.PI.toFixed(4)
@@ -26,7 +27,8 @@ const ICON_COLORS = {
   oxygen: '#006093',
   salinity: '#672F98',
   speed: COLORS.yellow,
-  turbidity: '#A85A38'
+  turbidity: '#A85A38',
+  ph: 'green'
 }
 
 const ICON_SIZE = 65

@@ -1,43 +1,25 @@
 import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { before, getSamples } from '../../helpers/data'
+import { dataValues, before, getSamples } from '../../helpers/data'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
 import './index.css'
 
-const units = ['day', 'week', 'month', 'year']
+const timeUnits = ['day', 'week', 'month', 'year']
+
+const generateGraphObject = ({ label, unit, column }) => ({
+  header: label,
+  unit: unit,
+  y: column
+})
 
 const graphs = [
-  {
-    header: 'Water Direction',
-    unit: 'degrees',
-    y: 'd'
-  },
-  {
-    header: 'Water Speed',
-    unit: 'knots',
-    y: 's'
-  },
-  {
-    header: 'Percent Oxygen',
-    unit: '%',
-    y: 'Percent Oxygen_SDI_0_10_%'
-  },
-  {
-    header: 'Salinity',
-    unit: 'PPT',
-    y: 'Salinity_SDI_0_4_ppt'
-  },
-  {
-    header: 'Turbidity',
-    unit: 'NTU',
-    y: 'Turbidity_SDI_0_8_NTU'
-  },
-  {
-    header: 'pH',
-    unit: 'pH',
-    y: 'pH mV_SDI_0_7_V'
-  }
+  generateGraphObject(dataValues.direction),
+  generateGraphObject(dataValues.speed),
+  generateGraphObject(dataValues.oxygen),
+  generateGraphObject(dataValues.salinity),
+  generateGraphObject(dataValues.turbidity),
+  generateGraphObject(dataValues.ph)
 ]
 
 const Graphs = ({ noaaData, stationData }) => {
@@ -56,7 +38,7 @@ const Graphs = ({ noaaData, stationData }) => {
   return (
     <>
       <GraphsDateFilter
-        units={units}
+        units={timeUnits}
         activeUnit={activeUnit}
         onChange={filterOnClick}
         name='span'
