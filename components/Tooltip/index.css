@@ -19,8 +19,9 @@
   padding: var(--tooltip--padding);
   width: 320px;
 
-  background-color: white;
-  color: black;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 1px solid #000000;
 
   opacity: 0;
   transition: opacity 0.2s;
@@ -42,6 +43,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tooltip__icon svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.tooltip__icon svg path,
+.tooltip__icon svg circle,
+.tooltip__icon svg polygon {
+  fill: currentColor;
 }
 
 .tooltip__header {

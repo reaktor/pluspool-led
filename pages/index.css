@@ -22,8 +22,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #1D1D1D;
-  color: #FAFAFA;
+  background-color: #FFFFFF;
+  color: #000000;
 }
 
 p {
@@ -64,7 +64,7 @@ p {
 }
 
 .index-page__link-out__link {
-  color: #FFFFFF;
+  color: #000000;
 }
 
 .index-page__label-title {

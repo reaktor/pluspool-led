@@ -12,7 +12,7 @@ import './index.css'
 function IndexPage ({ noaaData, stationData }) {
   const [tooltopPosition] = useState({ x: 0, y: 0 })
   const [tooltipOpen, setTooltipOpen] = useState(false)
-  const [tooltipKey, setTooltipKey] = useState(null)
+  const [tooltipSlug, setTooltipSlug] = useState(null)
 
   const samples = useMemo(() => getSamples({ noaaData, stationData }), [noaaData, stationData])
 
@@ -38,7 +38,7 @@ function IndexPage ({ noaaData, stationData }) {
       <Tooltip
         open={tooltipOpen}
         position={tooltopPosition}
-        tooltipKey={tooltipKey}
+        slug={tooltipSlug}
         closeTooltip={() => setTooltipOpen(false)}
       />
       <div className='index-page'>
@@ -59,13 +59,13 @@ function IndexPage ({ noaaData, stationData }) {
           <Databar
             sample={sample}
             onItemClick={(icon) => {
-              setTooltipKey(icon)
+              setTooltipSlug(icon)
               setTooltipOpen(true)
             }}
           />
         </div>
         <Visualization
-          setTooltipKey={setTooltipKey}
+          setTooltipSlug={setTooltipSlug}
           setTooltipOpen={setTooltipOpen}
           sample={sample}
         />

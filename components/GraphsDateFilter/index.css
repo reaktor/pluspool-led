@@ -1,5 +1,5 @@
 .graphs-date-filter {
-  background-color: #333;
+  background-color: #CCCCCC;
   border-radius: 4rem;
   padding: 1em;
   display: inline-flex;
@@ -10,14 +10,13 @@
 }
 
 .graphs-date-filter__label {
-  background-color: #333;
   padding: 0.5em 1em 0.5em 1em;
   cursor: pointer;
 }
 
 .graphs-date-filter__input[type="radio"]:checked + .graphs-date-filter__label {
-  color: black;
-  background-color: white;
+  color: #FFFFFF;
+  background-color: #333333;
   border-radius: 4rem;
   overflow: hidden;
   transition: 0.25s ease all;

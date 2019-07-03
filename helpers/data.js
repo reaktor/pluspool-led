@@ -9,6 +9,7 @@ const before = unit => dayjs().subtract(1, unit).valueOf()
 
 const dataValues = {
   bacteria: {
+    color: '#DB2B2B',
     column: 'bacteria',
     label: 'Bacteria',
     unit: 'MPN',
@@ -34,6 +35,7 @@ const dataValues = {
     ]
   },
   oxygen: {
+    color: '#1443A7',
     column: 'Percent Oxygen_SDI_0_10_%',
     label: 'Percent Oxygen',
     unit: '%',
@@ -43,6 +45,7 @@ const dataValues = {
     normalize: value => scale(value, 0, 100, 0, 1)
   },
   salinity: {
+    color: '#009247',
     column: 'Salinity_SDI_0_4_ppt',
     label: 'Salinity',
     unit: 'PPT',
@@ -51,6 +54,7 @@ const dataValues = {
     )
   },
   turbidity: {
+    color: '#592150',
     column: 'Turbidity_SDI_0_8_NTU',
     label: 'Turbidity',
     unit: 'NTU',
@@ -59,6 +63,7 @@ const dataValues = {
     )
   },
   speed: {
+    color: '#F2BAD2',
     column: 's',
     label: 'Water Speed',
     unit: 'KN',
@@ -67,6 +72,7 @@ const dataValues = {
     )
   },
   direction: {
+    color: '#000000',
     column: 'd',
     label: 'Water Direction',
     unit: '',
@@ -76,6 +82,7 @@ const dataValues = {
     transform: value => DIRECTIONS[Math.floor(value / 45)]
   },
   ph: {
+    color: '#0DB3A6',
     column: 'pH mV_SDI_0_7_V',
     label: 'pH',
     unit: 'pH',
