@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { before, getSamples } from '../../helpers/data'
-import Chart from '../Chart'
+import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
 import './index.css'
 
@@ -63,7 +63,7 @@ const Graphs = ({ noaaData, stationData }) => {
       />
       <div className='graphs'>
         {graphs.map(graph => (
-          <Chart x='t' domain={domain} data={data} {...graph} />
+          <Graph x='t' domain={domain} data={data} {...graph} />
         ))}
       </div>
     </>
