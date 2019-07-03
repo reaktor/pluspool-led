@@ -14,7 +14,24 @@ const dataValues = {
     unit: 'MPN',
     description: (
       <p>While not generally harmful to humans, the presence of bacteria in the genus Enterococcus in a water body indicates possible fecal waste contamination. This waste is likely to contain pathogenic microbes and can cause disease in those using the water body directly (i.e. swimming) or indirectly (i.e. consuming marine life). The New York City Department of Health declares values under 35 Colony Forming Units (CFU) as acceptable, 35-104 CFU acceptable if transient, and greater than 104 CFU unacceptable. While the concentration of Enterococci generally takes 24 hours to be measured, we have developed a predictive algorithm based off highly correlated environmental parameters, such as precipitation, in order to present in real-time the probable concentration of Enterococci. Like the standard 24 hour measurement, this value is reported in Most Probable Number, or MPN.</p>
-    )
+    ),
+    legend: [
+      {
+        color: 'green',
+        value: '<35 MPN',
+        label: 'Acceptable'
+      },
+      {
+        color: 'yellow',
+        value: '35-104 MPN',
+        label: 'Unacceptable if levels persist'
+      },
+      {
+        color: 'red',
+        value: '>104 MPN',
+        label: 'Unacceptable'
+      }
+    ]
   },
   oxygen: {
     column: 'Percent Oxygen_SDI_0_10_%',

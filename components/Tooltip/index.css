@@ -48,6 +48,16 @@
   margin-top: 0;
 }
 
+.tooltip__legend {
+  --tooltip__legend--padding-h: 10px;
+  border-collapse: collapse;
+  margin: 0 calc(-1 * var(--tooltip__legend--padding-h));
+}
+
+.tooltip__legend td {
+  padding: 10px var(--tooltip__legend--padding-h);
+}
+
 .tooltip__body {
   max-height: 400px;
   overflow: auto;
