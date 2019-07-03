@@ -41,8 +41,7 @@ const dataValues = {
     unit: '%',
     description: (
       <p>Dissolved oxygen is introduced into the water by photosynthetic organisms and air-water gas exchange, and is consumed during respiration. Levels are highest during daylight and drop during the night as there is no photosynthesis to counteract consumption. Just like on land, oxygen is critical for many species of marine life, and low levels (hypoxia or anoxia) will stress or even suffocate organisms, resulting in large die-offs. Oxygen levels are primarily controlled by biological production and consumption, temperature (higher temperature decreases the solubility), and the physical mixing.</p>
-    ),
-    normalize: value => scale(value, 0, 100, 0, 1)
+    )
   },
   salinity: {
     color: '#009247',
@@ -88,7 +87,8 @@ const dataValues = {
     unit: 'pH',
     description: (
       <p>The pH refers to how acidic or basic a water body is. It is a critical component of water quality because the pH controls the solubility of minerals (including the shells of calcifying organisms) and the bioavailability of both nutrients and toxic compounds such as heavy metals. In general, lowering pH decreases environmental water quality, as heavy metals tend to become more soluble and marine organisms come under stress. There is a natural diel cycle in pH due to the increased release of acidic carbon dioxide during the night. Water temperature controls gas solubility, so colder temperatures can result in more uptake of carbon dioxide from the atmosphere and lower the pH as well.</p>
-    )
+    ),
+    transform: value => scale(value, -400, 400, 0, 14).toFixed(2)
   }
 }
 
