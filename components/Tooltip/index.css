@@ -45,16 +45,8 @@
   justify-content: center;
 }
 
-.tooltip__icon svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.tooltip__icon svg path,
-.tooltip__icon svg circle,
-.tooltip__icon svg polygon {
-  fill: currentColor;
+.tooltip__icon {
+  width: 20px;
 }
 
 .tooltip__header {

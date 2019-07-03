@@ -25,19 +25,8 @@
 .databar__item__icon {
   display: inline-block;
   vertical-align: middle;
-  width: 30px;
-}
-
-.databar__item__icon svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.databar__item__icon svg path,
-.databar__item__icon svg circle,
-.databar__item__icon svg polygon {
-  fill: currentColor;
+  width: 20px;
+  margin-right: 5px;
 }
 
 .databar__item__label {

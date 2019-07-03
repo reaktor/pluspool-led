@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { dataValues } from '../../helpers/data'
-import { svgIcons } from '../../helpers/icons'
+import Circle from '../Circle'
 
 import './index.css'
 
@@ -22,7 +22,6 @@ const Tooltip = ({ closeTooltip, open, position: { x, y }, slug }) => {
   if (!slug) return null
   const content = dataValues[slug]
   const { label, legend, description, color } = content
-  const icon = svgIcons[slug]
 
   return (
     <div className='tooltip-wrapper'>
@@ -33,7 +32,7 @@ const Tooltip = ({ closeTooltip, open, position: { x, y }, slug }) => {
           onClick={closeTooltip}
         >&times;</button>
         <div className='tooltip__icon' style={{ color }}>
-          {icon && icon()}
+          <Circle fill={color} />
         </div>
         <h4 className='tooltip__header'>{label}</h4>
         {legend && <Legend legend={legend} />}
