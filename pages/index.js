@@ -1,28 +1,25 @@
-import React, { useState, useMemo } from 'react'
-import datagarrison from 'datagarrison'
+import React, { useState } from 'react'
 import Head from 'next/head'
 import Databar from '../components/Databar'
 import DataRangePicker from '../components/DataRangePicker'
 import TitleText from '../components/TitleText'
 import Visualization from '../components/Visualization'
 import Tooltip from '../components/Tooltip'
-import { getSamples, fetchStationData, fetchNoaaData } from '../helpers/data'
+import { fetchSamplesData } from '../helpers/data'
 import './index.css'
 
-function IndexPage ({ noaaData, stationData }) {
+function IndexPage ({ samples }) {
   const [tooltopPosition] = useState({ x: 0, y: 0 })
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState(null)
 
-  const samples = useMemo(() => getSamples({ noaaData, stationData }), [noaaData, stationData])
-
   const range = {
-    start: Date.parse(samples[0].t),
-    end: Date.parse(samples[samples.length - 1].t)
+    start: samples[0].noaaTime,
+    end: samples[samples.length - 1].noaaTime
   }
 
   const [timestamp, setTimestamp] = useState(range.end)
-  const sample = samples.find(({ t }) => Date.parse(t) >= timestamp)
+  const sample = samples.find(({ noaaTime }) => noaaTime >= timestamp)
 
   return (
     <div>
@@ -75,13 +72,9 @@ function IndexPage ({ noaaData, stationData }) {
 }
 
 IndexPage.getInitialProps = async () => {
-  const rawStationData = await fetchStationData()
-  const stationData = datagarrison.parse(rawStationData)
+  const samples = await fetchSamplesData()
 
-  const rawNoaaData = await fetchNoaaData()
-  const noaaData = rawNoaaData.data
-
-  return { stationData, noaaData }
+  return { samples }
 }
 
 export default IndexPage

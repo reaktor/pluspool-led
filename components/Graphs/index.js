@@ -1,16 +1,16 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { dataValues, before, getSamples } from '../../helpers/data'
+import { dataValues, before } from '../../helpers/data'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
 import './index.css'
 
 const timeUnits = ['day', 'week', 'month', 'year']
 
-const generateGraphObject = ({ label, unit, column }) => ({
+const generateGraphObject = ({ label, unit, slug }) => ({
   header: label,
   unit: unit,
-  y: column
+  y: slug
 })
 
 const graphs = [
@@ -22,10 +22,9 @@ const graphs = [
   generateGraphObject(dataValues.ph)
 ]
 
-const Graphs = ({ noaaData, stationData }) => {
-  if (!noaaData && !stationData) return null
+const Graphs = ({ samples }) => {
+  if (!samples) return null
 
-  const data = useMemo(() => getSamples({ noaaData, stationData }), [noaaData, stationData])
   const [activeUnit, setActiveUnit] = useState('month')
   const [domain, setDomain] = useState([Date.now(), before(activeUnit)])
 
@@ -45,7 +44,7 @@ const Graphs = ({ noaaData, stationData }) => {
       />
       <div className='graphs'>
         {graphs.map(graph => (
-          <Graph x='t' domain={domain} data={data} {...graph} />
+          <Graph x='noaaTime' domain={domain} data={samples} {...graph} />
         ))}
       </div>
     </>
@@ -53,13 +52,11 @@ const Graphs = ({ noaaData, stationData }) => {
 }
 
 Graphs.defaultProps = {
-  noaaData: null,
-  stationData: null
+  samples: null
 }
 
 Graphs.propTypes = {
-  noaaData: PropTypes.array,
-  stationData: PropTypes.object
+  samples: PropTypes.array
 }
 
 export default Graphs

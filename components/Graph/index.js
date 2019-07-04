@@ -30,8 +30,8 @@ const Graph = ({ x, y, header, unit, data, domain: [min, max] }) => {
 
   const dataSeries = data.map(datum => {
     return {
-      x: Date.parse(datum[x]),
-      y: parseFloat(datum[y]) || null
+      x: datum[x],
+      y: datum[y] || null
     }
   })
 
