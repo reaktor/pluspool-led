@@ -61,7 +61,9 @@ class IconAnimation {
       .map(([key, iconPath]) => (
         this.loadIcon(iconPath)
           .then(icon => {
-            icon.fillColor = dataValues[key].color
+            icon.fillColor = 'transparent'
+            const circle = new paper.Shape.Circle(50)
+            circle.fillColor = '#000000'
             const group = new paper.Group([icon])
             const symbol = new paper.SymbolDefinition(group)
             this.iconSymbols[key] = symbol

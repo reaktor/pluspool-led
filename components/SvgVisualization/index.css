@@ -1,0 +1,48 @@
+.svg-visualization {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.svg-visualization__wrapper {
+  transform: rotate(calc(var(--svg--direction) * 1deg));
+}
+
+.svg-visualization svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes svg-data-point-animation {
+  0% {
+    transform: translate3d(0, var(--transition-distance), 0);
+    opacity: 0;
+  }
+
+  25%,
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(0, calc(var(--transition-distance) * -1), 0);
+    opacity: 0;
+  }
+}
+
+.svg-visualization__data-point-wrapper {
+  --transition-distance: 10%;
+  --transition-duration: 3s;
+  animation: svg-data-point-animation var(--transition-duration) infinite linear;
+}
+
+.svg-visualization__data-point {
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+  transform-origin: var(--circle--cx, 50%) var(--circle--cy, 50%);
+}
+
+.svg-visualization__data-point:hover {
+  transform: scale(1.2);
+  z-index: 1000;
+}
