@@ -2,7 +2,7 @@ This is a water quality data visualization and exploration tool.
 
 We are happy to receive any feedback using [github issues][]
 
-The main applications pulls from the noaa api and a datagarrison stream to share the current conditions of Pier 17.
+The main applications pulls from a file generated from the noaa api and a datagarrison stream to share the current conditions of Pier 17.
 
 To start developing:
 

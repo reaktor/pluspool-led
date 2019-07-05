@@ -9,8 +9,8 @@ const before = unit => dayjs().subtract(1, unit).valueOf()
 
 const dataValues = {
   bacteria: {
+    slug: 'bacteria',
     color: '#DB2B2B',
-    column: 'bacteria',
     label: 'Bacteria',
     unit: 'MPN',
     description: (
@@ -35,8 +35,8 @@ const dataValues = {
     ]
   },
   oxygen: {
+    slug: 'oxygen',
     color: '#1443A7',
-    column: 'Percent Oxygen_SDI_0_10_%',
     label: 'Percent Oxygen',
     unit: '%',
     description: (
@@ -44,8 +44,8 @@ const dataValues = {
     )
   },
   salinity: {
+    slug: 'salinity',
     color: '#009247',
-    column: 'Salinity_SDI_0_4_ppt',
     label: 'Salinity',
     unit: 'PPT',
     description: (
@@ -53,8 +53,8 @@ const dataValues = {
     )
   },
   turbidity: {
+    slug: 'turbidity',
     color: '#592150',
-    column: 'Turbidity_SDI_0_8_NTU',
     label: 'Turbidity',
     unit: 'NTU',
     description: (
@@ -62,8 +62,8 @@ const dataValues = {
     )
   },
   speed: {
+    slug: 'speed',
     color: '#F2BAD2',
-    column: 's',
     label: 'Water Speed',
     unit: 'KN',
     description: (
@@ -71,8 +71,8 @@ const dataValues = {
     )
   },
   direction: {
+    slug: 'direction',
     color: '#000000',
-    column: 'd',
     label: 'Water Direction',
     unit: '',
     description: (
@@ -81,8 +81,8 @@ const dataValues = {
     transform: value => DIRECTIONS[Math.floor(value / 45)]
   },
   ph: {
+    slug: 'ph',
     color: '#0DB3A6',
-    column: 'pH mV_SDI_0_7_V',
     label: 'pH',
     unit: 'pH',
     description: (
@@ -116,80 +116,14 @@ const dataValues = {
 const scale = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
 
-/**
- * getSamples returns an array of samples
- * @param {Object} noaaData - raw noaaData
- * @param {Object} stationData - raw stationData
- *
- * @returns {Object} Array of samples
- */
-const getSamples = ({ noaaData, stationData }) => {
-  const start = Math.max(
-    Date.parse(noaaData[0].t),
-    stationData.samples[0][0]
-  )
-  const end = Math.min(
-    Date.parse(noaaData[noaaData.length - 1].t),
-    stationData.samples[stationData.samples.length - 2][0]
-  )
-
-  const startIndex = noaaData.findIndex(sample => Date.parse(sample.t) >= start)
-  const reverseNoaaData = noaaData.slice().reverse()
-  const endIndex = reverseNoaaData.length - reverseNoaaData.findIndex(sample => Date.parse(sample.t) <= end)
-
-  const samplesInRange = noaaData.slice(startIndex, endIndex)
-
-  const samples = samplesInRange.map(noaaSample => {
-    const timestamp = Date.parse(noaaSample.t)
-    const stationSample = deriveSampleFromStationData({ stationData, timestamp })
-    return { ...noaaSample, ...stationSample }
-  })
-
-  return samples
-}
-
-/**
- *
- * @param {Object} stationData - Data retrieved from the Datagarrison weather station.
- * @param {Array} stationData.header - A list of labels for each column of data.
- * @param {Array} stationData.samples - The data samples.
- * @param {string} stationData.timezone - Timezone for data
- * @param {number} stationSampleIndex - Temporary index for which sample to grab.
- * @returns {Object} A sample of data.
- */
-const deriveSampleFromStationData = ({ stationData, timestamp }) => {
-  if (!timestamp || !stationData || !stationData.samples) return {}
-
-  const sample = getStationSampleAtTimestamp({ stationData, timestamp })
-
-  return stationData.header.reduce((acc, column, i) => {
-    acc[column] = sample[i]
-    return acc
-  }, {})
-}
-
-const getStationSampleAtTimestamp = ({ stationData, timestamp }) => {
-  const index = stationData.samples.findIndex(
-    sample => sample[0] > timestamp
-  ) - 1
-
-  return stationData.samples[index] || {}
-}
-
-const fetchStationData = () => {
-  return fetch(ENDPOINTS.datagarrison).then(response => {
-    if (response.ok) {
-      return response.text()
-    }
-    throw new Error(`Request rejected with status ${response.status}`)
-  })
-}
-
-const fetchNoaaData = () => {
-  return fetch(ENDPOINTS.noaaCurrent, {
+const fetchSamplesData = () => {
+  return fetch(ENDPOINTS.samples, {
     method: 'GET'
   }).then(response => {
-    return response.json()
+    if (response.ok) {
+      return response.json()
+    }
+    throw new Error(`Request rejected with status ${response.status}`)
   })
 }
 
@@ -197,7 +131,5 @@ export {
   dataValues,
   before,
   scale,
-  getSamples,
-  fetchStationData,
-  fetchNoaaData
+  fetchSamplesData
 }

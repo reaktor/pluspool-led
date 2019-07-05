@@ -1,6 +1,5 @@
 const ENDPOINTS = {
-  datagarrison: 'https://reaktor.github.io/pluspool-led-api/351579054854805_live.txt',
-  noaaCurrent: 'https://tidesandcurrents.noaa.gov/api/datagetter?range=2400&station=n03020&product=currents&units=english&time_zone=gmt&&format=json'
+  samples: 'https://pluspool.s3.amazonaws.com/samples.json'
 }
 
 const ICON_SVG_PATHS = {

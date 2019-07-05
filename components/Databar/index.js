@@ -19,17 +19,16 @@ const Databar = ({ onItemClick, sample }) => {
     <div className='databar'>
       <div className='databar__wrapper'>
         {displayedSlugs
-          .filter(slug => dataValues[slug].column in sample)
+          .filter(slug => slug in sample)
           .map(
             slug => {
               const data = dataValues[slug]
               const icon = svgIcons[slug]
-              const { column } = data
               return (
                 <DatabarItem
                   key={slug}
                   icon={icon && icon()}
-                  value={sample[column]}
+                  value={sample[slug]}
                   onClick={() => onItemClick(slug)}
                   {...data}
                 />

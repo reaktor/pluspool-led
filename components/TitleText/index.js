@@ -1,7 +1,6 @@
 import React from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { dataValues } from '../../helpers/data'
 import './index.css'
 
 dayjs.extend(relativeTime)
@@ -21,7 +20,7 @@ const levelText = {
 
 function TitleText ({ timestamp, sample }) {
   const timestampDiff = dayjs().to(timestamp)
-  const oxygenLevel = sample[dataValues.oxygen.column]
+  const oxygenLevel = sample.oxygen
   const oxygenText = levelText.oxygen(oxygenLevel)
 
   return (
