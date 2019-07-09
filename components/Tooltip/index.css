@@ -1,48 +1,69 @@
-.tooltip-wrapper {
-  --tooltip--x-position: 20px;
-  --tooltip--y-position: 20px;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  z-index: 3;
-  transform: translate(var(--tooltip--x-position), var(--tooltip--y-position));
-  pointer-events: none;
-}
-
 .tooltip {
-  --tooltip--offset-horizontal: 0px;
-  --tooltip--offset-vertical: 0px;
-  --tooltip--padding: 30px;
-  position: absolute;
-  left: var(--tooltip--offset-horizontal);
-  top: var(--tooltip--offset-vertical);
-  padding: var(--tooltip--padding);
-  width: 320px;
+  --tooltip-padding: 20px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 5;
+  height: 100%;
+  width: 100%;
+  padding: var(--tooltip-padding);
+
+  display: flex;
+  flex-direction: column;
 
   background-color: #FFFFFF;
   color: #000000;
-  border: 1px solid #000000;
 
-  opacity: 0;
-  transition: opacity 0.2s;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in;
+}
+
+@media (min-width: 850px) {
+  .tooltip {
+    --tooltip-padding: 40px;
+    width: 50%;
+  }
 }
 
 .tooltip[data-active="true"] {
-  opacity: 1;
+  transform: translateX(0%);
   pointer-events: auto;
 }
 
+.tooltip__inner {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  flex-grow: 1;
+  position: relative;
+  padding: var(--tooltip-padding) var(--tooltip-padding) var(--tooltip-padding) 0px;
+  border: 1px solid #000000;
+  border-left: 0;
+}
+
+.tooltip__close-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
 .tooltip__close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 32px;
-  line-height: 0;
-  height: 40px;
-  width: 40px;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+
+  height: 26px;
+  width: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+}
+
+.tooltip__close-button svg {
+  height: 100%;
+  width: 100%;
 }
 
 .tooltip__icon svg {
@@ -57,25 +78,31 @@
   fill: currentColor;
 }
 
+.tooltip__heading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
 .tooltip__header {
-  margin-top: 0;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
 }
 
-.tooltip__legend {
-  --tooltip__legend--padding-h: 10px;
-  border-collapse: collapse;
-  margin: 0 calc(-1 * var(--tooltip__legend--padding-h));
-}
-
-.tooltip__legend td {
-  padding: 10px var(--tooltip__legend--padding-h);
+.tooltip__value {
+  margin-left: auto;
+  font-size: 24px;
 }
 
 .tooltip__body {
-  max-height: 400px;
+  max-width: 37.5em;
   overflow: auto;
-  margin-right: calc(var(--tooltip--padding) * -1);
-  padding-right: var(--tooltip--padding);
+}
+
+.tooltip__body p {
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .tooltip__link {
