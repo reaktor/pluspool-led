@@ -10,7 +10,8 @@ const simplexNoises = {
   salinity: new SimplexNoise(2.1),
   turbidity: new SimplexNoise(0.4),
   speed: new SimplexNoise(1.5),
-  ph: new SimplexNoise(1.2)
+  ph: new SimplexNoise(1.2),
+  bacteria: new SimplexNoise(-3.4)
 }
 
 const SCALE = 100
@@ -20,7 +21,8 @@ const displayedSlugs = [
   'salinity',
   'turbidity',
   'speed',
-  'ph'
+  'ph',
+  'bacteria'
 ]
 
 const SvgVisualization = ({
