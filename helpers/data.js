@@ -125,7 +125,14 @@ const scale = (num, inMin, inMax, outMin, outMax) =>
 
 const fetchSamplesData = () => {
   return fetch(ENDPOINTS.samples, {
-    method: 'GET'
+    method: 'GET',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    referrer: 'no-referrer'
   }).then(response => {
     if (response.ok) {
       return response.json()

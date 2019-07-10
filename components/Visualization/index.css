@@ -1,9 +1,0 @@
-.visualization {
-  flex-grow: 1;
-  overflow: hidden;
-}
-
-.visualization canvas {
-  height: 100%;
-  width: 100%;
-}

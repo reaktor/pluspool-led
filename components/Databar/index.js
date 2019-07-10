@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { dataValues } from '../../helpers/data'
 import DatabarItem from '../DatabarItem'
-import { svgIcons } from '../../helpers/icons'
 import './index.css'
 
 const displayedSlugs = [
@@ -24,11 +23,9 @@ const Databar = ({ onItemClick, sample }) => {
           .map(
             slug => {
               const data = dataValues[slug]
-              const icon = svgIcons[slug]
               return (
                 <DatabarItem
                   key={slug}
-                  icon={icon && icon()}
                   value={sample[slug]}
                   onClick={() => onItemClick(slug)}
                   {...data}

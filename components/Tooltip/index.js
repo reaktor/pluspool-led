@@ -1,7 +1,7 @@
 import React from 'react'
 import TooltipLegend from '../TooltipLegend'
 import { dataValues } from '../../helpers/data'
-import { svgIcons } from '../../helpers/icons'
+import Circle from '../Circle'
 
 import './index.css'
 
@@ -12,6 +12,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample }) => {
   }
 
   const content = dataValues[slug]
+
   const { label, legend, description, unit, transform } = content
   const value = transform ? transform(sample[slug]) : sample[slug]
 

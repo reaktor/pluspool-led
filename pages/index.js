@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Databar from '../components/Databar'
 import DataRangePicker from '../components/DataRangePicker'
 import TitleText from '../components/TitleText'
-import Visualization from '../components/Visualization'
+import SvgVisualization from '../components/SvgVisualization'
 import Tooltip from '../components/Tooltip'
 import { fetchSamplesData } from '../helpers/data'
 import './index.css'
@@ -60,7 +60,7 @@ function IndexPage ({ samples }) {
             }}
           />
         </div>
-        <Visualization
+        <SvgVisualization
           setTooltipSlug={setTooltipSlug}
           setTooltipOpen={setTooltipOpen}
           sample={sample}
