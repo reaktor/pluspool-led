@@ -1,48 +1,55 @@
 import React from 'react'
-import Link from 'next/link'
+import TooltipLegend from '../TooltipLegend'
 import { dataValues } from '../../helpers/data'
 import { svgIcons } from '../../helpers/icons'
 
 import './index.css'
 
-const Legend = ({ legend }) => (
-  <table className='tooltip__legend'>
-    <tbody>
-      {legend.map(({ color, value, label }) => (
-        <tr style={{ backgroundColor: color }}>
-          <td>{value}</td>
-          <td>{label}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-)
+const Tooltip = ({ closeTooltip, open, slug, sample }) => {
+  // Outer div required for CSS transition to occur on first open
+  if (!slug) {
+    return <div className='tooltip' data-active={open} />
+  }
 
-const Tooltip = ({ closeTooltip, open, position: { x, y }, slug }) => {
-  if (!slug) return null
   const content = dataValues[slug]
-  const { label, legend, description, color } = content
-  const icon = svgIcons[slug]
+  const { label, legend, description, unit, transform } = content
+  const value = transform ? transform(sample[slug]) : sample[slug]
 
   return (
-    <div className='tooltip-wrapper'>
-      <div className='tooltip' data-active={open}>
-        <button
-          className='tooltip__close-button'
-          type='button'
-          onClick={closeTooltip}
-        >&times;</button>
-        <div className='tooltip__icon' style={{ color }}>
-          {icon && icon()}
+    <div className='tooltip' data-active={open}>
+      <div className='tooltip__inner'>
+        <div className='tooltip__close-button-wrapper'>
+          <button
+            className='tooltip__close-button'
+            type='button'
+            onClick={closeTooltip}
+          >
+            <svg viewBox='0 0 10 10' preserveAspectRatio='none'>
+              <path
+                vector-effect='non-scaling-stroke'
+                fill='transparent'
+                stroke='#000000'
+                stroke-width='1'
+                stroke-linejoin='round'
+                d='M0,0l10,10' />
+              <path
+                vector-effect='non-scaling-stroke'
+                fill='transparent'
+                stroke='#000000'
+                stroke-width='1'
+                stroke-linejoin='round'
+                d='M10,0l-10,10' />
+            </svg>
+          </button>
         </div>
-        <h4 className='tooltip__header'>{label}</h4>
-        {legend && <Legend legend={legend} />}
+        <div className='tooltip__heading'>
+          <h4 className='tooltip__header'>{label}</h4>
+          <span className='tooltip__value'>{value} {unit}</span>
+        </div>
+        {legend && <TooltipLegend legend={legend} />}
         <div className='tooltip__body'>
           {description}
         </div>
-        <Link href='/data'>
-          <a className='tooltip__link'>View the data</a>
-        </Link>
       </div>
     </div>
   )
