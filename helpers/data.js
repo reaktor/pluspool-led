@@ -135,9 +135,7 @@ const fetchSamplesData = () => {
     referrer: 'no-referrer'
   })
     .then(response => {
-      if (response.ok) {
-        return response.json()
-      }
+      if (response.ok) return response.json()
       throw new Error(`Request rejected with status ${response.status}`)
     })
     .then(json => {
