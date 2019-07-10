@@ -133,12 +133,17 @@ const fetchSamplesData = () => {
       'Content-Type': 'application/json'
     },
     referrer: 'no-referrer'
-  }).then(response => {
-    if (response.ok) {
-      return response.json()
-    }
-    throw new Error(`Request rejected with status ${response.status}`)
   })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      throw new Error(`Request rejected with status ${response.status}`)
+    })
+    .then(json => {
+      if (!json.version) return { samples: json }
+      return json
+    })
 }
 
 export {

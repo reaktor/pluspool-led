@@ -29,10 +29,6 @@ function DataPage (props) {
   )
 }
 
-DataPage.getInitialProps = async () => {
-  const samples = await fetchSamplesData()
-
-  return { samples }
-}
+DataPage.getInitialProps = fetchSamplesData
 
 export default DataPage
