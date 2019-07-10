@@ -73,7 +73,9 @@ function IndexPage ({ samples }) {
 IndexPage.getInitialProps = async () => {
   const samples = await fetchSamplesData()
 
-  return { samples }
+  if (!samples.version) return { samples }
+
+  return { samples: samples.samples }
 }
 
 export default IndexPage
