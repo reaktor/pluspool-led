@@ -6,6 +6,7 @@ import { svgIcons } from '../../helpers/icons'
 import './index.css'
 
 const displayedSlugs = [
+  'bacteria',
   'oxygen',
   'salinity',
   'turbidity',

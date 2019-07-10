@@ -14,6 +14,7 @@ const generateGraphObject = ({ label, unit, slug }) => ({
 })
 
 const graphs = [
+  generateGraphObject(dataValues.bacteria),
   generateGraphObject(dataValues.direction),
   generateGraphObject(dataValues.speed),
   generateGraphObject(dataValues.oxygen),
