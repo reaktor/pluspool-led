@@ -1,13 +1,13 @@
 import React from 'react'
-import Link from 'next/link'
 import Head from 'next/head'
+import Navbar from '../components/Navbar'
 import Graphs from '../components/Graphs'
 import { fetchSamplesData } from '../helpers/data'
 import './index.css'
 
 function DataPage (props) {
   return (
-    <div>
+    <main className='page' data-template='data'>
       <Head>
         <title>+Pool Light Installation</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
@@ -17,15 +17,13 @@ function DataPage (props) {
           rel='stylesheet'
         />
       </Head>
-      <section>
-        <h1>
-          <Link href='/'>
-            <a>+ Pool</a>
-          </Link>
-        </h1>
+      <div className='page__top'>
+        <Navbar />
+      </div>
+      <div className='page__body'>
         <Graphs {...props} />
-      </section>
-    </div>
+      </div>
+    </main>
   )
 }
 

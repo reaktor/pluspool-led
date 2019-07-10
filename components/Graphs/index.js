@@ -7,27 +7,12 @@ import './index.css'
 
 const timeUnits = ['day', 'week', 'month', 'year']
 
-const generateGraphObject = ({ label, unit, slug }) => ({
-  header: label,
-  unit: unit,
-  y: slug
-})
-
-const graphs = [
-  generateGraphObject(dataValues.bacteria),
-  generateGraphObject(dataValues.direction),
-  generateGraphObject(dataValues.speed),
-  generateGraphObject(dataValues.oxygen),
-  generateGraphObject(dataValues.salinity),
-  generateGraphObject(dataValues.turbidity),
-  generateGraphObject(dataValues.ph)
-]
-
 const Graphs = ({ samples }) => {
   if (!samples) return null
 
-  const [activeUnit, setActiveUnit] = useState('month')
+  const [activeUnit, setActiveUnit] = useState('day')
   const [domain, setDomain] = useState([Date.now(), before(activeUnit)])
+  const [overlayGraph, setOverlayGraph] = useState(null)
 
   const setSpan = unit => setDomain([Date.now(), before(unit)])
   const filterOnClick = unit => {
@@ -44,8 +29,24 @@ const Graphs = ({ samples }) => {
         name='span'
       />
       <div className='graphs'>
-        {graphs.map(graph => (
-          <Graph x='noaaTime' domain={domain} data={samples} {...graph} />
+        {Object.keys(dataValues).map(key => (
+          <Graph
+            setOverlayGraph={setOverlayGraph}
+            graph={{
+              x: 'noaaTime',
+              y: dataValues[key].slug,
+              domain: domain,
+              data: samples,
+              ...dataValues[key]
+            }}
+            overlayGraph={overlayGraph && {
+              x: 'noaaTime',
+              y: dataValues[overlayGraph].slug,
+              domain: domain,
+              data: samples,
+              ...dataValues[overlayGraph]
+            }}
+          />
         ))}
       </div>
     </>
