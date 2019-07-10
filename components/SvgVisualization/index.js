@@ -38,6 +38,8 @@ const SvgVisualization = ({
       const value = parseFloat(sample[slug])
       const simplex = simplexNoises[slug]
 
+      // Generate a random value for how many circles for each point to draw
+      // Eventually this could be derived from turbidity
       const count = Math.floor(
         scale(
           simplex.noise2D(value, -0.4),
@@ -71,10 +73,14 @@ const SvgVisualization = ({
 
       return [...array, ...acc]
     }, [])
+
+  // Sort by radius size. Places larger circles in the back, smaller ones in the front
   const drawingDataSorted = [...drawingData].sort((a, b) => {
     return b.radius - a.radius
   })
+
   const { direction } = sample
+
   return (
     <div className='svg-visualization'>
       <svg viewBox={`${SCALE / -2} ${SCALE / -2} ${SCALE} ${SCALE}`}>
