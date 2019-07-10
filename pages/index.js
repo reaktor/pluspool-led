@@ -9,7 +9,6 @@ import { fetchSamplesData } from '../helpers/data'
 import './index.css'
 
 function IndexPage ({ samples }) {
-  const [tooltopPosition] = useState({ x: 0, y: 0 })
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState(null)
 
@@ -34,8 +33,8 @@ function IndexPage ({ samples }) {
       </Head>
       <Tooltip
         open={tooltipOpen}
-        position={tooltopPosition}
         slug={tooltipSlug}
+        sample={sample}
         closeTooltip={() => setTooltipOpen(false)}
       />
       <div className='index-page'>
