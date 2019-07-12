@@ -43,7 +43,7 @@ function IndexPage ({ samples: initialSamples }) {
   return (
     <main className='page' data-template='index'>
       <Head>
-        <title>+Pool Light Installation</title>
+        <title>+POOL Lights</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         <link rel='shortcut icon' href='/static/favicon.ico' />
         <link

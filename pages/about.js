@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
-import Graphs from '../components/Graphs'
 import { fetchSamplesData } from '../helpers/data'
 import './index.css'
 
@@ -21,7 +20,7 @@ function DataPage (props) {
         <Navbar />
       </div>
       <div className='page__body'>
-        <Graphs {...props} />
+        <img src='/static/img/contentPage.jpg' />
       </div>
     </main>
   )
