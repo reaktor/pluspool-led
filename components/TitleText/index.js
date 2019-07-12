@@ -6,26 +6,26 @@ import './index.css'
 dayjs.extend(relativeTime)
 
 const levelText = {
-  oxygen: (value) => {
-    if (value < 40) {
-      return 'less oxygenated than usual'
+  bacteria: (value) => {
+    if (value < 35) {
+      return 'acceptable to swim in.'
     }
-    if (value < 60) {
-      return 'oxygenated as usual'
+    if (value < 104) {
+      return 'unnacceptable to swim in if levels persist.'
     }
 
-    return 'more oxygenated than usual'
+    return 'unnacceptable to swim in.'
   }
 }
 
 function TitleText ({ timestamp, sample }) {
   const timestampDiff = dayjs().to(timestamp)
-  const oxygenLevel = sample.oxygen
-  const oxygenText = levelText.oxygen(oxygenLevel)
+  const bacteriaLevel = sample.bacteria
+  const bacteriaText = levelText.bacteria(bacteriaLevel)
 
   return (
     <h1 className='title-text'>
-      The water {timestampDiff} at Pier 17 is {oxygenText}
+      The water {timestampDiff} at Pier 17 was {bacteriaText}
     </h1>
   )
 }
