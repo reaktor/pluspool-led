@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
 import Graphs from '../components/Graphs'
+import Tooltip from '../components/Tooltip'
 import { fetchSamplesData } from '../helpers/data'
 import './index.css'
 
 function DataPage (props) {
+  const [tooltipOpen, setTooltipOpen] = useState(false)
+  const [tooltipSlug, setTooltipSlug] = useState(null)
+
   return (
     <main className='page' data-template='data'>
       <Head>
@@ -17,11 +21,20 @@ function DataPage (props) {
           rel='stylesheet'
         />
       </Head>
+      <Tooltip
+        open={tooltipOpen}
+        slug={tooltipSlug}
+        closeTooltip={() => setTooltipOpen(false)}
+      />
       <div className='page__top'>
         <Navbar />
       </div>
       <div className='page__body'>
-        <Graphs {...props} />
+        <Graphs
+          setTooltipSlug={setTooltipSlug}
+          setTooltipOpen={setTooltipOpen}
+          {...props}
+        />
       </div>
     </main>
   )

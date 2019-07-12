@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
+import QuestionMark from '../../icons/QuestionMark'
 import GraphTooltip from '../GraphTooltip'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
@@ -70,7 +71,9 @@ const LineGraph = ({
 const Graph = ({
   graph,
   overlayGraph,
-  setOverlayGraph
+  setOverlayGraph,
+  setTooltipSlug,
+  setTooltipOpen
 }) => {
   if (typeof document === 'undefined') return null
 
@@ -91,32 +94,44 @@ const Graph = ({
             {graph.label} ({graph.unit})
           </span>
         </h2>
-        {overlayGraph && overlayGraph.y !== graph.y &&
+        <div className='graph__header__right'>
+          {overlayGraph && overlayGraph.y !== graph.y &&
+            <button
+              className='graph__overlay-picker-button'
+              onClick={() => setOverlayGraph(null)}
+            >
+              <div className='graph__overlay-picker-button__icon'>
+                <Circle fill={overlayGraph.color} />
+              </div>
+              <span className='graph__overlay-picker-button__text'>
+                {overlayGraph.label} ({overlayGraph.unit})
+              </span>
+              <div className='graph__overlay-picker-button__close'>
+                <CloseCircle />
+              </div>
+            </button>
+          }
+          {!overlayGraph &&
+            <button
+              className='graph__overlay-picker-button'
+              onClick={() => setOverlayGraph(graph.slug)}
+            >
+              <span className='graph__overlay-picker-button__text'>
+                Compare
+              </span>
+            </button>
+          }
           <button
-            className='graph__overlay-picker-button'
-            onClick={() => setOverlayGraph(null)}
+            type='button'
+            className='graph__question-mark'
+            onClick={() => {
+              setTooltipSlug(graph.slug)
+              setTooltipOpen(true)
+            }}
           >
-            <div className='graph__overlay-picker-button__icon'>
-              <Circle fill={overlayGraph.color} />
-            </div>
-            <span className='graph__overlay-picker-button__text'>
-              {overlayGraph.label} ({overlayGraph.unit})
-            </span>
-            <div className='graph__overlay-picker-button__close'>
-              <CloseCircle />
-            </div>
+            <QuestionMark />
           </button>
-        }
-        {!overlayGraph &&
-          <button
-            className='graph__overlay-picker-button'
-            onClick={() => setOverlayGraph(graph.slug)}
-          >
-            <span className='graph__overlay-picker-button__text'>
-              Compare
-            </span>
-          </button>
-        }
+        </div>
       </header>
       <div className='graph__graph-wrapper'>
         <LineGraph
