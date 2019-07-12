@@ -51,6 +51,11 @@ p {
   padding: 0 20px 20px;
 }
 
+.page__body img {
+  max-width: 100%;
+  height: auto;
+}
+
 @media (min-width: 560px) {
   .page__body {
     padding: 0px 40px 40px;

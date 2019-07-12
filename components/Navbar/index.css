@@ -24,3 +24,7 @@
   color: #000000;
   margin-left: 45px;
 }
+
+.navbar__nav__link[data-active="true"] {
+  color: #1443A7;
+}
