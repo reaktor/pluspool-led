@@ -19,7 +19,7 @@ const levelText = {
 }
 
 function TitleText ({ timestamp, sample }) {
-  const timestampDiff = dayjs().to(timestamp)
+  const timestampDiff = dayjs().subtract(6, 'hours').to(timestamp)
   const oxygenLevel = sample.oxygen
   const oxygenText = levelText.oxygen(oxygenLevel)
 

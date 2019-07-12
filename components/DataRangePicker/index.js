@@ -51,14 +51,14 @@ class DataRangePicker extends React.Component {
     const { timestamp, range: { start, end } } = this.props
 
     const timestampDate = dayjs(timestamp)
-    const diff = dayjs().to(timestamp)
+    const diff = dayjs().subtract(6,'hours').to(timestamp)
 
     const startDate = dayjs(start)
-    const startDateDiff = dayjs().to(startDate)
+    const startDateDiff = dayjs().subtract(6,'hours').to(startDate)
     const atStart = startDate.isSame(timestampDate)
 
     const endDate = dayjs(end)
-    const endDateDiff = dayjs().to(endDate)
+    const endDateDiff = dayjs().subtract(6,'hours').to(endDate)
     const atEnd = endDate.isSame(timestampDate)
 
     return (
