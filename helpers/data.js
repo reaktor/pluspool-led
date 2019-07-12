@@ -44,7 +44,7 @@ const dataValues = {
   oxygen: {
     slug: 'oxygen',
     color: '#1443A7',
-    label: 'Percent Oxygen',
+    label: 'Oxygen',
     unit: '%',
     description: (
       <p>Dissolved oxygen is introduced into the water by photosynthetic organisms and air-water gas exchange, and is consumed during respiration. Levels are highest during daylight and drop during the night as there is no photosynthesis to counteract consumption. Just like on land, oxygen is critical for many species of marine life, and low levels (hypoxia or anoxia) will stress or even suffocate organisms, resulting in large die-offs. Oxygen levels are primarily controlled by biological production and consumption, temperature (higher temperature decreases the solubility), and the physical mixing.</p>
@@ -61,7 +61,7 @@ const dataValues = {
   },
   turbidity: {
     slug: 'turbidity',
-    color: '#592150',
+    color: '#0DB3A6',
     label: 'Turbidity',
     unit: 'NTU',
     description: (
@@ -70,8 +70,8 @@ const dataValues = {
   },
   speed: {
     slug: 'speed',
-    color: '#F2BAD2',
-    label: 'Water Speed',
+    color: '#592150',
+    label: 'Speed',
     unit: 'KN',
     description: (
       <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
@@ -79,9 +79,9 @@ const dataValues = {
   },
   direction: {
     slug: 'direction',
-    color: '#000000',
-    label: 'Water Direction',
-    unit: '',
+    color: '#F2BAD2',
+    label: 'Direction',
+    unit: 'Degrees',
     description: (
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lectus purus, euismod aliquam lacinia sit amet, semper in nulla. Aliquam erat volutpat. Proin consequat dapibus magna sit amet feugiat. Integer ultrices feugiat urna, pellentesque sagittis ante suscipit at. Duis pellentesque erat vitae accumsan vulputate. Quisque urna neque, luctus sed sapien non, euismod pharetra felis. Sed gravida porttitor elit mattis vehicula. Aenean nec est commodo, viverra turpis efficitur, tincidunt leo.</p>
     ),

@@ -1,0 +1,10 @@
+.close-circle {
+  width: 100%;
+  height: 100%;
+}
+
+.close-circle svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}

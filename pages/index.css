@@ -31,54 +31,28 @@ p {
   max-width: 48em;
 }
 
-.index-page {
+.page[data-template='index'] {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.index-page__top {
+.page__top {
   padding: 20px 20px 10px;
 }
 
 @media (min-width: 560px) {
-  .index-page__top {
-    padding: 35px 50px;
+  .page__top {
+    padding: 35px 40px;
   }
 }
 
-.index-page__top-bar {
-  display: flex;
-  justify-content: space-between;
-}
-
-.index-page__link-out__label {
-  color: #AAAAAA;
-  display: none;
+.page__body {
+  padding: 0 20px 20px;
 }
 
 @media (min-width: 560px) {
-  .index-page__link-out__label {
-    display: initial;
-  }
-}
-
-.index-page__link-out__link {
-  color: #000000;
-}
-
-.index-page__label-title {
-  font-size: 18px;
-  font-weight: 300;
-  margin: 0;
-}
-
-.index-page__label-title__label {
-  display: none;
-}
-
-@media (min-width: 560px) {
-  .index-page__label-title__label {
-    display: initial;
+  .page__body {
+    padding: 0px 40px 40px;
   }
 }

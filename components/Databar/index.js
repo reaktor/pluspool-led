@@ -14,7 +14,7 @@ const displayedSlugs = [
   'ph'
 ]
 
-const Databar = ({ onItemClick, sample }) => {
+const Databar = ({ sample }) => {
   return (
     <div className='databar'>
       <div className='databar__wrapper'>
@@ -27,7 +27,6 @@ const Databar = ({ onItemClick, sample }) => {
                 <DatabarItem
                   key={slug}
                   value={sample[slug]}
-                  onClick={() => onItemClick(slug)}
                   {...data}
                 />
               )

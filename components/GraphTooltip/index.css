@@ -1,0 +1,12 @@
+.graph-tooltip {
+  background: #000000;
+  padding: 10px 14px;
+  color: #FFFFFF;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.graph-tooltip__date {
+  color: #808080;
+}
