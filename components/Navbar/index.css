@@ -4,8 +4,8 @@
 }
 
 .navbar__title {
-  font-size: 18px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -14,27 +14,13 @@
   text-decoration: none;
 }
 
-.navbar__title__label {
-  display: none;
+.navbar__nav {
+  display: inline-flex;
 }
 
-@media (min-width: 560px) {
-  .navbar__title__label {
-    display: initial;
-  }
-}
-
-.navbar__link-out__label {
-  color: #AAAAAA;
-  display: none;
-}
-
-@media (min-width: 560px) {
-  .navbar__link-out__label {
-    display: initial;
-  }
-}
-
-.navbar__link-out__link {
+.navbar__nav__link {
+  font-size: 16px;
+  text-decoration: none;
   color: #000000;
+  margin-left: 45px;
 }
