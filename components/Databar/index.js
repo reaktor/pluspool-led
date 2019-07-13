@@ -11,7 +11,8 @@ const displayedSlugs = [
   'turbidity',
   'speed',
   'direction',
-  'ph'
+  'ph',
+  'depth'
 ]
 
 const Databar = ({ sample }) => {

@@ -39,7 +39,13 @@ const dataValues = {
         color: '#DB2B2B',
         value: '+104'
       }
-    ]
+    ],
+    transform: value => {
+      return value.toFixed(1)
+      // if (value < 35) return 'low'
+      // if (value < 104) return 'medium'
+      // return 'high'
+    }
   },
   oxygen: {
     slug: 'oxygen',
@@ -96,6 +102,15 @@ const dataValues = {
       <p>The pH refers to how acidic or basic a water body is. It is a critical component of water quality because the pH controls the solubility of minerals (including the shells of calcifying organisms) and the bioavailability of both nutrients and toxic compounds such as heavy metals. In general, lowering pH decreases environmental water quality, as heavy metals tend to become more soluble and marine organisms come under stress. There is a natural diel cycle in pH due to the increased release of acidic carbon dioxide during the night. Water temperature controls gas solubility, so colder temperatures can result in more uptake of carbon dioxide from the atmosphere and lower the pH as well.</p>
     ),
     transform: value => scale(value, -400, 400, 0, 14).toFixed(2)
+  },
+  depth: {
+    slug: 'depth',
+    color: '#505050',
+    label: 'Depth',
+    unit: 'm',
+    description: (
+      <p>Depth shows the tides. The Hudson River Estuary is a strongly tidal system which is measured through a depth sensor on water quality sond.</p>
+    )
   }
 }
 
