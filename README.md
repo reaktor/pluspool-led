@@ -4,6 +4,8 @@ We are happy to receive any feedback using [github issues][]
 
 The main applications pulls from a file generated from the noaa api and a datagarrison stream to share the current conditions of Pier 17.
 
+Water Day!
+
 To start developing:
 
      npm install
