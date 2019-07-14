@@ -4,8 +4,8 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { throttle } from 'lodash'
 import { scale } from '../../helpers/data'
-import './index.css'
 import 'rc-slider/assets/index.css'
+import './index.css'
 
 dayjs.extend(relativeTime)
 
@@ -38,34 +38,32 @@ class DataRangePicker extends React.Component {
   // Scale from Slider value to our timestamp
   scaleFrom (value) {
     const { range: { start, end } } = this.props
-    return scale(value, SLIDER_MIN, SLIDER_MAX, end, start)
+    return scale(value, SLIDER_MIN, SLIDER_MAX, start, end)
   }
 
   // Scale our timestamp to our Slider value
   scaleTo (value) {
     const { range: { start, end } } = this.props
-    return scale(value, end, start, SLIDER_MIN, SLIDER_MAX)
+    return scale(value, start, end, SLIDER_MIN, SLIDER_MAX)
   }
 
   render () {
     const { timestamp, range: { start, end } } = this.props
 
     const timestampDate = dayjs(timestamp)
-    const diff = dayjs().subtract(5,'hours').to(timestamp)
+    const diff = dayjs().subtract(5, 'hours').to(timestamp)
 
     const startDate = dayjs(start)
-    const startDateDiff = dayjs().subtract(5,'hours').to(startDate)
     const atStart = startDate.isSame(timestampDate)
 
     const endDate = dayjs(end)
-    const endDateDiff = dayjs().subtract(5,'hours').to(endDate)
     const atEnd = endDate.isSame(timestampDate)
 
     return (
       <div className='data-range-picker'>
-        <label className='data-range-picker__label'>{endDateDiff}</label>
         <div className='data-range-picker__slider-container'>
           <RcSlider
+            vertical
             min={SLIDER_MIN}
             max={SLIDER_MAX}
             value={this.scaleTo(timestamp)}
@@ -80,7 +78,10 @@ class DataRangePicker extends React.Component {
             }
           />
         </div>
-        <label className='data-range-picker__label'>{startDateDiff}</label>
+        <div className='data-range-picker__labels'>
+          <label className='data-range-picker__label'>Today</label>
+          <label className='data-range-picker__label'>Past</label>
+        </div>
       </div>
     )
   }

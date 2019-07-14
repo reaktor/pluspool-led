@@ -26,8 +26,7 @@ const displayedSlugs = [
 ]
 
 const SvgVisualization = ({
-  setTooltipSlug,
-  setTooltipOpen,
+  openTooltip,
   sample
 }) => {
   const drawingData = displayedSlugs
@@ -52,10 +51,10 @@ const SvgVisualization = ({
 
       const array = new Array(count).fill().map((_val, index) => {
         const noiseValue = value + index
-        const radius = scale(simplex.noise2D(noiseValue, -2), -1, 1, 0.2, 20)
-        const x = scale(simplex.noise2D(noiseValue, 1), -1, 1, -60, 60)
-        const y = scale(simplex.noise2D(noiseValue, 16), -1, 1, -60, 60)
-        const duration = scale(simplex.noise2D(noiseValue, 3.2), -1, 1, 6, 12)
+        const radius = scale(simplex.noise2D(noiseValue, -2), -1, 1, 0.2, 12)
+        const x = scale(simplex.noise2D(noiseValue, 1), -1, 1, -30, 30)
+        const y = scale(simplex.noise2D(noiseValue, 16), -1, 1, -20, 20)
+        const duration = scale(simplex.noise2D(noiseValue, 3.2), -1, 1, 12, 16)
         const delay = scale(simplex.noise2D(noiseValue, -0.8), -1, 1, 6, 12)
         const distance = scale(simplex.noise2D(noiseValue, 1.5), -1, 1, 10, 50)
 
@@ -102,7 +101,9 @@ const SvgVisualization = ({
                   style={{
                     '--transition-distance': `${distance}%`,
                     '--transition-duration': `${duration}s`,
-                    '--transition-delay': `${delay}s`
+                    '--transition-delay': `${delay}s`,
+                    '--circle--cx': `${x}px`,
+                    '--circle--cy': `${y}px`
                   }}
                 >
                   <circle
@@ -113,14 +114,7 @@ const SvgVisualization = ({
                     cy={y}
                     r={radius}
                     fill={color}
-                    style={{
-                      '--circle--cx': `${x}px`,
-                      '--circle--cy': `${y}px`
-                    }}
-                    onClick={() => {
-                      setTooltipSlug(slug)
-                      setTooltipOpen(true)
-                    }}
+                    onClick={() => openTooltip(slug)}
                   />
                 </g>
               )

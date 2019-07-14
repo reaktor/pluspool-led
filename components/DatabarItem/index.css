@@ -1,32 +1,61 @@
 .databar__item {
-  text-decoration: none;
+  /* <button /> reset */
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  font-smoothing: inherit;
   color: inherit;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  text-align: inherit;
 
-  font-size: 18px;
-  font-weight: 300;
-  margin: var(--databar__spacing-v) var(--databar__spacing-h);
-  white-space: nowrap;
+  width: 100%;
+
+  font-size: 16px;
+  line-height: 21px;
+  margin-bottom: 12px;
 }
 
-.databar__item:hover {
-  color: #0073E5;
+@media (min-width: 560px) {
+  .databar__item {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
-.databar__item__icon {
-  display: inline-block;
-  vertical-align: middle;
-  width: 20px;
-  margin-right: 5px;
-}
-
-.databar__item__label {
-  display: inline-block;
+.databar__item__wrapper {
+  display: grid;
+  grid-template-columns: 20px 1fr 100px 100px 24px;
+  align-items: center;
+  grid-column-gap: 14px;
 }
 
 .databar__item__value {
-  display: inline-block;
+  text-align: right;
 }
 
 .databar__item__unit {
-  color: #AAAAAA;
+  text-align: right;
+}
+
+.databar__item__link {
+  text-decoration: none;
+  color: inherit;
+  pointer-events: auto;
+  display: block;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.databar__item__link svg {
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.2s;
+}
+
+.databar__item:hover .databar__item__link svg {
+  transform: translate3d(25%, 0, 0);
 }

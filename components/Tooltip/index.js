@@ -14,7 +14,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample }) => {
   const content = dataValues[slug]
 
   const { label, legend, description, unit, transform, color } = content
-  const value = transform ? transform(sample[slug]) : sample ? sample[slug] : null
+  const value = sample ? transform ? transform(sample[slug]) : slug : null
 
   return (
     <div className='tooltip' data-active={open}>

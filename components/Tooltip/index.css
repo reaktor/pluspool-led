@@ -61,11 +61,6 @@
   cursor: pointer;
 }
 
-.tooltip__close-button svg {
-  height: 100%;
-  width: 100%;
-}
-
 .tooltip__icon {
   width: 20px;
   margin-right: 15px;

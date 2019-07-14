@@ -72,8 +72,7 @@ const Graph = ({
   graph,
   overlayGraph,
   setOverlayGraph,
-  setTooltipSlug,
-  setTooltipOpen
+  openTooltip
 }) => {
   if (typeof document === 'undefined') return null
 
@@ -124,10 +123,7 @@ const Graph = ({
           <button
             type='button'
             className='graph__question-mark'
-            onClick={() => {
-              setTooltipSlug(graph.slug)
-              setTooltipOpen(true)
-            }}
+            onClick={() => openTooltip(graph.slug)}
           >
             <QuestionMark />
           </button>

@@ -1,12 +1,14 @@
 .title-text {
-  margin: 25px 0px 25px 0px;
-  font-size: 24px;
-  font-weight: 300;
+  display: none;
+  grid-area: title-text;
+  font-weight: 400;
+  margin: 0;
 }
 
 @media (min-width: 560px) {
   .title-text {
-    font-size: 32px;
-    margin: 40px 0px 35px 0px;
+    display: initial;
+    font-size: 36px;
+    line-height: 45px;
   }
 }

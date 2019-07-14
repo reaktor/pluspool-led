@@ -1,21 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'next/link'
+import Arrow from '../../icons/Arrow'
 import Circle from '../../icons/Circle'
 
 import './index.css'
 
-const DatabarItem = ({ color, label, value, unit, transform }) => (
-  <Link href='/data'>
-    <a className='databar__item'>
+const DatabarItem = ({ onClick, color, label, value, unit, transform }) => (
+  <button className='databar__item' onClick={onClick}>
+    <div className='databar__item__wrapper'>
       <div className='databar__item__icon'><Circle fill={color} /></div>
-      <div className='databar__item__label'>{label}</div>{' '}
+      <div className='databar__item__label'>{label}</div>
       <div className='databar__item__value'>
-        {transform ? transform(value) : value}&thinsp;
-        <span className='databar__item__unit'>{unit}</span>
+        {transform ? transform(value) : value}
       </div>
-    </a>
-  </Link>
+      <div className='databar__item__unit'>{unit}</div>
+      <div className='databar__item__link'>
+        <Arrow />
+      </div>
+    </div>
+  </button>
 )
 
 DatabarItem.defaultProps = {
