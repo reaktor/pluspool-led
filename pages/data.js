@@ -4,11 +4,13 @@ import Navbar from '../components/Navbar'
 import Graphs from '../components/Graphs'
 import Tooltip from '../components/Tooltip'
 import { fetchSamplesData } from '../helpers/data'
+import { useSamples } from '../hooks/useSamples'
 import './index.css'
 
-function DataPage (props) {
+function DataPage ({ samples: initialSamples }) {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState(null)
+  const [samples] = useSamples(initialSamples)
 
   return (
     <main className='page' data-template='data'>
@@ -33,7 +35,7 @@ function DataPage (props) {
         <Graphs
           setTooltipSlug={setTooltipSlug}
           setTooltipOpen={setTooltipOpen}
-          {...props}
+          samples={samples}
         />
       </div>
     </main>
