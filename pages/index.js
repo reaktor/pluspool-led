@@ -10,7 +10,7 @@ import { fetchSamplesData } from '../helpers/data'
 import { useSample } from '../hooks/useSamples'
 import './index.css'
 
-function IndexPage ({ samples: initialSamples }) {
+const IndexPage = ({ samples: initialSamples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState()
   const [sample, range, timestamp, setTimestamp] = useSample(initialSamples)
