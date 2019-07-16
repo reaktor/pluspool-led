@@ -45,7 +45,8 @@ const dataValues = {
       // if (value < 35) return 'low'
       // if (value < 104) return 'medium'
       // return 'high'
-    }
+    },
+    source: 'https://datagarrison.com/users/1105898/351579054854805/temp/351579054854805_live.txt'
   },
   oxygen: {
     slug: 'oxygen',

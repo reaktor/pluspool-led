@@ -1,5 +1,6 @@
 import React from 'react'
 import TooltipLegend from '../TooltipLegend'
+import TooltipSource from '../TooltipSource'
 import { dataValues } from '../../helpers/data'
 import Circle from '../../icons/Circle'
 
@@ -13,8 +14,8 @@ const Tooltip = ({ closeTooltip, open, slug, sample }) => {
 
   const content = dataValues[slug]
 
-  const { label, legend, description, unit, transform, color } = content
-  const value = sample ? transform ? transform(sample[slug]) : slug : null
+  const { label, legend, description, unit, transform, color, source } = content
+  const value = sample ? transform ? transform(sample[slug]) : sample[slug] : null
 
   return (
     <div className='tooltip' data-active={open}>
@@ -54,6 +55,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample }) => {
         <div className='tooltip__body'>
           {description}
         </div>
+        <TooltipSource source={source} />
       </div>
     </div>
   )
