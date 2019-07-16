@@ -1,5 +1,6 @@
 .title-text {
   display: none;
+  font-family: 'Styrene A';
   grid-area: title-text;
   font-weight: 400;
   margin: 0;
