@@ -34,7 +34,6 @@
 }
 
 .tooltip-legend__item__label {
-  font-family: monospace;
   font-size: 12px;
   text-transform: uppercase;
   text-align: center;
@@ -75,7 +74,6 @@
 }
 
 .tooltip-legend__item__value {
-  font-family: monospace;
   font-size: 18px;
   width: var(--tooltip-legend__item__value--width);
   text-align: center;
