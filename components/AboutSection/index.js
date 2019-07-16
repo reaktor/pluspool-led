@@ -12,9 +12,7 @@ const AboutSection = ({ side, image, title, body, cta }) => (
       <div className='about-section__body'>
         {body}
       </div>
-      { cta &&
-        <a className='about-section__cta'>{cta}</a>
-      }
+      { cta }
     </div>
   </div>
 )

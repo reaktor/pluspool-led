@@ -16,14 +16,11 @@
     grid-column-gap: 120px;
     grid-row-gap: 0;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: "text image";
   }
 
   .about-section + .about-section {
     margin-top: 165px;
-  }
-
-  .about-section[data-side="left"] {
-    grid-template-areas: "text image";
   }
 
   .about-section[data-side="right"] {
@@ -54,6 +51,7 @@
   font-size: 24px;
   line-height: 32px;
   font-weight: 400;
+  margin: 0;
 }
 
 @media (min-width: 560px) {
@@ -81,4 +79,12 @@
   align-items: center;
   justify-content: center;
   border: 1px solid #000000;
+  font-size: 21px;
+  line-height: 36px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.about-section__cta:hover {
+  border-color: #0098E1;
 }

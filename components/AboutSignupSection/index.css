@@ -1,8 +1,4 @@
 .about-signup-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "image" "text";
-  grid-row-gap: 40px;
   border-top: 1px solid #000000;
   border-bottom: 1px solid #000000;
   padding-top: 40px;
@@ -13,12 +9,6 @@
 
 @media (min-width: 560px) {
   .about-signup-section {
-    align-items: center;
-    /* TODO: This grid should be same as index page grid. anyway to abstract these out? */
-    grid-column-gap: 120px;
-    grid-row-gap: 0;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-areas: "text image";
     padding-top: 80px;
     padding-bottom: 80px;
     margin-bottom: 120px;
@@ -31,27 +21,4 @@
 
 .about-signup-section__text {
   grid-area: text;
-}
-
-.about-signup-section__title {
-  font-family: 'Styrene B';
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 400;
-  margin: 0;
-}
-
-@media (min-width: 560px) {
-  .about-signup-section__title {
-    font-size: 48px;
-    line-height: 62px;
-  }
-}
-
-.about-signup-section__cta {
-  display: flex;
-  height: 120px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #000000;
 }
