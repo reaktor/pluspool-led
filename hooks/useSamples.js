@@ -1,10 +1,21 @@
 import { useState, useEffect } from 'react'
 import { fetchSamplesData } from '../helpers/data'
+import dayjs from 'dayjs'
 
 const useSamples = initialSamples => {
   const [samples, setSamples] = useState(initialSamples)
 
-  useEffect(() => fetchSamplesData().then(({ samples }) => setSamples(samples)), [])
+  // Normally, you wouldn't need this, but we use next export to statically
+  // generate the initial site.
+  //
+  // This means the initialSamples are going to be out of date.
+  // So we check on each render if we need to update the samples.
+  useEffect(() => {
+    const latestTime = dayjs(samples[0].noaaTime * 1000)
+    const sixMinutesAgo = dayjs().subtract(6, 'minutes')
+    if (latestTime.isAfter(sixMinutesAgo)) return
+    fetchSamplesData().then(({ samples }) => setSamples(samples))
+  })
   return [samples]
 }
 
