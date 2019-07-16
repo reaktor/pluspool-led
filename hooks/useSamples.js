@@ -4,7 +4,7 @@ import { fetchSamplesData } from '../helpers/data'
 const useSamples = initialSamples => {
   const [samples, setSamples] = useState(initialSamples)
 
-  useEffect(() => fetchSamplesData().then(({ samples }) => setSamples(samples)))
+  useEffect(() => fetchSamplesData().then(({ samples }) => setSamples(samples)), [])
   return [samples]
 }
 
