@@ -37,11 +37,6 @@
   margin-left: 20px;
 }
 
-.graph__question-mark svg {
-  max-width: 100%;
-  height: auto;
-}
-
 .graph__graph-wrapper {
   height: 240px;
   position: relative;

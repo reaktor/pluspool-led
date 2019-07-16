@@ -15,39 +15,48 @@ const IndexPage = ({ samples: initialSamples }) => {
   const [tooltipSlug, setTooltipSlug] = useState()
   const [sample, range, timestamp, setTimestamp] = useSample(initialSamples)
 
+  const openTooltip = slug => {
+    setTooltipSlug(slug)
+    setTooltipOpen(true)
+  }
+
+  const closeTooltip = () => setTooltipOpen(false)
+
   return (
-    <main className='page' data-template='index'>
-      <Head>
-        <title>+POOL Lights</title>
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-        <link rel='shortcut icon' href='/static/favicon.ico' />
-        <link
-          href='https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap'
-          rel='stylesheet'
+    <>
+      <Navbar />
+      <main className='page' data-template='index'>
+        <Head>
+          <title>+POOL Lights</title>
+          <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+          <link rel='shortcut icon' href='/static/favicon.ico' />
+          <link
+            href='https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap'
+            rel='stylesheet'
+          />
+        </Head>
+        <Tooltip
+          open={tooltipOpen}
+          slug={tooltipSlug}
+          sample={sample}
+          closeTooltip={closeTooltip}
         />
-      </Head>
-      <Tooltip
-        open={tooltipOpen}
-        slug={tooltipSlug}
-        sample={sample}
-        closeTooltip={() => setTooltipOpen(false)}
-      />
-      <div className='page__top'>
-        <Navbar />
         <TitleText timestamp={timestamp} sample={sample} />
         <DataRangePicker
           setTimestamp={setTimestamp}
           timestamp={timestamp}
           range={range}
         />
-        <Databar sample={sample} />
-      </div>
-      <SvgVisualization
-        setTooltipSlug={setTooltipSlug}
-        setTooltipOpen={setTooltipOpen}
-        sample={sample}
-      />
-    </main>
+        <Databar
+          openTooltip={openTooltip}
+          sample={sample}
+        />
+        <SvgVisualization
+          openTooltip={openTooltip}
+          sample={sample}
+        />
+      </main>
+    </>
   )
 }
 

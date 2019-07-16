@@ -1,6 +1,31 @@
 .navbar {
+  background: #FFFFFF;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 560px) {
+  .navbar {
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 30px;
+  }
+}
+
+.navbar__inner {
+  padding-top: 20px;
+  padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #000000;
+}
+
+@media (min-width: 560px) {
+  .navbar__inner {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 }
 
 .navbar__title {
@@ -19,6 +44,7 @@
 }
 
 .navbar__nav__link {
+  display: flex;
   font-size: 16px;
   text-decoration: none;
   color: #000000;
@@ -27,4 +53,8 @@
 
 .navbar__nav__link[data-active="true"] {
   color: #1443A7;
+}
+
+.navbar__nav__link__icon {
+  margin-left: 10px;
 }

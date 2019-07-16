@@ -4,9 +4,15 @@ html {
 
 html,
 body,
-#__next,
-#__next > div {
+#__next {
   height: 100%;
+}
+
+/* TODO: make this an index page wrapper */
+#__next {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 *,
@@ -31,33 +37,61 @@ p {
   max-width: 48em;
 }
 
-.page[data-template='index'] {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.page__top {
-  padding: 20px 20px 10px;
-}
-
-@media (min-width: 560px) {
-  .page__top {
-    padding: 35px 40px;
-  }
-}
-
-.page__body {
-  padding: 0 20px 20px;
-}
-
-.page__body img {
+img {
   max-width: 100%;
   height: auto;
 }
 
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.page {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
 @media (min-width: 560px) {
-  .page__body {
-    padding: 0px 40px 40px;
+  .page {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+.page[data-template='index'] {
+  display: grid;
+  grid-template-areas: "scrubber" "databar";
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 200px minmax(0, 1fr);
+  position: relative;
+  flex: 1;
+}
+
+@media (min-width: 560px) {
+  .page[data-template='index'] {
+    grid-column-gap: 120px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 300fr) minmax(0, 400fr);
+    grid-template-areas:
+      "title-text databar"
+      "scrubber databar";
+  }
+}
+
+/* utilities */
+
+@media (max-width: 559px) {
+  .u-hide-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 560px) {
+  .u-hide-desktop {
+    display: none;
   }
 }

@@ -1,24 +1,29 @@
 .data-range-picker {
   display: flex;
-  margin-top: 32px;
-  max-width: 600px;
 }
 
 .data-range-picker__slider-container {
-  flex-grow: 1;
   position: relative;
 }
 
 .data-range-picker__handle-label {
   position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 12px;
+  top: 0;
+  left: 100%;
   width: 160px;
-  text-align: center;
+  font-size: 16px;
+  line-height: 21px;
+  margin-top: -0.6em;
+  margin-left: 12px;
   opacity: 0;
   transition: opacity 0.3s;
+}
+
+@media (min-width: 560px) {
+  .data-range-picker__handle-label {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
 .data-range-picker__handle-label.--visible {
@@ -29,10 +34,115 @@
   width: 100%;
 }
 
-.data-range-picker__label:first-child {
-  margin-right: 16px;
+.data-range-picker__labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 16px;
+  line-height: 21px;
+  margin-left: 12px;
+  margin-top: -0.6em;
+  margin-bottom: -0.6em;
 }
 
-.data-range-picker__label:last-child {
-  margin-left: 16px;
+@media (min-width: 560px) {
+  .data-range-picker__labels {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+/**
+  RC Slider Style Overrides
+
+  NOTE:
+    The repeating of the className in each selector is intentional.
+
+  TLDR:
+    We need more specificity in order to override default styles that come from RC Slider.
+
+  Why are there repeating classNames in selectors?
+    In order to discuss specificity an online calculator can help us invision things.
+    One can be found here: https://specificity.keegan.st/
+    If we put in the selector `.rc-slider` into that calculator we should see a score of:
+      0 - IDs
+      1 - Classes, attributes and pseudo-classes
+      0 - Elements and pseudo-elements
+    
+    The className `.rc-slider` is the selector being used in RC Sliders styles. Our goal is to overwrite some of these.
+    There are a number of ways for us to overwrite this including:
+      1. Put `!important` in our declarations.
+      2. Put our CSS after RC Sliders CSS
+      3. Make our selector more specific
+
+    The technique in 1 was somewhat the standard way of achieving this in the past. It will reliably work
+    but it also throws out all the scaling of specificity. If we have any further styles that interact with these selectors
+    and we used an `!important` it can become quite difficult to be "more specific" when you've thrown the hole scale
+    out of the window.
+
+    The technique in 2 I believed would be hard to ensure. We are using Javascript to bundle our CSS and it's an app with client side routing.
+    I decided that it would be too much of a pain to configure our app to include css bundles in a specific order.
+
+    The technique in 3 is the one in place. If we go back to the online calculator and input `.rc-slider.rc-slider` we should see a score of:
+      0 - IDs
+      2 - Classes, attributes and pseudo-classes
+      0 - Elements and pseudo-elements
+    This score is higher than the score we got when using just 1 className.
+    The trick here is that `.rc-slider.rc-slider` is basically looking for a `.rc-slider` element that also has the className `.rc-slider`.
+    It is NOT asking for an element that has that class twice. Logically it is really no different than just putting the className once
+    however it allows us to up our accessibility score. 
+    If RC Slider we using a selector with 3, 4, or 5 elements in it, we could just write our overwriting selector here with one more className
+    than what they are using.
+
+  */
+.rc-slider.rc-slider {
+  border-radius: 0;
+  padding: 0;
+  width: 60px;
+}
+
+@media (min-width: 560px) {
+  .rc-slider.rc-slider {
+    width: 85px;
+  }
+}
+
+.rc-slider-handle.rc-slider-handle {
+  border-radius: 0;
+  box-shadow: none;
+  border: 0;
+  width: 100%;
+  height: 6px;
+  background-color: #000000;
+  margin-left: 0;
+  margin-top: -3px;
+  margin-bottom: -3px;
+}
+
+.rc-slider-track.rc-slider-track {
+  border-radius: 0;
+  background: transparent;
+  left: 0;
+  width: 100%;
+}
+
+.rc-slider-rail.rc-slider-rail {
+  border-radius: 0;
+  background: transparent;
+  background-image: url('/static/img/bar-lines-mobile.svg');
+  background-position: 0 0;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  left: 0;
+  width: 100%;
+}
+
+@media (min-width: 560px) {
+  .rc-slider-rail.rc-slider-rail {
+    background-image: url('/static/img/bar-lines-desktop.svg');
+  }
+}
+
+.rc-slider-mark.rc-slider-mark {
+  display: none;
 }

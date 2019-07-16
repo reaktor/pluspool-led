@@ -1,19 +1,14 @@
 .databar {
-  --databar__spacing-v: 7px;
-  --databar__spacing-h: 10px;
-  margin-top: 20px;
+  grid-area: databar;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 @media (min-width: 560px) {
   .databar {
-    --databar__spacing-v: 10px;
-    --databar__spacing-h: 15px;
-    margin-top: 40px;
+    border-left: 1px solid #000000;
+    padding-left: 40px;
+    justify-content: space-between;
   }
-}
-
-.databar__wrapper {
-  display: flex;
-  margin: calc(-1 * var(--databar__spacing-v)) calc(-1 * var(--databar__spacing-h));
-  overflow-x: auto;
 }

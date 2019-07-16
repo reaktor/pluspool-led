@@ -7,7 +7,7 @@ import './index.css'
 
 const timeUnits = ['day', 'week', 'month', 'year']
 
-const Graphs = ({ setTooltipSlug, setTooltipOpen, samples }) => {
+const Graphs = ({ openTooltip, samples }) => {
   if (!samples) return null
 
   const [activeUnit, setActiveUnit] = useState('day')
@@ -32,8 +32,7 @@ const Graphs = ({ setTooltipSlug, setTooltipOpen, samples }) => {
         {Object.keys(dataValues).map(key => (
           <Graph
             setOverlayGraph={setOverlayGraph}
-            setTooltipSlug={setTooltipSlug}
-            setTooltipOpen={setTooltipOpen}
+            openTooltip={openTooltip}
             graph={{
               x: 'noaaTime',
               y: dataValues[key].slug,
