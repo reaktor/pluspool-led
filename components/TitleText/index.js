@@ -18,14 +18,28 @@ const levelText = {
   }
 }
 
-function TitleText ({ timestamp, sample }) {
+const getPageText = ({ pageState, timestamp, sample }) => {
+  if (pageState === 0) {
+    return 'Welcome to our dashboard. Click me to proceed.'
+  }
+
+  if (pageState === 1) {
+    return 'This is a data scrubber. Click to proceed.'
+  }
+
   const timestampDiff = dayjs().subtract(5, 'hours').to(timestamp)
   const bacteriaLevel = sample.bacteria
   const bacteriaText = levelText.bacteria(bacteriaLevel)
 
+  return `The water ${timestampDiff} at Pier 17 was ${bacteriaText}`
+}
+
+function TitleText ({ onClick, ...rest }) {
   return (
     <h1 className='title-text'>
-      The water {timestampDiff} at Pier 17 was {bacteriaText}
+      <button type='button' onClick={onClick}>
+        {getPageText(rest)}
+      </button>
     </h1>
   )
 }

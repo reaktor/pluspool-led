@@ -14,6 +14,7 @@ const IndexPage = ({ samples: initialSamples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState()
   const [sample, range, timestamp, setTimestamp] = useSample(initialSamples)
+  const [pageState, setPageState] = useState(0)
 
   const openTooltip = slug => {
     setTooltipSlug(slug)
@@ -25,7 +26,7 @@ const IndexPage = ({ samples: initialSamples }) => {
   return (
     <>
       <Navbar />
-      <main className='page' data-template='index'>
+      <main className='page' data-template='index' data-page-state={pageState}>
         <Head>
           <title>+POOL Lights</title>
           <meta name='viewport' content='initial-scale=1.0, width=device-width' />
@@ -41,7 +42,12 @@ const IndexPage = ({ samples: initialSamples }) => {
           sample={sample}
           closeTooltip={closeTooltip}
         />
-        <TitleText timestamp={timestamp} sample={sample} />
+        <TitleText
+          timestamp={timestamp}
+          sample={sample}
+          pageState={pageState}
+          onClick={() => pageState < 1 && setPageState(pageState + 1)}
+        />
         <DataRangePicker
           setTimestamp={setTimestamp}
           timestamp={timestamp}

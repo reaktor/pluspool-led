@@ -1,5 +1,7 @@
 .data-range-picker {
   display: flex;
+  opacity: var(--page-state-1-opacity);
+  transition: opacity 1s;
 }
 
 .data-range-picker__slider-container {
