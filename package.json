@@ -20,8 +20,10 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "simplex-noise": "^2.4.0",
+    "slick-carousel": "^1.8.1",
     "standard": "^12.0.1",
-    "svg-react-loader": "^0.4.6"
+    "svg-react-loader": "^0.4.6",
+    "url-loader": "^2.0.1"
   },
   "scripts": {
     "dev": "node server.js",
@@ -51,5 +53,9 @@
     "env": [
       "jest"
     ]
+  },
+  "dependencies": {
+    "pure-react-carousel": "^1.21.1",
+    "react-slick": "^0.24.0"
   }
 }

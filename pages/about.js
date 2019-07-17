@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import AboutSection from '../components/AboutSection'
 import AboutSignupSection from '../components/AboutSignupSection'
+import Carousel from '../components/Carousel'
 import Navbar from '../components/Navbar'
 import { fetchSamplesData } from '../helpers/data'
 import './index.css'
@@ -59,7 +60,10 @@ const AboutPage = () => {
           <>
             <AboutSection side={index % 2 === 0 ? 'left' : 'right'} {...section} />
             {index === 2 && (
-              <AboutSignupSection title='Join the movement!' cta='Sign up for our newsletter' />
+              <>
+                <Carousel items={[0, 1, 2, 3]} />
+                <AboutSignupSection title='Join the movement!' cta='Sign up for our newsletter' />
+              </>
             )}
           </>
           ))}
