@@ -14,9 +14,9 @@
   width: 100%;
   display: grid;
   margin-top: 40px;
-  font-size: 16px;
   grid-template-columns: 40px 1fr;
   grid-column-gap: 20px;
+  line-height: 24px;
 }
 
 .tooltip-source__question-mark {
