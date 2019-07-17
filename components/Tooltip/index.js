@@ -6,15 +6,14 @@ import Circle from '../../icons/Circle'
 
 import './index.css'
 
-const Tooltip = ({ closeTooltip, open, slug, sample }) => {
+const Tooltip = ({ closeTooltip, open, slug, sample, sources }) => {
   // Outer div required for CSS transition to occur on first open
   if (!slug) {
     return <div className='tooltip' data-active={open} />
   }
 
-  const content = dataValues[slug]
-
-  const { label, legend, description, unit, transform, color, source } = content
+  const source = sources[slug]
+  const { label, legend, description, unit, transform, color } = dataValues[slug]
   const value = sample ? transform ? transform(sample[slug]) : sample[slug] : null
 
   return (
