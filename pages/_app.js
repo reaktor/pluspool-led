@@ -16,7 +16,7 @@ const Header = () => (
 )
 
 class PlusPoolApp extends App {
-  render() {
+  render () {
     const { Component, pageProps } = this.props
     return (
       <Container>

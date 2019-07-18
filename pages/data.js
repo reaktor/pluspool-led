@@ -6,7 +6,7 @@ import { fetchSamplesData } from '../helpers/data'
 import { useSamples } from '../hooks/useSamples'
 import './index.css'
 
-function DataPage ({ samples: initialSamples }) {
+function DataPage ({ sources, samples: initialSamples }) {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState(null)
   const [samples] = useSamples(initialSamples)
@@ -24,6 +24,7 @@ function DataPage ({ samples: initialSamples }) {
         open={tooltipOpen}
         slug={tooltipSlug}
         closeTooltip={closeTooltip}
+        sources={sources}
       />
       <div className='page__body'>
         <Graphs

@@ -72,6 +72,4 @@ const AboutPage = () => {
   )
 }
 
-AboutPage.getInitialProps = fetchSamplesData
-
 export default AboutPage

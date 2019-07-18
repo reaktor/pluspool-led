@@ -9,7 +9,7 @@ import { fetchSamplesData } from '../helpers/data'
 import { useSample } from '../hooks/useSamples'
 import './index.css'
 
-const IndexPage = ({ samples: initialSamples }) => {
+const IndexPage = ({ sources, samples: initialSamples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState()
   const [sample, range, timestamp, setTimestamp] = useSample(initialSamples)
@@ -29,6 +29,7 @@ const IndexPage = ({ samples: initialSamples }) => {
         slug={tooltipSlug}
         sample={sample}
         closeTooltip={closeTooltip}
+        sources={sources}
       />
       <TitleText
         timestamp={timestamp}
