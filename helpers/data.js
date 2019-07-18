@@ -70,7 +70,7 @@ const dataValues = {
   },
   speed: {
     slug: 'speed',
-    color: '#592150',
+    color: 'rgba(0, 0, 0, 0)',
     label: 'Speed',
     unit: 'KN',
     description: (
@@ -79,7 +79,7 @@ const dataValues = {
   },
   direction: {
     slug: 'direction',
-    color: '#F2BAD2',
+    color: 'rgba(0, 0, 0, 0)',
     label: 'Direction',
     unit: 'Degrees',
     description: (
@@ -99,7 +99,7 @@ const dataValues = {
   },
   depth: {
     slug: 'depth',
-    color: '#505050',
+    color: 'rgba(0, 0, 0, 0)',
     label: 'Depth',
     unit: 'm',
     description: (
