@@ -36,9 +36,9 @@ const dataValues = {
       }
     ],
     transform: value => {
-      if (value < 35) return 'low'
-      if (value < 104) return 'medium'
-      return 'high'
+      if (value < 35) return 'Low'
+      if (value < 104) return 'Medium'
+      return 'High'
     }
   },
   oxygen: {
