@@ -37,19 +37,7 @@ const SvgVisualization = ({
       const value = parseFloat(sample[slug])
       const simplex = simplexNoises[slug]
 
-      // Generate a random value for how many circles for each point to draw
-      // Eventually this could be derived from turbidity
-      const count = Math.floor(
-        scale(
-          simplex.noise2D(value, -0.4),
-          -1,
-          1,
-          1,
-          15
-        )
-      )
-
-      const array = new Array(count).fill().map((_val, index) => {
+      const array = new Array(3).fill().map((_val, index) => {
         const noiseValue = value + index
         const radius = scale(simplex.noise2D(noiseValue, -2), -1, 1, 0.2, 12)
         const x = scale(simplex.noise2D(noiseValue, 1), -1, 1, -30, 30)
@@ -73,18 +61,13 @@ const SvgVisualization = ({
       return [...array, ...acc]
     }, [])
 
-  // Sort by radius size. Places larger circles in the back, smaller ones in the front
-  const drawingDataSorted = [...drawingData].sort((a, b) => {
-    return b.radius - a.radius
-  })
-
   const { direction } = sample
 
   return (
     <div className='svg-visualization'>
       <svg viewBox={`${SCALE / -2} ${SCALE / -2} ${SCALE} ${SCALE}`}>
         <g className='svg-visualization__wrapper' style={{ '--svg--direction': direction }}>
-          {drawingDataSorted
+          {drawingData
             .map(({
               slug,
               x,
@@ -102,17 +85,16 @@ const SvgVisualization = ({
                     '--transition-distance': `${distance}%`,
                     '--transition-duration': `${duration}s`,
                     '--transition-delay': `${delay}s`,
-                    '--circle--cx': `${x}px`,
-                    '--circle--cy': `${y}px`
+                    '--circle--x': `${x}px`,
+                    '--circle--y': `${y}px`,
+                    '--circle--radius': `${radius}`
                   }}
                 >
                   <circle
                     className='svg-visualization__data-point'
                     data-slug={slug}
                     key={slug}
-                    cx={x}
-                    cy={y}
-                    r={radius}
+                    r='1'
                     fill={color}
                     onClick={() => openTooltip(slug)}
                   />

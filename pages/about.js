@@ -5,7 +5,6 @@ import AboutSection from '../components/AboutSection'
 import AboutSignupSection from '../components/AboutSignupSection'
 import Carousel from '../components/Carousel'
 import Navbar from '../components/Navbar'
-import { fetchSamplesData } from '../helpers/data'
 import './index.css'
 
 const sections = [

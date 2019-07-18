@@ -13,8 +13,12 @@ const Navbar = () => {
         <h1 className='navbar__title'>
           <Link href='/'>
             <a className='navbar__title__link'>
-              <span className='u-hide-desktop'><strong>+</strong></span>
-              <span className='u-hide-mobile'><strong>+POOL</strong> Water Quality Dashboard</span>
+              <div className='navbar__logo'>
+                <span className='navbar__logo__text'>+ POOL</span>
+              </div>
+              <span className='u-hide-mobile'>
+                Water Quality Dashboard
+              </span>
             </a>
           </Link>
         </h1>

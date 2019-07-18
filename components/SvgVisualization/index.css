@@ -32,18 +32,20 @@
 .svg-visualization__data-point-wrapper {
   --transition-distance: 10%;
   --transition-duration: 3s;
+  transition: transform-origin 0.3s 0.1s ease-in-out;
   animation: svg-data-point-animation var(--transition-duration) infinite linear;
-  transform-origin: var(--circle--cx, 50%) var(--circle--cy, 50%);
+  transform-origin: var(--circle--x, 50%) var(--circle--y, 50%);
 }
 
 .svg-visualization__data-point {
   cursor: pointer;
   transform: scale(1);
-  transition: transform 0.3s ease-in-out;
-  transform-origin: var(--circle--cx, 50%) var(--circle--cy, 50%);
+  transition: transform 0.3s 0.1s ease-in-out;
+  transform: translate3d(var(--circle--x), var(--circle--y), 0) scale(var(--circle--radius));
+  /* transform-origin: var(--circle--x, 50%) var(--circle--y, 50%); */
 }
 
 .svg-visualization__data-point:hover {
-  transform: scale(1.2);
+  /* transform: scale(1.2); */
   z-index: 1000;
 }
