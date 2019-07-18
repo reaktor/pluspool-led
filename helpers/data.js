@@ -28,11 +28,6 @@ const dataValues = {
       {
         color: '#DB2B2B',
         value: 35,
-        label: 'Unacceptable if levels persist'
-      },
-      {
-        color: '#DB2B2B',
-        value: 104,
         label: 'Unacceptable'
       },
       {
