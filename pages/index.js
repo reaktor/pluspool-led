@@ -25,12 +25,12 @@ const IndexPage = ({ sources, samples: initialSamples }) => {
   const closeTooltip = () => setTooltipOpen(false)
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <SocialMetaTags
           url={BASE_URL}
-          title={"+ POOLWater Quality Data Dashboard"}
-          description={"A beautiful dashboard for visualizing water quality in the +POOL floating pool in the East River of NYC."}
+          title={'+ POOLWater Quality Dashboard'}
+          description={'A beautiful dashboard for visualizing water quality in the +POOL floating pool in the East River of NYC.'}
           image_url={`${BASE_URL}/static/img/home-social-preview.png`}
         />
       </Head>
@@ -61,7 +61,7 @@ const IndexPage = ({ sources, samples: initialSamples }) => {
           sample={sample}
         />
       </main>
-    </React.Fragment>
+    </>
   )
 }
 
