@@ -5,6 +5,7 @@ import Graphs from '../components/Graphs'
 import Tooltip from '../components/Tooltip'
 import { fetchSamplesData } from '../helpers/data'
 import { useSamples } from '../hooks/useSamples'
+import { BASE_URL } from '../helpers/constants'
 import './index.css'
 
 function DataPage ({ sources, samples: initialSamples }) {
@@ -23,10 +24,10 @@ function DataPage ({ sources, samples: initialSamples }) {
     <React.Fragment>
       <Head>
         <SocialMetaTags
-          url={"https://water.pluspool.org/data"}
+          url={BASE_URL}
           title={"+ POOLWater Quality Data Dashboard"}
           description={"A detailed dashboard for visualizing the components of water quality in the +POOL floating pool in the East River of NYC."}
-          image_url={"https://water.pluspool.org/static/img/data-social-preview.png"}
+          image_url={`${BASE_URL}/static/img/data-social-preview.png`}
         />
       </Head>
       <main className='page' data-template='data'>

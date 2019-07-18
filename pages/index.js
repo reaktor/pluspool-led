@@ -9,6 +9,7 @@ import SvgVisualization from '../components/SvgVisualization'
 import Tooltip from '../components/Tooltip'
 import { fetchSamplesData } from '../helpers/data'
 import { useSample } from '../hooks/useSamples'
+import { BASE_URL } from '../helpers/constants'
 import './index.css'
 
 const IndexPage = ({ sources, samples: initialSamples }) => {
@@ -27,10 +28,10 @@ const IndexPage = ({ sources, samples: initialSamples }) => {
     <React.Fragment>
       <Head>
         <SocialMetaTags
-          url={"https://water.pluspool.org"}
+          url={BASE_URL}
           title={"+ POOLWater Quality Data Dashboard"}
           description={"A beautiful dashboard for visualizing water quality in the +POOL floating pool in the East River of NYC."}
-          image_url={"https://water.pluspool.org/static/img/home-social-preview.png"}
+          image_url={`${BASE_URL}/static/img/home-social-preview.png`}
         />
       </Head>
       <main className='page' data-template='index' data-page-state={pageState}>
