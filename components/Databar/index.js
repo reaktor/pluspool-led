@@ -13,8 +13,8 @@ const displayedSlugsTop = [
 ]
 
 const displayedSlugsBottom = [
-  'speed',
   'direction',
+  'speed',
   'depth'
 ]
 
