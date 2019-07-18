@@ -14,6 +14,12 @@
   src: url('/static/fonts/StyreneB-Regular-Test.woff2') format('woff2');
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 html {
   box-sizing: border-box;
 }
@@ -24,19 +30,6 @@ body,
   height: 100%;
 }
 
-/* TODO: make this an index page wrapper */
-#__next {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
 body {
   margin: 0;
   font-family: 'Styrene B', sans-serif;
@@ -44,6 +37,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #FFFFFF;
   color: #000000;
+  overflow-x: hidden;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
 }
 
 button {
@@ -67,6 +66,7 @@ p {
 }
 
 img {
+  display: block;
   max-width: 100%;
   height: auto;
 }
@@ -81,6 +81,9 @@ svg {
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 20px;
+  width: 100%;
+  max-width: 1800px;
+  margin: auto;
 }
 
 @media (min-width: 560px) {

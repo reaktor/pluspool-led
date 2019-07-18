@@ -1,0 +1,90 @@
+.about-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "image" "text";
+  grid-row-gap: 40px;
+}
+
+.about-section + .about-section {
+  margin-top: 70px;
+}
+
+@media (min-width: 560px) {
+  .about-section {
+    align-items: center;
+    /* TODO: This grid should be same as index page grid. anyway to abstract these out? */
+    grid-column-gap: 120px;
+    grid-row-gap: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: "text image";
+  }
+
+  .about-section + .about-section {
+    margin-top: 165px;
+  }
+
+  .about-section[data-side="right"] {
+    grid-template-areas: "image text";
+  }
+}
+
+.about-section__image {
+  grid-area: image;
+}
+
+@media (min-width: 560px) {
+  .about-section[data-side="left"] .about-section__image {
+    margin-right: -120px;
+  }
+
+  .about-section[data-side="right"] .about-section__image {
+    margin-left: -120px;
+  }
+}
+
+.about-section__text {
+  grid-area: text;
+}
+
+.about-section__title {
+  font-family: 'Styrene A';
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+  margin: 0;
+}
+
+@media (min-width: 560px) {
+  .about-section__title {
+    font-size: 48px;
+    line-height: 62px;
+  }
+}
+
+.about-section__body p {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+@media (min-width: 560px) {
+  .about-section__body p {
+    font-size: 21px;
+    line-height: 36px;
+  }
+}
+
+.about-section__cta {
+  display: flex;
+  height: 120px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000000;
+  font-size: 21px;
+  line-height: 36px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.about-section__cta:hover {
+  border-color: #0098E1;
+}

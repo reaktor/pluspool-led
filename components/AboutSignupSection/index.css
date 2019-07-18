@@ -1,0 +1,24 @@
+.about-signup-section {
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  margin-bottom: 80px;
+}
+
+@media (min-width: 560px) {
+  .about-signup-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    margin-bottom: 120px;
+  }
+}
+
+.about-signup-section__image {
+  grid-area: image;
+}
+
+.about-signup-section__text {
+  grid-area: text;
+}
