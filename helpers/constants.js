@@ -4,4 +4,6 @@ const ENDPOINTS = {
 
 const DIRECTIONS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
 
-export { DIRECTIONS, ENDPOINTS }
+const BASE_URL = 'https://water.pluspool.org'
+
+export { DIRECTIONS, ENDPOINTS, BASE_URL }
