@@ -3,7 +3,7 @@ import QuestionMark from '../../icons/QuestionMark'
 
 import './index.css'
 
-const TooltipSource = ({ source }) => (<>
+const TooltipSource = ({ source }) => source && (<>
   <div className='tooltip-source'>
     <div className='tooltip-source__question-mark'>
       <QuestionMark />
