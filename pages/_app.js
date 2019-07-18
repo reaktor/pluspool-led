@@ -17,7 +17,6 @@ const Header = () => (
 
 class PlusPoolApp extends App {
   render() {
-    console.log("Rendering outer layer.")
     const { Component, pageProps } = this.props
     return (
       <Container>
