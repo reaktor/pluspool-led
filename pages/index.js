@@ -20,8 +20,6 @@ const IndexPage = ({ sources, samples: initialSamples }) => {
     setTooltipOpen(true)
   }
 
-  // openTooltip('bacteria')
-
   const closeTooltip = () => setTooltipOpen(false)
 
   return (
