@@ -18,8 +18,11 @@ const displayedSlugsBottom = [
   'depth'
 ]
 
-const displayDatabarItem = ({ openTooltip, sample, slug }) => {
+const displayDatabarItem = ({ openTooltip, sample, slug, icon }) => {
   const data = dataValues[slug]
+  const color = icon ? data['color'] : 'rgba(0,0,0,0)'
+  Object.assign(data, { color })
+
   return (
     <DatabarItem
       key={slug}
@@ -36,12 +39,12 @@ const Databar = ({ sample, openTooltip }) => {
       <div className='databar__wrapper'>
         {displayedSlugsTop
           .filter(slug => slug in sample)
-          .map(slug => displayDatabarItem({ openTooltip, sample, slug }))}
+          .map(slug => displayDatabarItem({ openTooltip, sample, slug, icon: true }))}
       </div>
       <div className='databar__wrapper'>
         {displayedSlugsBottom
           .filter(slug => slug in sample)
-          .map(slug => displayDatabarItem({ openTooltip, sample, slug }))}
+          .map(slug => displayDatabarItem({ openTooltip, sample, slug, icon: false }))}
       </div>
     </div>
   )
