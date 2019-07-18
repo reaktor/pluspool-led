@@ -1,10 +1,8 @@
 import React from 'react'
-import Head from 'next/head'
 import Link from 'next/link'
 import AboutSection from '../components/AboutSection'
 import AboutSignupSection from '../components/AboutSignupSection'
 import Carousel from '../components/Carousel'
-import Navbar from '../components/Navbar'
 import './index.css'
 
 const sections = [
