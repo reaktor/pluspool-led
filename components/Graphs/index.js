@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { dataValues, before } from '../../helpers/data'
+import { dataValues, before, cutData, downsampleData } from '../../helpers/data'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
 import './index.css'
+
+const maxResolution = 1000 // points
 
 const timeUnits = ['day', 'week', 'month', 'year']
 
@@ -20,6 +22,28 @@ const Graphs = ({ openTooltip, samples }) => {
     setSpan(unit)
   }
 
+  const [max, min] = domain
+  const dsColumns = Array.from(Object.keys(dataValues))
+  const domainSamples = cutData(samples, 'noaaTime', min, max)
+  const dsSamples = downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
+
+  const graphProps = key => ({
+    x: 'noaaTime',
+    y: dataValues[key].slug,
+    domain: domain,
+    data: dsSamples,
+    ...dataValues[key]
+  })
+
+  const graphs = dsColumns.map(key => (
+    <Graph
+      setOverlayGraph={setOverlayGraph}
+      openTooltip={openTooltip}
+      graph={graphProps(key)}
+      overlayGraph={overlayGraph && graphProps(overlayGraph)}
+    />
+  ))
+
   return (
     <>
       <GraphsDateFilter
@@ -28,28 +52,7 @@ const Graphs = ({ openTooltip, samples }) => {
         onChange={filterOnClick}
         name='span'
       />
-      <div className='graphs'>
-        {Object.keys(dataValues).map(key => (
-          <Graph
-            setOverlayGraph={setOverlayGraph}
-            openTooltip={openTooltip}
-            graph={{
-              x: 'noaaTime',
-              y: dataValues[key].slug,
-              domain: domain,
-              data: samples,
-              ...dataValues[key]
-            }}
-            overlayGraph={overlayGraph && {
-              x: 'noaaTime',
-              y: dataValues[overlayGraph].slug,
-              domain: domain,
-              data: samples,
-              ...dataValues[overlayGraph]
-            }}
-          />
-        ))}
-      </div>
+      <div className='graphs'>{graphs}</div>
     </>
   )
 }

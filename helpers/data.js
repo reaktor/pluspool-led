@@ -134,7 +134,6 @@ const dataValues = {
  * @param {number} outMax - The high end value for the scale that `num` will be mapped to.
  * @return {number} the scaled numbmer
  */
-
 const scale = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
 
@@ -159,9 +158,68 @@ const fetchSamplesData = () => {
     })
 }
 
+/**
+ *
+ * A function that cuts a data series to points where 'index' is between
+ * 'min' and 'max'.
+ *
+ * @param {[object]} data - The input data series
+ * @param {string} index - The field in the data series objects used for filtering
+ * @param {any} min - The minimum included index value
+ * @param {any} max - The maximum included index value
+ * @return {[object]} the cut data series
+ */
+const cutData = (data, index, min, max) =>
+  min > max ? [] : data.filter(d => d[index] >= min && d[index] <= max)
+
+/**
+ *
+ * Downsamples ordered data across a collection of numerical columns.
+ *
+ * @param {[object]} data - The ordered input data series
+ * @param {string} index - The field in the data series objects used for filtering
+ * @param {[string]} columns - The columns to downsample into the output
+ * @param {number} resolution - The maxium length of the downsampled data
+ * @return {[object]} the downsampled data series
+ */
+const downsampleData = (data, index, columns, resolution) => {
+  const dsFactor = Math.ceil(data.length / resolution)
+  if (data.length < 2 || dsFactor <= 1) {
+    return data
+  }
+
+  const out = []
+  let sampleCounter = 0
+  let indexValue = data[0][index]
+  const accum = {}
+  for (const k of columns) { accum[k] = 0 }
+
+  for (let k = 0; k < data.length; ++k) {
+    const datum = data[k]
+    for (const k of columns) { accum[k] += datum[k] }
+    sampleCounter += 1
+    if (sampleCounter >= dsFactor) {
+      for (const k of columns) { accum[k] /= sampleCounter }
+      out.push({ [index]: indexValue, ...accum })
+      
+      sampleCounter = 0
+      indexValue = datum[index]
+      for (const k of columns) { accum[k] = 0 }
+    }
+  }
+  
+  return out
+}
+
+const formXYSeries = (data, xColumn, yColumn) =>
+  data.map(datum => ({ x: datum[xColumn], y: datum[yColumn] || null }))
+
 export {
   dataValues,
   before,
   scale,
-  fetchSamplesData
+  fetchSamplesData,
+  cutData,
+  downsampleData,
+  formXYSeries
 }

@@ -3,6 +3,7 @@ import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import QuestionMark from '../../icons/QuestionMark'
 import GraphTooltip from '../GraphTooltip'
+import { formXYSeries } from '../../helpers/data'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -23,21 +24,10 @@ const LineGraph = ({
   props,
   overlayGraph
 }) => {
-  const dataSeries = data.map(datum => {
-    return {
-      x: datum[x],
-      y: datum[y] || null
-    }
-  })
+  // Downsampling factor
+  const onClick = (point, event) => { console.dir({ point, event }) }
 
-  const onClick = (point, event) => {
-    console.dir({ point, event })
-  }
-
-  const dataRender = [{
-    id: label,
-    data: dataSeries
-  }]
+  const dataRender = [{ id: label, data: formXYSeries(data, x, y) }]
 
   const defaultProps = {
     curve: 'linear',
@@ -60,12 +50,7 @@ const LineGraph = ({
     onClick: onClick
   }
 
-  return (
-    <ResponsiveLineCanvas
-      {...defaultProps}
-      {...props}
-    />
-  )
+  return ( <ResponsiveLineCanvas {...defaultProps} {...props} /> )
 }
 
 const Graph = ({
@@ -81,6 +66,17 @@ const Graph = ({
   }, [])
 
   startTime = new Date()
+
+  const lineGraphProps = {
+    gridYValues: 5,
+    axisLeft: { format: d => `${d}`, tickValues: 5 }
+  } 
+
+  const overlayGraphProps = {
+    axisLeft: null,
+    axisRight: { format: d => `${d}` },
+    enableGridY: false
+  } 
 
   return (
     <section>
@@ -130,31 +126,11 @@ const Graph = ({
         </div>
       </header>
       <div className='graph__graph-wrapper'>
-        <LineGraph
-          {...graph}
-          overlayGraph={overlayGraph}
-          props={{
-            gridYValues: 5,
-            axisLeft: {
-              format: d => `${d}`,
-              tickValues: 5
-            }
-          }}
-        />
+        <LineGraph {...graph} overlayGraph={ overlayGraph } props={ lineGraphProps } />
         {overlayGraph &&
-        <div className='graph__overlay-graph'>
-          <LineGraph
-            {...overlayGraph}
-            props={{
-              axisLeft: null,
-              axisRight: {
-                format: d => `${d}`
-              },
-              enableGridY: false
-            }}
-            tooltip={null}
-          />
-        </div>
+          <div className='graph__overlay-graph'>
+            <LineGraph {...overlayGraph} props={ overlayGraphProps } tooltip={null} />
+          </div>
         }
       </div>
     </section>

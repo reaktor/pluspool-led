@@ -1,10 +1,8 @@
 import React from 'react'
-import Head from 'next/head'
 import Link from 'next/link'
 import AboutSection from '../components/AboutSection'
 import AboutSignupSection from '../components/AboutSignupSection'
 import Carousel from '../components/Carousel'
-import Navbar from '../components/Navbar'
 import './index.css'
 
 const sections = [
@@ -41,37 +39,23 @@ const sections = [
 ]
 
 const AboutPage = () => {
-  return (
+  const aboutSection = (section, index) => (
     <>
-      <Navbar />
-      <main className='page' data-template='about'>
-        <Head>
-          <title>+POOL Lights</title>
-          <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-          <link rel='shortcut icon' href='/static/favicon.ico' />
-          <link
-            href='https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap'
-            rel='stylesheet'
-          />
-        </Head>
-        <div className='page__body'>
-          {sections.map((section, index) => (
-          <>
-            <AboutSection side={index % 2 === 0 ? 'left' : 'right'} {...section} />
-            {index === 2 && (
-              <>
-                <Carousel items={[0, 1, 2, 3]} />
-                <AboutSignupSection title='Join the movement!' cta='Sign up for our newsletter' />
-              </>
-            )}
-          </>
-          ))}
-        </div>
-      </main>
+      <AboutSection side={index % 2 === 0 ? 'left' : 'right'} {...section} />
+      {index === 2 && (
+        <>
+          <Carousel items={[0, 1, 2, 3]} />
+          <AboutSignupSection title='Join the movement!' cta='Sign up for our newsletter' />
+        </>
+      )}
     </>
   )
-}
 
-AboutPage.getInitialProps = fetchSamplesData
+  return (
+    <main className='page' data-template='about'>
+      { sections.map(aboutSection) }
+    </main>
+  )
+}
 
 export default AboutPage
