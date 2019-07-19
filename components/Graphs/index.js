@@ -12,7 +12,7 @@ const timeUnits = ['day', 'week', 'month', 'year']
 const Graphs = ({ openTooltip, samples }) => {
   if (!samples) return null
 
-  const [activeUnit, setActiveUnit] = useState('day')
+  const [activeUnit, setActiveUnit] = useState('week')
   const [domain, setDomain] = useState([Date.now(), before(activeUnit)])
   const [overlayGraph, setOverlayGraph] = useState(null)
 
