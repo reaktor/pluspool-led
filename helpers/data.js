@@ -35,7 +35,7 @@ const dataValues = {
         value: '+104'
       }
     ],
-    transform: value => {
+    interperet: value => {
       if (value < 35) return 'Low'
       if (value < 104) return 'Medium'
       return 'High'
@@ -67,7 +67,7 @@ const dataValues = {
     description: (
       <p>Turbidity is a measurement of the clarity of water, and thus is indicative of how many particles are suspended. Turbidity is important parameter of water quality because microbes and heavy metals may adhere to these particles. Additionally, the clarity of the water affects light penetration, habitat quality, and sedimentation rates.</p>
     ),
-    transform: value => {
+    interperet: value => {
       if (value > 1500) return 'Clear'
       if (value < 750) return 'Murky'
       return 'Normal'
@@ -81,7 +81,7 @@ const dataValues = {
     description: (
       <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
     ),
-    transform: value => {
+    interperet: value => {
       if (value > 1.5) return 'Fast'
       if (value < 0.5) return 'Slow'
       return 'Average'
@@ -93,9 +93,14 @@ const dataValues = {
     label: 'Direction',
     unit: 'Degrees',
     description: (
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lectus purus, euismod aliquam lacinia sit amet, semper in nulla. Aliquam erat volutpat. Proin consequat dapibus magna sit amet feugiat. Integer ultrices feugiat urna, pellentesque sagittis ante suscipit at. Duis pellentesque erat vitae accumsan vulputate. Quisque urna neque, luctus sed sapien non, euismod pharetra felis. Sed gravida porttitor elit mattis vehicula. Aenean nec est commodo, viverra turpis efficitur, tincidunt leo.</p>
+      <p>Which compass direction is the water flowing? For Pier 17, inbound would be westward and outbount would be eastward.</p>
     ),
-    transform: value => DIRECTIONS[Math.floor(value / 45)]
+    interperet: value => DIRECTIONS[Math.floor(value / 45)],
+    legend: [...DIRECTIONS, DIRECTIONS[DIRECTIONS.length - 1]].map((label, index) => ({
+      color: '#000000',
+      value: index * 45,
+      label
+    }))
   },
   ph: {
     slug: 'ph',
@@ -115,7 +120,7 @@ const dataValues = {
     description: (
       <p>Depth shows the tides. The Hudson River Estuary is a strongly tidal system which is measured through a depth sensor on water quality sond.</p>
     ),
-    transform: value => {
+    interperet: value => {
       if (value > 4) return 'High'
       if (value < 3.2) return 'Low'
       return value
