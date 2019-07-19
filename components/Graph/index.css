@@ -25,7 +25,6 @@
 }
 
 .graph__graph-wrapper {
-  z-index: -1;
   height: 240px;
   position: relative;
 }
