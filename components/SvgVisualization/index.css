@@ -15,17 +15,18 @@
 
 @keyframes svg-data-point-animation {
   0% {
-    transform: scale(0);
-    opacity: 0;
+    transform: scale(1);
+    opacity: 0.95;
   }
 
-  50%, 90% {
+  50% {
+    transform: scale(1.1);
     opacity: 1;
   }
 
   100% {
-    transform: scale(1.2);
-    opacity: 0;
+    transform: scale(1);
+    opacity: 0.95;
   }
 }
 
