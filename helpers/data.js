@@ -184,6 +184,7 @@ const cutData = (data, index, min, max) =>
 /**
  *
  * Downsamples ordered data across a collection of numerical columns.
+ * Averages downsampled values.
  *
  * @param {[object]} data - The ordered input data series
  * @param {string} index - The field in the data series objects used for filtering
