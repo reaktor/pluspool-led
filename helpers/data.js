@@ -205,10 +205,11 @@ const downsampleData = (data, index, columns, resolution) => {
 
   for (let k = 0; k < data.length; ++k) {
     const datum = data[k]
-    for (const k of columns) { accum[k] += datum[k] }
+    for (const k of columns) { accum[k] += datum[k] } // switch from += to = to sample instead of avera
     sampleCounter += 1
     if (sampleCounter >= dsFactor) {
-      for (const k of columns) { accum[k] /= sampleCounter }
+      for (const k of columns) { accum[k] /= sampleCounter } // comment out to sample instead of average
+
       out.push({ [index]: indexValue, ...accum })
       
       sampleCounter = 0
