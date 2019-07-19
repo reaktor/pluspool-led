@@ -108,14 +108,12 @@ const SvgVisualization = ({
 }
 
 SvgVisualization.defaultProps = {
-  setTooltipSlug: () => {},
-  setTooltipOpen: () => {},
+  openTooltip: () => {},
   sample: {}
 }
 
 SvgVisualization.propTypes = {
-  setTooltipSlug: PropTypes.func,
-  setTooltipOpen: PropTypes.func,
+  openTooltip: PropTypes.func,
   sample: PropTypes.object
 }
 
