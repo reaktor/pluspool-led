@@ -48,7 +48,17 @@ const dataValues = {
     unit: '%',
     description: (
       <p>Dissolved oxygen is introduced into the water by photosynthetic organisms and air-water gas exchange, and is consumed during respiration. Levels are highest during daylight and drop during the night as there is no photosynthesis to counteract consumption. Just like on land, oxygen is critical for many species of marine life, and low levels (hypoxia or anoxia) will stress or even suffocate organisms, resulting in large die-offs. Oxygen levels are primarily controlled by biological production and consumption, temperature (higher temperature decreases the solubility), and the physical mixing.</p>
-    )
+    ),
+    legend: [
+      {
+        color: '#000000',
+        value: '0%'
+      },
+      {
+        color: '#$000000',
+        value: '100%'
+      }
+    ]
   },
   salinity: {
     slug: 'salinity',
@@ -57,7 +67,28 @@ const dataValues = {
     unit: 'PPT',
     description: (
       <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
-    )
+    ),
+    legend: [
+      {
+        color: '#000000',
+        value: 5,
+        label: 'drinkable but gross'
+      },
+      {
+        color: '#$000000',
+        value: 10,
+        label: 'like a ritz cracker'
+      },
+      {
+        color: '#$000000',
+        value: 15,
+        label: 'good for sealing open wounds'
+      },
+      {
+        color: '#$000000',
+        value: '15+'
+      }
+    ]
   },
   turbidity: {
     slug: 'turbidity',
@@ -71,7 +102,28 @@ const dataValues = {
       if (value > 1500) return 'Clear'
       if (value < 750) return 'Murky'
       return 'Normal'
-    }
+    },
+    legend: [
+      {
+        color: '#000000',
+        value: 0,
+        label: 'Clear'
+      },
+      {
+        color: '#$000000',
+        value: 300,
+        label: 'Murky'
+      },
+      {
+        color: '#$000000',
+        value: 750,
+        label: 'Opaque'
+      },
+      {
+        color: '#$000000',
+        value: '1000+'
+      }
+    ]
   },
   speed: {
     slug: 'speed',
@@ -85,7 +137,28 @@ const dataValues = {
       if (value > 1.5) return 'Fast'
       if (value < 0.5) return 'Slow'
       return 'Average'
-    }
+    },
+    legend: [
+      {
+        color: '#000000',
+        value: 0,
+        label: 'Slow'
+      },
+      {
+        color: '#000000',
+        value: 0.5,
+        label: 'Average'
+      },
+      {
+        color: '#DB2B2B',
+        value: '1.5',
+        label: 'Fast'
+      },
+      {
+        color: '#DB2B2B',
+        value: '2.0+'
+      }
+    ]
   },
   direction: {
     slug: 'direction',
@@ -124,7 +197,23 @@ const dataValues = {
       if (value > 4) return 'High'
       if (value < 3.2) return 'Low'
       return value
-    }
+    },
+    legend: [
+      {
+        color: '#000000',
+        value: 0,
+        label: 'Low Tide'
+      },
+      {
+        color: '#$000000',
+        value: 3.2,
+        label: 'High Tide'
+      },
+      {
+        color: '#$000000',
+        value: '4+'
+      }
+    ]
   }
 }
 
