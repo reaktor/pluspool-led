@@ -40,6 +40,7 @@ const IndexPage = ({ sources, samples: initialSamples }) => {
           slug={tooltipSlug}
           sample={sample}
           closeTooltip={closeTooltip}
+          sources={sources}
         />
         <TitleText
           timestamp={timestamp}

@@ -36,6 +36,7 @@ function DataPage ({ sources, samples: initialSamples }) {
           open={tooltipOpen}
           slug={tooltipSlug}
           closeTooltip={closeTooltip}
+          sources={sources}
         />
         <div className='page__body'>
           <Graphs
