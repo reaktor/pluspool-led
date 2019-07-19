@@ -194,32 +194,30 @@ const cutData = (data, index, min, max) =>
  */
 const downsampleData = (data, index, columns, resolution) => {
   const dsFactor = Math.ceil(data.length / resolution)
-  if (data.length < 2 || dsFactor <= 1) {
-    return data
-  }
 
-  const out = []
+  if (data.length < 2 || dsFactor <= 1)  return data
+
+  const averagedData = []
   let sampleCounter = 0
   let indexValue = data[0][index]
-  const accum = {}
-  for (const k of columns) { accum[k] = 0 }
+  const accumulator = {}
+  for (const name of columns) { accumulator[name] = 0 }
 
-  for (let k = 0; k < data.length; ++k) {
-    const datum = data[k]
-    for (const k of columns) { accum[k] += datum[k] } // switch from += to = to sample instead of avera
+  for (const datum of data) {
+    for (const name of columns) { accumulator[name] += datum[name] } // switch from += to = to sample instead of average
     sampleCounter += 1
     if (sampleCounter >= dsFactor) {
-      for (const k of columns) { accum[k] /= sampleCounter } // comment out to sample instead of average
+      for (const name of columns) { accumulator[name] /= sampleCounter } // comment out to sample instead of average
 
-      out.push({ [index]: indexValue, ...accum })
+      averagedData.push({ [index]: indexValue, ...accumulator })
       
       sampleCounter = 0
       indexValue = datum[index]
-      for (const k of columns) { accum[k] = 0 }
+      for (const name of columns) { accumulator[name] = 0 }
     }
   }
   
-  return out
+  return averagedData
 }
 
 const formXYSeries = (data, xColumn, yColumn) =>
