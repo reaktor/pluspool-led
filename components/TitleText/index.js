@@ -20,11 +20,7 @@ const levelText = {
 
 const getPageText = ({ pageState, timestamp, sample }) => {
   if (pageState === 0) {
-    return 'Welcome to our dashboard. Click me to proceed.'
-  }
-
-  if (pageState === 1) {
-    return 'This is a data scrubber. Click to proceed.'
+    return 'How is the water today? Click to find out.'
   }
 
   const timestampDiff = dayjs().subtract(5, 'hours').to(timestamp)

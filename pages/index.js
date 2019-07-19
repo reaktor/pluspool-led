@@ -45,7 +45,7 @@ const IndexPage = ({ sources, samples: initialSamples }) => {
           timestamp={timestamp}
           sample={sample}
           pageState={pageState}
-          onClick={() => pageState < 2 && setPageState(pageState + 1)}
+          onClick={() => pageState < 1 && setPageState(pageState + 1)}
         />
         <DataRangePicker
           setTimestamp={setTimestamp}
