@@ -39,19 +39,21 @@ const sections = [
 ]
 
 const AboutPage = () => {
+  const aboutSection = (section, index) => (
+    <>
+      <AboutSection side={index % 2 === 0 ? 'left' : 'right'} {...section} />
+      {index === 2 && (
+        <>
+          <Carousel items={[0, 1, 2, 3]} />
+          <AboutSignupSection title='Join the movement!' cta='Sign up for our newsletter' />
+        </>
+      )}
+    </>
+  )
+
   return (
     <main className='page' data-template='about'>
-      {sections.map((section, index) => (
-          <>
-            <AboutSection side={index % 2 === 0 ? 'left' : 'right'} {...section} />
-            {index === 2 && (
-              <>
-                <Carousel items={[0, 1, 2, 3]} />
-                <AboutSignupSection title='Join the movement!' cta='Sign up for our newsletter' />
-              </>
-            )}
-          </>
-      ))}
+      { sections.map(aboutSection) }
     </main>
   )
 }
