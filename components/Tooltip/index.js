@@ -1,20 +1,20 @@
 import React from 'react'
 import TooltipLegend from '../TooltipLegend'
+import TooltipSource from '../TooltipSource'
 import { dataValues } from '../../helpers/data'
 import Circle from '../../icons/Circle'
 
 import './index.css'
 
-const Tooltip = ({ closeTooltip, open, slug, sample }) => {
+const Tooltip = ({ closeTooltip, open, slug, sample, sources }) => {
   // Outer div required for CSS transition to occur on first open
   if (!slug) {
     return <div className='tooltip' data-active={open} />
   }
 
-  const content = dataValues[slug]
-
-  const { label, legend, description, unit, transform, color } = content
-  const value = sample ? transform ? transform(sample[slug]) : slug : null
+  const source = sources[slug]
+  const { label, legend, description, unit, transform, color } = dataValues[slug]
+  const value = sample ? transform ? transform(sample[slug]) : sample[slug] : null
 
   return (
     <div className='tooltip' data-active={open}>
@@ -54,6 +54,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample }) => {
         <div className='tooltip__body'>
           {description}
         </div>
+        <TooltipSource source={source} />
       </div>
     </div>
   )

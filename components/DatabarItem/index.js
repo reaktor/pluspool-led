@@ -5,21 +5,22 @@ import Circle from '../../icons/Circle'
 
 import './index.css'
 
-const DatabarItem = ({ onClick, color, label, value, unit, transform }) => (
-  <button className='databar__item' onClick={onClick}>
-    <div className='databar__item__wrapper'>
-      <div className='databar__item__icon'><Circle fill={color} /></div>
-      <div className='databar__item__label'>{label}</div>
-      <div className='databar__item__value'>
-        {transform ? transform(value) : value}
+const DatabarItem = ({ onClick, color, label, value, unit, transform }) => {
+  const transformedValue = transform ? transform(value) : value
+  const transformedUnit = (typeof transformedValue === 'string') ? '' : unit
+
+  return (
+    <button className='databar__item' onClick={onClick}>
+      <div className='databar__item__wrapper'>
+        <div className='databar__item__icon'><Circle fill={color} /></div>
+        <div className='databar__item__label'>{label}</div>
+        <div className='databar__item__value'>{transformedValue}</div>
+        <div className='databar__item__unit' >{transformedUnit}</div>
+        <div className='databar__item__link'> <Arrow /></div>
       </div>
-      <div className='databar__item__unit'>{unit}</div>
-      <div className='databar__item__link'>
-        <Arrow />
-      </div>
-    </div>
-  </button>
-)
+    </button>
+  )
+}
 
 DatabarItem.defaultProps = {
   transform: null

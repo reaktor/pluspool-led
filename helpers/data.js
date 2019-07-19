@@ -28,11 +28,6 @@ const dataValues = {
       {
         color: '#DB2B2B',
         value: 35,
-        label: 'Unacceptable if levels persist'
-      },
-      {
-        color: '#DB2B2B',
-        value: 104,
         label: 'Unacceptable'
       },
       {
@@ -41,10 +36,9 @@ const dataValues = {
       }
     ],
     transform: value => {
-      return value.toFixed(1)
-      // if (value < 35) return 'low'
-      // if (value < 104) return 'medium'
-      // return 'high'
+      if (value < 35) return 'Low'
+      if (value < 104) return 'Medium'
+      return 'High'
     }
   },
   oxygen: {
@@ -72,7 +66,12 @@ const dataValues = {
     unit: 'NTU',
     description: (
       <p>Turbidity is a measurement of the clarity of water, and thus is indicative of how many particles are suspended. Turbidity is important parameter of water quality because microbes and heavy metals may adhere to these particles. Additionally, the clarity of the water affects light penetration, habitat quality, and sedimentation rates.</p>
-    )
+    ),
+    transform: value => {
+      if (value > 1500) return 'Clear'
+      if (value < 750) return 'Murky'
+      return 'Normal'
+    }
   },
   speed: {
     slug: 'speed',
@@ -81,7 +80,12 @@ const dataValues = {
     unit: 'KN',
     description: (
       <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
-    )
+    ),
+    transform: value => {
+      if (value > 1.5) return 'Fast'
+      if (value < 0.5) return 'Slow'
+      return 'Average'
+    }
   },
   direction: {
     slug: 'direction',
@@ -110,7 +114,12 @@ const dataValues = {
     unit: 'm',
     description: (
       <p>Depth shows the tides. The Hudson River Estuary is a strongly tidal system which is measured through a depth sensor on water quality sond.</p>
-    )
+    ),
+    transform: value => {
+      if (value > 4) return 'High'
+      if (value < 3.2) return 'Low'
+      return value
+    }
   }
 }
 

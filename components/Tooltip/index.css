@@ -25,6 +25,12 @@
   }
 }
 
+.tooltip hr {
+  width: 100%;
+  height: 2px;
+  border: 1px solid rgb(0, 0, 0);
+}
+
 .tooltip[data-active="true"] {
   transform: translateX(0%);
   pointer-events: auto;
