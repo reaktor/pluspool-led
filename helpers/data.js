@@ -23,12 +23,12 @@ const dataValues = {
       {
         color: '#000000',
         value: 0,
-        label: 'Acceptable'
+        label: 'EPA Safe'
       },
       {
         color: '#DB2B2B',
         value: 35,
-        label: 'Unacceptable'
+        label: 'EPA Unsafe'
       },
       {
         color: '#DB2B2B',
@@ -58,7 +58,8 @@ const dataValues = {
         color: '#$000000',
         value: '100%'
       }
-    ]
+    ],
+    interperet: () => 'Normal'
   },
   salinity: {
     slug: 'salinity',
@@ -82,13 +83,19 @@ const dataValues = {
       {
         color: '#$000000',
         value: 15,
-        label: 'good for sealing open wounds'
+        label: 'would burn any scrape'
       },
       {
         color: '#$000000',
         value: '15+'
       }
-    ]
+    ],
+    interperet: value => {
+      if (value < 5) return 'Drinkable'
+      if (value < 10) return 'Salty'
+      return 'Burns'
+    }
+
   },
   turbidity: {
     slug: 'turbidity',
@@ -123,7 +130,12 @@ const dataValues = {
         color: '#$000000',
         value: '1000+'
       }
-    ]
+    ],
+    interperet: value => {
+      if (value < 300) return 'Clear'
+      if (value < 750) return 'Murky'
+      return 'Opaque'
+    },
   },
   speed: {
     slug: 'speed',
@@ -142,12 +154,12 @@ const dataValues = {
       {
         color: '#000000',
         value: 0,
-        label: 'Slow'
+        label: 'Still'
       },
       {
         color: '#000000',
         value: 0.5,
-        label: 'Average'
+        label: 'Moving'
       },
       {
         color: '#DB2B2B',
@@ -158,7 +170,12 @@ const dataValues = {
         color: '#DB2B2B',
         value: '2.0+'
       }
-    ]
+    ],
+    interperet: value => {
+      if (value < 0.5) return 'Still'
+      if (value < 1) return 'Moving'
+      return 'Fast'
+    },
   },
   direction: {
     slug: 'direction',
@@ -183,21 +200,21 @@ const dataValues = {
     description: (
       <p>The pH refers to how acidic or basic a water body is. It is a critical component of water quality because the pH controls the solubility of minerals (including the shells of calcifying organisms) and the bioavailability of both nutrients and toxic compounds such as heavy metals. In general, lowering pH decreases environmental water quality, as heavy metals tend to become more soluble and marine organisms come under stress. There is a natural diel cycle in pH due to the increased release of acidic carbon dioxide during the night. Water temperature controls gas solubility, so colder temperatures can result in more uptake of carbon dioxide from the atmosphere and lower the pH as well.</p>
     ),
-    transform: value => scale(value, -400, 400, 0, 14).toFixed(2)
+    transform: value => scale(value, -400, 400, 0, 14).toFixed(2),
+    interperet: value => {
+      if (value < 6) return 'Acidic'
+      if (value > 7) return 'Basic'
+      return 'Nuetral'
+    },
   },
   depth: {
     slug: 'depth',
     color: '#505050',
-    label: 'Depth',
+    label: 'Tide',
     unit: 'm',
     description: (
       <p>Depth shows the tides. The Hudson River Estuary is a strongly tidal system which is measured through a depth sensor on water quality sond.</p>
     ),
-    interperet: value => {
-      if (value > 4) return 'High'
-      if (value < 3.2) return 'Low'
-      return value
-    },
     legend: [
       {
         color: '#000000',
@@ -205,15 +222,19 @@ const dataValues = {
         label: 'Low Tide'
       },
       {
-        color: '#$000000',
+        color: '#000000',
         value: 3.2,
         label: 'High Tide'
       },
       {
-        color: '#$000000',
+        color: '#000000',
         value: '4+'
       }
-    ]
+    ],
+    interperet: value => {
+      if (value < 3.2) return 'Low'
+      return 'High'
+    },
   }
 }
 

@@ -4,6 +4,7 @@
   grid-area: title-text;
   font-weight: 400;
   margin: 0;
+  z-index: 1;
 }
 
 @media (min-width: 560px) {
