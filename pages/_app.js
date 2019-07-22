@@ -2,6 +2,7 @@ import React from 'react'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
+import { fetchSamplesData } from '../helpers/dataLoader'
 
 const Header = () => (
   <Head>
@@ -15,17 +16,37 @@ const Header = () => (
   </Head>
 )
 
+const updateTime = 10000
+
 class PlusPoolApp extends App {
-  render () {
+  constructor(props) {
+    super(props)
+    this.state = { data: props }
+  }
+
+  componentDidMount() {
+    console.log("Begining data fetching.")
+    setInterval((() => {
+      console.log("Fetching new data ...")
+        //fetchSamplesData().then(({ samples }) => {
+        //  console.log("New data received. Loading ...")
+        //  this.setState({ data: samples })
+        //})
+    }), updateTime)
+  }
+
+  render() {
     const { Component, pageProps } = this.props
     return (
       <Container>
         <Header />
         <Navbar />
-        <Component {...pageProps} />
+        <Component {...pageProps} {...this.state.data} />
       </Container>
     )
   }
 }
+
+PlusPoolApp.getInitialProps = fetchSamplesData
 
 export default PlusPoolApp

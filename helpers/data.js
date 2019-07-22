@@ -1,5 +1,4 @@
-import fetch from 'isomorphic-unfetch'
-import { DIRECTIONS, ENDPOINTS } from './constants'
+import { DIRECTIONS } from './constants'
 import dayjs from 'dayjs'
 
 /**
@@ -146,27 +145,6 @@ const dataValues = {
 const scale = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
 
-const fetchSamplesData = () => {
-  return fetch(ENDPOINTS.samples, {
-    method: 'GET',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    referrer: 'no-referrer'
-  })
-    .then(response => {
-      if (response.ok) return response.json()
-      throw new Error(`Request rejected with status ${response.status}`)
-    })
-    .then(json => {
-      if (!json.version) return { samples: json }
-      return json
-    })
-}
-
 /**
  *
  * A function that cuts a data series to points where 'index' is between
@@ -227,7 +205,6 @@ export {
   dataValues,
   before,
   scale,
-  fetchSamplesData,
   cutData,
   downsampleData,
   formXYSeries

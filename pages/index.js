@@ -7,15 +7,14 @@ import DataRangePicker from '../components/DataRangePicker'
 import TitleText from '../components/TitleText'
 import SvgVisualization from '../components/SvgVisualization'
 import Tooltip from '../components/Tooltip'
-import { fetchSamplesData } from '../helpers/data'
 import { useSample } from '../hooks/useSamples'
 import { BASE_URL } from '../helpers/constants'
 import './index.css'
 
-const IndexPage = ({ sources, samples: initialSamples }) => {
+const IndexPage = ({ sources, samples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState()
-  const [sample, range, timestamp, setTimestamp] = useSample(initialSamples)
+  const [sample, range, timestamp, setTimestamp] = useSample(samples)
   const [pageState, setPageState] = useState(0)
 
   const openTooltip = slug => {
@@ -64,7 +63,5 @@ const IndexPage = ({ sources, samples: initialSamples }) => {
     </>
   )
 }
-
-IndexPage.getInitialProps = fetchSamplesData
 
 export default IndexPage
