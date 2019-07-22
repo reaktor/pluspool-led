@@ -1,0 +1,10 @@
+.download-data {
+  display: inline-flex;
+  float: right;
+  height: 26px;
+  white-space: nowrap;
+}
+
+.download-data__label {
+  padding-right: 10px;
+}
