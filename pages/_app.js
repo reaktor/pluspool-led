@@ -2,7 +2,7 @@ import React from 'react'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
-import { fetchSamplesData } from '../helpers/dataLoader'
+import { fetchSamplesData, dataFetchProcess } from '../helpers/dataLoader'
 
 const Header = () => (
   <Head>
@@ -16,37 +16,36 @@ const Header = () => (
   </Head>
 )
 
-const updateTime = 10000
+// Populate loading shim (what shows for the brief moment before a load.
+const Loading = () => (<></>)
 
 class PlusPoolApp extends App {
   constructor(props) {
     super(props)
-    this.state = { data: props }
+    this.state = { data: null }
   }
 
   componentDidMount() {
-    console.log("Begining data fetching.")
-    setInterval((() => {
-      console.log("Fetching new data ...")
-        //fetchSamplesData().then(({ samples }) => {
-        //  console.log("New data received. Loading ...")
-        //  this.setState({ data: samples })
-        //})
-    }), updateTime)
+    dataFetchProcess.start(data => this.setState({ data }))
   }
 
+
   render() {
+    const loading = (<></>)
     const { Component, pageProps } = this.props
     return (
       <Container>
         <Header />
         <Navbar />
-        <Component {...pageProps} {...this.state.data} />
+        {
+          this.state.data === null ? <Loading />
+            : (<Component {...pageProps} {...this.state.data} />)
+        }
       </Container>
     )
   }
 }
 
-PlusPoolApp.getInitialProps = fetchSamplesData
+PlusPoolApp.getInitialProps = null
 
 export default PlusPoolApp
