@@ -26,8 +26,8 @@ function DataPage ({ sources, samples: initialSamples }) {
       <Head>
         <SocialMetaTags
           url={BASE_URL}
-          title={'+ POOLWater Quality Data Dashboard'}
-          description={'A detailed dashboard for visualizing the components of water quality in the +POOL floating pool in the East River of NYC.'}
+          title={'+ POOL Water Quality Data Dashboard'}
+          description={'A detailed dashboard for visualizing the components of water quality in the + POOL floating pool in the East River of NYC.'}
           image_url={`${BASE_URL}/static/img/data-social-preview.png`}
         />
       </Head>
