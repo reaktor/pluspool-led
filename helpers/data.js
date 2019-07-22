@@ -22,19 +22,19 @@ const dataValues = {
       {
         color: '#000000',
         value: 0,
-        label: 'Acceptable'
+        label: 'EPA Safe'
       },
       {
         color: '#DB2B2B',
         value: 35,
-        label: 'Unacceptable'
+        label: 'EPA Unsafe'
       },
       {
         color: '#DB2B2B',
         value: '+104'
       }
     ],
-    transform: value => {
+    interperet: value => {
       if (value < 35) return 'Low'
       if (value < 104) return 'Medium'
       return 'High'
@@ -47,7 +47,18 @@ const dataValues = {
     unit: '%',
     description: (
       <p>Dissolved oxygen is introduced into the water by photosynthetic organisms and air-water gas exchange, and is consumed during respiration. Levels are highest during daylight and drop during the night as there is no photosynthesis to counteract consumption. Just like on land, oxygen is critical for many species of marine life, and low levels (hypoxia or anoxia) will stress or even suffocate organisms, resulting in large die-offs. Oxygen levels are primarily controlled by biological production and consumption, temperature (higher temperature decreases the solubility), and the physical mixing.</p>
-    )
+    ),
+    legend: [
+      {
+        color: '#000000',
+        value: '0%'
+      },
+      {
+        color: '#$000000',
+        value: '100%'
+      }
+    ],
+    interperet: () => 'Normal'
   },
   salinity: {
     slug: 'salinity',
@@ -56,7 +67,34 @@ const dataValues = {
     unit: 'PPT',
     description: (
       <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
-    )
+    ),
+    legend: [
+      {
+        color: '#000000',
+        value: 5,
+        label: 'drinkable but gross'
+      },
+      {
+        color: '#$000000',
+        value: 10,
+        label: 'like a ritz cracker'
+      },
+      {
+        color: '#$000000',
+        value: 15,
+        label: 'would burn any scrape'
+      },
+      {
+        color: '#$000000',
+        value: '15+'
+      }
+    ],
+    interperet: value => {
+      if (value < 5) return 'Drinkable'
+      if (value < 10) return 'Salty'
+      return 'Burns'
+    }
+
   },
   turbidity: {
     slug: 'turbidity',
@@ -66,11 +104,37 @@ const dataValues = {
     description: (
       <p>Turbidity is a measurement of the clarity of water, and thus is indicative of how many particles are suspended. Turbidity is important parameter of water quality because microbes and heavy metals may adhere to these particles. Additionally, the clarity of the water affects light penetration, habitat quality, and sedimentation rates.</p>
     ),
-    transform: value => {
+    interperet: value => {
       if (value > 1500) return 'Clear'
       if (value < 750) return 'Murky'
       return 'Normal'
-    }
+    },
+    legend: [
+      {
+        color: '#000000',
+        value: 0,
+        label: 'Clear'
+      },
+      {
+        color: '#$000000',
+        value: 300,
+        label: 'Murky'
+      },
+      {
+        color: '#$000000',
+        value: 750,
+        label: 'Opaque'
+      },
+      {
+        color: '#$000000',
+        value: '1000+'
+      }
+    ],
+    interperet: value => {
+      if (value < 300) return 'Clear'
+      if (value < 750) return 'Murky'
+      return 'Opaque'
+    },
   },
   speed: {
     slug: 'speed',
@@ -80,11 +144,37 @@ const dataValues = {
     description: (
       <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
     ),
-    transform: value => {
+    interperet: value => {
       if (value > 1.5) return 'Fast'
       if (value < 0.5) return 'Slow'
       return 'Average'
-    }
+    },
+    legend: [
+      {
+        color: '#000000',
+        value: 0,
+        label: 'Still'
+      },
+      {
+        color: '#000000',
+        value: 0.5,
+        label: 'Moving'
+      },
+      {
+        color: '#DB2B2B',
+        value: '1.5',
+        label: 'Fast'
+      },
+      {
+        color: '#DB2B2B',
+        value: '2.0+'
+      }
+    ],
+    interperet: value => {
+      if (value < 0.5) return 'Still'
+      if (value < 1) return 'Moving'
+      return 'Fast'
+    },
   },
   direction: {
     slug: 'direction',
@@ -92,9 +182,14 @@ const dataValues = {
     label: 'Direction',
     unit: 'Degrees',
     description: (
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lectus purus, euismod aliquam lacinia sit amet, semper in nulla. Aliquam erat volutpat. Proin consequat dapibus magna sit amet feugiat. Integer ultrices feugiat urna, pellentesque sagittis ante suscipit at. Duis pellentesque erat vitae accumsan vulputate. Quisque urna neque, luctus sed sapien non, euismod pharetra felis. Sed gravida porttitor elit mattis vehicula. Aenean nec est commodo, viverra turpis efficitur, tincidunt leo.</p>
+      <p>Which compass direction is the water flowing? For Pier 17, inbound would be westward and outbount would be eastward.</p>
     ),
-    transform: value => DIRECTIONS[Math.floor(value / 45)]
+    interperet: value => DIRECTIONS[Math.floor(value / 45)],
+    legend: [...DIRECTIONS, DIRECTIONS[DIRECTIONS.length - 1]].map((label, index) => ({
+      color: '#000000',
+      value: index * 45,
+      label
+    }))
   },
   ph: {
     slug: 'ph',
@@ -104,21 +199,41 @@ const dataValues = {
     description: (
       <p>The pH refers to how acidic or basic a water body is. It is a critical component of water quality because the pH controls the solubility of minerals (including the shells of calcifying organisms) and the bioavailability of both nutrients and toxic compounds such as heavy metals. In general, lowering pH decreases environmental water quality, as heavy metals tend to become more soluble and marine organisms come under stress. There is a natural diel cycle in pH due to the increased release of acidic carbon dioxide during the night. Water temperature controls gas solubility, so colder temperatures can result in more uptake of carbon dioxide from the atmosphere and lower the pH as well.</p>
     ),
-    transform: value => scale(value, -400, 400, 0, 14).toFixed(2)
+    transform: value => scale(value, -400, 400, 0, 14).toFixed(2),
+    interperet: value => {
+      if (value < 6) return 'Acidic'
+      if (value > 7) return 'Basic'
+      return 'Nuetral'
+    },
   },
   depth: {
     slug: 'depth',
     color: '#505050',
-    label: 'Depth',
+    label: 'Tide',
     unit: 'm',
     description: (
       <p>Depth shows the tides. The Hudson River Estuary is a strongly tidal system which is measured through a depth sensor on water quality sond.</p>
     ),
-    transform: value => {
-      if (value > 4) return 'High'
+    legend: [
+      {
+        color: '#000000',
+        value: 0,
+        label: 'Low Tide'
+      },
+      {
+        color: '#000000',
+        value: 3.2,
+        label: 'High Tide'
+      },
+      {
+        color: '#000000',
+        value: '4+'
+      }
+    ],
+    interperet: value => {
       if (value < 3.2) return 'Low'
-      return value
-    }
+      return 'High'
+    },
   }
 }
 

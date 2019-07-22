@@ -10,6 +10,7 @@ const getRange = samples => ({
   end: samples[samples.length - 1].noaaTime
 })
 
+// TODO: FIX NULL FILTERING
 export const useSample = samples => {
   const range = getRange(samples)
   const [timestamp, setTimestamp] = useState(range.end)

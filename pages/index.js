@@ -17,6 +17,8 @@ const IndexPage = ({ sources, samples }) => {
   const [sample, range, timestamp, setTimestamp] = useSample(samples)
   const [pageState, setPageState] = useState(0)
 
+  const advanceIntro = () => pageState < 1 && setPageState(pageState + 1)
+
   const openTooltip = slug => {
     setTooltipSlug(slug)
     setTooltipOpen(true)
@@ -39,12 +41,13 @@ const IndexPage = ({ sources, samples }) => {
           slug={tooltipSlug}
           sample={sample}
           closeTooltip={closeTooltip}
+          sources={sources}
         />
         <TitleText
           timestamp={timestamp}
           sample={sample}
           pageState={pageState}
-          onClick={() => pageState < 2 && setPageState(pageState + 1)}
+          onClick={advanceIntro}
         />
         <DataRangePicker
           setTimestamp={setTimestamp}
@@ -56,7 +59,7 @@ const IndexPage = ({ sources, samples }) => {
           sample={sample}
         />
         <SvgVisualization
-          openTooltip={openTooltip}
+          openTooltip={pageState ? openTooltip : advanceIntro }
           sample={sample}
         />
       </main>

@@ -6,6 +6,7 @@
 
 .data-range-picker__slider-container {
   position: relative;
+  z-index: 2;
 }
 
 .data-range-picker__handle-label {

@@ -29,7 +29,7 @@ const DataPage = ({ sources, samples }) => {
         />
       </Head>
       <main className='page' data-template='data'>
-        <Tooltip open={tooltipOpen} slug={tooltipSlug} closeTooltip={closeTooltip} />
+        <Tooltip open={tooltipOpen} slug={tooltipSlug} closeTooltip={closeTooltip} sources={sources} />
         <div className='page__body'>
           <Graphs openTooltip={openTooltip} samples={samples} />
         </div>

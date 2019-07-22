@@ -12,6 +12,10 @@
   }
 }
 
+.databar__wrapper {
+  z-index: 2;
+}
+
 .databar__item__wrapper {
   display: grid;
   grid-template-columns: 20px 1fr 100px 100px 24px;
