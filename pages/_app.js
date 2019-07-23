@@ -5,13 +5,10 @@ import Navbar from '../components/Navbar'
 
 const Header = () => (
   <Head>
-    <title>+POOL Lights</title>
+    <title>+ POOL Lights</title>
     <meta name='viewport' content='initial-scale=1.0, width=device-width' />
     <link rel='shortcut icon' href='/static/favicon.ico' />
     <link rel='icon' href='/static/favicon.ico' />
-    <link rel='stylesheet'
-      href='https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap'
-    />
   </Head>
 )
 

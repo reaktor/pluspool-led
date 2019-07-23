@@ -35,7 +35,7 @@ const Navbar = () => {
             </Link>
             <Link href='https://pluspool.org'>
               <a className='navbar__nav__link'>
-                What is +POOL?
+                What is + POOL?
                 <div className='navbar__nav__link__icon'><CurvedArrow /></div>
               </a>
             </Link>

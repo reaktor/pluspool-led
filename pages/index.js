@@ -31,8 +31,8 @@ const IndexPage = ({ sources, samples: initialSamples }) => {
       <Head>
         <SocialMetaTags
           url={BASE_URL}
-          title={'+ POOLWater Quality Dashboard'}
-          description={'A beautiful dashboard for visualizing water quality in the +POOL floating pool in the East River of NYC.'}
+          title={'+ POOL Water Quality Dashboard'}
+          description={'A beautiful dashboard for visualizing water quality in the + POOL floating pool in the East River of NYC.'}
           image_url={`${BASE_URL}/static/img/home-social-preview.png`}
         />
       </Head>
