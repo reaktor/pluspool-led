@@ -4,15 +4,12 @@ import Head from 'next/head'
 import SocialMetaTags from '../components/SocialMetaTags'
 import Graphs from '../components/Graphs'
 import Tooltip from '../components/Tooltip'
-import { fetchSamplesData } from '../helpers/data'
-import { useSamples } from '../hooks/useSamples'
 import { BASE_URL } from '../helpers/constants'
 import './index.css'
 
-function DataPage ({ sources, samples: initialSamples }) {
+const DataPage = ({ sources, samples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState(null)
-  const [samples] = useSamples(initialSamples)
 
   const openTooltip = slug => {
     setTooltipSlug(slug)
@@ -32,23 +29,13 @@ function DataPage ({ sources, samples: initialSamples }) {
         />
       </Head>
       <main className='page' data-template='data'>
-        <Tooltip
-          open={tooltipOpen}
-          slug={tooltipSlug}
-          closeTooltip={closeTooltip}
-          sources={sources}
-        />
+        <Tooltip open={tooltipOpen} slug={tooltipSlug} closeTooltip={closeTooltip} sources={sources} />
         <div className='page__body'>
-          <Graphs
-            openTooltip={openTooltip}
-            samples={samples}
-          />
+          <Graphs openTooltip={openTooltip} samples={samples} />
         </div>
       </main>
     </>
   )
 }
-
-DataPage.getInitialProps = fetchSamplesData
 
 export default DataPage

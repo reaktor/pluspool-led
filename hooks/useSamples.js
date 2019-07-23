@@ -1,37 +1,19 @@
 import { useState, useEffect } from 'react'
-import { fetchSamplesData } from '../helpers/data'
-
-const useSamples = initialSamples => {
-  const [samples, setSamples] = useState(initialSamples)
-  const nonNull = sample => !Object.values(sample).includes(null)
-
-  useEffect(() => fetchSamplesData().then(({ samples }) => setSamples(samples.filter(nonNull))), [])
-  return [samples]
-}
 
 const getSampleAtTimestamp = (samples, timestamp) => {
   return samples.find(({ noaaTime }) => noaaTime >= timestamp)
 }
 
-const useSample = initialSamples => {
-  const [samples] = useSamples(initialSamples)
+const getRange = samples => ({
+  start: samples[0].noaaTime,
+  end: samples[samples.length - 1].noaaTime
+})
 
-  const range = {
-    start: samples[0].noaaTime,
-    end: samples[samples.length - 1].noaaTime
-  }
-
+// TODO: FIX NULL FILTERING
+export const useSample = samplesWithNulls => {
+  const samples = samplesWithNulls.filter(d => Object.values(d).every(v => v !== null))
+  const range = getRange(samples)
   const [timestamp, setTimestamp] = useState(range.end)
-
   const sample = getSampleAtTimestamp(samples, timestamp)
-
-  useEffect(() => {
-    if (timestamp === initialSamples[initialSamples.length - 1].noaaTime) {
-      setTimestamp(range.end)
-    }
-  }, [range])
-
   return [sample, range, timestamp, setTimestamp]
 }
-
-export { useSample, useSamples }
