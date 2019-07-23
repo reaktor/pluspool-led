@@ -2,7 +2,7 @@ import { ENDPOINTS } from './constants'
 import fetch from 'isomorphic-unfetch'
 
 // fifteen seconds
-const updateTime = 20000
+const updateTime = 6*60*1000
 
 const dataFetchParams = {
   method: 'GET',

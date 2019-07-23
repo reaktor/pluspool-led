@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { fetchSamplesData } from '../helpers/dataLoader'
 
 const getSampleAtTimestamp = (samples, timestamp) => {
   return samples.find(({ noaaTime }) => noaaTime >= timestamp)
@@ -11,7 +10,8 @@ const getRange = samples => ({
 })
 
 // TODO: FIX NULL FILTERING
-export const useSample = samples => {
+export const useSample = samplesWithNulls => {
+  const samples = samplesWithNulls.filter(d => Object.values(d).every(v => v !== null))
   const range = getRange(samples)
   const [timestamp, setTimestamp] = useState(range.end)
   const sample = getSampleAtTimestamp(samples, timestamp)
