@@ -47,13 +47,15 @@ const Graphs = ({ openTooltip, samples }) => {
 
   return (
     <>
-      <GraphsDateFilter
-        units={timeUnits}
-        activeUnit={activeUnit}
-        onChange={filterOnClick}
-        name='span'
-      />
-      <DownloadData />
+      <div className='graphs-top-bar'>
+        <GraphsDateFilter
+          units={timeUnits}
+          activeUnit={activeUnit}
+          onChange={filterOnClick}
+          name='span'
+        />
+        <DownloadData />
+      </div>
       <div className='graphs'>{graphs}</div>
     </>
   )
