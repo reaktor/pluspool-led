@@ -11,7 +11,6 @@ const dataValues = {
     slug: 'bacteria',
     color: '#DB2B2B',
     label: 'Bacteria',
-    unit: 'MPN',
     description: (
       <>
         <p>While not generally harmful to humans, the presence of bacteria in the genus Enterococcus in a water body indicates possible fecal waste contamination. This waste is likely to contain pathogenic microbes and can cause disease in those using the water body directly (i.e. swimming) or indirectly (i.e. consuming marine life). The New York City Department of Health declares values under 35 Colony Forming Units (CFU) as acceptable, 35-104 CFU acceptable if transient, and greater than 104 CFU unacceptable.</p>
@@ -44,7 +43,6 @@ const dataValues = {
     slug: 'oxygen',
     color: '#1443A7',
     label: 'Oxygen',
-    unit: '%',
     description: (
       <p>Dissolved oxygen is introduced into the water by photosynthetic organisms and air-water gas exchange, and is consumed during respiration. Levels are highest during daylight and drop during the night as there is no photosynthesis to counteract consumption. Just like on land, oxygen is critical for many species of marine life, and low levels (hypoxia or anoxia) will stress or even suffocate organisms, resulting in large die-offs. Oxygen levels are primarily controlled by biological production and consumption, temperature (higher temperature decreases the solubility), and the physical mixing.</p>
     ),
@@ -64,7 +62,76 @@ const dataValues = {
     slug: 'salinity',
     color: '#009247',
     label: 'Salinity',
-    unit: 'PPT',
+    description: (
+      <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
+    ),
+    interperet: value => {
+      if (value < 5) return 'Drinkable'
+      if (value < 10) return 'Salty'
+      return 'Burns'
+    },
+    legend: [
+      {
+        color: '#000000',
+        value: 5,
+        label: 'drinkable but gross'
+      },
+      {
+        color: '#000000',
+        value: 10,
+        label: 'like a ritz cracker'
+      },
+      {
+        color: '#000000',
+        value: 15,
+        label: 'would burn any scrape'
+      },
+      {
+        color: '#000000',
+        value: '15+'
+      }
+    ]
+  },
+  temperature: {
+    slug: 'temperature',
+    color: '#A71443',
+    label: 'Temperature',
+    description: (
+      <p>When you're hot you're hot, and look at what you got. Also under 60F puts most people at risk of hypothermia.</p>
+    ),
+    interperet: (value) => {
+      if (value < 60) return 'Hypothermia'
+      if (value < 70) return 'Chilly'
+      if (value < 80) return 'Perfect'
+      return 'Warm'
+    },
+    legend: [
+      {
+        color: '#0000CC',
+        value: '<60',
+        label: 'Risk of hypothermia'
+      },
+      {
+        color: '#000000',
+        value: 70,
+        label: 'Chilly'
+      },
+      {
+        color: '#000000',
+        value: 80,
+        label: 'Perfect'
+      },
+      {
+        color: '#000000',
+        value: '>80',
+        label: 'Hot!'
+      }
+    ]
+  },
+  salinity: {
+    slug: 'salinity',
+    color: '#009247',
+    label: 'Salinity',
     description: (
       <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
     ),
@@ -99,7 +166,6 @@ const dataValues = {
     slug: 'turbidity',
     color: '#0DB3A6',
     label: 'Turbidity',
-    unit: 'NTU',
     description: (
       <p>Turbidity is a measurement of the clarity of water, and thus is indicative of how many particles are suspended. Turbidity is important parameter of water quality because microbes and heavy metals may adhere to these particles. Additionally, the clarity of the water affects light penetration, habitat quality, and sedimentation rates.</p>
     ),
@@ -134,7 +200,6 @@ const dataValues = {
     slug: 'speed',
     color: '#592150',
     label: 'Speed',
-    unit: 'KN',
     description: (
       <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
     ),
@@ -169,7 +234,6 @@ const dataValues = {
     slug: 'direction',
     color: '#F2BAD2',
     label: 'Direction',
-    unit: 'Degrees',
     description: (
       <p>Which compass direction is the water flowing? For Pier 17, inbound would be westward and outbount would be eastward.</p>
     ),
@@ -184,7 +248,6 @@ const dataValues = {
     slug: 'ph',
     color: '#592150',
     label: 'pH',
-    unit: 'pH',
     description: (
       <p>The pH refers to how acidic or basic a water body is. It is a critical component of water quality because the pH controls the solubility of minerals (including the shells of calcifying organisms) and the bioavailability of both nutrients and toxic compounds such as heavy metals. In general, lowering pH decreases environmental water quality, as heavy metals tend to become more soluble and marine organisms come under stress. There is a natural diel cycle in pH due to the increased release of acidic carbon dioxide during the night. Water temperature controls gas solubility, so colder temperatures can result in more uptake of carbon dioxide from the atmosphere and lower the pH as well.</p>
     ),
@@ -198,7 +261,6 @@ const dataValues = {
     slug: 'depth',
     color: '#505050',
     label: 'Tide',
-    unit: 'm',
     description: (
       <p>Depth shows the tides. The Hudson River Estuary is a strongly tidal system which is measured through a depth sensor on water quality sond.</p>
     ),
