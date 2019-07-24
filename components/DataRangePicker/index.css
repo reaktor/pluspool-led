@@ -8,6 +8,7 @@
 
 @media (max-width: 559px) {
   .data-range-picker {
+    flex-direction: column;
     align-self: flex-end;
   }
 }
@@ -45,16 +46,19 @@
 }
 
 .data-range-picker__labels {
-  display: none;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  line-height: 21px;
+  margin-top: 10px;
 }
 
 @media (min-width: 560px) {
   .data-range-picker__labels {
-    display: flex;
     flex-direction: column;
-    justify-content: space-between;
     font-size: 24px;
     line-height: 32px;
+    margin-top: 0;
     margin-left: 12px;
     margin-top: -0.6em;
     margin-bottom: -0.6em;
@@ -113,7 +117,7 @@
     }
   
     .rc-slider-handle.rc-slider-handle {
-      color: #7F7F7F;
+      color: #000000;
       border-radius: 0;
       box-shadow: none;
       border: 0;
@@ -138,10 +142,7 @@
       bottom: 0px;
       left: 0px;
     }
-  
-    .rc-slider-handle.rc-slider-handle:hover {
-      color: #000000;
-    }
+
   
     .rc-slider-track.rc-slider-track {
       border-radius: 0;
