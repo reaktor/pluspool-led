@@ -1,0 +1,7 @@
+.download-data {
+  display: inline-flex;
+}
+
+.download-data__label {
+  padding-right: 10px;
+}

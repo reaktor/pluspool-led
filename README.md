@@ -17,6 +17,10 @@ Netlify is a static site hosting service therefore `npm run deploy` runs `next b
 This will generate a static file version of our site inside `/out` directory. More info about static export in Next
 can be found [here](https://nextjs.org/docs#static-html-export).
 
+## Configuration for S3
+
+For info on the S3 configuration for the data files look [here](https://github.com/reaktor/pluspool-led-scrape-data).
+
 ## Configuration for Netlify
 
 ### Build settings

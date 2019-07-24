@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { dataValues, before, cutData, downsampleData } from '../../helpers/data'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
+import DownloadData from '../DownloadData'
 import './index.css'
 
 const maxResolution = 1000 // points
@@ -46,12 +47,15 @@ const Graphs = ({ openTooltip, samples }) => {
 
   return (
     <>
-      <GraphsDateFilter
-        units={timeUnits}
-        activeUnit={activeUnit}
-        onChange={filterOnClick}
-        name='span'
-      />
+      <div className='graphs-top-bar'>
+        <GraphsDateFilter
+          units={timeUnits}
+          activeUnit={activeUnit}
+          onChange={filterOnClick}
+          name='span'
+        />
+        <DownloadData />
+      </div>
       <div className='graphs'>{graphs}</div>
     </>
   )
