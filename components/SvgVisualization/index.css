@@ -1,11 +1,12 @@
 .svg-visualization {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  /* Push our animation down a bit. Dead center interfere's with the top section of databar. */
+  top: 120px;
+  right: 0;
+  bottom: 0;
+  left: 200px;
   overflow: hidden;
-  z-index: 0;
+  z-index: var(--svg-visualization--z-index);
 }
 
 .svg-visualization svg {
@@ -13,39 +14,156 @@
   height: 100%;
 }
 
-@keyframes svg-data-point-animation {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
+/**
+ * There are transforms, transitions, and animations happening on 3 separate elements below.
+ *
+ * These elements are:
+ * 1. .svg-visualization__data-point-positioning-animation 
+ *   - Used to scale the circles in and out when our sample changes. Has some delay in order to stagger the transition.
+ *   - Accomplished using two CSS animations triggered in JS.
+ * 2. .svg-visualization__data-point-breath-animation
+ *   - Used to scale the circles in and out slowly all the time.
+ *   - Accomplished using a CSS animation that is always running.
+ * 3. .svg-visualization__data-point-hover-transition
+ *   - Used to scale the circles in and out a bit on hover.
+ *   - Accomplished using a CSS transition.
+ * 
+ * There are a couple reasons for breaking this out to 3 elements which all come down to breaking up concerns. 
+ * All 3 of those elements deal with a CSS scale transform. It would be quite complicated to manage all 
+ * of this scaling on 1 element. In order to do so we would need Javascript to do math and look at 3 different
+ * inputs to determine 1 scaling factor. Javscript would need to look at
+ *   1. Where am I currently located, possibly during an animation between positions.
+ *   2. What's the progress of our breathing animation.
+ *   3. Are we hovering.
+ * With those three it would do some convoluted calculation to give us a number for our circle scale. 
+ * 
+ * Instead of generating 1 convoluted number, we break all 3 of those concerns out to separate transforms that can more easily be managed.
+ */
 
-  50%, 90% {
-    opacity: 1;
+.svg-visualization__data-point-positioning-animation {
+  /**
+   * transform-origin behaves differently on SVG elements than DOM elements.
+   * 
+   * > "For SVG elements, the origin is ... at the 0 0 point of the SVG canvas."
+   * - https://css-tricks.com/transforms-on-svg-elements/
+   * 
+   * What we do here is set the transform-origin of each circle to the center of itself.
+   */
+  transform-origin: var(--data-point--translate-x) var(--data-point--translate-y);
+  transform:
+    scale(var(--data-point--scale))
+    translate3d(
+      var(--data-point--translate-x),
+      var(--data-point--translate-y),
+      0
+    );
+}
+
+@keyframes svg-data-point-positioning-out-animation {
+  0% {
+    transform:
+      scale(var(--data-point--scale))
+      translate3d(
+        var(--data-point--translate-x),
+        var(--data-point--translate-y),
+        0
+      );
   }
 
   100% {
-    transform: scale(1.2);
-    opacity: 0;
+    transform:
+      scale(0)
+      translate3d(
+        var(--data-point--translate-x),
+        var(--data-point--translate-y),
+        0
+      );
   }
 }
 
-.svg-visualization__data-point-wrapper {
-  --transition-distance: 10%;
-  --transition-duration: 3s;
-  transition: transform-origin 0.3s 0.1s ease-in-out;
-  animation: svg-data-point-animation var(--transition-duration) infinite linear;
-  transform-origin: var(--circle--x, 50%) var(--circle--y, 50%);
+@keyframes svg-data-point-positioning-in-animation {
+  0% {
+    transform:
+      scale(0)
+      translate3d(
+        var(--data-point--translate-x),
+        var(--data-point--translate-y),
+        0
+      );
+  }
+
+  100% {
+    transform:
+      scale(var(--data-point--scale))
+      translate3d(
+        var(--data-point--translate-x),
+        var(--data-point--translate-y),
+        0
+      );
+  }
 }
 
-.svg-visualization__data-point {
-  cursor: pointer;
+.svg-visualization[data-animate-state="start"] .svg-visualization__data-point-positioning-animation {
+  transform:
+    scale(0)
+    translate3d(
+      var(--data-point--translate-x),
+      var(--data-point--translate-y),
+      0
+    );
+}
+
+.svg-visualization[data-animate-state="out"] .svg-visualization__data-point-positioning-animation {
+  animation:
+    svg-data-point-positioning-out-animation
+    var(--data-point--animation-out-duration)
+    var(--data-point--animation-out-delay)
+    cubic-bezier(1.000, 0.010, 0.345, 1.000)
+    forwards;
+}
+
+.svg-visualization[data-animate-state="in"] .svg-visualization__data-point-positioning-animation {
+  transform:
+    scale(0)
+    translate3d(
+      var(--data-point--translate-x),
+      var(--data-point--translate-y),
+      0
+    );
+
+  animation:
+    svg-data-point-positioning-in-animation
+    var(--data-point--animation-in-duration)
+    var(--data-point--animation-in-delay)
+    cubic-bezier(1.000, 0.010, 0.345, 1.000)
+    forwards;
+}
+
+.svg-visualization__data-point-hover-transition {
   transform: scale(1);
-  transition: transform 0.3s 0.1s ease-in-out;
-  transform: translate3d(var(--circle--x), var(--circle--y), 0) scale(var(--circle--radius));
-  /* transform-origin: var(--circle--x, 50%) var(--circle--y, 50%); */
+  transition: transform ease-in-out 200ms;
+  cursor: pointer;
 }
 
-.svg-visualization__data-point:hover {
-  /* transform: scale(1.2); */
-  z-index: 1000;
+.svg-visualization__data-point-hover-transition:hover {
+  transform: scale(1.1);
+}
+
+@keyframes svg-data-point-ambient-scale-animation {
+  0%, 
+  100% {
+    transform: scale(0.85);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.svg-visualization__data-point-breathing-animation {
+  animation:
+    svg-data-point-ambient-scale-animation
+    20s
+    ease-in-out
+    infinite;
 }
