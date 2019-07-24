@@ -3,6 +3,7 @@
   font-size: 16px;
   line-height: 21px;
   margin-bottom: 12px;
+  pointer-events: auto;
 }
 
 @media (min-width: 560px) {
@@ -12,13 +13,9 @@
   }
 }
 
-.databar__wrapper {
-  z-index: 2;
-}
-
 .databar__item__wrapper {
   display: grid;
-  grid-template-columns: 20px 1fr 100px 100px 24px;
+  grid-template-columns: 20px 1fr 160px 24px;
   align-items: center;
   grid-column-gap: 14px;
 }
@@ -34,7 +31,6 @@
 .databar__item__link {
   text-decoration: none;
   color: inherit;
-  pointer-events: auto;
   display: block;
   height: 100%;
   display: flex;

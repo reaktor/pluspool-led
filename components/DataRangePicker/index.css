@@ -2,11 +2,13 @@
   display: flex;
   opacity: var(--page-state-1-opacity);
   transition: opacity 1s;
+  position: relative;
+  z-index: var(--data-range-picker--z-index);
+  justify-self: flex-start;
 }
 
 .data-range-picker__slider-container {
   position: relative;
-  z-index: 2;
 }
 
 .data-range-picker__handle-label {
@@ -20,13 +22,6 @@
   margin-left: 12px;
   opacity: 0;
   transition: opacity 0.3s;
-}
-
-@media (min-width: 560px) {
-  .data-range-picker__handle-label {
-    font-size: 24px;
-    line-height: 32px;
-  }
 }
 
 .data-range-picker__handle-label.--visible {
@@ -111,15 +106,36 @@
 }
 
 .rc-slider-handle.rc-slider-handle {
+  color: #7F7F7F;
   border-radius: 0;
   box-shadow: none;
   border: 0;
   width: 100%;
-  height: 6px;
-  background-color: #000000;
+  height: 3px;
+  background-color: currentColor;
   margin-left: 0;
   margin-top: -3px;
   margin-bottom: -3px;
+  transition: color 0.1s ease-in-out;
+}
+
+/**
+ * This element allows us to make the draggable area
+ * of .rc-slider-handle larger without having to change .rc-slider-handle size.
+ * This makes it easier to make .rc-slider-handle visually 3px tall
+ * and it's draggable area 60px larger.
+ */
+.rc-slider-handle.rc-slider-handle:before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -130px;
+  bottom: -30px;
+  left: 0px;
+}
+
+.rc-slider-handle.rc-slider-handle:hover {
+  color: #000000;
 }
 
 .rc-slider-track.rc-slider-track {

@@ -14,6 +14,15 @@
   src: url('/static/fonts/StyreneB-Regular-Test.woff2') format('woff2');
 }
 
+:root {
+  --svg-visualization--z-index: 0;
+  --title-text--z-index: 1;
+  --data-range-picker--z-index: 1;
+  --databar--z-index: 1;
+  --navbar--z-index: 2;
+  --tooltip--z-index: 3;
+}
+
 *,
 *:before,
 *:after {

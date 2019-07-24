@@ -5,16 +5,15 @@ import Circle from '../../icons/Circle'
 
 import './index.css'
 
-const DatabarItem = ({ onClick, color, label, value, unit, transform, interperet }) => {
-  const [itemValue, itemUnit] = interperet ? ['', interperet(value)] : [transform ? transform(value) : value, unit]
+const DatabarItem = ({ onClick, color, label, value, unit, interperet }) => {
+  const displayValue = interperet ? interperet(value) : `${value} ${unit}`
 
   return (
     <button className='databar__item' onClick={onClick}>
       <div className='databar__item__wrapper'>
         <div className='databar__item__icon'><Circle fill={color} /></div>
         <div className='databar__item__label'>{label}</div>
-        <div className='databar__item__value'>{itemValue}</div>
-        <div className='databar__item__unit' >{itemUnit}</div>
+        <div className='databar__item__unit' >{displayValue}</div>
         <div className='databar__item__link'> <Arrow /></div>
       </div>
     </button>

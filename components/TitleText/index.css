@@ -4,7 +4,8 @@
   grid-area: title-text;
   font-weight: 400;
   margin: 0;
-  z-index: 1;
+  z-index: var(--title-text--z-index);
+  align-self: flex-start;
 }
 
 @media (min-width: 560px) {
