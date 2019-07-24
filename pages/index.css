@@ -105,7 +105,7 @@ svg {
 
 .page[data-template='index'] {
   display: grid;
-  grid-template-areas: "scrubber" "databar";
+  grid-template-areas: "title-text" "scrubber";
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: 200px minmax(0, 1fr);
   position: relative;
