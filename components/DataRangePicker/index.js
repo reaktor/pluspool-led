@@ -14,12 +14,24 @@ const SLIDER_MIN = 0
 const SLIDER_MAX = 100
 const RcHandle = RcSlider.Handle
 
-const handle = ({ atStart, atEnd, label, value, dragging, index, ...restProps }) => {
+const handle = ({
+  atStart,
+  atEnd,
+  label,
+  value,
+  dragging,
+  index,
+  ...restProps
+}) => {
   const visible = !atStart && !atEnd
-  const visibleClassName = visible ? '--visible' : '' // cannot do this with a data-attr in Preact for some reason
   return (
     <RcHandle value={value} {...restProps}>
-      <div className={`data-range-picker__handle-label ${visibleClassName}`}>{label}</div>
+      <div
+        className='data-range-picker__handle-label'
+        data-visible={visible}
+      >
+        {label}
+      </div>
     </RcHandle>
   )
 }
@@ -60,7 +72,7 @@ class DataRangePicker extends React.Component {
     const { timestamp, range: { start, end } } = this.props
 
     const timestampDate = dayjs(timestamp)
-    const diff = dayjs().subtract(5, 'hours').to(timestamp)
+    const formattedDate = dayjs(timestamp).format('ddd MMM D, YYYY')
 
     const startDate = dayjs(start)
     const atStart = startDate.isSame(timestampDate)
@@ -79,7 +91,7 @@ class DataRangePicker extends React.Component {
             onChange={value => this.onChange(value)}
             handle={(props) =>
               handle({
-                label: diff,
+                label: formattedDate,
                 atStart,
                 atEnd,
                 ...props

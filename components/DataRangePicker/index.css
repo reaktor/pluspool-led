@@ -26,18 +26,31 @@
 
 .data-range-picker__handle-label {
   position: absolute;
-  top: 0;
-  left: 100%;
+  left: -80px;
+  bottom: 100%;
   width: 160px;
   font-size: 16px;
   line-height: 21px;
-  margin-top: -0.6em;
-  margin-left: 12px;
+  margin-bottom: 8px;
+  text-align: center;
   opacity: 0;
   transition: opacity 0.3s;
 }
 
-.data-range-picker__handle-label.--visible {
+@media (min-width: 560px) {
+  .data-range-picker__handle-label {
+    top: 0;
+    left: 100%;
+    bottom: auto;
+    margin-top: -0.6em;
+    margin-left: 12px;
+    text-align: left;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+}
+
+.data-range-picker__handle-label[data-visible="true"] {
   opacity: 1;
 }
 

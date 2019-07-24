@@ -19,10 +19,14 @@ const levelText = {
   }
 }
 
-const getContent = ({ pageState, timestamp, sample }) => {
+function TitleText ({ pageState, timestamp, sample, onClick }) {
   if (pageState === 0) {
     return (
-      <>
+      <button
+        className='title-text'
+        type='button'
+        onClick={onClick}
+      >
         <h1 className='title-text__title'>
           How is the water today at East River, Manhattan?
         </h1>
@@ -32,7 +36,7 @@ const getContent = ({ pageState, timestamp, sample }) => {
             <Arrow />
           </div>
         </div>
-      </>
+      </button>
     )
   }
 
@@ -41,21 +45,11 @@ const getContent = ({ pageState, timestamp, sample }) => {
   const bacteriaText = levelText.bacteria(bacteriaLevel)
 
   return (
-    <h1 className='title-text__title'>
-      The water {timestampDiff} at Pier 17 was {bacteriaText}
-    </h1>
-  )
-}
-
-function TitleText ({ onClick, ...rest }) {
-  return (
-    <button
-      className='title-text'
-      type='button'
-      onClick={onClick}
-    >
-      {getContent(rest)}
-    </button>
+    <div className='title-text'>
+      <h1 className='title-text__title'>
+        The water {timestampDiff} at Pier 17 was {bacteriaText}
+      </h1>
+    </div>
   )
 }
 
