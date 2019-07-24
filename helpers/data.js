@@ -108,23 +108,27 @@ const dataValues = {
     legend: [
       {
         color: '#0000CC',
-        value: '<60',
+        value: '50-',
         label: 'Risk of hypothermia'
       },
       {
         color: '#000000',
-        value: 70,
+        value: 60,
         label: 'Chilly'
       },
       {
         color: '#000000',
-        value: 80,
+        value: 70,
         label: 'Perfect'
       },
       {
         color: '#000000',
-        value: '>80',
+        value: 80,
         label: 'Hot!'
+      },
+      {
+        color: '#000000',
+        value: '90+'
       }
     ]
   },
