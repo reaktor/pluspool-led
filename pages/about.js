@@ -58,4 +58,6 @@ const AboutPage = () => {
   )
 }
 
+AboutPage.displayName = 'AboutPage'
+
 export default AboutPage

@@ -2,7 +2,7 @@ import React from 'react'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
-import { fetchSamplesData, dataFetchProcess } from '../helpers/dataLoader'
+import { dataFetchProcess } from '../helpers/dataLoader'
 
 const Header = () => (
   <Head>
@@ -17,27 +17,28 @@ const Header = () => (
 const Loading = () => (<></>)
 
 class PlusPoolApp extends App {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = { data: null }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     dataFetchProcess.start(data => this.setState({ data }))
   }
 
-
-  render() {
-    const loading = (<></>)
+  render () {
     const { Component, pageProps } = this.props
+    console.log(Component)
     return (
       <Container>
-        <Header />
-        <Navbar />
-        {
-          this.state.data === null ? <Loading />
-            : (<Component {...pageProps} {...this.state.data} />)
-        }
+        <div className='container' data-template={Component.displayName}>
+          <Header />
+          <Navbar />
+          {
+            this.state.data === null ? <Loading />
+              : (<Component {...pageProps} {...this.state.data} />)
+          }
+        </div>
       </Container>
     )
   }

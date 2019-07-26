@@ -67,4 +67,6 @@ const IndexPage = ({ sources, samples }) => {
   )
 }
 
+IndexPage.displayName = 'IndexPage'
+
 export default IndexPage
