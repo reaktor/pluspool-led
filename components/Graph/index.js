@@ -57,7 +57,8 @@ const Graph = ({
   graph,
   overlayGraph,
   setOverlayGraph,
-  openTooltip
+  openTooltip,
+  units
 }) => {
   if (typeof document === 'undefined') return null
 
@@ -86,7 +87,7 @@ const Graph = ({
             <Circle fill={graph.color} />
           </div>
           <span className='graph__overlay-picker-button__text'>
-            {graph.label} ({graph.unit})
+            {graph.label} ({units[graph.slug]})
           </span>
         </h2>
         <div className='graph__header__right'>
@@ -99,7 +100,7 @@ const Graph = ({
                 <Circle fill={overlayGraph.color} />
               </div>
               <span className='graph__overlay-picker-button__text'>
-                {overlayGraph.label} ({overlayGraph.unit})
+                {overlayGraph.label} ({units[overlayGraph.slug]})
               </span>
               <div className='graph__overlay-picker-button__close'>
                 <CloseCircle />

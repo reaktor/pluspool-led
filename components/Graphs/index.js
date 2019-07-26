@@ -10,7 +10,7 @@ const maxResolution = 1000 // points
 
 const timeUnits = ['day', 'week', 'month', 'year']
 
-const Graphs = ({ openTooltip, samples }) => {
+const Graphs = ({ openTooltip, samples, units }) => {
   if (!samples) return null
 
   const [activeUnit, setActiveUnit] = useState('week')
@@ -41,6 +41,7 @@ const Graphs = ({ openTooltip, samples }) => {
       setOverlayGraph={setOverlayGraph}
       openTooltip={openTooltip}
       graph={graphProps(key)}
+      units={units}
       overlayGraph={overlayGraph && graphProps(overlayGraph)}
     />
   ))

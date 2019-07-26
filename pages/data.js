@@ -31,7 +31,7 @@ const DataPage = ({ sources, samples, units }) => {
       <main className='page' data-template='data'>
         <Tooltip open={tooltipOpen} slug={tooltipSlug} closeTooltip={closeTooltip} sources={sources} units={units} />
         <div className='page__body'>
-          <Graphs openTooltip={openTooltip} samples={samples} />
+          <Graphs openTooltip={openTooltip} samples={samples} units={units} />
         </div>
       </main>
     </>
