@@ -28,7 +28,6 @@ const displayedSlugs = [
   'oxygen',
   'salinity',
   'turbidity',
-  'speed',
   'ph',
   'bacteria'
 ]

@@ -23,12 +23,12 @@
   --navbar--z-index: 3;
   --tooltip--z-index: 4;
 
-  --nav-height: 62px;
+  --navbar--height: 62px;
 }
 
 @media (min-width: 560px) {
   :root {
-    --nav-height: 105px;
+    --navbar--height: 105px;
   }
 }
 

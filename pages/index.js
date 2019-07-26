@@ -12,8 +12,8 @@ import { BASE_URL } from '../helpers/constants'
 import './index.css'
 
 const IndexPage = ({ sources, samples }) => {
-  const [tooltipOpen, setTooltipOpen] = useState(false)
-  const [tooltipSlug, setTooltipSlug] = useState()
+  const [tooltipOpen, setTooltipOpen] = useState(true)
+  const [tooltipSlug, setTooltipSlug] = useState('bacteria')
   const [sample, range, timestamp, setTimestamp] = useSample(samples)
   const [pageState, setPageState] = useState(1)
 

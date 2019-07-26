@@ -132,7 +132,6 @@ const dataValues = {
   },
   speed: {
     slug: 'speed',
-    color: '#592150',
     label: 'Speed',
     unit: 'KN',
     description: (
@@ -167,7 +166,6 @@ const dataValues = {
   },
   direction: {
     slug: 'direction',
-    color: '#F2BAD2',
     label: 'Direction',
     unit: 'Degrees',
     description: (
@@ -196,7 +194,6 @@ const dataValues = {
   },
   depth: {
     slug: 'depth',
-    color: '#505050',
     label: 'Tide',
     unit: 'm',
     description: (
