@@ -6,9 +6,10 @@ import './index.css'
 
 const displayedSlugsTop = [
   'bacteria',
-  'oxygen',
-  'salinity',
+  'temperature',
   'turbidity',
+  'salinity',
+  'oxygen',
   'ph'
 ]
 
