@@ -28,7 +28,7 @@ class PlusPoolApp extends App {
 
   render () {
     const { Component, pageProps } = this.props
-    console.log(Component)
+
     return (
       <Container>
         <div className='container' data-template={Component.displayName}>
