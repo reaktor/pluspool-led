@@ -30,7 +30,6 @@ const displayedSlugs = [
   'temperature',
   'salinity',
   'turbidity',
-  'speed',
   'ph',
   'bacteria'
 ]

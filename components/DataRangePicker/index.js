@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { throttle } from 'lodash'
 import { scale } from '../../helpers/data'
+import { isMobile } from '../../helpers/layout'
 import 'rc-slider/assets/index.css'
 import './index.css'
 
@@ -13,12 +14,24 @@ const SLIDER_MIN = 0
 const SLIDER_MAX = 100
 const RcHandle = RcSlider.Handle
 
-const handle = ({ atStart, atEnd, label, value, dragging, index, ...restProps }) => {
+const handle = ({
+  atStart,
+  atEnd,
+  label,
+  value,
+  dragging,
+  index,
+  ...restProps
+}) => {
   const visible = !atStart && !atEnd
-  const visibleClassName = visible ? '--visible' : '' // cannot do this with a data-attr in Preact for some reason
   return (
     <RcHandle value={value} {...restProps}>
-      <div className={`data-range-picker__handle-label ${visibleClassName}`}>{label}</div>
+      <div
+        className='data-range-picker__handle-label'
+        data-visible={visible}
+      >
+        {label}
+      </div>
     </RcHandle>
   )
 }
@@ -38,20 +51,28 @@ class DataRangePicker extends React.Component {
   // Scale from Slider value to our timestamp
   scaleFrom (value) {
     const { range: { start, end } } = this.props
-    return scale(value, SLIDER_MIN, SLIDER_MAX, start, end)
+    // On mobile we need to flip our min and max in order to have the slider start from the left
+    // Without doing this the slider would put "Today" at the right side
+    return isMobile()
+      ? scale(value, SLIDER_MAX, SLIDER_MIN, start, end)
+      : scale(value, SLIDER_MIN, SLIDER_MAX, start, end)
   }
 
   // Scale our timestamp to our Slider value
   scaleTo (value) {
     const { range: { start, end } } = this.props
-    return scale(value, start, end, SLIDER_MIN, SLIDER_MAX)
+    // On mobile we need to flip our min and max in order to have the slider start from the left
+    // Without doing this the slider would put "Today" at the right side
+    return isMobile()
+      ? scale(value, start, end, SLIDER_MAX, SLIDER_MIN)
+      : scale(value, start, end, SLIDER_MIN, SLIDER_MAX)
   }
 
   render () {
     const { timestamp, range: { start, end } } = this.props
 
     const timestampDate = dayjs(timestamp)
-    const diff = dayjs().subtract(5, 'hours').to(timestamp)
+    const formattedDate = dayjs(timestamp).format('ddd MMM D, YYYY')
 
     const startDate = dayjs(start)
     const atStart = startDate.isSame(timestampDate)
@@ -63,14 +84,14 @@ class DataRangePicker extends React.Component {
       <div className='data-range-picker'>
         <div className='data-range-picker__slider-container'>
           <RcSlider
-            vertical
+            vertical={!isMobile()}
             min={SLIDER_MIN}
             max={SLIDER_MAX}
             value={this.scaleTo(timestamp)}
             onChange={value => this.onChange(value)}
             handle={(props) =>
               handle({
-                label: diff,
+                label: formattedDate,
                 atStart,
                 atEnd,
                 ...props

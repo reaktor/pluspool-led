@@ -19,8 +19,17 @@
   --title-text--z-index: 1;
   --data-range-picker--z-index: 1;
   --databar--z-index: 1;
-  --navbar--z-index: 2;
-  --tooltip--z-index: 3;
+  --navbar__nav--z-index: 2;
+  --navbar--z-index: 3;
+  --tooltip--z-index: 4;
+
+  --navbar--height: 62px;
+}
+
+@media (min-width: 560px) {
+  :root {
+    --navbar--height: 105px;
+  }
 }
 
 *,
@@ -46,12 +55,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #FFFFFF;
   color: #000000;
-  overflow-x: hidden;
-}
-
-#__next {
-  display: flex;
-  flex-direction: column;
 }
 
 button {
@@ -93,6 +96,7 @@ svg {
   width: 100%;
   max-width: 1800px;
   margin: auto;
+  overflow-x: hidden;
 }
 
 @media (min-width: 560px) {
@@ -103,9 +107,15 @@ svg {
   }
 }
 
+.container[data-template='IndexPage'] {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .page[data-template='index'] {
   display: grid;
-  grid-template-areas: "scrubber" "databar";
+  grid-template-areas: "title-text" "scrubber";
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: 200px minmax(0, 1fr);
   position: relative;

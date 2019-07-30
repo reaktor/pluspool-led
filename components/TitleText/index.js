@@ -1,6 +1,7 @@
 import React from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import Arrow from '../../icons/Arrow'
 import './index.css'
 
 dayjs.extend(relativeTime)
@@ -18,25 +19,37 @@ const levelText = {
   }
 }
 
-const getPageText = ({ pageState, timestamp, sample }) => {
+function TitleText ({ pageState, timestamp, sample, onClick }) {
   if (pageState === 0) {
-    return 'How is the water today? Click to find out.'
+    return (
+      <button
+        className='title-text'
+        type='button'
+        onClick={onClick}
+      >
+        <h1 className='title-text__title'>
+          How is the water today at East River, Manhattan?
+        </h1>
+        <div className='title-text__button'>
+          Find out
+          <div className='title-text__button__icon'>
+            <Arrow />
+          </div>
+        </div>
+      </button>
+    )
   }
 
   const timestampDiff = dayjs().subtract(5, 'hours').to(timestamp)
   const bacteriaLevel = sample.bacteria
   const bacteriaText = levelText.bacteria(bacteriaLevel)
 
-  return `The water ${timestampDiff} at Pier 17 was ${bacteriaText}`
-}
-
-function TitleText ({ onClick, ...rest }) {
   return (
-    <h1 className='title-text'>
-      <button type='button' onClick={onClick}>
-        {getPageText(rest)}
-      </button>
-    </h1>
+    <div className='title-text'>
+      <h1 className='title-text__title'>
+        The water {timestampDiff} at Pier 17 was {bacteriaText}
+      </h1>
+    </div>
   )
 }
 

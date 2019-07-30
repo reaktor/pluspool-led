@@ -202,7 +202,6 @@ const dataValues = {
   },
   speed: {
     slug: 'speed',
-    color: '#592150',
     label: 'Speed',
     description: (
       <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
@@ -236,7 +235,6 @@ const dataValues = {
   },
   direction: {
     slug: 'direction',
-    color: '#F2BAD2',
     label: 'Direction',
     description: (
       <p>Which compass direction is the water flowing? For Pier 17, inbound would be westward and outbount would be eastward.</p>
@@ -263,7 +261,6 @@ const dataValues = {
   },
   depth: {
     slug: 'depth',
-    color: '#505050',
     label: 'Tide',
     description: (
       <p>Depth shows the tides. The Hudson River Estuary is a strongly tidal system which is measured through a depth sensor on water quality sond.</p>

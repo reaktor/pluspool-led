@@ -38,4 +38,6 @@ const DataPage = ({ sources, samples, units }) => {
   )
 }
 
+DataPage.displayName = 'DataPage'
+
 export default DataPage

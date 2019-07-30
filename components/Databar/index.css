@@ -1,6 +1,6 @@
 .databar {
+  display: none;
   grid-area: databar;
-  display: flex;
   flex-direction: column;
   justify-content: flex-end;
   pointer-events: none;
@@ -11,6 +11,7 @@
 
 @media (min-width: 560px) {
   .databar {
+    display: flex;
     border-left: 1px solid #000000;
     padding-left: 40px;
     justify-content: space-between;

@@ -14,6 +14,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
 
   const [source, unit] = [ sources[slug], units[slug] ]
   const { label, legend, description, transform, color } = dataValues[slug]
+
   const value = sample ? transform ? transform(sample[slug]) : sample[slug] : null
 
   return (
@@ -44,9 +45,9 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
           </button>
         </div>
         <div className='tooltip__heading'>
-          <div className='tooltip__icon'>
+          {color && <div className='tooltip__icon'>
             <Circle fill={color} />
-          </div>
+          </div>}
           <h4 className='tooltip__header'>{label}</h4>
           {value && <span className='tooltip__value'>{value} {unit}</span>}
         </div>

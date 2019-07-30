@@ -1,17 +1,48 @@
 .title-text {
-  display: none;
-  font-family: 'Styrene A';
-  grid-area: title-text;
-  font-weight: 400;
-  margin: 0;
+  position: relative;
   z-index: var(--title-text--z-index);
   align-self: flex-start;
 }
 
+.title-text__title {
+  font-family: 'Styrene A';
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+  grid-area: title-text;
+  margin: 0;
+}
+
 @media (min-width: 560px) {
-  .title-text {
-    display: initial;
+  .title-text__title {
     font-size: 36px;
     line-height: 45px;
   }
+}
+
+.title-text__button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #000000;
+  padding: 14px 20px;
+  font-size: 16px;
+  line-height: 21px;
+  width: 66%;
+  max-width: 320px;
+  margin-top: 20px;
+}
+
+@media (min-width: 560px) {
+  .title-text__button {
+    font-size: 24px;
+    line-height: 32px;
+    max-width: 320px;
+    margin-top: 40px;
+  }
+}
+
+.title-text__button__icon {
+  width: 24px;
+  margin-left: 14px;
 }

@@ -11,9 +11,11 @@ import { useSample } from '../hooks/useSamples'
 import { BASE_URL } from '../helpers/constants'
 import './index.css'
 
+
 const IndexPage = ({ sources, units, samples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState()
+
   const [sample, range, timestamp, setTimestamp] = useSample(samples)
   const [pageState, setPageState] = useState(0)
 
@@ -67,5 +69,7 @@ const IndexPage = ({ sources, units, samples }) => {
     </>
   )
 }
+
+IndexPage.displayName = 'IndexPage'
 
 export default IndexPage
