@@ -11,7 +11,8 @@ const simplexNoises = {
   turbidity: new SimplexNoise(0.4),
   speed: new SimplexNoise(1.5),
   ph: new SimplexNoise(1.2),
-  bacteria: new SimplexNoise(-3.4)
+  bacteria: new SimplexNoise(-3.4),
+  temperature: new SimplexNoise(1.7)
 }
 
 const SCALE = 100
@@ -26,6 +27,7 @@ const ANIMATION_STATE_START = 'start'
 
 const displayedSlugs = [
   'oxygen',
+  'temperature',
   'salinity',
   'turbidity',
   'ph',

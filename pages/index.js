@@ -11,9 +11,11 @@ import { useSample } from '../hooks/useSamples'
 import { BASE_URL } from '../helpers/constants'
 import './index.css'
 
-const IndexPage = ({ sources, samples }) => {
-  const [tooltipOpen, setTooltipOpen] = useState(true)
-  const [tooltipSlug, setTooltipSlug] = useState('bacteria')
+
+const IndexPage = ({ sources, units, samples }) => {
+  const [tooltipOpen, setTooltipOpen] = useState(false)
+  const [tooltipSlug, setTooltipSlug] = useState()
+
   const [sample, range, timestamp, setTimestamp] = useSample(samples)
   const [pageState, setPageState] = useState(1)
 
@@ -42,6 +44,7 @@ const IndexPage = ({ sources, samples }) => {
           sample={sample}
           closeTooltip={closeTooltip}
           sources={sources}
+          units={units}
         />
         <TitleText
           timestamp={timestamp}

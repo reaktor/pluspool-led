@@ -7,7 +7,7 @@ import Tooltip from '../components/Tooltip'
 import { BASE_URL } from '../helpers/constants'
 import './index.css'
 
-const DataPage = ({ sources, samples }) => {
+const DataPage = ({ sources, samples, units }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState(null)
 
@@ -29,9 +29,9 @@ const DataPage = ({ sources, samples }) => {
         />
       </Head>
       <main className='page' data-template='data'>
-        <Tooltip open={tooltipOpen} slug={tooltipSlug} closeTooltip={closeTooltip} sources={sources} />
+        <Tooltip open={tooltipOpen} slug={tooltipSlug} closeTooltip={closeTooltip} sources={sources} units={units} />
         <div className='page__body'>
-          <Graphs openTooltip={openTooltip} samples={samples} />
+          <Graphs openTooltip={openTooltip} samples={samples} units={units} />
         </div>
       </main>
     </>

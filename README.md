@@ -1,8 +1,32 @@
-This is a water quality data visualization and exploration tool.
+This is a water quality data visualization and exploration tool. You can view it on https://water.pluspool.org.
+
+If you are interested in helping out, check [the projects board][] and reach out in #pluspool and via pluspool@reaktor.com.
 
 We are happy to receive any feedback using [github issues][]
 
-The main applications pulls from a file generated from the noaa api and a datagarrison stream to share the current conditions of Pier 17.
+# Architecture
+
+## repositories
+```
+reaktor/pluspool-led                   application respository, built in react
+reaktor/pluspool-led-scrape-data       data scraping tool, runs every 6 minutes on a digitalocean box
+jedahan/predicted-mpn                  npm package for turning rainfall data into predicted bacteria amount
+```
+## data sources
+
+datagarrison - used for central park rainfall data, and the sensor in pier 17
+
+noaa tides and currents - used for speed and direction of water flow
+
+## hosting
+```
+s3             for samples data
+netlify        for application hosting
+digital ocean  for grabbing all the data and uploading to s3
+mediatemple    ns for water.pluspool.org
+```
+
+# Development
 
 To start developing:
 
@@ -42,3 +66,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 
 [github issues]: https://github.com/reaktor/pluspool-led/issues
+[the projects board]: https://github.com/reaktor/pluspool-led/projects

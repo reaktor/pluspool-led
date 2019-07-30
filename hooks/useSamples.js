@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const getSampleAtTimestamp = (samples, timestamp) => {
   return samples.find(({ noaaTime }) => noaaTime >= timestamp)
