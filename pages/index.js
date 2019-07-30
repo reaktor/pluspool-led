@@ -17,7 +17,7 @@ const IndexPage = ({ sources, units, samples }) => {
   const [tooltipSlug, setTooltipSlug] = useState()
 
   const [sample, range, timestamp, setTimestamp] = useSample(samples)
-  const [pageState, setPageState] = useState(1)
+  const [pageState, setPageState] = useState(0)
 
   const advanceIntro = () => pageState < 1 && setPageState(pageState + 1)
 
