@@ -28,10 +28,10 @@ function TitleText ({ pageState, timestamp, sample, onClick }) {
         onClick={onClick}
       >
         <h1 className='title-text__title'>
-          How is the water today at East River, Manhattan?
+          How is the water in today?
         </h1>
         <div className='title-text__button'>
-          Find out
+          Click here to find out.
           <div className='title-text__button__icon'>
             <Arrow />
           </div>

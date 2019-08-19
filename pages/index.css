@@ -72,6 +72,10 @@ button {
   text-align: inherit;
 }
 
+a:hover {
+  color: #808080;
+}
+
 p {
   line-height: 1.5;
   max-width: 48em;
@@ -124,12 +128,18 @@ svg {
 
 @media (min-width: 560px) {
   .page[data-template='index'] {
-    grid-column-gap: 120px;
+    grid-column-gap: 60px;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: minmax(0, 300fr) minmax(0, 400fr);
     grid-template-areas:
       "title-text databar"
       "scrubber databar";
+  }
+}
+
+@media (min-width: 1200px) {
+  .page[data-template='index'] {
+    grid-column-gap: 120px;
   }
 }
 

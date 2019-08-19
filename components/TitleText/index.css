@@ -21,15 +21,13 @@
 }
 
 .title-text__button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
   border: 1px solid #000000;
   padding: 14px 20px;
   font-size: 16px;
   line-height: 21px;
-  width: 66%;
-  max-width: 320px;
   margin-top: 20px;
 }
 
@@ -37,7 +35,6 @@
   .title-text__button {
     font-size: 24px;
     line-height: 32px;
-    max-width: 320px;
     margin-top: 40px;
   }
 }

@@ -55,7 +55,6 @@
 .navbar__title__link {
   color: inherit;
   text-decoration: none;
-
   display: flex;
   align-items: center;
 }

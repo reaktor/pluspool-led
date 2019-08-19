@@ -13,29 +13,28 @@ const dataValues = {
     label: 'Bacteria',
     description: (
       <>
-        <p>While not generally harmful to humans, the presence of bacteria in the genus Enterococcus in a water body indicates possible fecal waste contamination. This waste is likely to contain pathogenic microbes and can cause disease in those using the water body directly (i.e. swimming) or indirectly (i.e. consuming marine life). The New York City Department of Health declares values under 35 Colony Forming Units (CFU) as acceptable, 35-104 CFU acceptable if transient, and greater than 104 CFU unacceptable.</p>
-        <p>While the concentration of Enterococci generally takes 24 hours to be measured, we have developed a predictive algorithm based off highly correlated environmental parameters, such as precipitation, in order to present in real-time the probable concentration of Enterococci. Like the standard 24 hour measurement, this value is reported in Most Probable Number, or MPN.</p>
+        <p>This is kind of a big one and why we put it first.  Bacteria, specifically “Enterococcus,” is the main factor that impacts whether or not it’s safe to swim in the water. The NYC Department of Health says its safe to swim when levels are under 35 Colony Forming Units (CFU). The problem is, current systems for testing the concentration of bacteria generally takes a 24 hours lab test. That's why we have developed a predictive algorithm with our friends at Columbia University based off highly correlated environmental parameters, such as precipitation, in order to present in real-time the probable concentration of Enterococci. Like the standard 24 hour lab measurement, this value is reported in Most Probable Number, or MPN.</p>
       </>
     ),
     interperet: value => {
-      if (value < 35) return 'Low'
-      if (value < 104) return 'Medium'
-      return 'High'
+      if (value < 35) return 'Good'
+      if (value < 104) return 'Bad'
+      return 'Ugly'
     },
     legend: [
       {
-        color: '#000000',
         value: 0,
-        label: 'EPA Safe'
+        label: 'Good'
       },
       {
         color: '#DB2B2B',
         value: 35,
-        label: 'EPA Unsafe'
+        label: 'Bad'
       },
       {
         color: '#DB2B2B',
-        value: '+104'
+        value: 104,
+        label: 'Ugly'
       }
     ]
   },
@@ -44,51 +43,15 @@ const dataValues = {
     color: '#1443A7',
     label: 'Oxygen',
     description: (
-      <p>Dissolved oxygen is introduced into the water by photosynthetic organisms and air-water gas exchange, and is consumed during respiration. Levels are highest during daylight and drop during the night as there is no photosynthesis to counteract consumption. Just like on land, oxygen is critical for many species of marine life, and low levels (hypoxia or anoxia) will stress or even suffocate organisms, resulting in large die-offs. Oxygen levels are primarily controlled by biological production and consumption, temperature (higher temperature decreases the solubility), and the physical mixing.</p>
+      <p>Just like the air we breath on land, oxygen supports life in the water. This parameter gets its clever name, Dissolved Oxygen, because oxygen makes its way into the water from the air, or its produced by underwater plants and dissolves in water. Levels tend to be highest during daylight (when plants and animals use it to breath) and drop during the night (when there’s no photosynthesis to counteract consumption).</p>
     ),
     interperet: () => 'Normal',
     legend: [
       {
-        color: '#000000',
         value: '0%'
       },
       {
-        color: '#000000',
         value: '100%'
-      }
-    ]
-  },
-  salinity: {
-    slug: 'salinity',
-    color: '#009247',
-    label: 'Salinity',
-    description: (
-      <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
-    ),
-    interperet: value => {
-      if (value < 5) return 'Drinkable'
-      if (value < 10) return 'Salty'
-      return 'Burns'
-    },
-    legend: [
-      {
-        color: '#000000',
-        value: 5,
-        label: 'drinkable but gross'
-      },
-      {
-        color: '#000000',
-        value: 10,
-        label: 'like a ritz cracker'
-      },
-      {
-        color: '#000000',
-        value: 15,
-        label: 'would burn any scrape'
-      },
-      {
-        color: '#000000',
-        value: '15+'
       }
     ]
   },
@@ -106,29 +69,21 @@ const dataValues = {
       return 'Warm'
     },
     legend: [
-      {
-        color: '#0000CC',
-        value: '50-',
-        label: 'Risk of hypothermia'
+      {        color: '#0000CC',
+        value: -50,
+        label: 'Hypothermia'
       },
       {
-        color: '#000000',
         value: 60,
         label: 'Chilly'
       },
       {
-        color: '#000000',
         value: 70,
         label: 'Perfect'
       },
       {
-        color: '#000000',
         value: 80,
-        label: 'Hot!'
-      },
-      {
-        color: '#000000',
-        value: '90+'
+        label: 'Warm'
       }
     ]
   },
@@ -137,32 +92,20 @@ const dataValues = {
     color: '#009247',
     label: 'Salinity',
     description: (
-      <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
+      <p>Some water has salt, some water is fresh. In the East River, its a little bit of both!  Salinity changes often in NYC because the river is actually an estuary, where salt water (coming in from the ocean) and fresh water (coming down from Upstate) mix together. Thats why when the water is flowing north there tends to be a higher level of salinity and when the water is flowing south, salinity tends to be lower.</p>
     ),
     interperet: value => {
-      if (value < 5) return 'Drinkable'
       if (value < 10) return 'Salty'
-      return 'Burns'
+      return 'Stings'
     },
     legend: [
       {
-        color: '#000000',
-        value: 5,
-        label: 'drinkable but gross'
+        value: 0,
+        label: 'Salty'
       },
       {
-        color: '#000000',
         value: 10,
-        label: 'like a ritz cracker'
-      },
-      {
-        color: '#000000',
-        value: 15,
-        label: 'would burn any scrape'
-      },
-      {
-        color: '#000000',
-        value: '15+'
+        label: 'Stings'
       }
     ]
   },
@@ -171,7 +114,7 @@ const dataValues = {
     color: '#0DB3A6',
     label: 'Turbidity',
     description: (
-      <p>Turbidity is a measurement of the clarity of water, and thus is indicative of how many particles are suspended. Turbidity is important parameter of water quality because microbes and heavy metals may adhere to these particles. Additionally, the clarity of the water affects light penetration, habitat quality, and sedimentation rates.</p>
+      <p>We track turbidity to to see how much funk is in the water.  Funk can take the form of floating particles like clay, silt, algae, or sewage. This might be obvious, but generally, clear water is healthier than murky or opaque water. More floating particles equals greater turbidity.  [NEW PARAGRAPH] Turbidity is a pretty unique water quality parameter in that its a visible - you can see with your eyes if water has high turbidity or low turbidity, unlike other parameters, such as oxygen. But we still measure it in what's called NTU, which stands for Nephelometric Turbidity Units simply because the instrument used for measuring it is called a nephelometer. This instrument traces the amount of light that can penetrate through the water.  More light means turbidity is low. And less light? More funk.  </p>
     ),
     interperet: value => {
       if (value < 300) return 'Clear'
@@ -179,24 +122,14 @@ const dataValues = {
       return 'Opaque'
     },
     legend: [
-      {
-        color: '#000000',
-        value: 0,
+      {        value: 0,
         label: 'Clear'
       },
-      {
-        color: '#000000',
-        value: 300,
+      {        value: 300,
         label: 'Murky'
       },
-      {
-        color: '#000000',
-        value: 750,
+      {        value: 750,
         label: 'Opaque'
-      },
-      {
-        color: '#000000',
-        value: '1000+'
       }
     ]
   },
@@ -204,7 +137,7 @@ const dataValues = {
     slug: 'speed',
     label: 'Speed',
     description: (
-      <p>Salinity is a measurement of dissolved salts in the water, and is calculated from a measurement of conductance. The Hudson River is a tidal estuary, so the salinity is controlled by the tides pulling freshwater south and saltwater north. Thus the salinity indicates the source of the water and can correlate with several other parameters.</p>
+      <p>Speed effects how fast (or how slow!) an area of water changes. Not related to the Keanue Reeves film(s).</p>
     ),
     interperet: value => {
       if (value < 0.5) return 'Still'
@@ -213,23 +146,17 @@ const dataValues = {
     },
     legend: [
       {
-        color: '#000000',
         value: 0,
         label: 'Still'
       },
       {
-        color: '#000000',
         value: 0.5,
         label: 'Moving'
       },
       {
         color: '#DB2B2B',
-        value: '1.5',
+        value: 1.5,
         label: 'Fast'
-      },
-      {
-        color: '#DB2B2B',
-        value: '2.0+'
       }
     ]
   },
@@ -237,11 +164,10 @@ const dataValues = {
     slug: 'direction',
     label: 'Direction',
     description: (
-      <p>Which compass direction is the water flowing? For Pier 17, inbound would be westward and outbount would be eastward.</p>
+      <p>Due to the tides coming in and going out from the ocean, the East River runs north for six hours and then runs south for six hours. Pretty cool.</p>
     ),
     interperet: value => DIRECTIONS[Math.floor(value / 45)],
     legend: [...DIRECTIONS, DIRECTIONS[DIRECTIONS.length - 1]].map((label, index) => ({
-      color: '#000000',
       value: index * 45,
       label
     }))
@@ -251,13 +177,28 @@ const dataValues = {
     color: '#592150',
     label: 'pH',
     description: (
-      <p>The pH refers to how acidic or basic a water body is. It is a critical component of water quality because the pH controls the solubility of minerals (including the shells of calcifying organisms) and the bioavailability of both nutrients and toxic compounds such as heavy metals. In general, lowering pH decreases environmental water quality, as heavy metals tend to become more soluble and marine organisms come under stress. There is a natural diel cycle in pH due to the increased release of acidic carbon dioxide during the night. Water temperature controls gas solubility, so colder temperatures can result in more uptake of carbon dioxide from the atmosphere and lower the pH as well.</p>
+      <p>pH tells us whether water is acidic or basic. For good water quality, we don't want pH to be too high or too low. pH is effected by all kinds of things, including rain and snow, which tend to be acidic. Wetlands and marshes tend to help keep pH balanced.</p>
     ),
     interperet: value => {
       if (value < 6) return 'Acidic'
       if (value > 7) return 'Basic'
       return 'Neutral'
-    }
+    },
+    max: 14,
+    legend: [
+      {
+        value: 0,
+        label: 'Acidic'
+      },
+      {
+        value: 6,
+        label: 'Neutral'
+      },
+      {
+        value: 7,
+        label: 'Basic'
+      }
+    ]
   },
   depth: {
     slug: 'depth',
@@ -271,18 +212,12 @@ const dataValues = {
     },
     legend: [
       {
-        color: '#000000',
         value: 0,
-        label: 'Low Tide'
+        label: 'Low'
       },
       {
-        color: '#000000',
         value: 3.2,
-        label: 'High Tide'
-      },
-      {
-        color: '#000000',
-        value: '4+'
+        label: 'High'
       }
     ]
   }

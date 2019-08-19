@@ -3,8 +3,8 @@
   position: fixed;
   right: 0;
   top: 0;
+  bottom: 0;
   z-index: var(--tooltip--z-index);
-  height: 100%;
   width: 100%;
   padding: var(--tooltip-padding);
 
@@ -41,9 +41,10 @@
 .tooltip__inner {
   display: flex;
   flex-direction: column;
-  max-height: 100%;
+  height: 100%;
   flex-grow: 1;
   position: relative;
+  overflow: auto;
 }
 
 @media (min-width: 850px) {
@@ -112,7 +113,6 @@
 
 .tooltip__body {
   max-width: 37.5em;
-  overflow: auto;
   margin-top: 20px;
   margin-bottom: 20px;
 }
