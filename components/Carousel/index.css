@@ -1,8 +1,8 @@
 .slider {
-  margin-left: -20px;
-  margin-right: -20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  margin-left: calc(var(--outer-gutter) * -1);
+  margin-right: calc(var(--outer-gutter) * -1);
+  padding-left: var(--outer-gutter);
+  padding-right: var(--outer-gutter);
 }
 
 .slider__tray {
@@ -23,12 +23,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-}
-
-@media (min-width: 560px) {
-  .slider__slide {
-    padding-right: 40px;
-  }
 }
 
 .slider__slide__image {
