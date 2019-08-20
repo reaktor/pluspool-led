@@ -6,7 +6,7 @@ const TooltipLegend = ({ legend, max }) => (
   <div className='tooltip-legend'>
     {legend.map(({ color, value, label }, index) => (
       <>
-        <div className='tooltip-legend__item' style={{ '--color': color }}>
+        <div className='tooltip-legend__item' style={color ? { '--color': color } : {}}>
           <div className='tooltip-legend__item__arrow-value'>
             <div className='tooltip-legend__item__value'>
               <span>{value}</span>

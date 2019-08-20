@@ -48,6 +48,14 @@ const getConfig = () => {
     }
   }
 
+  if (width < 1200) {
+    return {
+      naturalSlideWidth: 240,
+      naturalSlideHeight: 350,
+      visibleSlides: 2.5
+    }
+  }
+
   return {
     naturalSlideWidth: 350,
     naturalSlideHeight: 610,
@@ -55,7 +63,7 @@ const getConfig = () => {
   }
 }
 
-const MySlide = ({ index, children }) => (
+const CarouselSlide = ({ index, children }) => (
   <Slide
     className='slider__slide-container'
     innerClassName='slider__slide'
@@ -80,7 +88,9 @@ class Carousel extends React.Component {
   constructor (props) {
     super(props)
     this.onResize = throttle(this.onResize.bind(this), 1000 / 60)
-    this.state = getConfig()
+    this.state = {
+      config: getConfig()
+    }
   }
 
   componentWillUnmount () {
@@ -93,22 +103,11 @@ class Carousel extends React.Component {
 
   onResize () {
     const config = getConfig()
-    console.log(config)
-    this.setState({ ...config })
+    this.setState({ config })
   }
 
   render () {
-    const isMobile = (typeof window !== 'undefined' && window.innerWidth < 560)
-
-    const config = isMobile ? {
-      naturalSlideWidth: 240,
-      naturalSlideHeight: 350,
-      visibleSlides: 1.2
-    } : {
-      naturalSlideWidth: 350,
-      naturalSlideHeight: 610,
-      visibleSlides: 3.5
-    }
+    const { config } = this.state
 
     return (
       <div>
@@ -121,13 +120,13 @@ class Carousel extends React.Component {
             classNameTray='slider__tray'
           >
             {slides.map((slide, index) => (
-              <MySlide index={index}>
+              <CarouselSlide index={index}>
                 {{
                   image: slide.image,
                   title: slide.title,
                   body: slide.body
                 }}
-              </MySlide>
+              </CarouselSlide>
             ))}
 
           </Slider>

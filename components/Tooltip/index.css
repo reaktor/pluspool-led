@@ -19,18 +19,12 @@
   transition: opacity 200ms ease-in;
 }
 
-@media (min-width: 850px) {
+@media (min-width: 960px) {
   .tooltip {
     --tooltip-padding: 40px;
     width: 50%;
     top: var(--navbar--height);
   }
-}
-
-.tooltip hr {
-  width: 100%;
-  height: 2px;
-  border: 1px solid rgb(0, 0, 0);
 }
 
 .tooltip[data-active="true"] {
@@ -112,14 +106,22 @@
 }
 
 .tooltip__body {
+  font-size: 16px;
+  line-height: 24px;
   max-width: 37.5em;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.tooltip__body p {
-  font-size: 16px;
-  line-height: 1.5;
+.tooltip__body h4 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.tooltip__body h4 + p {
+  margin-top: 0;
 }
 
 .tooltip__link {

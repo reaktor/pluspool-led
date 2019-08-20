@@ -55,6 +55,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #FFFFFF;
   color: #000000;
+  overflow-x: hidden;
 }
 
 button {
@@ -70,6 +71,10 @@ button {
   margin: 0;
   appearance: none;
   text-align: inherit;
+}
+
+a {
+  color: inherit;
 }
 
 a:hover {
@@ -94,20 +99,18 @@ svg {
 }
 
 .page {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
+  --outer-gutter: 20px;
+  padding-left: var(--outer-gutter);
+  padding-right: var(--outer-gutter);
+  padding-bottom: var(--outer-gutter);
   width: 100%;
   max-width: 1800px;
   margin: auto;
-  overflow-x: hidden;
 }
 
 @media (min-width: 560px) {
   .page {
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 40px;
+    --outer-gutter: 40px;
   }
 }
 
@@ -151,6 +154,34 @@ svg {
 .page[data-page-state="1"] {
   --page-state-1-opacity: 1;
   --page-state-2-opacity: 1;
+}
+
+.about-credits {
+  background: #000000;
+  color: #FFFFFF;
+  margin-left: calc(var(--outer-gutter) * -1);
+  margin-right: calc(var(--outer-gutter) * -1);
+  margin-bottom: calc(var(--outer-gutter) * -1);
+  padding: var(--outer-gutter);
+  text-align: center;
+}
+
+.about-credits h3 {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: #0073E5;
+}
+
+.about-credits ul {
+  padding: 0;
+  list-style: none;
+}
+
+.about-credits__wrapper {
+  max-width: 48em;
+  display: block;
+  margin: auto;
 }
 
 /* utilities */
