@@ -2,7 +2,7 @@ import React from 'react'
 import TooltipLegend from '../TooltipLegend'
 import TooltipSource from '../TooltipSource'
 import { dataValues } from '../../helpers/data'
-import { content } from '../../helpers/content'
+import content from '../../content'
 import Circle from '../../icons/Circle'
 
 import './index.css'

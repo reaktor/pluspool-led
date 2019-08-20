@@ -156,6 +156,34 @@ svg {
   --page-state-2-opacity: 1;
 }
 
+.about-credits {
+  background: #000000;
+  color: #FFFFFF;
+  margin-left: calc(var(--outer-gutter) * -1);
+  margin-right: calc(var(--outer-gutter) * -1);
+  margin-bottom: calc(var(--outer-gutter) * -1);
+  padding: var(--outer-gutter);
+  text-align: center;
+}
+
+.about-credits h3 {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: #0073E5;
+}
+
+.about-credits ul {
+  padding: 0;
+  list-style: none;
+}
+
+.about-credits__wrapper {
+  max-width: 48em;
+  display: block;
+  margin: auto;
+}
+
 /* utilities */
 
 @media (max-width: 559px) {
