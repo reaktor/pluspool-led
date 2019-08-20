@@ -6,49 +6,34 @@ import './index.css'
 
 const slides = [
   {
-    image: '/static/img/about/pluspool-placeholder.jpg',
+    image: '/static/img/about/image-billionoyster.jpg',
     title: 'Billion Oyster Project',
-    body: <p>The Billion Oyster Project of the New York Harbor School is teaching students to cultivate oysters, which naturally filter the river, with the goal of cultivating one billion oysters by 2030. Volunteer with the Billion Oyster Project!</p>
+    body: <p>The Billion Oyster Project of the New York Harbor School is teaching students to cultivate oysters, which naturally filter the river, with the goal of cultivating one billion oysters by 2030. Volunteer with the Billion Oyster Project! Work alongside staff and students to build oyster reef structures, prepare recycled shell for new oysters, sort and count baby oysters, and much more.</p>
   },
   {
-    image: '/static/img/about/pluspool-placeholder.jpg',
-    title: 'New York Water Trails',
-    body: <p>New York Water Trails is a group of individuals who have taken it upon themselves to collect water samples and map water quality across the City where there is none.  Volunteer to become a water quality sampler here.</p>
+    image: '/static/img/about/image-nywatertrails.jpg',
+    title: 'New York Water Trail Association',
+    body: <p>New York Water Trail Association is a group of individuals who have taken it upon themselves to collect water samples and map water quality across the City where there is none.  Volunteer to become a water quality sampler by contacting NYCWTA on their website <a target='_BLANK' rel='noopener' href='http://www.nycwatertrail.org/index.html'>here</a>.</p>
   },
   {
-    image: '/static/img/about/pluspool-placeholder.jpg',
+    image: '/static/img/about/image-riverkeeper.jpg',
     title: 'Riverkeeper',
-    body: <p>Riverkeepr is a nonprofit and government watchdog working to preserve and protect our waterways. You can help promote healthy rivers by and make a difference by urging your New York State legislators to take actions to better the waters that surround us here.</p>
+    body: <p>Riverkeeper is a member-supported watchdog organization dedicated to defending the Hudson River and its tributaries, and protecting the drinking water supply of more than nine million New York City and Hudson Valley residents. You can help promote healthy rivers by and make a difference by urging your New York State legislators to take actions to better the waters that surround us <a target='_BLANK' rel='noopener' href='https://www.riverkeeper.org/get-involved/take-action/'>here</a>.</p>
   },
   {
-    image: '/static/img/about/pluspool-placeholder.jpg',
+    image: '/static/img/about/image-newtoncreek.jpg',
     title: 'Newtown Creek Alliance',
-    body: <p>TKTK.</p>
+    body: <p>Newtown Creek Alliance (NCA) is a community-based organization dedicated to restoring, revealing and revitalizing Newtown Creek, the waterbody that flows between Brooklyn and Queens and empties into the East River. In 2010 Newtown Creek was named a Superfund site by the U.S. Environmental Protection Agency, which means, the federal government has identified it as an area in need of cleanup due to its contamination by hazardous substances and pollutants. You can help through NCA’s <a target='_BLANK' rel='noopener' href='http://www.newtowncreekalliance.org/eyes-on-the-creek/'>Eye on the Creek</a> Program.</p>
   },
   {
-    image: '/static/img/about/pluspool-placeholder.jpg',
+    image: '/static/img/about/image-gowanuscanal.jpg',
     title: 'Gowanus Canal Conservancy',
-    body: <p>TKTK.</p>
+    body: <p>Gowanus Canal Conservancy is dedicated to facilitating the development of a resilient, vibrant, open space network centered on the Gowanus Canal through activating and empowering community stewardship of the Gowanus Watershed. Each year over 1,000 volunteers take part in exciting and creative projects that expand green spaces in the Gowanus Watershed, <a target='_BLANK' rel='noopener' href='https://gowanuscanalconservancy.org/volunteer/'>find out more here!</a></p>
   },
   {
-    image: '/static/img/about/pluspool-placeholder.jpg',
+    image: '/static/img/about/image-bronxalliance.jpg',
     title: 'Bronx River Alliance',
-    body: <p>TKTK.</p>
-  },
-  {
-    image: '/static/img/about/pluspool-placeholder.jpg',
-    title: 'Hudson River Foundation',
-    body: <p>TKTK.</p>
-  },
-  {
-    image: '/static/img/about/pluspool-placeholder.jpg',
-    title: 'NY/NJ Harbor Baykeeper',
-    body: <p>TKTK.</p>
-  },
-  {
-    image: '/static/img/about/pluspool-placeholder.jpg',
-    title: 'Lamont-Doherty Earth Observatory',
-    body: <p>TKTK.</p>
+    body: <p>The Bronx River, is approximately 24 miles long, flows all the way from White Plains down to the East River and is the only freshwater river in NYC! The Bronx River Alliance (BRA) works to protect, improve and restore the Bronx River corridor.  You can <a target='_BLANK' rel='noopener' href='http://bronxriver.org/volunteer'>support their efforts by volunteering</a> to plant trees, remove invasive species, or act as a bike ride marshall.</p>
   }
 ]
 
@@ -74,7 +59,7 @@ const MySlide = ({ index, children }) => (
   <Slide
     className='slider__slide-container'
     innerClassName='slider__slide'
-    innerTag='a'
+    innerTag='div'
     index={index}
   >
     <div className='slider__slide__image'>
@@ -113,7 +98,6 @@ class Carousel extends React.Component {
   }
 
   render () {
-    const { items } = this.props
     const isMobile = (typeof window !== 'undefined' && window.innerWidth < 560)
 
     const config = isMobile ? {
@@ -148,8 +132,8 @@ class Carousel extends React.Component {
 
           </Slider>
           <div className='slider__buttons'>
-            <ButtonBack className='slider__button slider__button--prev'>&lt;</ButtonBack>
-            <ButtonNext className='slider__button slider__button--next'>&gt;</ButtonNext>
+            <ButtonBack className='slider__button slider__button--prev'>&lt; Back</ButtonBack>
+            <ButtonNext className='slider__button slider__button--next'>More &gt;</ButtonNext>
           </div>
         </CarouselProvider>
       </div>

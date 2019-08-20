@@ -2,7 +2,7 @@ import { ENDPOINTS } from './constants'
 import fetch from 'isomorphic-unfetch'
 
 // fifteen seconds
-const updateTime = 6*60*1000
+const updateTime = 6 * 60 * 1000
 
 const dataFetchParams = {
   method: 'GET',
@@ -25,24 +25,23 @@ export const fetchSamplesData = () => fetch(ENDPOINTS.samples, dataFetchParams)
 
 export const dataFetchProcess = (() => {
   let dataFetchProcess = null
-  
+
   const fetching = update => () => {
-    console.log("Fetching new data ...")
+    console.log('Fetching new data ...')
     fetchSamplesData().then(data => {
-      console.log("New data received. Loading ...")
+      console.log('New data received. Loading ...')
       update(data)
     })
   }
-  
+
   const start = update => {
     if (dataFetchProcess === null) {
-      console.log("Begining data fetching.")
+      console.log('Begining data fetching.')
       const fetcher = fetching(update)
       fetcher() // first instance
       dataFetchProcess = setInterval(fetcher, updateTime)
-    }
-    else {
-      console.log("Data fetching already running.")
+    } else {
+      console.log('Data fetching already running.')
     }
   }
 

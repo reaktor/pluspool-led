@@ -40,7 +40,7 @@
 .slider__slide__image:before {
   content: '';
   display: block;
-  padding-bottom: 104%;
+  padding-bottom: 43%;
 }
 
 .slider__slide__image img {
@@ -73,20 +73,20 @@
 }
 
 .slider__buttons {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
   margin-top: 40px;
 }
 
 .slider__button {
   color: #000000;
   border: 1px solid currentColor;
-  width: 60px;
-  height: 60px;
-}
-
-.slider__button + .slider__button {
-  margin-left: 20px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .slider__button[disabled] {
