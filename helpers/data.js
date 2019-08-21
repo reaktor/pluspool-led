@@ -22,12 +22,10 @@ const dataValues = {
         label: 'Good'
       },
       {
-        color: '#DB2B2B',
         value: 35,
         label: 'Bad'
       },
       {
-        color: '#DB2B2B',
         value: 104,
         label: 'Ugly'
       }
@@ -58,7 +56,7 @@ const dataValues = {
       return 'Warm'
     },
     legend: [
-      {        color: '#0000CC',
+      {
         value: -50,
         label: 'Hypothermia'
       },
@@ -134,7 +132,6 @@ const dataValues = {
         label: 'Moving'
       },
       {
-        color: '#DB2B2B',
         value: 1.5,
         label: 'Fast'
       }
