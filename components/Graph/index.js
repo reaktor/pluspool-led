@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
+import OverlayData from '../../icons/OverlayData'
 import QuestionMark from '../../icons/QuestionMark'
+import Legend from '../Legend'
 import GraphTooltip from '../GraphTooltip'
-import { formXYSeries } from '../../helpers/data'
+import { dataValues, formXYSeries } from '../../helpers/data'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -77,16 +79,18 @@ const Graph = ({
     axisLeft: null,
     axisRight: { format: d => `${d}` },
     enableGridY: false
-  } 
+  }
+
+  const { legend, max } = dataValues[graph.slug]
 
   return (
     <section>
       <header className='graph__header'>
         <h2 className='graph__title'>
-          <div className='graph__overlay-picker-button__icon'>
+          <div className='graph__title__circle'>
             <Circle fill={graph.color} />
           </div>
-          <span className='graph__overlay-picker-button__text'>
+          <span className='graph__title__text'>
             {graph.label} ({units[graph.slug]})
           </span>
         </h2>
@@ -96,7 +100,7 @@ const Graph = ({
               className='graph__overlay-picker-button'
               onClick={() => setOverlayGraph(null)}
             >
-              <div className='graph__overlay-picker-button__icon'>
+              <div className='graph__overlay-picker-button__circle'>
                 <Circle fill={overlayGraph.color} />
               </div>
               <span className='graph__overlay-picker-button__text'>
@@ -113,7 +117,10 @@ const Graph = ({
               onClick={() => setOverlayGraph(graph.slug)}
             >
               <span className='graph__overlay-picker-button__text'>
-                Compare
+                Overlay Data
+              </span>
+              <span className='graph__overlay-picker-button__icon'>
+                <OverlayData />
               </span>
             </button>
           }
@@ -133,6 +140,9 @@ const Graph = ({
             <LineGraph {...overlayGraph} props={ overlayGraphProps } tooltip={null} />
           </div>
         }
+      </div>
+      <div className='graph__legend'>
+        {legend && <Legend legend={legend} max={max} />}
       </div>
     </section>
   )

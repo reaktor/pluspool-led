@@ -1,13 +1,13 @@
 .graphs {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-row-gap: 5px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-row-gap: 60px;
   grid-column-gap: 45px;
 }
 
 @media (min-width: 560px) {
   .graphs {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 }
 

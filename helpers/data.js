@@ -140,11 +140,7 @@ const dataValues = {
   direction: {
     slug: 'direction',
     label: 'Direction',
-    interperet: value => DIRECTIONS[Math.floor(value / 45)],
-    legend: [...DIRECTIONS, DIRECTIONS[DIRECTIONS.length - 1]].map((label, index) => ({
-      value: index * 45,
-      label
-    }))
+    interperet: value => DIRECTIONS[Math.floor(value / 45)]
   },
   ph: {
     slug: 'ph',

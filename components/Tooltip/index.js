@@ -1,5 +1,5 @@
 import React from 'react'
-import TooltipLegend from '../TooltipLegend'
+import Legend from '../Legend'
 import TooltipSource from '../TooltipSource'
 import { dataValues } from '../../helpers/data'
 import content from '../../content'
@@ -52,7 +52,11 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
           <h3 className='tooltip__header'>{label}</h3>
           {value && <span className='tooltip__value'>{value} {unit}</span>}
         </div>
-        {legend && <TooltipLegend legend={legend} max={max} />}
+        {legend && (
+          <div className='tooltip__legend'>
+            <Legend legend={legend} max={max} />
+          </div>
+        )}
         <div className='tooltip__body'>
           {content.tooltip[slug]}
         </div>
