@@ -2,16 +2,16 @@ import React from 'react'
 
 import './index.css'
 
-const TooltipLegend = ({ legend, max }) => (
-  <div className='tooltip-legend'>
+const Legend = ({ legend, max }) => (
+  <div className='legend'>
     {legend.map(({ color, value, label }, index) => (
       <>
-        <div className='tooltip-legend__item' style={color ? { '--color': color } : {}}>
-          <div className='tooltip-legend__item__arrow-value'>
-            <div className='tooltip-legend__item__value'>
+        <div className='legend__item' style={color ? { '--color': color } : {}}>
+          <div className='legend__item__arrow-value'>
+            <div className='legend__item__value'>
               <span>{value}</span>
             </div>
-            <div className='tooltip-legend__item__arrow'>
+            <div className='legend__item__arrow'>
               <svg viewBox='0 -5 10 10' preserveAspectRatio='none'>
                 <path
                   vector-effect='non-scaling-stroke'
@@ -32,7 +32,7 @@ const TooltipLegend = ({ legend, max }) => (
               </svg>
             </div>
           </div>
-          <div className='tooltip-legend__item__bar'>
+          <div className='legend__item__bar'>
             <svg viewBox='0 0 10 10' preserveAspectRatio='none'>
               <path
                 vector-effect='non-scaling-stroke'
@@ -43,12 +43,12 @@ const TooltipLegend = ({ legend, max }) => (
                 d='M0,0l0,10l10,0l0,-10' />
             </svg>
           </div>
-          <div className='tooltip-legend__item__label'>{label}</div>
+          <div className='legend__item__label'>{label}</div>
         </div>
         {(index === legend.length - 1) && 
-          <div className='tooltip-legend__item --last' style={{ '--color': color }}>
-            <div className='tooltip-legend__item__arrow-value'>
-              <div className='tooltip-legend__item__value'>
+          <div className='legend__item --last' style={{ '--color': color }}>
+            <div className='legend__item__arrow-value'>
+              <div className='legend__item__value'>
                 { max ? max : (<span>+{value}</span>)}
               </div>
             </div>
@@ -59,4 +59,4 @@ const TooltipLegend = ({ legend, max }) => (
   </div>
 )
 
-export default TooltipLegend
+export default Legend
