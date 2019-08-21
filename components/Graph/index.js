@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import QuestionMark from '../../icons/QuestionMark'
+import Legend from '../Legend'
 import GraphTooltip from '../GraphTooltip'
-import { formXYSeries } from '../../helpers/data'
+import { dataValues, formXYSeries } from '../../helpers/data'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -77,7 +78,9 @@ const Graph = ({
     axisLeft: null,
     axisRight: { format: d => `${d}` },
     enableGridY: false
-  } 
+  }
+
+  const { legend, max } = dataValues[graph.slug]
 
   return (
     <section>
@@ -133,6 +136,9 @@ const Graph = ({
             <LineGraph {...overlayGraph} props={ overlayGraphProps } tooltip={null} />
           </div>
         }
+      </div>
+      <div className='graph__legend'>
+        {legend && <Legend legend={legend} max={max} />}
       </div>
     </section>
   )

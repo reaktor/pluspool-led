@@ -94,6 +94,10 @@
   }
 }
 
+.tooltip__legend {
+  margin-top: 60px;
+}
+
 .tooltip__value {
   margin-left: auto;
   font-size: 16px;

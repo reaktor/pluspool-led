@@ -52,7 +52,11 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
           <h3 className='tooltip__header'>{label}</h3>
           {value && <span className='tooltip__value'>{value} {unit}</span>}
         </div>
-        {legend && <Legend legend={legend} max={max} />}
+        {legend && (
+          <div className='tooltip__legend'>
+            <Legend legend={legend} max={max} />
+          </div>
+        )}
         <div className='tooltip__body'>
           {content.tooltip[slug]}
         </div>

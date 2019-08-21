@@ -69,3 +69,9 @@
   position: absolute;
   z-index: 1;
 }
+
+.graph__legend {
+  padding-left: 40px; /* This is the same value we pass to our graph margin in Graph/index.js */
+  padding-right: 40px; /* This is the same value we pass to our graph margin in Graph/index.js */
+  margin-top: 20px;
+}
