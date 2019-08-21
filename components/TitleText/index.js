@@ -2,6 +2,7 @@ import React from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Arrow from '../../icons/Arrow'
+import content from '../../content'
 import './index.css'
 
 dayjs.extend(relativeTime)
@@ -9,13 +10,13 @@ dayjs.extend(relativeTime)
 const levelText = {
   bacteria: (value) => {
     if (value < 35) {
-      return 'acceptable to swim in.'
+      return content.titleText.bacteriaText.acceptable
     }
     if (value < 104) {
-      return 'unnacceptable to swim in if levels persist.'
+      return content.titleText.bacteriaText.unacceptablePersist
     }
 
-    return 'unnacceptable to swim in.'
+    return content.titleText.bacteriaText.unacceptable
   }
 }
 
@@ -28,10 +29,10 @@ function TitleText ({ pageState, timestamp, sample, onClick }) {
         onClick={onClick}
       >
         <h1 className='title-text__title'>
-          How is the water in today?
+          {content.titleText.introText}
         </h1>
         <div className='title-text__button'>
-          Click here to find out.
+          {content.titleText.introCta}
           <div className='title-text__button__icon'>
             <Arrow />
           </div>
@@ -47,7 +48,7 @@ function TitleText ({ pageState, timestamp, sample, onClick }) {
   return (
     <div className='title-text'>
       <h1 className='title-text__title'>
-        The water {timestampDiff} at Pier 17 was {bacteriaText}
+        {content.titleText.statusText(timestampDiff, bacteriaText)}
       </h1>
     </div>
   )
