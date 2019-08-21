@@ -54,6 +54,7 @@
     ]
   },
   "dependencies": {
+    "@tippy.js/react": "^2.2.2",
     "pure-react-carousel": "^1.21.1",
     "react-slick": "^0.24.0"
   }

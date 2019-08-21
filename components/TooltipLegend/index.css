@@ -37,6 +37,7 @@
 
 .tooltip-legend__item__label {
   font-size: 12px;
+  line-height: 15px;
   text-transform: uppercase;
   text-align: center;
   margin-top: 7px;
