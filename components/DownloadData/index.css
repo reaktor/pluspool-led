@@ -2,6 +2,7 @@
   display: inline-flex;
 }
 
-.download-data__label {
-  padding-right: 10px;
+.download-data__icon {
+  width: 26px;
+  margin-left: 10px;
 }

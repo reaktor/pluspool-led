@@ -3,7 +3,7 @@ import React from 'react'
 const DownloadIcon = () => (
   <svg width='26px' height='26px' viewBox='0 0 26 26'>
     <g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>
-      <g transform='translate(-1376.000000, -146.000000)' stroke='#000000'>
+      <g transform='translate(-1376.000000, -146.000000)' stroke='currentColor'>
         <g transform='translate(1230.000000, 146.000000)'>
           <g transform='translate(147.000000, 1.000000)'>
             <path d='M3.6,8.4 L20.4,8.4' transform='translate(12.000000, 8.400000) rotate(90.000000) translate(-12.000000, -8.400000) ' />
