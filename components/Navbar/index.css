@@ -1,11 +1,13 @@
 .navbar {
-  background: #FFFFFF;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-bottom: 20px;
   position: sticky;
   top: 0;
   z-index: var(--navbar--z-index);
+  background: #FFFFFF;
+  /* this is so our background extends to the edges */
+  margin-left: calc(var(--outer-gutter) * -1);
+  margin-right: calc(var(--outer-gutter) * -1);
+  padding-left: var(--outer-gutter);
+  padding-right: var(--outer-gutter);
 }
 
 @media (max-width: 559px) {
@@ -26,8 +28,6 @@
 
 @media (min-width: 560px) {
   .navbar {
-    padding-left: 40px;
-    padding-right: 40px;
     margin-bottom: 30px;
   }
 }
@@ -36,11 +36,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #000000;
   width: 100%;
   max-width: 1800px;
   height: var(--navbar--height);
   margin: auto;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000000;
 }
 
 .navbar__title {

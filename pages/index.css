@@ -15,6 +15,7 @@
 }
 
 :root {
+  /* z-index */
   --svg-visualization--z-index: 0;
   --title-text--z-index: 1;
   --data-range-picker--z-index: 1;
@@ -23,7 +24,9 @@
   --navbar--z-index: 3;
   --tooltip--z-index: 4;
 
+  /* rest */
   --navbar--height: 62px;
+  --site--max-width: 1800px;
 }
 
 @media (min-width: 560px) {
@@ -99,17 +102,20 @@ svg {
 }
 
 .page {
+  width: 100%;
+  max-width: var(--site--max-width);
+  margin: auto;
+}
+
+.container {
   --outer-gutter: 20px;
   padding-left: var(--outer-gutter);
   padding-right: var(--outer-gutter);
   padding-bottom: var(--outer-gutter);
-  width: 100%;
-  max-width: 1800px;
-  margin: auto;
 }
 
 @media (min-width: 560px) {
-  .page {
+  .container {
     --outer-gutter: 40px;
   }
 }
