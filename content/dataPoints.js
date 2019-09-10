@@ -97,13 +97,13 @@ export default {
       return 'Opaque'
     },
     legend: [
-      {        value: 0,
+      { value: 0,
         label: 'Clear'
       },
-      {        value: 300,
+      { value: 300,
         label: 'Murky'
       },
-      {        value: 750,
+      { value: 750,
         label: 'Opaque'
       }
     ]

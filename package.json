@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "@nivo/line": "^0.59.0",
+    "@tippy.js/react": "^2.2.2",
     "@zeit/next-css": "^1.0.1",
     "dayjs": "^1.8.14",
     "isomorphic-unfetch": "^3.0.0",
@@ -15,9 +16,11 @@
     "next-transpile-modules": "^2.3.1",
     "preact": "^10.0.0-rc.0",
     "preact-render-to-string": "^5.0.6",
+    "pure-react-carousel": "^1.21.1",
     "rc-slider": "^8.6.13",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-slick": "^0.24.0",
     "simplex-noise": "^2.4.0",
     "slick-carousel": "^1.8.1",
     "standard": "^13.0.2",
@@ -52,10 +55,5 @@
     "env": [
       "jest"
     ]
-  },
-  "dependencies": {
-    "@tippy.js/react": "^2.2.2",
-    "pure-react-carousel": "^1.21.1",
-    "react-slick": "^0.24.0"
   }
 }
