@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { dataValues, before, cutData, downsampleData } from '../../helpers/data'
+import { before, cutData, downsampleData } from '../../helpers/data'
+import content from '../../content'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
 import DownloadData from '../DownloadData'
@@ -24,17 +25,17 @@ const Graphs = ({ openTooltip, samples, units }) => {
   }
 
   const [max, min] = domain
-  const dsColumns = Array.from(Object.keys(dataValues))
+  const dsColumns = Array.from(Object.keys(content.dataPoints))
   const domainSamples = cutData(samples, 'noaaTime', min, max)
   const dsSamples = downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
 
   const graphProps = key => ({
     x: 'noaaTime',
-    y: dataValues[key].slug,
+    y: content.dataPoints[key].slug,
     domain: domain,
     data: dsSamples,
-    unit: units[dataValues[key].slug],
-    ...dataValues[key]
+    unit: units[content.dataPoints[key].slug],
+    ...content.dataPoints[key]
   })
 
   const graphs = dsColumns.map(key => (

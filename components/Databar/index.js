@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { dataValues } from '../../helpers/data'
+import content from '../../content'
 import DatabarItem from '../DatabarItem'
 import './index.css'
 
@@ -20,14 +20,14 @@ const displayedSlugsBottom = [
 ]
 
 const displayDatabarItem = ({ openTooltip, sample, slug }) => {
-  const data = dataValues[slug]
+  const datum = content.dataPoints[slug]
 
   return (
     <DatabarItem
       key={slug}
       value={sample[slug]}
       onClick={() => openTooltip(slug)}
-      {...data}
+      {...datum}
     />
   )
 }

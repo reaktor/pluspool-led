@@ -1,7 +1,6 @@
 import React from 'react'
 import Legend from '../Legend'
 import TooltipSource from '../TooltipSource'
-import { dataValues } from '../../helpers/data'
 import content from '../../content'
 import Circle from '../../icons/Circle'
 
@@ -14,7 +13,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
   }
 
   const [source, unit] = [ sources[slug], units[slug] ]
-  const { label, legend, transform, color, max } = dataValues[slug]
+  const { label, legend, transform, color, max } = content.dataPoints[slug]
 
   const value = sample ? transform ? transform(sample[slug]) : sample[slug] : null
 

@@ -5,7 +5,8 @@ import OverlayData from '../../icons/OverlayData'
 import QuestionMark from '../../icons/QuestionMark'
 import Legend from '../Legend'
 import GraphTooltip from '../GraphTooltip'
-import { dataValues, formXYSeries } from '../../helpers/data'
+import { formXYSeries } from '../../helpers/data'
+import content from '../../content'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -81,7 +82,7 @@ const Graph = ({
     enableGridY: false
   }
 
-  const { legend, max } = dataValues[graph.slug]
+  const { legend, max } = content.dataPoints[graph.slug]
 
   return (
     <section>

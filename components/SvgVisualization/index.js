@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import { dataValues, scale } from '../../helpers/data'
+import { scale } from '../../helpers/data'
+import content from '../../content'
 import './index.css'
 import SimplexNoise from 'simplex-noise'
 
@@ -42,7 +43,7 @@ const getValues = (sample) => {
   return displayedSlugs
     .filter(slug => slug in sample)
     .reduce((acc, slug) => {
-      const data = dataValues[slug]
+      const data = content.dataPoints[slug]
       const { color } = data
       const value = parseFloat(sample[slug])
       const simplex = simplexNoises[slug]
