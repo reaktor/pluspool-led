@@ -1,5 +1,6 @@
 import React from 'react'
 import AboutSection from '../components/AboutSection'
+import SocialMetaTags from '../components/SocialMetaTags'
 import content from '../content'
 import './index.css'
 
@@ -26,7 +27,7 @@ const AboutPage = () => {
           </div>
         </section>
       </main>
-    <>
+    </>
   )
 }
 
