@@ -9,6 +9,7 @@ import SvgVisualization from '../components/SvgVisualization'
 import Tooltip from '../components/Tooltip'
 import { useSample } from '../hooks/useSamples'
 import { BASE_URL } from '../helpers/constants'
+import content from '../content'
 import './index.css'
 
 
@@ -29,14 +30,12 @@ const IndexPage = ({ sources, units, samples }) => {
 
   return (
     <>
-      <Head>
-        <SocialMetaTags
-          url={BASE_URL}
-          title={'+ POOL Water Quality Dashboard'}
-          description={'A beautiful dashboard for visualizing water quality in the + POOL floating pool in the East River of NYC.'}
-          image_url={`${BASE_URL}/static/img/home-social-preview.png`}
-        />
-      </Head>
+      <SocialMetaTags
+        url={content.social.url}
+        title={content.social.title}
+        description={content.social.description}
+        image_url={content.social.image_url}
+      />
       <main className='page' data-template='index' data-page-state={pageState}>
         <Tooltip
           open={tooltipOpen}

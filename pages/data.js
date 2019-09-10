@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 
-import Head from 'next/head'
 import SocialMetaTags from '../components/SocialMetaTags'
 import Graphs from '../components/Graphs'
 import Tooltip from '../components/Tooltip'
-import { BASE_URL } from '../helpers/constants'
+import content from '../content'
 import './index.css'
 
 const DataPage = ({ sources, samples, units }) => {
@@ -20,14 +19,12 @@ const DataPage = ({ sources, samples, units }) => {
 
   return (
     <>
-      <Head>
-        <SocialMetaTags
-          url={BASE_URL}
-          title={'+ POOL Water Quality Data Dashboard'}
-          description={'A detailed dashboard for visualizing the components of water quality in the + POOL floating pool in the East River of NYC.'}
-          image_url={`${BASE_URL}/static/img/data-social-preview.png`}
-        />
-      </Head>
+      <SocialMetaTags
+        url={content.social.url}
+        title={content.social.title}
+        description={content.social.description}
+        image_url={content.social.image_url}
+      />
       <main className='page' data-template='data'>
         <Tooltip open={tooltipOpen} slug={tooltipSlug} closeTooltip={closeTooltip} sources={sources} units={units} />
         <div className='page__body'>
