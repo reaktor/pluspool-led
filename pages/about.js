@@ -1,5 +1,6 @@
 import React from 'react'
 import AboutSection from '../components/AboutSection'
+import content from '../content'
 import './index.css'
 
 const AboutPage = () => {
