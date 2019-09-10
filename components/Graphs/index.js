@@ -33,6 +33,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
     y: dataValues[key].slug,
     domain: domain,
     data: dsSamples,
+    unit: units[dataValues[key].slug],
     ...dataValues[key]
   })
 
