@@ -1,5 +1,5 @@
 const ENDPOINTS = {
-  samples: 'https://pluspool-east-river-data.s3.us-east-2.amazonaws.com/samples.json.gz'
+  samples: 'https://pluspool-east-river-data.s3.us-east-2.amazonaws.com/samples.json'
 }
 
 const DIRECTIONS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
