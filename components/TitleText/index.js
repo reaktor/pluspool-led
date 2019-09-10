@@ -41,7 +41,7 @@ function TitleText ({ pageState, timestamp, sample, onClick }) {
     )
   }
 
-  const timestampDiff = dayjs().subtract(5, 'hours').to(timestamp)
+  const timestampDiff = dayjs().to(timestamp)
   const bacteriaLevel = sample.bacteria
   const bacteriaText = levelText.bacteria(bacteriaLevel)
 
