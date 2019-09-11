@@ -1,10 +1,10 @@
 import React from 'react'
 import TitleTextTooltip from '../components/TitleTextTooltip'
 
-const tooltipText = `But you still shouldn't! This dashboard does not condone illegal swimming and is only an awareness platform. Please don't jump in until we have a +POOL!`
+const tooltipText = `But even if we say water is great for swimming, we are NOT suggesting that you get in it! This dashboard does not condone unsanctioned swimming and is only an awareness platform. Please don't jump in until we have a + POOL!`
 
 export default {
-  introText: 'How is the water today?',
+  introText: 'We’re tracking the water in the NYC harbor at Pier 17 How is the water in today?',
   introCta: 'Click here to find out.',
   bacteriaText: {
     acceptable: <>acceptable to <TitleTextTooltip tooltipText={tooltipText}>swim in</TitleTextTooltip>.</>,

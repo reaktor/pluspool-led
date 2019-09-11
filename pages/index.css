@@ -177,6 +177,12 @@ svg {
   line-height: inherit;
   font-weight: inherit;
   color: #0073E5;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.about-credits section {
+  margin-top: 4em;
 }
 
 .about-credits ul {

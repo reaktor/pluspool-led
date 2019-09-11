@@ -4,7 +4,7 @@ export default {
   bacteria: {
     slug: 'bacteria',
     color: '#F2BAD2',
-    label: 'Bacteria',
+    label: 'Pathogens',
     interperet: value => {
       if (value < 35) return 'Good'
       if (value < 104) return 'Bad'
@@ -44,26 +44,26 @@ export default {
     color: '#DB2B2B',
     label: 'Temperature',
     interperet: (value) => {
-      if (value < 60) return 'Hypothermia'
-      if (value < 70) return 'Chilly'
-      if (value < 80) return 'Perfect'
+      if (value < 47) return 'Hypothermia'
+      if (value < 60) return 'Chilly'
+      if (value < 71) return 'Cool'
       return 'Warm'
     },
     legend: [
       {
-        value: -50,
+        value: 32,
         label: 'Hypothermia'
       },
       {
-        value: 60,
+        value: 47,
         label: 'Chilly'
       },
       {
-        value: 70,
-        label: 'Perfect'
+        value: 60,
+        label: 'Cool'
       },
       {
-        value: 80,
+        value: 71,
         label: 'Warm'
       }
     ]
@@ -90,21 +90,21 @@ export default {
   turbidity: {
     slug: 'turbidity',
     color: '#0DB3A6',
-    label: 'Turbidity',
+    label: 'Clarity',
     interperet: value => {
-      if (value < 300) return 'Clear'
-      if (value < 750) return 'Murky'
-      return 'Opaque'
+      if (value < 20) return 'Clear'
+      if (value < 75) return 'Cloudy'
+      return 'Murky'
     },
     legend: [
       { value: 0,
         label: 'Clear'
       },
-      { value: 300,
-        label: 'Murky'
+      { value: 20,
+        label: 'Cloudy'
       },
-      { value: 750,
-        label: 'Opaque'
+      { value: 75,
+        label: 'Murky'
       }
     ]
   },

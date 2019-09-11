@@ -1,88 +1,49 @@
 export default {
   bacteria: (
     <>
-      <p>This is kind of a big one and why we put it first. Bacteria, specifically “Enterococcus,” is the main factor that impacts whether or not it’s safe to swim in the water. The NYC Department of Health says its safe to swim when levels are under 35 Colony Forming Units (CFU). The problem is, current systems for testing the concentration of bacteria generally takes a 24 hours lab test. That's why we have developed a predictive algorithm with our friends at Columbia University based off highly correlated environmental parameters, such as precipitation, in order to present in real-time the probable concentration of Enterococci. Like the standard 24 hour lab measurement, this value is reported in Most Probable Number, or MPN.</p>
-      <h4>Why We Care</h4>
-      <p>Before bacteria became a major issue affecting our water quality, New Yorkers used to swim in the river all the time!  By the year 1890, there were 15 floating bathhouses that gave New Yorkers access points to swim in the river. In 1911, of the 4.8 million people that lived in NYC, 1.8 million used the floating baths - that's 40%!</p>
-      <h4>Your Impact</h4>
-      <p>How do our actions affect bacteria in the water?</p>
-      <ul>
-        <li>excessive water use during rain storms that over load the sewer systems, resulting in sewage overflows right in the river :(</li>
-      </ul>
+      <p>Pathogens can take the form of bacteria, viruses, or other microorganisms that can cause disease and that’s why we put it at the top of our list! Because there are so many potential pathogens it’s difficult and expensive to test for them directly, the EPA recommends we track “indicator organisms” that tell us where disease causing microbes <em>may</em> be present. That’s why we test for “Enterococcus,” a bacterium that is not generally harmful to humans (it’s in all of our guts!) but widely considered the best ‘indicator’ for pathogens. The NYC Department of Health says it’s safe to swim when levels are under 35 Colony Forming Units (CFU).</p>
+      <p>The problem is, current systems for testing the concentration of bacteria generally takes 24 hours in a lab. That's why we have developed a predictive algorithm with our friends at Columbia University based off highly correlated environmental parameters in order to present in real-time the probable concentration of Enterococci. We also use the latest-generation rapid microbiology techniques, thanks to <a href="http://fluidion.com/en/products/alert-system-2">Fluidion's ALERT technology</a>, in order to assess daily actual bacterial levels and compare with model predictions.</p>
     </>
   ),
   oxygen: (
     <>
-      <p>Just like the air we breath on land, oxygen supports life in the water. This parameter gets its clever name, Dissolved Oxygen, because oxygen makes its way into the water from the air, or its produced by underwater plants and dissolves in water. Levels tend to be highest during daylight (when plants and animals use it to breath) and drop during the night (when there’s no photosynthesis to counteract consumption).</p>
-      <h4>Why We Care</h4>
-      <p>We track turbidity to to see how much funk is in the water. Funk can take the form of floating particles like clay, silt, algae, or sewage. This might be obvious, but generally, clear water is healthier than murky or opaque water. More floating particles = greater turbidity.</p>
-      <p>Turbidity is a pretty unique water quality parameter in that its visible - you can see with your eyes if water has high turbidity or low turbidity, unlike other parameters, such as oxygen. But we still measure it in what's called NTU, which stands for Nephelometric Turbidity Units, simply because the instrument used for measuring it is called a nephelometer. This instrument traces the amount of light that can penetrate through the water. More light means turbidity is low. And less light? More funk!</p>
-      <h4>Your Impact</h4>
-      <p>What contributes to low levels of dissolved oxygen?</p>
-      <ul>
-        <li>street runnoff from salting roads</li>
-        <li>increased water temperature from asphalt runoff</li>
-        <li>incresed temperature from lack of tree cover; execessive errosion</li>
-      </ul>
+      <p>Just like the air we breathe on land, oxygen supports life in the water. This parameter gets its clever name, Dissolved Oxygen, because oxygen makes its way into the water from the air, or its produced by underwater plants and dissolves in water. Levels tend to be highest during daylight (when plants and animals use it to breathe) and drop during the night (when there’s no photosynthesis to counteract consumption).</p>
+      <p>Low Oxygen won’t bother human swimmers since we can’t breathe in the water (unless you’re Michael Phelps!), but it is very hard marine life and starts to starve breathing things.  Even still, bacteria can still thrive, which is why it’s important to track for swimming.  Bodies of water with higher levels of dissolved oxygen can support many different kinds of aquatic organisms. Bottom feeders, crabs, oysters and worms need minimal amounts of oxygen, while shallow water fish need higher levels. Oxygen likes to be in cold fresh water and enters the water when there is lots of mixing.</p>
     </>
   ),
   temperature: (
-    <p>When you're hot you're hot, and look at what you got. Also under 60F puts most people at risk of hypothermia.</p>
+    <>
+      <p>When you're hot you're hot, and look at what you got!  Temperature is the degree or intensity of heat present in the water but you probably already know that from Al Roker.  Water temperature fluctuates by season just like air temperature but tends to be a little cooler than the air in the summer -- which is why we enjoy swimming in it so much on a hot day!  Of course everyone has a different preference when it comes to water temperature. What’s yours? Chilly? Cool? Warm?</p>
+      <p>It is considered very very cold below 46 degrees and even the most fearless among us would be foolish to risk hypothermia for a swim! In the winter month, average water temperature can be around 39 degrees (brrrrrr!) but in the height of summer the water inch up to 80! Temperature affects the experience we have swimming, but it can also have a major impact on marine life.</p>
+    </>
   ),
   salinity: (
     <>
-      <p>Some water has salt, some water is fresh. In the East River, its a little bit of both!  Salinity changes often in NYC because the river is actually an estuary, where salt water (coming in from the ocean) and fresh water (coming down from Upstate) mix together. Thats why when the water is flowing north there tends to be a higher level of salinity and when the water is flowing south, salinity tends to be lower.</p>
-      <h4>Why We Care</h4>
-      <p>Somewhere south of the Tappan Zee Bridge, is the border of diluted seawater (called a "salt front,') but it can reach as far north as Poughkeepsie during droughts. If you tested the water for salt, you probably wouldn't find any past Newburgh, NY.</p>
-      <h4>Your Impact</h4>
-      <p>How do we affect salinity?</p>
-      <ul>
-        <li>runoff from salting the streats in the winter months</li>
-      </ul>
+      <p>Some water is salty, some water is fresh. In the East River, it’s a little bit of both! Salinity changes often in NYC because the harbor is part of an estuary, where salt water (coming in from the ocean) and freshwater (coming down from Upstate) mix together. High salinity means there is tons of ocean water (and ocean creatures!) at the site.</p>
+      <p>As you head north up the Hudson towards fresher water, salinity tends to drop and though it fluctuates, somewhere around the Tappan Zee Bridge, is the border of diluted seawater (called a “salt front”) but it can reach as far north as Poughkeepsie during droughts. If you tested the water for salt, you probably wouldn't find any past Beacon, NY.</p>
     </>
   ),
   turbidity: (
     <>
-      <p>We track turbidity to to see how much funk is in the water. Funk can take the form of floating particles like clay, silt, algae, or sewage. This might be obvious, but generally, clear water is healthier than murky or opaque water. More floating particles equals greater turbidity.</p>
-      <p>Turbidity is a pretty unique water quality parameter in that its a visible - you can see with your eyes if water has high turbidity or low turbidity, unlike other parameters, such as oxygen. But we still measure it in what's called NTU, which stands for Nephelometric Turbidity Units simply because the instrument used for measuring it is called a nephelometer. This instrument traces the amount of light that can penetrate through the water. More light means turbidity is low. And less light? More funk.</p>
-      <h4>Why We Care</h4>
-      <p>High turbidity blocks the sunlight in the water which plants need to create more oxygen and aquatic life needs to breath. High turbidity is also tough on fish since all the funk can affect their vision and since of smell. </p>
-      <h4>Your Impact</h4>
-      <p>What causes high turbidity?</p>
-      <ul>
-        <li>erosion from farms, mining, construction sites, or tree removal near water bodies</li>
-        <li>urban runoff; boats that stir up sediment</li>
-        <li>nutrients from farms that feed algae blooms</li>
-      </ul>
+      <p>The clarity of water is affected by something called turbidity. Turbidity can take the form of floating particles like clay, silt, algae, or sewage. More floating particles = greater turbidity. High turbidity is not necessarily unpleasant for swimming, but it does block the sunlight in the water which plants need to create more oxygen and aquatic life needs to breathe. High turbidity is also tough on some fish since all the funk can affect their vision and sense of smell.</p>
+      <p>Turbidity is a pretty unique water quality parameter in that it’s visible. Unlike other parameters, you can see with your eyes whether water has high turbidity or low turbidity. The classic way to measure turbidity is to lower a black and white disc (known as a Secchi disc) into the water until it can no longer be seen from the surface.  Here, we measure it in what's called NTU, which stands for Nephelometric Turbidity Units simply because the instrument used for measuring it is called a nephelometer. This instrument traces the amount of light that can penetrate through the water. More light means turbidity is low. And less light? More funk in the water.</p>
     </>
   ),
   speed: (
-    <p>Speed effects how fast (or how slow!) an area of water changes. Not related to the Keanue Reeves film(s). ;)</p>
+    <p>Speed affects how fast (or how slow!) an area of water changes. Not related to the Keanue Reeves film(s)!</p>
   ),
   direction: (
     <>
-      <p>Due to the tides coming in and going out from the ocean, the East River runs north for six hours and then runs south for six hours. Pretty cool.</p>
-      <h4>Why We Care</h4>
-      <p>New York Natives Tribes who hung by the river like the Lenape called the East River the Mahicantuck, which translates to “the river that flows both ways.”</p>
-      <h4>Your Impact</h4>
-      <p>Can I impact drection of the water? Probably not! But climate change does effect the tides and there are a lot things we do that impact the warming of our climate.</p>
+      <p>The direction of the East River shifts pretty drastically a few times a day.  (She’s got a little uptown girl and a little downtown girl in her!)  Due mostly to the gravitational influence of the moon and the tides it creates, the East River floods (comes in) in an easterly and northerly direction direction for a little more than six hours, then ebbs (goes out) for six hours. Pretty cool!</p>
     </>
   ),
   ph: (
     <>
-      <p>pH tells us whether water is acidic or basic. For good water quality, we don't want pH to be too high or too low. pH is effected by all kinds of things, including rain and snow, which tend to be acidic. Wetlands and marshes tend to help keep pH balanced.</p>
-      <h4>Why We Care</h4>
-      <p>A pH below 4 or above 10 will kill most fish and very few animals can tolerate waters with a pH below 3 or above 11, including us!</p>
-      <h4>Your Impact</h4>
-      <p>What causes pH to fluctuate?</p>
-      <ul>
-        <li>mining that creates acidic runoff; factory runoff</li>
-        <li>pollution</li>
-        <li>domestic or industrial runoff of soaps and detergents</li>
-      </ul>
+      <p>pH tells us whether water is acidic or basic. For good water quality, we don't want the pH to be too high or too low. pH is affected by all kinds of things, including rain and snow, which tend to be acidic. Wetlands and marshes tend to help keep pH balanced so let’s build more of those!</p>
+      <p>A pH level below 4 or above 10 will kill most fish and very few animals can tolerate waters with a pH below 3 or above 11.</p>
     </>
   ),
   depth: (
-    <p>The distance from the top of the water to the bottom of the riverbed. You might think this wouldn't change but because the Hudson River is a tidal esuary, its changing all the time with the tides.</p>
+    <p>The distance from the top of the water to the bottom of the riverbed. You might think this wouldn't change but because the East River is a tidal estuary, its changing all the time, just like the direction of the current!</p>
   )
 }
