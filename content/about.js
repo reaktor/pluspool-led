@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Carousel from '../components/Carousel'
-import { throwStatement } from '@babel/types';
 
 export default {
   sections: [
@@ -28,7 +27,7 @@ export default {
       cta: <a className='about-section__cta' href='https://pluspool.org/pool/info/'>Join the movement!</a>
     },
     {
-      align: 'center',
+      side: 'left',
       title: 'Learn about the communities that support the health of our waterways.',
       body: (
         <p>+ POOL isn’t at it alone. There are tons of community groups in and around NYC who care about the state of our rivers and are fighting to help protect them and keep them clean. And you can help too! </p>
@@ -49,40 +48,54 @@ export default {
   credits: (
     <>
       <h2>Commissioned by Friends of + POOL, Inc.</h2>
-      <h3>Designers </h3>
-      <ul>
-        <li><a target='_BLANK' rel='noopener' href='https://reaktor.com'>Reaktor Inc</a></li>
-        <li>Jonathan Dahan</li>
-        <li>Ross Langley</li>
-        <li>Savas Ozay</li>
-        <li>Stephen Cronin</li>
-      </ul>
-      <h3>Sonde Installation</h3>
-      <ul>
-        <li>Rob Buchanan</li>
-        <li>Wade McGillis</li>
-        <li>Haokai Zhao</li>
-      </ul>
-      <h3>Lab Testing</h3>
-      <ul>
-        <li>Aaniyla Allen-Sutherland</li>
-      </ul>
-      <h3>Data Collection &amp; Analysis</h3>
-      <ul>
-        <li><a target='_BLANK' rel='noopener' href='https://www.columbia.edu/'>Columbia University</a></li>
-        <li><a target='_BLANK' rel='noopener' href='https://www.ldeo.columbia.edu/'>Lamont-Doherty Earth Observatory</a></li>
-        <li>Shawnee Taylor</li>
-        <li>Wade McGillis</li>
-      </ul>
-      <h3>Microbiology Early Warning ALERT Instrumentation</h3>
-      <ul>
-        <li>Fluidion</li>
-        <li>Dan Angelescu</li>
-        <li>Andreas Hausot</li>
-        <li>Joyce Wong</li>
-      </ul>
-      <p>Special thanks to <a  target='_BLANK' rel='noopener'href='https://www.newyorkharborschool.org/'>New York Harbor School</a> for lending a boat, <a  target='_BLANK' rel='noopener'href='https://www.arup.com/'>Arup Engineering</a> for creating a lab, and <a  target='_BLANK' rel='noopener'href='https://www.pier17ny.com/'>Pier 17</a> for letting us sample.</p>
-      <p>This project is supported in part by an award from the National Endowment for the Arts.</p>
+      <section>
+        <h3>Designers</h3>
+        <ul>
+          <li><a target='_BLANK' rel='noopener' href='https://reaktor.com'>Reaktor Inc</a></li>
+          <li>Jonathan Dahan</li>
+          <li>Ross Langley</li>
+          <li>Savas Ozay</li>
+          <li>Stephen Cronin</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Sonde Installation</h3>
+        <ul>
+          <li>Rob Buchanan</li>
+          <li>Wade McGillis</li>
+          <li>Haokai Zhao</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Lab Testing</h3>
+        <ul>
+          <li>Aaniyla Allen-Sutherland</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Data Collection &amp; Analysis</h3>
+        <ul>
+          <li><a target='_BLANK' rel='noopener' href='https://www.columbia.edu/'>Columbia University</a></li>
+          <li><a target='_BLANK' rel='noopener' href='https://www.ldeo.columbia.edu/'>Lamont-Doherty Earth Observatory</a></li>
+          <li>Wade McGillis</li>
+          <li><a target='_BLANK' rel='noopener' href='http://www.mit.edu/'>Massachusetts Institute of Technology</a></li>
+          <li><a target='_BLANK' rel='noopener' href='https://www.whoi.edu/'>Woods Hole Oceanographic Institution</a></li>
+          <li>Shawnee Taylor</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Microbiology Early Warning ALERT Instrumentation</h3>
+        <ul>
+          <li><a target="_BLANK" rel="noopener" href="http://fluidion.com/en">Fluidion</a></li>
+          <li>Dan Angelescu</li>
+          <li>Andreas Hausot</li>
+          <li>Joyce Wong</li>
+        </ul>
+      </section>
+      <section>
+        <p>Special thanks to <a target='_BLANK' rel='noopener'href='https://billionoysterproject.org/'>Billion Oyster Project</a> for lending a boat, <a  target='_BLANK' rel='noopener'href='https://www.arup.com/'>Arup Engineering</a> for creating a lab, and <a  target='_BLANK' rel='noopener'href='https://www.pier17ny.com/'>Pier 17</a> for letting us sample.</p>
+        <p>This project is supported in part by an award from the National Endowment for the Arts.</p>
+      </section>
     </>
   )
 }

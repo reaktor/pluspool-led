@@ -1,3 +1,7 @@
+.carousel {
+  margin-top: 40px;
+}
+
 .slider {
   margin-left: calc(var(--outer-gutter) * -1);
   margin-right: calc(var(--outer-gutter) * -1);

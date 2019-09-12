@@ -110,7 +110,7 @@ class Carousel extends React.Component {
     const { config } = this.state
 
     return (
-      <div>
+      <div className='carousel'>
         <CarouselProvider
           totalSlides={slides.length}
           {...config}
