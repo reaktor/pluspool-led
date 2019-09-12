@@ -51,7 +51,7 @@ export default {
       <section>
         <h3>Designers</h3>
         <ul>
-          <li><a target='_BLANK' rel='noopener' href='https://reaktor.com'>Reaktor Inc</a></li>
+          <li><a target='_BLANK' rel='noopener noreferrer' href='https://reaktor.com'>Reaktor Inc</a></li>
           <li>Jonathan Dahan</li>
           <li>Ross Langley</li>
           <li>Savas Ozay</li>
@@ -75,25 +75,25 @@ export default {
       <section>
         <h3>Data Collection &amp; Analysis</h3>
         <ul>
-          <li><a target='_BLANK' rel='noopener' href='https://www.columbia.edu/'>Columbia University</a></li>
-          <li><a target='_BLANK' rel='noopener' href='https://www.ldeo.columbia.edu/'>Lamont-Doherty Earth Observatory</a></li>
+          <li><a target='_BLANK' rel='noopener noreferrer' href='https://www.columbia.edu/'>Columbia University</a></li>
+          <li><a target='_BLANK' rel='noopener noreferrer' href='https://www.ldeo.columbia.edu/'>Lamont-Doherty Earth Observatory</a></li>
           <li>Wade McGillis</li>
-          <li><a target='_BLANK' rel='noopener' href='http://www.mit.edu/'>Massachusetts Institute of Technology</a></li>
-          <li><a target='_BLANK' rel='noopener' href='https://www.whoi.edu/'>Woods Hole Oceanographic Institution</a></li>
+          <li><a target='_BLANK' rel='noopener noreferrer' href='http://www.mit.edu/'>Massachusetts Institute of Technology</a></li>
+          <li><a target='_BLANK' rel='noopener noreferrer' href='https://www.whoi.edu/'>Woods Hole Oceanographic Institution</a></li>
           <li>Shawnee Taylor</li>
         </ul>
       </section>
       <section>
         <h3>Microbiology Early Warning ALERT Instrumentation</h3>
         <ul>
-          <li><a target="_BLANK" rel="noopener" href="http://fluidion.com/en">Fluidion</a></li>
+          <li><a target='_BLANK' rel='noopener noreferrer' href='http://fluidion.com/en'>Fluidion</a></li>
           <li>Dan Angelescu</li>
           <li>Andreas Hausot</li>
           <li>Joyce Wong</li>
         </ul>
       </section>
       <section>
-        <p>Special thanks to <a target='_BLANK' rel='noopener'href='https://billionoysterproject.org/'>Billion Oyster Project</a> for lending a boat, <a  target='_BLANK' rel='noopener'href='https://www.arup.com/'>Arup Engineering</a> for creating a lab, and <a  target='_BLANK' rel='noopener'href='https://www.pier17ny.com/'>Pier 17</a> for letting us sample.</p>
+        <p>Special thanks to <a target='_BLANK' rel='noopener noreferrer' href='https://billionoysterproject.org/'>Billion Oyster Project</a> for lending a boat, <a target='_BLANK' rel='noopener noreferrer' href='https://www.arup.com/'>Arup Engineering</a> for creating a lab, and <a target='_BLANK' rel='noopener noreferrer' href='https://www.pier17ny.com/'>Pier 17</a> for letting us sample.</p>
         <p>This project is supported in part by an award from the National Endowment for the Arts.</p>
       </section>
     </>

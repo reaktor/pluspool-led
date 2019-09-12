@@ -12,10 +12,10 @@ const DatabarItem = ({ onClick, color, showColor = true, label, value, unit, int
     <button className='databar__item' onClick={onClick}>
       <div className='databar__item__wrapper'>
         <div className='databar__item__icon'>
-          { showColor && color && <Circle fill={color} /> }
+          {showColor && color && <Circle fill={color} />}
         </div>
         <div className='databar__item__label'>{label}</div>
-        <div className='databar__item__unit' >{displayValue}</div>
+        <div className='databar__item__unit'>{displayValue}</div>
         <div className='databar__item__link'> <Arrow /></div>
       </div>
     </button>

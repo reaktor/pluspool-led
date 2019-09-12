@@ -97,13 +97,16 @@ export default {
       return 'Murky'
     },
     legend: [
-      { value: 0,
+      {
+        value: 0,
         label: 'Clear'
       },
-      { value: 20,
+      {
+        value: 20,
         label: 'Cloudy'
       },
-      { value: 75,
+      {
+        value: 75,
         label: 'Murky'
       }
     ]

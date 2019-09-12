@@ -11,14 +11,14 @@ const AboutSection = ({ side, image, title, body, cta, carousel }) => (
         </div>
       )}
       <div className='about-section__text'>
-        <h2 className='about-section__title'>{ title }</h2>
+        <h2 className='about-section__title'>{title}</h2>
         <div className='about-section__body'>
           {body}
         </div>
-        { cta }
+        {cta}
       </div>
     </div>
-    { carousel }
+    {carousel}
   </>
 )
 

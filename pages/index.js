@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
 
-import Head from 'next/head'
 import Databar from '../components/Databar'
 import DataRangePicker from '../components/DataRangePicker'
 import TitleText from '../components/TitleText'
 import SvgVisualization from '../components/SvgVisualization'
 import Tooltip from '../components/Tooltip'
 import { useSample } from '../hooks/useSamples'
-import { BASE_URL } from '../helpers/constants'
 import './index.css'
-
 
 const IndexPage = ({ sources, units, samples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)

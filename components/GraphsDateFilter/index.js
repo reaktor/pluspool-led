@@ -16,15 +16,16 @@ const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {
 
   return (
     <span className='graphs-date-filter'>
-      { units.map(unit => (
+      {units.map(unit => (
         <DateFilter
+          key={unit}
           name={name}
           unit={unit}
           activeUnit={activeUnit}
           label={choiceToLabel(unit)}
           onChange={innerOnChange}
         />
-      )) }
+      ))}
     </span>
   )
 }

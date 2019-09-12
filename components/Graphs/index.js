@@ -40,6 +40,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
 
   const graphs = dsColumns.map(key => (
     <Graph
+      key={key}
       setOverlayGraph={setOverlayGraph}
       openTooltip={openTooltip}
       graph={graphProps(key)}

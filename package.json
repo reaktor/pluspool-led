@@ -6,6 +6,7 @@
     "@nivo/line": "^0.59.0",
     "@tippy.js/react": "^2.2.2",
     "@zeit/next-css": "^1.0.1",
+    "babel-eslint": "^10.0.3",
     "dayjs": "^1.8.14",
     "isomorphic-unfetch": "^3.0.0",
     "jest": "^24.8.0",
@@ -23,7 +24,7 @@
     "react-slick": "^0.24.0",
     "simplex-noise": "^2.4.0",
     "slick-carousel": "^1.8.1",
-    "standard": "^13.0.2",
+    "standard": "^14.2.0",
     "svg-react-loader": "^0.4.6",
     "url-loader": "^2.0.1"
   },
@@ -52,7 +53,9 @@
     ]
   },
   "standard": {
+    "parser": "babel-eslint",
     "env": [
+      "es6",
       "jest"
     ]
   }

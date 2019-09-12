@@ -53,7 +53,7 @@ const LineGraph = ({
     onClick: onClick
   }
 
-  return ( <ResponsiveLineCanvas {...defaultProps} {...props} /> )
+  return (<ResponsiveLineCanvas {...defaultProps} {...props} />)
 }
 
 const Graph = ({
@@ -74,7 +74,7 @@ const Graph = ({
   const lineGraphProps = {
     gridYValues: 5,
     axisLeft: { format: d => `${d}`, tickValues: 5 }
-  } 
+  }
 
   const overlayGraphProps = {
     axisLeft: null,
@@ -110,8 +110,7 @@ const Graph = ({
               <div className='graph__overlay-picker-button__close'>
                 <CloseCircle />
               </div>
-            </button>
-          }
+            </button>}
           {!overlayGraph &&
             <button
               className='graph__overlay-picker-button'
@@ -123,8 +122,7 @@ const Graph = ({
               <span className='graph__overlay-picker-button__icon'>
                 <OverlayData />
               </span>
-            </button>
-          }
+            </button>}
           <button
             type='button'
             className='graph__question-mark'
@@ -135,12 +133,11 @@ const Graph = ({
         </div>
       </header>
       <div className='graph__graph-wrapper'>
-        <LineGraph {...graph} overlayGraph={ overlayGraph } props={ lineGraphProps } />
+        <LineGraph {...graph} overlayGraph={overlayGraph} props={lineGraphProps} />
         {overlayGraph &&
           <div className='graph__overlay-graph'>
-            <LineGraph {...overlayGraph} props={ overlayGraphProps } tooltip={null} />
-          </div>
-        }
+            <LineGraph {...overlayGraph} props={overlayGraphProps} tooltip={null} />
+          </div>}
       </div>
       <div className='graph__legend'>
         {legend && <Legend legend={legend} max={max} />}

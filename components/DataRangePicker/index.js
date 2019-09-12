@@ -95,8 +95,7 @@ class DataRangePicker extends React.Component {
                 atStart,
                 atEnd,
                 ...props
-              })
-            }
+              })}
           />
         </div>
         <div className='data-range-picker__labels'>

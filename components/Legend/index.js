@@ -6,7 +6,7 @@ const Legend = ({ legend, max }) => (
   <div className='legend'>
     {legend.map(({ color, value, label }, index) => (
       <>
-        <div className='legend__item' style={color ? { '--color': color } : {}}>
+        <div className='legend__item'>
           <div className='legend__item__arrow-value'>
             <div className='legend__item__value'>
               <span>{value}</span>
@@ -19,7 +19,8 @@ const Legend = ({ legend, max }) => (
                   stroke='currentColor'
                   stroke-width='1'
                   stroke-linejoin='miter'
-                  d='M0,0L10,0' />
+                  d='M0,0L10,0'
+                />
               </svg>
               <svg viewBox='0 0 10 10' preserveAspectRatio='none'>
                 <path
@@ -28,7 +29,8 @@ const Legend = ({ legend, max }) => (
                   stroke='currentColor'
                   stroke-width='1'
                   stroke-linejoin='miter'
-                  d='M10,5l-5,-5l0,10Z' />
+                  d='M10,5l-5,-5l0,10Z'
+                />
               </svg>
             </div>
           </div>
@@ -40,20 +42,20 @@ const Legend = ({ legend, max }) => (
                 stroke='currentColor'
                 stroke-width='1'
                 stroke-linejoin='miter'
-                d='M0,0l0,10l10,0l0,-10' />
+                d='M0,0l0,10l10,0l0,-10'
+              />
             </svg>
           </div>
           <div className='legend__item__label'>{label}</div>
         </div>
-        {(index === legend.length - 1) && 
-          <div className='legend__item --last' style={{ '--color': color }}>
+        {(index === legend.length - 1) &&
+          <div className='legend__item --last'>
             <div className='legend__item__arrow-value'>
               <div className='legend__item__value'>
-                { max ? max : (<span>+{value}</span>)}
+                {max || (<span>+{value}</span>)}
               </div>
             </div>
-          </div>
-        }
+          </div>}
       </>
     ))}
   </div>

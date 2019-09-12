@@ -12,7 +12,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
     return <div className='tooltip' data-active={open} />
   }
 
-  const [source, unit] = [ sources[slug], units[slug] ]
+  const [source, unit] = [sources[slug], units[slug]]
   const { label, legend, transform, color, max } = content.dataPoints[slug]
 
   const value = sample ? transform ? transform(sample[slug]) : sample[slug] : null
@@ -33,21 +33,24 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
                 stroke='#000000'
                 stroke-width='1'
                 stroke-linejoin='round'
-                d='M0,0l10,10' />
+                d='M0,0l10,10'
+              />
               <path
                 vector-effect='non-scaling-stroke'
                 fill='transparent'
                 stroke='#000000'
                 stroke-width='1'
                 stroke-linejoin='round'
-                d='M10,0l-10,10' />
+                d='M10,0l-10,10'
+              />
             </svg>
           </button>
         </div>
         <div className='tooltip__heading'>
-          {color && <div className='tooltip__icon'>
-            <Circle fill={color} />
-          </div>}
+          {color &&
+            <div className='tooltip__icon'>
+              <Circle fill={color} />
+            </div>}
           <h3 className='tooltip__header'>{label}</h3>
           {value && <span className='tooltip__value'>{value} {unit}</span>}
         </div>
