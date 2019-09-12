@@ -23,7 +23,8 @@ export default {
         value: 104,
         label: 'Ugly'
       }
-    ]
+    ],
+    disclaimerText: 'Since this is the main parameter the Health Department tracks when determining whether a body of water is safe for swimming, it is the only parameter we use to track whether the water is great (or not so great) for swimming. Of course all the other parameters listed here (like temperature!) impact your swimming experience!'
   },
   oxygen: {
     slug: 'oxygen',
@@ -66,7 +67,8 @@ export default {
         value: 71,
         label: 'Warm'
       }
-    ]
+    ],
+    disclaimerText: 'Temperature is not factored into our real-time algorithm for swimming. So while the water quality may be safe for swimming, the temperature may not be. Different strokes for different folks!'
   },
   salinity: {
     slug: 'salinity',

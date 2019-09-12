@@ -94,6 +94,11 @@
   }
 }
 
+.tooltip__disclaimer {
+  width: 24px;
+  margin-left: 10px;
+}
+
 .tooltip__legend {
   margin-top: 60px;
 }
