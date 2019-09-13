@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import CurvedArrow from '../../icons/CurvedArrow'
+import content from '../../content'
 import './index.css'
 
 const Navbar = () => {
@@ -19,10 +19,10 @@ const Navbar = () => {
           <Link href='/'>
             <a className='navbar__title__link'>
               <div className='navbar__logo'>
-                <span className='navbar__logo__text'>+ POOL</span>
+                <span className='navbar__logo__text'>{content.nav.titleName}</span>
               </div>
               <span className='u-hide-mobile'>
-                Water Quality Dashboard
+                {content.nav.titleDescription}
               </span>
             </a>
           </Link>
@@ -60,21 +60,19 @@ const Navbar = () => {
           </svg>
         </button>
         <nav className='navbar__nav'>
-          <Link href='/'>
-            <a className='navbar__nav__link' data-active={router.pathname === '/'} onClick={() => setIsOpen(false)}>Dashboard</a>
-          </Link>
-          <Link href='/data'>
-            <a className='navbar__nav__link' data-active={router.pathname === '/data'} onClick={() => setIsOpen(false)}>Data</a>
-          </Link>
-          <Link href='/about'>
-            <a className='navbar__nav__link' data-active={router.pathname === '/about'} onClick={() => setIsOpen(false)}>About</a>
-          </Link>
-          <Link href='https://pluspool.org'>
-            <a className='navbar__nav__link' onClick={() => setIsOpen(false)}>
-              What is + POOL?
-              <div className='navbar__nav__link__icon'><CurvedArrow /></div>
-            </a>
-          </Link>
+          {
+            content.nav.links.map(({ label, pathname }) => (
+              <Link href={pathname} key={pathname}>
+                <a
+                  className='navbar__nav__link'
+                  data-active={router.pathname === pathname}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {label}
+                </a>
+              </Link>
+            ))
+          }
         </nav>
       </div>
     </div>
