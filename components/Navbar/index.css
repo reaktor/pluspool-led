@@ -6,8 +6,10 @@
   /* this is so our background extends to the edges */
   margin-left: calc(var(--outer-gutter) * -1);
   margin-right: calc(var(--outer-gutter) * -1);
+  margin-bottom: 20px;
   padding-left: var(--outer-gutter);
   padding-right: var(--outer-gutter);
+  height: var(--navbar--height);
 }
 
 @media (max-width: 559px) {
@@ -37,10 +39,9 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1800px;
-  height: var(--navbar--height);
+  max-width: var(--site--max-width);
+  height: 100%;
   margin: auto;
-  margin-bottom: 20px;
   border-bottom: 1px solid #000000;
 }
 
