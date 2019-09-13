@@ -2,6 +2,7 @@
   --legend__item__value--width: 36px;
   width: 100%;
   display: flex;
+  overflow: hidden;
 }
 
 .legend__item {

@@ -39,6 +39,7 @@
   flex-grow: 1;
   position: relative;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: 850px) {

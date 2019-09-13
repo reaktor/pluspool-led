@@ -34,33 +34,36 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
   return (
     <div className='tooltip' data-active={open}>
       <div className='tooltip__inner'>
-        <div className='tooltip__close-button-wrapper'>
-          <button
-            className='tooltip__close-button'
-            type='button'
-            onClick={closeTooltip}
-          >
-            <X />
-          </button>
-        </div>
-        <div className='tooltip__heading'>
-          {color &&
-            <div className='tooltip__icon'>
-              <Circle fill={color} />
-            </div>}
-          <h3 className='tooltip__header'>{label}</h3>
-          {disclaimerText &&
-            <Tippy
-              content={disclaimerText}
-              placement='bottom'
-              maxWidth={285}
-              trigger='click'
+        {/* This div is needed to solve some flexbox issues. Flex children inside of .tooltip__inner were having height 0px in mobile. */}
+        <div>
+          <div className='tooltip__close-button-wrapper'>
+            <button
+              className='tooltip__close-button'
+              type='button'
+              onClick={closeTooltip}
             >
-              <button class='tooltip__disclaimer'>
-                <ExclamationCircle />
-              </button>
-            </Tippy>}
-          {sample && <span className='tooltip__value'>{renderValue(slug, sample, units, dataPoint)}</span>}
+              <X />
+            </button>
+          </div>
+          <div className='tooltip__heading'>
+            {color &&
+              <div className='tooltip__icon'>
+                <Circle fill={color} />
+              </div>}
+            <h3 className='tooltip__header'>{label}</h3>
+            {disclaimerText &&
+              <Tippy
+                content={disclaimerText}
+                placement='bottom'
+                maxWidth={285}
+                trigger='click'
+              >
+                <button class='tooltip__disclaimer'>
+                  <ExclamationCircle />
+                </button>
+              </Tippy>}
+            {sample && <span className='tooltip__value'>{renderValue(slug, sample, units, dataPoint)}</span>}
+          </div>
         </div>
         {legend && (
           <div className='tooltip__legend'>
