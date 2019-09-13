@@ -1,6 +1,7 @@
 .data-range-picker {
   display: flex;
   opacity: var(--page-state-1-opacity);
+  pointer-events: var(--page-state-1-pointer-events, auto);
   transition: opacity 1s;
   position: relative;
   z-index: var(--data-range-picker--z-index);
@@ -71,10 +72,8 @@
     flex-direction: column;
     font-size: 24px;
     line-height: 32px;
-    margin-top: 0;
     margin-left: 12px;
     margin-top: -0.6em;
-    margin-bottom: -0.6em;
   }
 }
 

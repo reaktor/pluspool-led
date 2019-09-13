@@ -5,7 +5,8 @@
   justify-content: flex-end;
   pointer-events: none;
   z-index: var(--databar--z-index);
-  opacity: var(--page-state-2-opacity);
+  opacity: var(--page-state-1-opacity);
+  pointer-events: var(--page-state-1-pointer-events, auto);
   transition: opacity 1s;
 }
 

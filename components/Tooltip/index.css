@@ -96,13 +96,12 @@
 }
 
 .tooltip__disclaimer {
-  width: 24px;
+  width: 27px;
   margin-left: 10px;
 }
 
 .tooltip__legend {
   margin-top: 60px;
-  padding-left: 1px; /* fixes issue where SVG was cut off for 1px on left side */
 }
 
 .tooltip__value {

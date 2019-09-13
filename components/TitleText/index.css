@@ -13,7 +13,14 @@
   margin: 0;
 }
 
-@media (min-width: 560px) {
+@media (min-width: 540px) {
+  .title-text__title {
+    font-size: 30px;
+    line-height: 38px;
+  }
+}
+
+@media (min-width: 1200px) {
   .title-text__title {
     font-size: 36px;
     line-height: 45px;
