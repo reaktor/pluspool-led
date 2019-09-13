@@ -20,6 +20,10 @@
   }
 }
 
+.title-text__title > span {
+  display: block;
+}
+
 .title-text__button {
   display: inline-flex;
   align-items: center;

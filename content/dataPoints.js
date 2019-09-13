@@ -33,8 +33,8 @@ export default {
     label: 'Oxygen',
     interperet: value => {
       if (value < 5) return 'Low'
-      if (value < 6) return 'Normal'
-      return 'High'
+      if (value > 5) return 'High'
+      return 'Normal'
     },
     legend: [
       {
@@ -116,7 +116,7 @@ export default {
     },
     legend: [
       {
-        value: '<20',
+        value: 0,
         label: 'Clear'
       },
       {
