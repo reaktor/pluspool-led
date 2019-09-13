@@ -24,19 +24,30 @@ export default {
         label: 'Ugly'
       }
     ],
-    disclaimerText: 'Since this is the main parameter the Health Department tracks when determining whether a body of water is safe for swimming, it is the only parameter we use to track whether the water is great (or not so great) for swimming. Of course all the other parameters listed here (like temperature!) impact your swimming experience!'
+    disclaimerText: 'Since this is the main parameter the Health Department tracks when determining whether a body of water is safe for swimming, it is the only parameter we use to track whether the water is great (or not so great) for swimming. Of course all the other parameters listed here (like temperature!) impact your swimming experience!',
+    showNumber: false
   },
   oxygen: {
     slug: 'oxygen',
     color: '#1443A7',
     label: 'Oxygen',
-    interperet: () => 'Normal',
+    interperet: value => {
+      if (value < 5) return 'Low'
+      if (value < 6) return 'Normal'
+      return 'High'
+    },
     legend: [
       {
-        value: '0%'
+        value: '<5',
+        label: 'Low'
       },
       {
-        value: '100%'
+        value: 5,
+        label: 'Normal'
+      },
+      {
+        value: 5,
+        label: 'High'
       }
     ]
   },
@@ -46,13 +57,13 @@ export default {
     label: 'Temperature',
     interperet: (value) => {
       if (value < 47) return 'Hypothermia'
-      if (value < 60) return 'Chilly'
-      if (value < 71) return 'Cool'
+      if (value < 61) return 'Chilly'
+      if (value < 72) return 'Cool'
       return 'Warm'
     },
     legend: [
       {
-        value: 32,
+        value: '<32',
         label: 'Hypothermia'
       },
       {
@@ -60,11 +71,11 @@ export default {
         label: 'Chilly'
       },
       {
-        value: 60,
+        value: 61,
         label: 'Cool'
       },
       {
-        value: 71,
+        value: 72,
         label: 'Warm'
       }
     ],
@@ -75,17 +86,22 @@ export default {
     color: '#009247',
     label: 'Salinity',
     interperet: value => {
-      if (value < 10) return 'Salty'
-      return 'Stings'
+      if (value < 0.5) return 'Fresh'
+      if (value < 30) return 'Brackish'
+      return 'Salty'
     },
     legend: [
       {
         value: 0,
-        label: 'Salty'
+        label: 'Fresh'
       },
       {
-        value: 10,
-        label: 'Stings'
+        value: 0.5,
+        label: 'Brackish'
+      },
+      {
+        value: 30,
+        label: 'Salty'
       }
     ]
   },
@@ -94,17 +110,17 @@ export default {
     color: '#0DB3A6',
     label: 'Clarity',
     interperet: value => {
-      if (value < 20) return 'Clear'
+      if (value < 21) return 'Clear'
       if (value < 75) return 'Cloudy'
       return 'Murky'
     },
     legend: [
       {
-        value: 0,
+        value: '<20',
         label: 'Clear'
       },
       {
-        value: 20,
+        value: 21,
         label: 'Cloudy'
       },
       {
@@ -135,13 +151,16 @@ export default {
         value: 1.5,
         label: 'Fast'
       }
-    ]
+    ],
+    disclaimerText: 'Margin of error note: We’re tracking speed from The Narrows because it is the closest Weather Station to Pier 17.',
+    showNumber: false
   },
   direction: {
     slug: 'direction',
     color: '#E28224',
     label: 'Direction',
-    interperet: value => DIRECTIONS[Math.floor(value / 45)]
+    interperet: value => DIRECTIONS[Math.floor(value / 45)],
+    showNumber: false
   },
   ph: {
     slug: 'ph',
@@ -149,7 +168,7 @@ export default {
     label: 'pH',
     interperet: value => {
       if (value < 6) return 'Acidic'
-      if (value > 7) return 'Basic'
+      if (value > 8) return 'Basic'
       return 'Neutral'
     },
     max: 14,
@@ -163,7 +182,7 @@ export default {
         label: 'Neutral'
       },
       {
-        value: 7,
+        value: 8,
         label: 'Basic'
       }
     ]
