@@ -9,16 +9,27 @@ import X from '../../icons/X'
 
 import './index.css'
 
+const renderValue = (slug, sample, units, dataPoint) => {
+  const unit = units[slug]
+  const { showNumber, interperet } = dataPoint
+  const value = sample[slug]
+
+  if (showNumber === false) {
+    return interperet(value)
+  }
+
+  return `${value} ${unit}`
+}
+
 const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
   // We need to render our containing div even when no slug in order for transition in to work
   if (!slug) {
     return <div className='tooltip' data-active={open} />
   }
 
-  const [source, unit] = [sources[slug], units[slug]]
-  const { label, legend, transform, color, max, disclaimerText } = content.dataPoints[slug]
-
-  const value = sample ? transform ? transform(sample[slug]) : sample[slug] : null
+  const source = sources[slug]
+  const dataPoint = content.dataPoints[slug]
+  const { label, legend, color, max, disclaimerText } = dataPoint
 
   return (
     <div className='tooltip' data-active={open}>
@@ -49,7 +60,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
                 <ExclamationCircle />
               </button>
             </Tippy>}
-          {value && <span className='tooltip__value'>{value} {unit}</span>}
+          {sample && <span className='tooltip__value'>{renderValue(slug, sample, units, dataPoint)}</span>}
         </div>
         {legend && (
           <div className='tooltip__legend'>
