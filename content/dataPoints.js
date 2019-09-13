@@ -192,18 +192,9 @@ export default {
     color: '#FFD746',
     label: 'Tide',
     interperet: value => {
-      if (value < 3.2) return 'Low'
+      if (value < 3.75) return 'Low'
       return 'High'
     },
-    legend: [
-      {
-        value: 0,
-        label: 'Low'
-      },
-      {
-        value: 3.2,
-        label: 'High'
-      }
-    ]
+    showNumber: false
   }
 }
