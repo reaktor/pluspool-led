@@ -7,9 +7,9 @@ export default {
   introText: <><span>We’re tracking the water in the NYC harbor at Pier 17.</span><span>How is the water today?</span></>,
   introCta: 'Click here to find out.',
   bacteriaText: {
-    acceptable: <>acceptable to <TitleTextTooltip tooltipText={tooltipText}>swim in</TitleTextTooltip>.</>,
-    unacceptablePersist: 'unnacceptable to swim in if levels persist.',
-    unacceptable: 'unnacceptable to swim in.'
+    acceptable: <>great for <TitleTextTooltip tooltipText={tooltipText}>swimming</TitleTextTooltip>.</>,
+    unacceptablePersist: <>not great for <TitleTextTooltip tooltipText={tooltipText}>swimming</TitleTextTooltip> if levels persist.</>,
+    unacceptable: <>not great for <TitleTextTooltip tooltipText={tooltipText}>swimming</TitleTextTooltip>.</>
   },
   statusText: (timestampDiff, bacteriaText) => <>The water {timestampDiff} at Pier 17 was {bacteriaText}</>
 }
