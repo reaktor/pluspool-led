@@ -6,4 +6,6 @@ const DIRECTIONS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
 
 const BASE_URL = 'https://water.pluspool.org'
 
-export { DIRECTIONS, ENDPOINTS, BASE_URL }
+const GA_TRACKING_ID = 'UA-17668746-5'
+
+export { DIRECTIONS, ENDPOINTS, BASE_URL, GA_TRACKING_ID }

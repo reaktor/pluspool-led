@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Navbar from '../components/Navbar'
 import { dataFetchProcess } from '../helpers/dataLoader'
 import content from '../content'
+import { GA_TRACKING_ID } from '../helpers/constants'
 
 const Header = () => (
   <Head>
@@ -24,6 +25,18 @@ const Header = () => (
     <meta property='twitter:title' content={content.social.title} />
     <meta property='twitter:description' content={content.social.description} />
     <meta property='twitter:image' content={content.social.imageUrl} />
+
+    <script async src='https://www.googletagmanager.com/gtag/js?id=UA-17668746-5' />
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}');
+          `
+      }}
+    />
   </Head>
 )
 
