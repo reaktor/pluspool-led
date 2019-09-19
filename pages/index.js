@@ -48,10 +48,7 @@ const IndexPage = ({ sources, units, samples }) => {
         openTooltip={openTooltip}
         sample={sample}
       />
-      <SvgVisualization
-        openTooltip={pageState ? openTooltip : advanceIntro}
-        sample={sample}
-      />
+      <SvgVisualization sample={sample} />
     </main>
   )
 }

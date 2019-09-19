@@ -134,7 +134,6 @@ svg {
   grid-template-rows: 200px minmax(0, 1fr);
   position: relative;
   flex: 1;
-  overflow: hidden;
 }
 
 @media (min-width: 560px) {

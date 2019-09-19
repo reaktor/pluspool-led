@@ -20,12 +20,12 @@
      * Push our animation down and to the left a bit.
      * This fills our white space a bit better. 
      */
-    transform: translate3d(120px, 200px, 0px);
+    transform: translate3d(60px, 100px, 0px);
   }
 }
 
 /**
- * There are transforms, transitions, and animations happening on 3 separate elements below.
+ * There are transforms, transitions, and animations happening on 2 separate elements below.
  *
  * These elements are:
  * 1. .svg-visualization__data-point-positioning-animation 
@@ -34,20 +34,16 @@
  * 2. .svg-visualization__data-point-breath-animation
  *   - Used to scale the circles in and out slowly all the time.
  *   - Accomplished using a CSS animation that is always running.
- * 3. .svg-visualization__data-point-hover-transition
- *   - Used to scale the circles in and out a bit on hover.
- *   - Accomplished using a CSS transition.
  * 
- * There are a couple reasons for breaking this out to 3 elements which all come down to breaking up concerns. 
+ * There are a couple reasons for breaking this out to 2 elements which all come down to breaking up concerns. 
  * All 3 of those elements deal with a CSS scale transform. It would be quite complicated to manage all 
- * of this scaling on 1 element. In order to do so we would need Javascript to do math and look at 3 different
+ * of this scaling on 1 element. In order to do so we would need Javascript to do math and look at 2 different
  * inputs to determine 1 scaling factor. Javscript would need to look at
  *   1. Where am I currently located, possibly during an animation between positions.
  *   2. What's the progress of our breathing animation.
- *   3. Are we hovering.
  * With those three it would do some convoluted calculation to give us a number for our circle scale. 
  * 
- * Instead of generating 1 convoluted number, we break all 3 of those concerns out to separate transforms that can more easily be managed.
+ * Instead of generating 1 convoluted number, we break the 2 of those concerns out to separate transforms that can more easily be managed.
  */
 
 .svg-visualization__data-point-positioning-animation {
@@ -147,16 +143,6 @@
     var(--data-point--animation-in-delay)
     cubic-bezier(1.000, 0.010, 0.345, 1.000)
     forwards;
-}
-
-.svg-visualization__data-point-hover-transition {
-  transform: scale(1);
-  transition: transform ease-in-out 200ms;
-  cursor: pointer;
-}
-
-.svg-visualization__data-point-hover-transition:hover {
-  transform: scale(1.1);
 }
 
 @keyframes svg-data-point-ambient-scale-animation {
