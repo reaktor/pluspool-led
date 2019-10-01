@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "devDependencies": {
-    "@nivo/line": "^0.59.0",
+    "@nivo/line": "^0.59.3",
     "@tippy.js/react": "^2.2.2",
     "@zeit/next-css": "^1.0.1",
     "babel-eslint": "^10.0.3",

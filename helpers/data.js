@@ -82,7 +82,7 @@ const downsampleData = (data, index, columns, resolution) => {
 }
 
 const formXYSeries = (data, xColumn, yColumn) =>
-  data.map(datum => ({ x: datum[xColumn], y: datum[yColumn] || null }))
+  data.map(datum => ({ x: datum[xColumn], y: datum[yColumn] }))
 
 export {
   before,

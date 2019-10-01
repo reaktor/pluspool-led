@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import OverlayData from '../../icons/OverlayData'
@@ -14,8 +14,6 @@ import './index.css'
 
 dayjs.extend(relativeTime)
 
-let startTime = 0
-
 const LineGraph = ({
   x,
   y,
@@ -27,9 +25,6 @@ const LineGraph = ({
   props,
   overlayGraph
 }) => {
-  // Downsampling factor
-  const onClick = (point, event) => { console.dir({ point, event }) }
-
   const dataRender = [{ id: label, data: formXYSeries(data, x, y) }]
 
   const defaultProps = {
@@ -49,8 +44,7 @@ const LineGraph = ({
       tickRotation: 30
     },
     data: dataRender,
-    colors: [color],
-    onClick: onClick
+    colors: [color]
   }
 
   return (<ResponsiveLineCanvas {...defaultProps} {...props} />)
@@ -64,12 +58,6 @@ const Graph = ({
   units
 }) => {
   if (typeof document === 'undefined') return null
-
-  useEffect(() => {
-    console.log(`renderTime = ${new Date() - startTime}ms`)
-  }, [])
-
-  startTime = new Date()
 
   const lineGraphProps = {
     gridYValues: 5,
