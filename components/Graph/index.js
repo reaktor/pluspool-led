@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import OverlayData from '../../icons/OverlayData'
@@ -14,8 +14,6 @@ import './index.css'
 
 dayjs.extend(relativeTime)
 
-let startTime = 0
-
 const LineGraph = ({
   x,
   y,
@@ -23,20 +21,26 @@ const LineGraph = ({
   unit,
   data,
   color,
-  domain: [min, max],
+  domain: [xMin, xMax],
   props,
-  overlayGraph
+  overlayGraph,
+  dataPoint
 }) => {
-  // Downsampling factor
-  const onClick = (point, event) => { console.dir({ point, event }) }
-
   const dataRender = [{ id: label, data: formXYSeries(data, x, y) }]
-
   const defaultProps = {
     curve: 'linear',
     margin: { top: 10, right: 40, bottom: 50, left: 40 },
-    xScale: { type: 'linear', min, max },
-    yScale: { type: 'linear', stacked: false, min: 'auto', max: 'auto' },
+    xScale: {
+      type: 'linear',
+      min: xMin,
+      max: xMax
+    },
+    yScale: {
+      type: 'linear',
+      stacked: false,
+      min: dataPoint.min || 'auto',
+      max: dataPoint.max || 'auto'
+    },
     enableGridX: false,
     lineWidth: 1,
     pointSize: 0,
@@ -49,8 +53,7 @@ const LineGraph = ({
       tickRotation: 30
     },
     data: dataRender,
-    colors: [color],
-    onClick: onClick
+    colors: [color]
   }
 
   return (<ResponsiveLineCanvas {...defaultProps} {...props} />)
@@ -65,12 +68,6 @@ const Graph = ({
 }) => {
   if (typeof document === 'undefined') return null
 
-  useEffect(() => {
-    console.log(`renderTime = ${new Date() - startTime}ms`)
-  }, [])
-
-  startTime = new Date()
-
   const lineGraphProps = {
     gridYValues: 5,
     axisLeft: { format: d => `${d}`, tickValues: 5 }
@@ -82,7 +79,7 @@ const Graph = ({
     enableGridY: false
   }
 
-  const { legend, max } = content.dataPoints[graph.slug]
+  const { legend } = content.dataPoints[graph.slug]
 
   return (
     <section>
@@ -133,14 +130,23 @@ const Graph = ({
         </div>
       </header>
       <div className='graph__graph-wrapper'>
-        <LineGraph {...graph} overlayGraph={overlayGraph} props={lineGraphProps} />
+        <LineGraph
+          {...graph}
+          overlayGraph={overlayGraph}
+          props={lineGraphProps}
+          dataPoint={content.dataPoints[graph.slug]}
+        />
         {overlayGraph &&
           <div className='graph__overlay-graph'>
-            <LineGraph {...overlayGraph} props={overlayGraphProps} tooltip={null} />
+            <LineGraph
+              {...overlayGraph}
+              props={overlayGraphProps}
+              dataPoint={content.dataPoints[overlayGraph.slug]}
+            />
           </div>}
       </div>
       <div className='graph__legend'>
-        {legend && <Legend legend={legend} max={max} />}
+        {legend && <Legend legend={legend} />}
       </div>
     </section>
   )
