@@ -3,6 +3,7 @@
   width: 100%;
   display: flex;
   overflow: hidden;
+  padding-left: 1px; /* fixes the .legend__item__bar svg from getting cut off */
 }
 
 .legend__item {
@@ -41,6 +42,7 @@
   text-transform: uppercase;
   text-align: center;
   margin-top: 7px;
+  word-wrap: break-word;
 }
 
 .legend__item__arrow-value {
