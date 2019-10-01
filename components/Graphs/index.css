@@ -15,5 +15,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 60px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+@media (min-width: 560px) {
+  .graphs-top-bar {
+    margin-top: 0px;
+    margin-bottom: 60px;
+  }
 }
