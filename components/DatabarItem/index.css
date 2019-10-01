@@ -25,7 +25,7 @@
 
 .databar__item__wrapper {
   display: grid;
-  grid-template-columns: 20px minmax(0, 1fr) 160px 24px;
+  grid-template-columns: minmax(0, 1fr) 160px 24px;
   align-items: center;
   grid-column-gap: 14px;
 }

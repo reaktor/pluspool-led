@@ -1,19 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Arrow from '../../icons/Arrow'
-import Circle from '../../icons/Circle'
 
 import './index.css'
 
-const DatabarItem = ({ onClick, color, showColor = true, label, value, unit, interperet }) => {
+const DatabarItem = ({ onClick, label, value, unit, interperet }) => {
   const displayValue = interperet ? interperet(value) : `${value} ${unit}`
 
   return (
     <button className='databar__item' onClick={onClick}>
       <div className='databar__item__wrapper'>
-        <div className='databar__item__icon'>
-          {showColor && color && <Circle fill={color} />}
-        </div>
         <div className='databar__item__label'>{label}</div>
         <div className='databar__item__unit'>{displayValue}</div>
         <div className='databar__item__link'> <Arrow /></div>

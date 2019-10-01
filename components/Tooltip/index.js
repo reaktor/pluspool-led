@@ -3,7 +3,6 @@ import Tippy from '@tippy.js/react'
 import Legend from '../Legend'
 import TooltipSource from '../TooltipSource'
 import content from '../../content'
-import Circle from '../../icons/Circle'
 import ExclamationCircle from '../../icons/ExclamationCircle'
 import X from '../../icons/X'
 
@@ -29,7 +28,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
 
   const source = sources[slug]
   const dataPoint = content.dataPoints[slug]
-  const { label, legend, color, max, disclaimerText } = dataPoint
+  const { label, legend, max, disclaimerText } = dataPoint
 
   return (
     <div className='tooltip' data-active={open}>
@@ -46,10 +45,6 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
             </button>
           </div>
           <div className='tooltip__heading'>
-            {color &&
-              <div className='tooltip__icon'>
-                <Circle fill={color} />
-              </div>}
             <h3 className='tooltip__header'>{label}</h3>
             {disclaimerText &&
               <Tippy

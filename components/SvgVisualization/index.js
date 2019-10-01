@@ -48,11 +48,11 @@ const getValues = (sample) => {
       const value = parseFloat(sample[slug])
       const simplex = simplexNoises[slug]
 
-      const array = new Array(2).fill().map((_val, index) => {
+      const array = new Array(3).fill().map((_val, index) => {
         const noiseValue = value + index
         const radius = scale(simplex.noise2D(noiseValue, -2), -1, 1, 0.2, 17)
-        const x = scale(simplex.noise2D(noiseValue, 1), -1, 1, -45, 45)
-        const y = scale(simplex.noise2D(noiseValue, 16), -1, 1, -30, 30)
+        const x = scale(simplex.noise2D(noiseValue, 1), -1, 1, -50, 50)
+        const y = scale(simplex.noise2D(noiseValue, 16), -1, 1, -35, 35)
         const delay = scale(simplex.noise2D(noiseValue, -0.8), -1, 1, 0, 0.3)
 
         return {
@@ -69,10 +69,7 @@ const getValues = (sample) => {
     }, [])
 }
 
-const SvgVisualization = ({
-  openTooltip,
-  sample
-}) => {
+const SvgVisualization = ({ sample }) => {
   const [drawnSample, setDrawnSample] = useState(sample)
   const [animationState, setAnimationState] = useState(ANIMATION_STATE_START)
   const [drawThrottle, setDrawThrottle] = useState(null)
@@ -152,15 +149,10 @@ const SvgVisualization = ({
                 }}
               >
                 <g className='svg-visualization__data-point-breathing-animation'>
-                  <g
-                    className='svg-visualization__data-point-hover-transition'
-                    onClick={() => openTooltip(slug)}
-                  >
-                    <circle
-                      r='1'
-                      fill={color}
-                    />
-                  </g>
+                  <circle
+                    r='1'
+                    fill={color}
+                  />
                 </g>
               </g>
             )
@@ -171,12 +163,10 @@ const SvgVisualization = ({
 }
 
 SvgVisualization.defaultProps = {
-  openTooltip: () => {},
   sample: {}
 }
 
 SvgVisualization.propTypes = {
-  openTooltip: PropTypes.func,
   sample: PropTypes.object
 }
 
