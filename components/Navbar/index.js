@@ -61,7 +61,7 @@ const Navbar = () => {
         </button>
         <nav className='navbar__nav'>
           {
-            content.nav.links.map(({ label, pathname }) => (
+            content.nav.links.map(({ label, pathname, icon }) => (
               <Link href={pathname} key={pathname}>
                 <a
                   className='navbar__nav__link'
@@ -69,6 +69,7 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                 >
                   {label}
+                  {icon && <div className='navbar__nav__link__icon'>{icon}</div>}
                 </a>
               </Link>
             ))
