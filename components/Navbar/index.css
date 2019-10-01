@@ -12,7 +12,7 @@
   height: var(--navbar--height);
 }
 
-@media (max-width: 559px) {
+@media (max-width: 849px) {
   .navbar {
     --navbar__nav--opacity: 0;
     --navbar__nav--pointer-events: none;
@@ -28,7 +28,7 @@
   }
 }
 
-@media (min-width: 560px) {
+@media (min-width: 850px) {
   .navbar {
     margin-bottom: 30px;
   }
@@ -71,7 +71,7 @@
   background-size: contain;
 }
 
-@media (min-width: 560px) {
+@media (min-width: 850px) {
   .navbar__logo {
     background-image: url('/static/img/logo-desktop@2x.png');
     width: 74px;
@@ -93,7 +93,7 @@
   height: 30px;
 }
 
-@media (min-width: 560px) {
+@media (min-width: 850px) {
   .navbar__toggle {
     display: none;
   }
@@ -116,15 +116,15 @@
   transform: translateY(calc(var(--navbar__toggle__line--shift-y) * -1)) rotate(calc(var(--navbar__toggle__line--rotation) * -1));
 }
 
-@media (max-width: 559px) {
+@media (max-width: 849px) {
   .navbar__nav {
     position: fixed;
     top: var(--navbar--height);
     left: 0;
     bottom: 0;
     right: 0;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: var(--outer-gutter);
+    padding-right: var(--outer-gutter);
     background-color: #FFFFFF;
     opacity: var(--navbar__nav--opacity);
     z-index: var(--navbar__nav--z-index);
@@ -133,7 +133,7 @@
   }
 }
 
-@media (min-width: 560px) {
+@media (min-width: 850px) {
   .navbar__nav {
     display: inline-flex;
   }
@@ -146,9 +146,10 @@
   color: #000000;
   margin-top: 25px;
   position: relative;
+  white-space: nowrap;
 }
 
-@media (min-width: 560px) {
+@media (min-width: 850px) {
   .navbar__nav__link {
     margin-top: 0px;
     margin-left: 45px;
@@ -171,7 +172,7 @@
   margin-right: 4px;
 }
 
-@media (min-width: 560px) {
+@media (min-width: 850px) {
   .navbar__nav__link:after {
     top: 100%;
     left: 0;
@@ -190,6 +191,6 @@
 }
 
 .navbar__nav__link__icon {
-  margin-left: 10px;
-  width: 23px;
+  margin-left: 6px;
+  width: 18px;
 }

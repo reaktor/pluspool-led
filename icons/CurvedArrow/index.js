@@ -3,7 +3,7 @@ import React from 'react'
 const CurvedArrow = () => (
   <svg width='23px' height='17px' viewBox='0 0 23 17'>
     <g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>
-      <g transform='translate(-1377.000000, -47.000000)' stroke='#000000'>
+      <g transform='translate(-1377.000000, -47.000000)' stroke='currentColor'>
         <g transform='translate(40.000000, 40.000000)'>
           <g transform='translate(1227.000000, 5.000000)'>
             <g transform='translate(111.000000, 2.000000)'>
