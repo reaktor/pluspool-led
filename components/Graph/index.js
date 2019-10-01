@@ -21,17 +21,26 @@ const LineGraph = ({
   unit,
   data,
   color,
-  domain: [min, max],
+  domain: [xMin, xMax],
   props,
-  overlayGraph
+  overlayGraph,
+  dataPoint
 }) => {
   const dataRender = [{ id: label, data: formXYSeries(data, x, y) }]
-
   const defaultProps = {
     curve: 'linear',
     margin: { top: 10, right: 40, bottom: 50, left: 40 },
-    xScale: { type: 'linear', min, max },
-    yScale: { type: 'linear', stacked: false, min: 'auto', max: 'auto' },
+    xScale: {
+      type: 'linear',
+      min: xMin,
+      max: xMax
+    },
+    yScale: {
+      type: 'linear',
+      stacked: false,
+      min: dataPoint.min || 'auto',
+      max: dataPoint.max || 'auto'
+    },
     enableGridX: false,
     lineWidth: 1,
     pointSize: 0,
@@ -70,7 +79,7 @@ const Graph = ({
     enableGridY: false
   }
 
-  const { legend, max } = content.dataPoints[graph.slug]
+  const { legend } = content.dataPoints[graph.slug]
 
   return (
     <section>
@@ -121,14 +130,23 @@ const Graph = ({
         </div>
       </header>
       <div className='graph__graph-wrapper'>
-        <LineGraph {...graph} overlayGraph={overlayGraph} props={lineGraphProps} />
+        <LineGraph
+          {...graph}
+          overlayGraph={overlayGraph}
+          props={lineGraphProps}
+          dataPoint={content.dataPoints[graph.slug]}
+        />
         {overlayGraph &&
           <div className='graph__overlay-graph'>
-            <LineGraph {...overlayGraph} props={overlayGraphProps} tooltip={null} />
+            <LineGraph
+              {...overlayGraph}
+              props={overlayGraphProps}
+              dataPoint={content.dataPoints[overlayGraph.slug]}
+            />
           </div>}
       </div>
       <div className='graph__legend'>
-        {legend && <Legend legend={legend} max={max} />}
+        {legend && <Legend legend={legend} />}
       </div>
     </section>
   )

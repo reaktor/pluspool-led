@@ -5,6 +5,8 @@ export default {
     slug: 'bacteria',
     color: '#F2BAD2',
     label: 'Pathogens',
+    min: 0,
+    max: 104,
     interperet: value => {
       if (value < 35) return 'Good'
       if (value < 104) return 'Bad'
@@ -171,7 +173,6 @@ export default {
       if (value > 8) return 'Basic'
       return 'Neutral'
     },
-    max: 14,
     legend: [
       {
         value: 0,
@@ -184,6 +185,10 @@ export default {
       {
         value: 8,
         label: 'Basic'
+      },
+      {
+        value: 14,
+        isMax: true
       }
     ]
   },

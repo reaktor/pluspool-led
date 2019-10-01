@@ -28,7 +28,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
 
   const source = sources[slug]
   const dataPoint = content.dataPoints[slug]
-  const { label, legend, max, disclaimerText } = dataPoint
+  const { label, legend, disclaimerText } = dataPoint
 
   return (
     <div className='tooltip' data-active={open}>
@@ -62,7 +62,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
         </div>
         {legend && (
           <div className='tooltip__legend'>
-            <Legend legend={legend} max={max} />
+            <Legend legend={legend} />
           </div>
         )}
         <div className='tooltip__body'>
