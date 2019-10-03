@@ -6,7 +6,7 @@ export default {
     color: '#F2BAD2',
     label: 'Pathogens',
     min: 0,
-    max: 104,
+    max: 300,
     interperet: value => {
       if (value < 35) return 'Good'
       if (value < 104) return 'Bad'
