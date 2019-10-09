@@ -201,5 +201,10 @@ export default {
       return 'High'
     },
     showNumber: false
+  },
+  rain: {
+    slug: 'rain',
+    color: '#ff0000',
+    label: 'Rain'
   }
 }
