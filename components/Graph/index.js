@@ -120,13 +120,14 @@ const Graph = ({
                 <OverlayData />
               </span>
             </button>}
-          <button
-            type='button'
-            className='graph__question-mark'
-            onClick={() => openTooltip(graph.slug)}
-          >
-            <QuestionMark />
-          </button>
+          {content.tooltip[graph.slug] &&
+            <button
+              type='button'
+              className='graph__question-mark'
+              onClick={() => openTooltip(graph.slug)}
+            >
+              <QuestionMark />
+            </button>}
         </div>
       </header>
       <div className='graph__graph-wrapper'>
