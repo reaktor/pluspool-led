@@ -15,10 +15,11 @@ const Graphs = ({ openTooltip, samples, units }) => {
   if (!samples) return null
 
   const [activeUnit, setActiveUnit] = useState('day')
-  const [domain, setDomain] = useState([Date.now(), before(activeUnit)])
+  const latestSampleTimestamp = samples[samples.length -1].noaaTime
+  const [domain, setDomain] = useState([latestSampleTimestamp, before(activeUnit, latestSampleTimestamp)])
   const [overlayGraph, setOverlayGraph] = useState(null)
 
-  const setSpan = unit => setDomain([Date.now(), before(unit)])
+  const setSpan = unit => setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)])
   const filterOnClick = unit => {
     setActiveUnit(unit)
     setSpan(unit)
