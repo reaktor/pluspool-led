@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 /**
  * Generate a timestamp in the past
  */
-const before = unit => dayjs().subtract(1, unit).valueOf()
+const before = (unit, date = Date.now()) => dayjs(date).subtract(1, unit).valueOf()
 
 /**
  *

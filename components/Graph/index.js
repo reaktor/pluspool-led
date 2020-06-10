@@ -46,7 +46,7 @@ const LineGraph = ({
     pointSize: 0,
     tooltip: props => GraphTooltip({ label, unit, overlayGraph, data, ...props }),
     axisBottom: {
-      format: d => dayjs().to(dayjs(d)),
+      format: d => dayjs(d).format('MMM D, YYYY'),
       tickValues: 3,
       tickSize: 5,
       tickPadding: 5,

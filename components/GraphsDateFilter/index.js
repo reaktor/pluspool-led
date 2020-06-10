@@ -6,10 +6,10 @@ const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {
 
   const choiceToLabel = choice => {
     switch (choice) {
-      case 'day': return 'Today'
-      case 'week': return 'Past Week'
-      case 'month': return 'Past Month'
-      case 'year': return 'Past Year'
+      case 'day': return 'Day'
+      case 'week': return 'Week'
+      case 'month': return 'Month'
+      case 'year': return 'Year'
       default: return 'Select Date Range'
     }
   }

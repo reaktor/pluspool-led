@@ -99,8 +99,8 @@ class DataRangePicker extends React.Component {
           />
         </div>
         <div className='data-range-picker__labels'>
-          <label className='data-range-picker__label'>Today</label>
-          <label className='data-range-picker__label'>Past</label>
+          <label className='data-range-picker__label'>Latest</label>
+          <label className='data-range-picker__label'>Oldest</label>
         </div>
       </div>
     )
