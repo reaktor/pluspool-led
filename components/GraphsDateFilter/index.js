@@ -1,4 +1,4 @@
-import React from 'react'
+
 import './index.css'
 
 const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {

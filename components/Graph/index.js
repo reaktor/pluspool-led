@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import OverlayData from '../../icons/OverlayData'

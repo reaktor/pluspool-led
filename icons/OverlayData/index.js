@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 export default () => (
   <svg width='15px' height='14px' viewBox='0 0 15 14'>

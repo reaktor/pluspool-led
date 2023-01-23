@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const DownloadIcon = () => (
   <svg width='26px' height='26px' viewBox='0 0 26 26'>

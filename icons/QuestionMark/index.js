@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const QuestionMark = () => (
   <svg width='30px' height='30px' viewBox='0 0 30 30'>

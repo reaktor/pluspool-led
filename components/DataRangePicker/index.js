@@ -1,4 +1,4 @@
-import React from 'react'
+
 import RcSlider from 'rc-slider'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'

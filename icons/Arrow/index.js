@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const Arrow = () => (
   <svg width='25px' height='13px' viewBox='0 0 25 13'>

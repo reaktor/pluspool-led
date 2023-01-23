@@ -1,4 +1,4 @@
-import React from 'react'
+
 import QuestionMark from '../../icons/QuestionMark'
 
 import './index.css'

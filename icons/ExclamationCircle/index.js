@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 export default () => (
   <svg viewBox='0 0 27 27' style={{ margin: '-1px' }}>

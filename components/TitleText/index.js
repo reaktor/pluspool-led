@@ -1,4 +1,4 @@
-import React from 'react'
+
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Arrow from '../../icons/Arrow'

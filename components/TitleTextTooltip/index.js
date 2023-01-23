@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Tippy from '@tippy.js/react'
 import ExclamationCircle from '../../icons/ExclamationCircle'
 import './index.css'

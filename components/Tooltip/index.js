@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Tippy from '@tippy.js/react'
 import Legend from '../Legend'
 import TooltipSource from '../TooltipSource'

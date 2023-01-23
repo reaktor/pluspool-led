@@ -1,4 +1,4 @@
-import React from 'react'
+
 import PropTypes from 'prop-types'
 import content from '../../content'
 import DatabarItem from '../DatabarItem'

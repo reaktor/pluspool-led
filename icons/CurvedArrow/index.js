@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const CurvedArrow = () => (
   <svg width='23px' height='17px' viewBox='0 0 23 17'>

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import App, { Container } from 'next/app'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
