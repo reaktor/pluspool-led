@@ -1,6 +1,5 @@
 const withTM = require('next-transpile-modules')
 const withCSS = require('@zeit/next-css')
-const withPreact = require('next-preactx-plugin')
 
 const options = {
   transpileModules: ['jsdom', 'canvas'],
@@ -27,5 +26,5 @@ const options = {
   }
 }
 
-module.exports = [withTM, withCSS, withPreact]
+module.exports = [withTM, withCSS]
   .reduce((value, plugin) => plugin(value), options)

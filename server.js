@@ -1,5 +1,3 @@
-require('next-preactx-plugin/alias')()
-
 const Koa = require('koa')
 const next = require('next')
 
