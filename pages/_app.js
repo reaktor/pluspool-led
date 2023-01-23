@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import App, { Container } from 'next/app'
+import React, { useEffect, useState } from 'react'
+import { Container } from 'next/app'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
 import { dataFetchProcess } from '../helpers/dataLoader'
@@ -10,24 +10,24 @@ import ProgressBar from '../components/ProgressBar'
 const Header = () => (
   <Head>
     <title>{content.social.title}</title>
-    <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
-    <link rel="shortcut icon" href="/static/favicon.ico"/>
-    <link rel="icon" href="/static/favicon.ico"/>
+    <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+    <link rel='shortcut icon' href='/static/favicon.ico' />
+    <link rel='icon' href='/static/favicon.ico' />
 
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content={content.social.url}/>
-    <meta property="og:title" content={content.social.title}/>
-    <meta property="og:description" content={content.social.description}/>
-    <meta property="og:image" content={content.social.imageUrl}/>
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content={content.social.url} />
+    <meta property='og:title' content={content.social.title} />
+    <meta property='og:description' content={content.social.description} />
+    <meta property='og:image' content={content.social.imageUrl} />
 
     {/* Twitter meta tags */}
-    <meta property="twitter:card" content="summary_large_image"/>
-    <meta property="twitter:url" content={content.social.url}/>
-    <meta property="twitter:title" content={content.social.title}/>
-    <meta property="twitter:description" content={content.social.description}/>
-    <meta property="twitter:image" content={content.social.imageUrl}/>
+    <meta property='twitter:card' content='summary_large_image' />
+    <meta property='twitter:url' content={content.social.url} />
+    <meta property='twitter:title' content={content.social.title} />
+    <meta property='twitter:description' content={content.social.description} />
+    <meta property='twitter:image' content={content.social.imageUrl} />
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17668746-5"/>
+    <script async src='https://www.googletagmanager.com/gtag/js?id=UA-17668746-5' />
     <script
       dangerouslySetInnerHTML={{
         __html: `
