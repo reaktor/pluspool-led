@@ -42,7 +42,7 @@ export default {
       body: (
         <p>How warm was the water today? What’s turbidity? What’s pH? How is enterococci affect our ability to swim? Dive into the dashboard and find out!</p>
       ),
-      cta: <Link href='/'><a className='about-section__cta'>Go to the dashboard</a></Link>
+      cta: <Link href='/' className='about-section__cta'>Go to the dashboard</Link>
     }
   ],
   credits: (

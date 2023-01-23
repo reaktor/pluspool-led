@@ -16,15 +16,15 @@ const Navbar = () => {
     <div className='navbar' data-is-open={isOpen}>
       <div className='navbar__inner'>
         <h1 className='navbar__title'>
-          <Link href='/'>
-            <a className='navbar__title__link'>
-              <div className='navbar__logo'>
-                <span className='navbar__logo__text'>{content.nav.titleName}</span>
-              </div>
-              <span className='u-hide-mobile'>
-                {content.nav.titleDescription}
-              </span>
-            </a>
+          <Link href='/' className='navbar__title__link'>
+
+            <div className='navbar__logo'>
+              <span className='navbar__logo__text'>{content.nav.titleName}</span>
+            </div>
+            <span className='u-hide-mobile'>
+              {content.nav.titleDescription}
+            </span>
+
           </Link>
         </h1>
         <button
@@ -62,22 +62,23 @@ const Navbar = () => {
         <nav className='navbar__nav'>
           {
             content.nav.links.map(({ label, pathname, icon }) => (
-              <Link href={pathname} key={pathname}>
-                <a
-                  className='navbar__nav__link'
-                  data-active={router.pathname === pathname}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {label}
-                  {icon && <div className='navbar__nav__link__icon'>{icon}</div>}
-                </a>
-              </Link>
+              (<Link
+                href={pathname}
+                key={pathname}
+                className='navbar__nav__link'
+                data-active={router.pathname === pathname}
+                onClick={() => setIsOpen(false)}>
+
+                {label}
+                {icon && <div className='navbar__nav__link__icon'>{icon}</div>}
+
+              </Link>)
             ))
           }
         </nav>
       </div>
     </div>
-  )
+  );
 }
 
 export default Navbar
