@@ -71,6 +71,4 @@ class PlusPoolApp extends App {
   }
 }
 
-PlusPoolApp.getInitialProps = null
-
 export default PlusPoolApp
