@@ -1,11 +1,10 @@
-
-import App, { Container } from 'next/app'
+import React from 'react'
+import { Container } from 'next/app'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
 import { dataFetchProcess } from '../helpers/dataLoader'
 import content from '../content'
 import { GA_TRACKING_ID } from '../helpers/constants'
-import '../components/AboutSection/index.css'
 
 const Header = () => (
   <Head>
@@ -41,35 +40,24 @@ const Header = () => (
   </Head>
 )
 
-// Populate loading shim (what shows for the brief moment before a load.
-const Loading = () => (<></>)
+const PlusPoolApp = ({ Component, pageProps }) => {
+  const [state, setState] = useState({ data: null })
 
-class PlusPoolApp extends App {
-  constructor (props) {
-    super(props)
-    this.state = { data: null }
-  }
+  useEffect(() => {
+    dataFetchProcess.start(data => setState({ data }))
+  }, [setState]) // conform to React exhaustive-deps
 
-  componentDidMount () {
-    dataFetchProcess.start(data => this.setState({ data }))
-  }
-
-  render () {
-    const { Component, pageProps } = this.props
-
-    return (
-      <Container>
-        <div className='container' data-template={Component.displayName}>
-          <Header />
-          <Navbar />
-          {
-            this.state.data === null ? <Loading />
-              : (<Component {...pageProps} {...this.state.data} />)
-          }
-        </div>
-      </Container>
-    )
-  }
+  return (
+    <Container>
+      <div className='container' data-template={Component.displayName}>
+        <Header />
+        <Navbar />
+        {
+          state.data ? (<Component {...pageProps} {...state.data} />) : <ProgressBar />
+        }
+      </div>
+    </Container>
+  )
 }
 
 export default PlusPoolApp

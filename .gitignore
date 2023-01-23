@@ -9,3 +9,5 @@ yarn-error.log*
 .DS_Store
 .vscode
 .next
+#jetbrains IDEs
+.idea/
