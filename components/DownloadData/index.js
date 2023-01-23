@@ -1,6 +1,5 @@
 import DownloadIcon from '../../icons/DownloadIcon'
 import { ENDPOINTS } from '../../helpers/constants'
-import './index.css'
 
 const DownloadData = () => (
   <a href={ENDPOINTS.samples} className='download-data'>

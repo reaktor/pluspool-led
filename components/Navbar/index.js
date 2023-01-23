@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import content from '../../content'
-import './index.css'
 
 const Navbar = () => {
   const router = useRouter()

@@ -2,8 +2,6 @@
 import PropTypes from 'prop-types'
 import Arrow from '../../icons/Arrow'
 
-import './index.css'
-
 const DatabarItem = ({ onClick, label, value, unit, interperet }) => {
   const displayValue = interperet ? interperet(value) : `${value} ${unit}`
 

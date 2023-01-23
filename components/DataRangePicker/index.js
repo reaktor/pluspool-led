@@ -7,7 +7,6 @@ import { throttle } from 'lodash'
 import { scale } from '../../helpers/data'
 import { isMobile } from '../../helpers/layout'
 import 'rc-slider/assets/index.css'
-import './index.css'
 
 dayjs.extend(relativeTime)
 

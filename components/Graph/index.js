@@ -10,7 +10,6 @@ import content from '../../content'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import './index.css'
 
 dayjs.extend(relativeTime)
 

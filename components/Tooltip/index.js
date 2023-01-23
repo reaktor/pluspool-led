@@ -6,8 +6,6 @@ import content from '../../content'
 import ExclamationCircle from '../../icons/ExclamationCircle'
 import X from '../../icons/X'
 
-import './index.css'
-
 const renderValue = (slug, sample, units, dataPoint) => {
   const unit = units[slug]
   const { showNumber, interperet } = dataPoint

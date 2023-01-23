@@ -1,5 +1,4 @@
 
-import './index.css'
 
 const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {
   const innerOnChange = ({ target: { value } }) => onChange(value)

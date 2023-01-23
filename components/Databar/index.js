@@ -2,7 +2,6 @@
 import PropTypes from 'prop-types'
 import content from '../../content'
 import DatabarItem from '../DatabarItem'
-import './index.css'
 
 const displayedSlugsTop = [
   'bacteria',

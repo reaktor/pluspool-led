@@ -2,18 +2,18 @@ import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { scale } from '../../helpers/data'
 import content from '../../content'
-import './index.css'
-import SimplexNoise from 'simplex-noise'
+import { createNoise2D } from 'simplex-noise'
+import alea from 'alea'
 
 // Seed the noise functions
 const simplexNoises = {
-  oxygen: new SimplexNoise(1),
-  salinity: new SimplexNoise(2.1),
-  turbidity: new SimplexNoise(0.4),
-  speed: new SimplexNoise(1.5),
-  ph: new SimplexNoise(1.2),
-  bacteria: new SimplexNoise(-3.4),
-  temperature: new SimplexNoise(1.7)
+  oxygen: createNoise2D(alea(1)),
+  salinity: createNoise2D(alea(2.1)),
+  turbidity: createNoise2D(alea(0.4)),
+  speed: createNoise2D(alea(1.5)),
+  ph: createNoise2D(alea(1.2)),
+  bacteria: createNoise2D(alea(-3.4)),
+  temperature: createNoise2D(alea(1.7))
 }
 
 const SCALE = 100

@@ -5,7 +5,6 @@ import content from '../../content'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
 import DownloadData from '../DownloadData'
-import './index.css'
 
 const maxResolution = 1000 // points
 

@@ -1,8 +1,6 @@
 
 import QuestionMark from '../../icons/QuestionMark'
 
-import './index.css'
-
 const TooltipSource = ({ source }) => source && (
   <>
     <div className='tooltip-source'>

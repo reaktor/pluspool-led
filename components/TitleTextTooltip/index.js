@@ -1,7 +1,6 @@
 
 import Tippy from '@tippy.js/react'
 import ExclamationCircle from '../../icons/ExclamationCircle'
-import './index.css'
 
 const TitleTextTooltip = ({ children, tooltipText }) => (
   <Tippy

@@ -1,7 +1,4 @@
 
-
-import './index.css'
-
 const AboutSection = ({ side, image, title, body, cta, carousel }) => (
   <>
     <div className='about-section' data-side={side}>

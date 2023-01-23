@@ -1,7 +1,5 @@
 
 
-import './index.css'
-
 const Legend = ({ legend }) => (
   <div className='legend'>
     {legend.map(({ value, label, isMax }, index) => (

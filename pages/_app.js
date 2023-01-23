@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import { dataFetchProcess } from '../helpers/dataLoader'
 import content from '../content'
 import { GA_TRACKING_ID } from '../helpers/constants'
+import '../components/AboutSection/index.css'
 
 const Header = () => (
   <Head>
