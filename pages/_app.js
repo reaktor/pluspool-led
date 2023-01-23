@@ -1,10 +1,30 @@
-import React from 'react'
-import { Container } from 'next/app'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
 import { dataFetchProcess } from '../helpers/dataLoader'
 import content from '../content'
 import { GA_TRACKING_ID } from '../helpers/constants'
+import ProgressBar from '../components/ProgressBar'
+import '../components/AboutSection/index.css'
+import '../components/Carousel/index.css'
+import '../components/DataRangePicker/index.css'
+import '../components/Databar/index.css'
+import '../components/DatabarItem/index.css'
+import '../components/Graph/index.css'
+import '../components/GraphTooltip/index.css'
+import '../components/Graphs/index.css'
+import '../components/GraphsDateFilter/index.css'
+import '../components/Legend/index.css'
+import '../components/Navbar/index.css'
+import '../components/ProgressBar/index.css'
+import '../components/SvgVisualization/index.css'
+import '../components/TitleText/index.css'
+import '../components/TitleTextTooltip/index.css'
+import '../components/Tooltip/index.css'
+import '../components/TooltipSource/index.css'
+import '../pages/index.css'
+import '../icons/Circle/index.css'
+import '../icons/CloseCircle/index.css'
 
 const Header = () => (
   <Head>
@@ -48,15 +68,13 @@ const PlusPoolApp = ({ Component, pageProps }) => {
   }, [setState]) // conform to React exhaustive-deps
 
   return (
-    <Container>
-      <div className='container' data-template={Component.displayName}>
-        <Header />
-        <Navbar />
-        {
-          state.data ? (<Component {...pageProps} {...state.data} />) : <ProgressBar />
-        }
-      </div>
-    </Container>
+    <div className='container' data-template={Component.displayName}>
+      <Header />
+      <Navbar />
+      {
+        state.data ? (<Component {...pageProps} {...state.data} />) : <ProgressBar />
+      }
+    </div>
   )
 }
 

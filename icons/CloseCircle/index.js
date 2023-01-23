@@ -1,6 +1,3 @@
-
-import './index.css'
-
 const CloseCircle = () => {
   return (
     <div className='close-circle'>

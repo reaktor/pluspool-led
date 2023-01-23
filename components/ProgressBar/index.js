@@ -1,6 +1,3 @@
-import React from 'react'
-import './index.css'
-
 /**
  * Animated Progress Bar Component
  * taking up full width of its parent component

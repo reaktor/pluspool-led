@@ -1,6 +1,3 @@
-
-import './index.css'
-
 const Circle = ({ fill }) => {
   return (
     <div className='circle'>

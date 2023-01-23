@@ -50,10 +50,10 @@ const getValues = (sample) => {
 
       const array = new Array(3).fill().map((_val, index) => {
         const noiseValue = value + index
-        const radius = scale(simplex.noise2D(noiseValue, -2), -1, 1, 0.2, 17)
-        const x = scale(simplex.noise2D(noiseValue, 1), -1, 1, -50, 50)
-        const y = scale(simplex.noise2D(noiseValue, 16), -1, 1, -35, 35)
-        const delay = scale(simplex.noise2D(noiseValue, -0.8), -1, 1, 0, 0.3)
+        const radius = scale(simplex(noiseValue, -2), -1, 1, 0.2, 17)
+        const x = scale(simplex(noiseValue, 1), -1, 1, -50, 50)
+        const y = scale(simplex(noiseValue, 16), -1, 1, -35, 35)
+        const delay = scale(simplex(noiseValue, -0.8), -1, 1, 0, 0.3)
 
         return {
           slug,
