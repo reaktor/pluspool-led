@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
 import { dataFetchProcess } from '../helpers/dataLoader'
 import content from '../content'
 import { GA_TRACKING_ID } from '../helpers/constants'
-import Spinner from '../components/Spinner'
+import ProgressBar from '../components/ProgressBar'
 
 const Header = () => (
   <Head>
@@ -41,34 +41,26 @@ const Header = () => (
   </Head>
 )
 
-// Populate loading shim (what shows for the brief moment before a load.
-const Loading = ({ data }) => {
-  // const [shouldDisplay, setShouldDisplay] = useState(false)
-  if (data) return null
-  return <>{ <Spinner centered /> }</>
-}
-
-const PlusPoolApp = ({ Component, pageProps, shouldShowLoading }) => {
+const PlusPoolApp = ({ Component, pageProps }) => {
   const [state, setState] = useState({ data: null })
 
   useEffect(() => {
     dataFetchProcess.start(data => setState({ data }))
-  }, [setState])
+  }, [setState]) // conform to React exhaustive-deps
 
   return (
     <Container>
       <div className='container' data-template={Component.displayName}>
         <Header />
         <Navbar />
-        <Loading data={state.data} />
         {
-          state.data && (<Component {...pageProps} {...state.data} />)
+          state.data ? (<Component {...pageProps} {...state.data} />) : <ProgressBar />
         }
       </div>
     </Container>
   )
 }
 
-PlusPoolApp.getInitialProps = null;
+PlusPoolApp.getInitialProps = null
 
 export default PlusPoolApp

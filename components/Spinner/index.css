@@ -1,4 +1,4 @@
-.pluspool-spinner {
+.spinner {
     border: 12px solid #f3f3f3;
     border-top: 10px solid #000000;
     border-radius: 50%;
@@ -14,6 +14,20 @@
     bottom: 0;
     left: 0;
     margin: auto;
+}
+
+.size-md {
+    width: 60px;
+    height: 60px;
+    border: 10px solid #f3f3f3;
+    border-top: 8px solid #000000;
+}
+
+.size-sm {
+    width: 30px;
+    height: 30px;
+    border: 6px solid #f3f3f3;
+    border-top: 4px solid #000000;
 }
 
 @keyframes spin {
