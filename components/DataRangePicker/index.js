@@ -89,6 +89,7 @@ class DataRangePicker extends React.Component {
             max={SLIDER_MAX}
             value={this.scaleTo(timestamp)}
             onChange={value => this.onChange(value)}
+            railStyle={{ width: '100%' }}
             handle={(props) =>
               handle({
                 label: formattedDate,
