@@ -11,7 +11,6 @@ const maxResolution = 1000 // points
 const timeUnits = ['day', 'week', 'month', 'year']
 
 const Graphs = ({ openTooltip, samples, units }) => {
-  if (!samples) return null
 
   const [activeUnit, setActiveUnit] = useState('day')
   const latestSampleTimestamp = samples[samples.length -1].noaaTime
@@ -28,6 +27,8 @@ const Graphs = ({ openTooltip, samples, units }) => {
   const dsColumns = Array.from(Object.keys(content.dataPoints))
   const domainSamples = cutData(samples, 'noaaTime', min, max)
   const dsSamples = downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
+
+  if (!samples) return null
 
   const graphProps = key => ({
     x: 'noaaTime',
