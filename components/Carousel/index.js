@@ -130,7 +130,8 @@ class Carousel extends React.Component {
                 {{
                   image: slide.image,
                   title: slide.title,
-                  body: slide.body
+                  body: slide.body,
+		  description: slide.description
                 }}
               </CarouselSlide>
             ))}
