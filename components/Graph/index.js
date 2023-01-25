@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import OverlayData from '../../icons/OverlayData'
 import QuestionMark from '../../icons/QuestionMark'
 import Legend from '../Legend'
 import GraphTooltip from '../GraphTooltip'
-import { formXYSeries } from '../../helpers/data'
+import { cutData, formXYSeries } from '../../helpers/data';
 import content from '../../content'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
@@ -38,7 +38,7 @@ const LineGraph = ({
     yScale: {
       type: 'linear',
       stacked: false,
-      min: dataPoint.min || 'auto',
+      min: dataPoint.min || 0,
       max: dataPoint.max || 'auto'
     },
     enableGridX: false,
@@ -67,6 +67,40 @@ const Graph = ({
   units
 }) => {
   if (typeof document === 'undefined') return null
+
+  const firstRun = useRef(true)
+  const [seekDate, setSeekDate] = useState(graph.domain[0])
+  const [data, setData] = useState(graph.data)
+  console.log(overlayGraph)
+  const overlayData = overlayGraph ? overlayGraph.data : []
+
+  useEffect(() => {
+    // do not filter any data on the first run
+    if (firstRun.current) {
+      return
+    }
+    setSeekDate(graph.domain[0])
+    console.log('running seek')
+    setData(cutData(graph.data, 'noaaTime', graph.domain[1], seekDate))
+  }, [graph.domain])
+
+  useEffect(() => {
+    // do not filter data on the first run, it's already filtered
+    if (!firstRun.current) {
+      console.log('filtering data')
+      setData(cutData(graph.data, 'noaaTime', graph.domain[1], seekDate))
+    }
+  }, [seekDate])
+
+  useEffect(() => {
+    // update the firstRun reference to false as the component has been mounted and effects above have executed
+    // we can start updating data if date seeking changes or if date range changes in the parent Graphs component
+    firstRun.current = false
+  }, [])
+
+  const onSeekChange = (e) => {
+    setSeekDate(e.target.value)
+  }
 
   const lineGraphProps = {
     gridYValues: 5,
@@ -130,17 +164,21 @@ const Graph = ({
             </button>}
         </div>
       </header>
+      <input style={{ margin: '10px 0 25px 18px', accentColor: graph.color }} type='range' min={graph.domain[1]} max={graph.domain[0]} onChange={onSeekChange} value={seekDate} />
       <div className='graph__graph-wrapper'>
         <LineGraph
           {...graph}
+          data={data}
+          domain={[seekDate, graph.domain[1]]}
           overlayGraph={overlayGraph}
           props={lineGraphProps}
           dataPoint={content.dataPoints[graph.slug]}
         />
-        {overlayGraph &&
+        {overlayGraph && overlayGraph.slug !== graph.slug &&
           <div className='graph__overlay-graph'>
             <LineGraph
               {...overlayGraph}
+              data={overlayData}
               props={overlayGraphProps}
               dataPoint={content.dataPoints[overlayGraph.slug]}
             />

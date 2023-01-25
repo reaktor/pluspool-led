@@ -32,6 +32,8 @@ export default {
   oxygen: {
     slug: 'oxygen',
     color: '#1443A7',
+    min: 0,
+    max: 10,
     label: 'Oxygen',
     interperet: value => {
       if (value < 5) return 'Low'
@@ -56,6 +58,8 @@ export default {
   temperature: {
     slug: 'temperature',
     color: '#DB2B2B',
+    min: 0,
+    max: 100,
     label: 'Temperature',
     interperet: (value) => {
       if (value < 47) return 'Hypothermia'
@@ -87,6 +91,8 @@ export default {
     slug: 'salinity',
     color: '#009247',
     label: 'Salinity',
+    min: 0,
+    max: 3.0,
     interperet: value => {
       if (value < 0.5) return 'Fresh'
       if (value < 30) return 'Brackish'
@@ -111,6 +117,8 @@ export default {
     slug: 'turbidity',
     color: '#0DB3A6',
     label: 'Clarity',
+    min: 0,
+    max: 700,
     interperet: value => {
       if (value < 21) return 'Clear'
       if (value < 75) return 'Cloudy'
@@ -135,6 +143,8 @@ export default {
     slug: 'speed',
     color: '#000000',
     label: 'Speed',
+    min: 0,
+    max: 2,
     interperet: value => {
       if (value < 0.5) return 'Still'
       if (value < 1) return 'Moving'
@@ -161,6 +171,8 @@ export default {
     slug: 'direction',
     color: '#E28224',
     label: 'Direction',
+    min: 0,
+    max: 360,
     interperet: value => DIRECTIONS[Math.floor(value / 45)],
     showNumber: false
   },
@@ -168,6 +180,8 @@ export default {
     slug: 'ph',
     color: '#592150',
     label: 'pH',
+    min: 0,
+    max: 14,
     interperet: value => {
       if (value < 6) return 'Acidic'
       if (value > 8) return 'Basic'
@@ -196,6 +210,8 @@ export default {
     slug: 'depth',
     color: '#FFD746',
     label: 'Tide',
+    min: 0,
+    max: 4.0,
     interperet: value => {
       if (value < 3.75) return 'Low'
       return 'High'
@@ -205,6 +221,8 @@ export default {
   rain: {
     slug: 'rain',
     color: '#ff0000',
-    label: 'Rain'
+    label: 'Rain',
+    min: 0,
+    max: 0.30
   }
 }
