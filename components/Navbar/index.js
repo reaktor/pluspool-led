@@ -2,82 +2,83 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import content from '../../content'
+import cx from 'classnames';
+import styles from './Navbar.module.css';
 
 const Navbar = () => {
-  const router = useRouter()
-  const [isOpen, setIsOpen] = useState()
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState();
 
   const toggleIsOpen = () => {
-    setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <div className='navbar' data-is-open={isOpen}>
-      <div className='navbar__inner'>
-        <h1 className='navbar__title'>
-          <Link href='/' className='navbar__title__link'>
-
-            <div className='navbar__logo'>
-              <span className='navbar__logo__text'>{content.nav.titleName}</span>
+    <div className={styles.container} data-is-open={isOpen}>
+      <div className={styles.inner}>
+        <h1 className={styles.title}>
+          <Link href='/' className={styles.titleLink}>
+            <div className={styles.logo}>
+              <span className={styles.logoText}>{content.nav.titleName}</span>
             </div>
             <span className='u-hide-mobile'>
               {content.nav.titleDescription}
             </span>
-
           </Link>
         </h1>
         <button
-          className='navbar__toggle'
+          className={styles.toggle}
           type='button'
           onClick={() => toggleIsOpen()}
         >
-          <svg viewBox='0 0 30 10' className='navbar__toggle__icon'>
+          <svg viewBox='0 0 30 10' className={styles.toggleIcon}>
             <line
-              className='navbar__toggle__line --first'
-              x1='0' y1='0'
-              x2='30' y2='0'
+              className={cx(styles.toggleLine, styles.first)}
+              x1='0'
+              y1='0'
+              x2='30'
+              y2='0'
               stroke='#000000'
               stroke-width='1'
               vector-effect='non-scaling-stroke'
               style={{
-                '--navbar__toggle__line--center-x': '15px',
-                '--navbar__toggle__line--center-y': '0px'
+                '--toggle__line--center-x': '15px',
+                '--toggle__line--center-y': '0px',
               }}
             />
             <line
-              className='navbar__toggle__line --second'
-              x1='0' y1='10'
-              x2='30' y2='10'
+              className={cx(styles.toggleLine, styles.second)}
+              x1='0'
+              y1='10'
+              x2='30'
+              y2='10'
               stroke='#000000'
               stroke-width='1'
               vector-effect='non-scaling-stroke'
               style={{
-                '--navbar__toggle__line--center-x': '15px',
-                '--navbar__toggle__line--center-y': '10px'
+                '--toggle__line--center-x': '15px',
+                '--toggle__line--center-y': '10px',
               }}
             />
           </svg>
         </button>
-        <nav className='navbar__nav'>
-          {
-            content.nav.links.map(({ label, pathname, icon }) => (
-              (<Link
-                href={pathname}
-                key={pathname}
-                className='navbar__nav__link'
-                data-active={router.pathname === pathname}
-                onClick={() => setIsOpen(false)}>
-
-                {label}
-                {icon && <div className='navbar__nav__link__icon'>{icon}</div>}
-
-              </Link>)
-            ))
-          }
+        <nav className={styles.nav}>
+          {content.nav.links.map(({ label, pathname, icon }) => (
+            <Link
+              href={pathname}
+              key={pathname}
+              className={styles.navLink}
+              data-active={router.pathname === pathname}
+              onClick={() => setIsOpen(false)}
+            >
+              {label}
+              {icon && <div className={styles.icon}>{icon}</div>}
+            </Link>
+          ))}
         </nav>
       </div>
     </div>
   );
-}
+};
 
 export default Navbar

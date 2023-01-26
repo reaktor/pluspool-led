@@ -1,6 +1,7 @@
 
 import Tippy from '@tippy.js/react'
 import ExclamationCircle from '../../icons/ExclamationCircle'
+import styles from './TitleTextTooltip.module.css';
 
 const TitleTextTooltip = ({ children, tooltipText }) => (
   <Tippy
@@ -9,13 +10,13 @@ const TitleTextTooltip = ({ children, tooltipText }) => (
     maxWidth={285}
     trigger='click'
   >
-    <button className='title-text-tooltip'>
+    <button className={styles.container}>
       {children}
-      <div className='title-text-tooltip__icon'>
+      <div className={styles.icon}>
         <ExclamationCircle />
       </div>
     </button>
   </Tippy>
-)
+);
 
 export default TitleTextTooltip

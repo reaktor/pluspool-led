@@ -7,27 +7,27 @@ import { GA_TRACKING_ID } from '../helpers/constants'
 import ProgressBar from '../components/ProgressBar'
 import Script from 'next/script'
 
-import '../components/AboutSection/index.css'
-import '../components/Carousel/index.css'
-import '../components/DataRangePicker/index.css'
-import '../components/Databar/index.css'
-import '../components/DatabarItem/index.css'
-import '../components/DownloadData/index.css'
-import '../components/Graph/index.css'
-import '../components/GraphTooltip/index.css'
-import '../components/Graphs/index.css'
-import '../components/GraphsDateFilter/index.css'
-import '../components/Legend/index.css'
-import '../components/Navbar/index.css'
-import '../components/ProgressBar/index.css'
-import '../components/SvgVisualization/index.css'
-import '../components/TitleText/index.css'
-import '../components/TitleTextTooltip/index.css'
-import '../components/Tooltip/index.css'
-import '../components/TooltipSource/index.css'
-import '../icons/Circle/index.css'
-import '../icons/CloseCircle/index.css'
-import '../pages/index.css'
+import './global.css';
+
+// import '../components/AboutSection/index.css';
+// import '../components/Carousel/index.css';
+// import '../components/DataRangePicker/index.css';
+// import '../components/Databar/index.css';
+// import '../components/DatabarItem/index.css';
+// import '../components/DownloadData/index.css';
+// import '../components/GraphTooltip/index.css';
+// import '../components/GraphsDateFilter/index.css';
+// import '../components/Legend/index.css';
+// import '../components/Navbar/index.css';
+// import '../components/ProgressBar/index.css';
+// import '../components/SvgVisualization/index.css';
+// import '../components/TitleText/index.css';
+// import '../components/TitleTextTooltip/index.css';
+// import '../components/Tooltip/index.css';
+// import '../components/TooltipSource/index.css';
+// import '../icons/Circle/index.css';
+// import '../icons/CloseCircle/index.css';
+
 
 const Header = () => (
   <Head>

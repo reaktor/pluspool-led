@@ -1,4 +1,4 @@
-.graphs {
+.container {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-row-gap: 60px;
@@ -6,12 +6,12 @@
 }
 
 @media (min-width: 560px) {
-  .graphs {
+  .container {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 }
 
-.graphs-top-bar {
+.topBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,7 +21,7 @@
 
 
 @media (min-width: 560px) {
-  .graphs-top-bar {
+  .topBar {
     margin-top: 0px;
     margin-bottom: 60px;
   }

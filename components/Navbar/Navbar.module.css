@@ -1,4 +1,4 @@
-.navbar {
+.container {
   position: sticky;
   top: 0;
   z-index: var(--navbar--z-index);
@@ -13,28 +13,28 @@
 }
 
 @media (max-width: 849px) {
-  .navbar {
-    --navbar__nav--opacity: 0;
-    --navbar__nav--pointer-events: none;
-    --navbar__toggle__line--rotation: 0deg;
-    --navbar__toggle__line--shift-y: 0px;
+  .container {
+    --nav--opacity: 0;
+    --nav--pointer-events: none;
+    --toggle__line--rotation: 0deg;
+    --toggle__line--shift-y: 0px;
   }
 
-  .navbar[data-is-open="true"] {
-    --navbar__nav--opacity: 1;
-    --navbar__nav--pointer-events: auto;
-    --navbar__toggle__line--rotation: 45deg;
-    --navbar__toggle__line--shift-y: 5px;
+  .container[data-is-open="true"] {
+    --nav--opacity: 1;
+    --nav--pointer-events: auto;
+    --toggle__line--rotation: 45deg;
+    --toggle__line--shift-y: 5px;
   }
 }
 
 @media (min-width: 850px) {
-  .navbar {
+  .container {
     margin-bottom: 30px;
   }
 }
 
-.navbar__inner {
+.inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,7 +45,7 @@
   border-bottom: 1px solid #000000;
 }
 
-.navbar__title {
+.title {
   font-size: 16px;
   font-weight: 400;
   margin: 0;
@@ -54,14 +54,14 @@
   justify-content: center;
 }
 
-.navbar__title__link {
+.titleLink {
   color: inherit;
   text-decoration: none;
   display: flex;
   align-items: center;
 }
 
-.navbar__logo {
+.logo {
   width: 14px;
   height: 14px;
   margin-right: 14px;
@@ -72,14 +72,14 @@
 }
 
 @media (min-width: 850px) {
-  .navbar__logo {
+  .logo {
     background-image: url('/static/img/logo-desktop@2x.png');
     width: 74px;
     height: 14px;
   }
 }
 
-.navbar__logo__text {
+.logoText {
   position: absolute; 
   left: -10000px; 
   top: auto; 
@@ -88,36 +88,36 @@
   overflow: hidden;
 }
 
-.navbar__toggle {
+.toggle {
   width: 30px;
   height: 30px;
 }
 
 @media (min-width: 850px) {
-  .navbar__toggle {
+  .toggle {
     display: none;
   }
 }
 
-.navbar__toggle__icon {
+.toggleIcon {
   overflow: visible;
 }
 
-.navbar__toggle__line {
-  transform-origin: var(--navbar__toggle__line--center-x) var(--navbar__toggle__line--center-y);
+.toggleLine {
+  transform-origin: var(--toggle__line--center-x) var(--toggle__line--center-y);
   transition: transform 200ms ease-in-out;
 }
 
-.navbar__toggle__line.--first {
-  transform: translateY(var(--navbar__toggle__line--shift-y)) rotate(var(--navbar__toggle__line--rotation));
+.toggleLine.first {
+  transform: translateY(var(--toggle__line--shift-y)) rotate(var(--toggle__line--rotation));
 }
 
-.navbar__toggle__line.--second {
-  transform: translateY(calc(var(--navbar__toggle__line--shift-y) * -1)) rotate(calc(var(--navbar__toggle__line--rotation) * -1));
+.toggleLine.second {
+  transform: translateY(calc(var(--toggle__line--shift-y) * -1)) rotate(calc(var(--toggle__line--rotation) * -1));
 }
 
 @media (max-width: 849px) {
-  .navbar__nav {
+  .nav {
     position: fixed;
     top: var(--navbar--height);
     left: 0;
@@ -126,20 +126,20 @@
     padding-left: var(--outer-gutter);
     padding-right: var(--outer-gutter);
     background-color: #FFFFFF;
-    opacity: var(--navbar__nav--opacity);
-    z-index: var(--navbar__nav--z-index);
+    opacity: var(--nav--opacity);
+    z-index: var(--nav--z-index);
     transition: opacity 200ms ease-out;
-    pointer-events: var(--navbar__nav--pointer-events);
+    pointer-events: var(--nav--pointer-events);
   }
 }
 
 @media (min-width: 850px) {
-  .navbar__nav {
+  .nav {
     display: inline-flex;
   }
 }
 
-.navbar__nav__link {
+.navLink {
   display: flex;
   font-size: 16px;
   text-decoration: none;
@@ -150,13 +150,13 @@
 }
 
 @media (min-width: 850px) {
-  .navbar__nav__link {
+  .navLink {
     margin-top: 0px;
     margin-left: 45px;
   }
 }
 
-.navbar__nav__link:after {
+.navLink:after {
   --size: 8px;
   content: '';
   position: absolute;
@@ -173,7 +173,7 @@
 }
 
 @media (min-width: 850px) {
-  .navbar__nav__link:after {
+  .navLink:after {
     top: 100%;
     left: 0;
     right: 0;
@@ -182,15 +182,15 @@
   }
 }
 
-.navbar__nav__link[data-active="true"] {
+.navLink[data-active="true"] {
   color: #1443A7;
 }
 
-.navbar__nav__link[data-active="true"]:after {
+.navLink[data-active="true"]:after {
   background-color: #1443A7;
 }
 
-.navbar__nav__link__icon {
+.navLink .icon {
   margin-left: 6px;
   width: 18px;
 }

@@ -1,20 +1,20 @@
-.graph__header {
+.header {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  /* pull up margin-top that's on both .graph__title and .graph__header__right */
+  /* pull up margin-top that's on both .title and .header .right */
   margin-top: -10px;
   flex-wrap: wrap;
 }
 
-.graph__header__right {
+.header .right {
   display: flex;
   align-items: center;
   margin-left: auto;
   margin-top: 10px;
 }
 
-.graph__title {
+.title {
   margin: 0;
   font-size: 24px;
   line-height: 32px;
@@ -24,24 +24,24 @@
   align-items: center;
 }
 
-.graph__title__circle {
+.title .circle {
   width: 15px;
   height: 15px;
   margin-left: -8px;
   margin-right: 8px;
 }
 
-.graph__question-mark {
+.questionMark {
   width: 30px;
   margin-left: 20px;
 }
 
-.graph__graph-wrapper {
+.graphWrapper {
   height: 240px;
   position: relative;
 }
 
-.graph__overlay-picker-button {
+.overlayPickerButton {
   display: inline-flex;
   align-items: center;
   height: 32px;
@@ -52,34 +52,34 @@
   white-space: nowrap;
 }
 
-.graph__overlay-picker-button:hover {
+.overlayPickerButton:hover {
   background-color: #888888;
 }
 
-.graph__overlay-picker-button__text {
+.overlayPickerButton .text {
   padding-bottom: 2px;
 }
 
-.graph__overlay-picker-button__icon {
+.overlayPickerButton .icon {
   width: 15px;
   margin-left: 10px;
 }
 
-.graph__overlay-picker-button__circle {
+.overlayPickerButton .circle {
   width: 15px;
   height: 15px;
   margin-left: -8px;
   margin-right: 8px;
 }
 
-.graph__overlay-picker-button__close {
+.overlayPickerButton .close {
   height: 24px;
   width: 24px;
   margin-left: 8px;
   margin-right: -12px;
 }
 
-.graph__overlay-graph {
+.overlayGraph {
   top: 0;
   left: 0;
   width: 100%;
@@ -88,12 +88,12 @@
   z-index: 1;
 }
 
-.graph__legend {
+.legend {
   margin-top: 20px;
 }
 
 @media (min-width: 850px) {
-  .graph__legend {
+  .legend {
     padding-left: 40px; /* This is the same value we pass to our graph margin in Graph/index.js */
     padding-right: 40px; /* This is the same value we pass to our graph margin in Graph/index.js */
   } 

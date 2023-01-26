@@ -1,3 +1,5 @@
+import styles from './ProgressBar.module.css';
+
 /**
  * Animated Progress Bar Component
  * taking up full width of its parent component
@@ -5,10 +7,10 @@
  */
 const ProgressBar = () => {
   return (
-    <div className='progressBarWrapper'>
-      <div class='progressBar' />
+    <div className={styles.wrapper}>
+      <div className={styles.bar} />
     </div>
-  )
-}
+  );
+};
 
-export default ProgressBar
+export default ProgressBar;

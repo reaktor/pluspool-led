@@ -1,11 +1,11 @@
-.graphs-date-filter {
+.container {
   display: inline-flex;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 }
 
-.graphs-date-filter__input {
+.input {
   display: none;
 }
 
@@ -14,7 +14,7 @@
  * Did not have time to refactor out to shared styles.
  * Note that their responsive styles diverge a bit on mobile.
  */
-.graphs-date-filter__label {
+.label {
   cursor: pointer;
   display: flex;
   font-size: 16px;
@@ -26,7 +26,7 @@
   padding-bottom: 12px;
 }
 
-.graphs-date-filter__label:after {
+.label:after {
   --size: 8px;
   content: '';
   position: absolute;
@@ -44,15 +44,15 @@
 }
 
 @media (min-width: 560px) {
-  .graphs-date-filter__label  {
+  .label  {
     margin-right: 45px;
   }
 }
 
-.graphs-date-filter__input[type="radio"]:checked + .graphs-date-filter__label {
+.input[type="radio"]:checked + .label {
   color: #1443A7;
 }
 
-.graphs-date-filter__input[type="radio"]:checked + .graphs-date-filter__label:after {
+.input[type="radio"]:checked + .label:after {
   background-color: #1443A7;
 }

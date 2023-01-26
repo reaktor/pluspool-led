@@ -1,21 +1,26 @@
-
+import styles from './GraphsDateFilter.module.css';
 
 const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {
-  const innerOnChange = ({ target: { value } }) => onChange(value)
+  const innerOnChange = ({ target: { value } }) => onChange(value);
 
-  const choiceToLabel = choice => {
+  const choiceToLabel = (choice) => {
     switch (choice) {
-      case 'day': return 'Day'
-      case 'week': return 'Week'
-      case 'month': return 'Month'
-      case 'year': return 'Year'
-      default: return 'Select Date Range'
+      case 'day':
+        return 'Day';
+      case 'week':
+        return 'Week';
+      case 'month':
+        return 'Month';
+      case 'year':
+        return 'Year';
+      default:
+        return 'Select Date Range';
     }
-  }
+  };
 
   return (
-    <span className='graphs-date-filter'>
-      {units.map(unit => (
+    <span className={styles.container}>
+      {units.map((unit) => (
         <DateFilter
           key={unit}
           name={name}
@@ -26,13 +31,13 @@ const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {
         />
       ))}
     </span>
-  )
-}
+  );
+};
 const DateFilter = ({ name, unit, activeUnit, label, onChange }) => {
   return (
-    <div className='graphs-date-filter__filter'>
+    <div>
       <input
-        className='graphs-date-filter__input'
+        className={styles.input}
         type='radio'
         id={unit}
         name={name}
@@ -40,11 +45,11 @@ const DateFilter = ({ name, unit, activeUnit, label, onChange }) => {
         onChange={onChange}
         checked={activeUnit === unit}
       />
-      <label className='graphs-date-filter__label' for={unit}>
+      <label className={styles.label} for={unit}>
         {label}
       </label>
     </div>
-  )
-}
+  );
+};
 
-export default GraphsDateFilter
+export default GraphsDateFilter;
