@@ -1,6 +1,12 @@
 import React from 'react'
 import './index.css'
 
+// TODO :: Add sticky functionality
+// position: sticky;
+// top: 12%;
+// background: white;
+// z-index: 3;
+
 const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {
   const innerOnChange = ({ target: { value } }) => onChange(value)
 
