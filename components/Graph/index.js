@@ -80,16 +80,18 @@ const Graph = ({
   const [data, setData] = useState(graph.data)
   const [overlayData, setOverlayData] = useState(overlayGraph ? overlayGraph.data : [])
 
+  // run and cut data down if the minimum date range changes
   useEffect(() => {
     // do not filter any data on the first run
     if (firstRun.current) {
       return
     }
     // reset the seek date back to default if it was changed prior to date filter change
-    setSeekDate(graph.domain[0])
+    const maxSeekDate = graph.domain[0]
+    setSeekDate(maxSeekDate)
     shouldFilterBySeek.current = false
 
-    setData(cutData(graph.data, 'noaaTime', graph.domain[1], seekDate))
+    setData(cutData(graph.data, 'noaaTime', graph.domain[1], maxSeekDate))
   }, [graph.domain, setSeekDate])
 
   // update the overlayGraph data if it gets set by the Graphs parent component
@@ -103,10 +105,11 @@ const Graph = ({
   useEffect(() => {
     // only cut data if it's not a first render, and the hook above didn't already filter the data after the seeker value was changed from previous value to default, EX:
     // If user changes the seeker value, and then changes the date filter below the nav bar
-    if (!firstRun.current && shouldFilterBySeek.current) {
-      setData(cutData(graph.data, 'noaaTime', graph.domain[1], seekDate))
-      setOverlayData(overlayGraph ? cutData(overlayGraph.data, 'noaaTime', graph.domain[1], seekDate) : [])
+    if (firstRun.current || !shouldFilterBySeek.current) {
+      return
     }
+    setData(cutData(graph.data, 'noaaTime', graph.domain[1], seekDate))
+    setOverlayData(overlayGraph ? cutData(overlayGraph.data, 'noaaTime', overlayGraph.domain[1], seekDate) : [])
   }, [seekDate, setData, setOverlayData]) // will not run if the previous value is the same as new value, hence removing double runs.
 
   useEffect(() => {
