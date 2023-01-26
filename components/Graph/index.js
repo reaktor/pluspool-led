@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import OverlayData from '../../icons/OverlayData'
@@ -92,13 +92,22 @@ const Graph = ({
     setData(cutData(graph.data, 'noaaTime', graph.domain[1], seekDate))
   }, [graph.domain, setSeekDate])
 
+  // update the overlayGraph data if it gets set by the Graphs parent component
+  useEffect(() => {
+    if (firstRun.current) {
+      return
+    }
+    setOverlayData(overlayGraph ? overlayGraph.data : [])
+  }, [overlayGraph, setOverlayData])
+
   useEffect(() => {
     // only cut data if it's not a first render, and the hook above didn't already filter the data after the seeker value was changed from previous value to default, EX:
     // If user changes the seeker value, and then changes the date filter below the nav bar
     if (!firstRun.current && shouldFilterBySeek.current) {
       setData(cutData(graph.data, 'noaaTime', graph.domain[1], seekDate))
+      setOverlayData(overlayGraph ? cutData(overlayGraph.data, 'noaaTime', graph.domain[1], seekDate) : [])
     }
-  }, [seekDate, setData]) // will not run if the previous value is the same as new value, hence removing double runs.
+  }, [seekDate, setData, setOverlayData]) // will not run if the previous value is the same as new value, hence removing double runs.
 
   useEffect(() => {
     // update the firstRun reference to false as the component has been mounted and effects above have executed
@@ -112,17 +121,28 @@ const Graph = ({
     shouldFilterBySeek.current = true
   }, [setSeekDate])
 
-
-  const lineGraphProps = {
+  // memoize the graph props, so they don't get re-created on each render
+  const lineGraphProps = useMemo(() => ({
     gridYValues: 5,
     axisLeft: { format: d => `${d}`, tickValues: 5 }
-  }
+  }), [])
 
-  const overlayGraphProps = {
+  const overlayGraphProps = useMemo(() => ({
     axisLeft: null,
     axisRight: { format: d => `${d}` },
     enableGridY: false
-  }
+  }), [])
+
+  // const lineGraphProps = {
+  //   gridYValues: 5,
+  //   axisLeft: { format: d => `${d}`, tickValues: 5 }
+  // }
+
+  // const overlayGraphProps = {
+  //   axisLeft: null,
+  //   axisRight: { format: d => `${d}` },
+  //   enableGridY: false
+  // }
 
   const { legend } = content.dataPoints[graph.slug]
 
@@ -185,11 +205,13 @@ const Graph = ({
           props={lineGraphProps}
           dataPoint={content.dataPoints[graph.slug]}
         />
+        {/* do not render an overlayGraph if it's the same graph as the one it's overlaying, causing a double render of the same exact graph */}
         {overlayGraph && overlayGraph.slug !== graph.slug &&
           <div className='graph__overlay-graph'>
             <LineGraph
               {...overlayGraph}
               data={overlayData}
+              domain={[seekDate, overlayGraph.domain[1]]}
               props={overlayGraphProps}
               dataPoint={content.dataPoints[overlayGraph.slug]}
             />
