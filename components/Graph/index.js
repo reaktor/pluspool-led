@@ -198,7 +198,20 @@ const Graph = ({
             </button>}
         </div>
       </header>
-      <input style={{ margin: '10px 0 25px 18px', accentColor: graph.color }} type='range' min={graph.domain[1]} max={graph.domain[0]} onChange={onSeekChange} value={seekDate} step={10000000} />
+      {/ *100000000 - year */}
+      {/ *10000000 - month and wekk */}
+      {/ *1000000 - day */}
+      <input
+        id={`${graph.slug}-seeker`}
+        name={`${graph.slug}-seeker`}
+        aria-label={`seek ${graph.label} graph`}
+        style={{ margin: '10px 0 25px 18px', accentColor: graph.color }}
+        type='range'
+        min={graph.domain[1]}
+        max={graph.domain[0]}
+        onChange={onSeekChange}
+        value={seekDate}
+      />
       <div className='graph__graph-wrapper'>
         <LineGraph
           {...graph}
