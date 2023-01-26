@@ -198,7 +198,7 @@ const Graph = ({
             </button>}
         </div>
       </header>
-      <input style={{ margin: '10px 0 25px 18px', accentColor: graph.color }} type='range' min={graph.domain[1]} max={graph.domain[0]} onChange={onSeekChange} value={seekDate} />
+      <input style={{ margin: '10px 0 25px 18px', accentColor: graph.color }} type='range' min={graph.domain[1]} max={graph.domain[0]} onChange={onSeekChange} value={seekDate} step={10000000} />
       <div className='graph__graph-wrapper'>
         <LineGraph
           {...graph}
