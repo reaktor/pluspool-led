@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import OverlayData from '../../icons/OverlayData'
 import QuestionMark from '../../icons/QuestionMark'
 import Legend from '../Legend'
 import GraphTooltip from '../GraphTooltip'
-import { cutData, formXYSeries } from '../../helpers/data';
+import { cutData, downsampleData, formXYSeries } from '../../helpers/data';
 import content from '../../content'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
@@ -13,6 +13,12 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import './index.css'
 
 dayjs.extend(relativeTime)
+
+const maxResolution = 1000 // points
+
+const timeUnits = ['day', 'week', 'month', 'year']
+
+const dsColumns = Array.from(Object.keys(content.dataPoints))
 
 const LineGraph = ({
   x,
@@ -69,28 +75,30 @@ const Graph = ({
   if (typeof document === 'undefined') return null
 
   const firstRun = useRef(true)
+  const shouldFilterBySeek = useRef(false)
   const [seekDate, setSeekDate] = useState(graph.domain[0])
   const [data, setData] = useState(graph.data)
-  console.log(overlayGraph)
-  const overlayData = overlayGraph ? overlayGraph.data : []
+  const [overlayData, setOverlayData] = useState(overlayGraph ? overlayGraph.data : [])
 
   useEffect(() => {
     // do not filter any data on the first run
     if (firstRun.current) {
       return
     }
+    // reset the seek date back to default if it was changed prior to date filter change
     setSeekDate(graph.domain[0])
-    console.log('running seek')
+    shouldFilterBySeek.current = false
+
     setData(cutData(graph.data, 'noaaTime', graph.domain[1], seekDate))
-  }, [graph.domain])
+  }, [graph.domain, setSeekDate])
 
   useEffect(() => {
-    // do not filter data on the first run, it's already filtered
-    if (!firstRun.current) {
-      console.log('filtering data')
+    // only cut data if it's not a first render, and the hook above didn't already filter the data after the seeker value was changed from previous value to default, EX:
+    // If user changes the seeker value, and then changes the date filter below the nav bar
+    if (!firstRun.current && shouldFilterBySeek.current) {
       setData(cutData(graph.data, 'noaaTime', graph.domain[1], seekDate))
     }
-  }, [seekDate])
+  }, [seekDate, setData]) // will not run if the previous value is the same as new value, hence removing double runs.
 
   useEffect(() => {
     // update the firstRun reference to false as the component has been mounted and effects above have executed
@@ -98,9 +106,12 @@ const Graph = ({
     firstRun.current = false
   }, [])
 
-  const onSeekChange = (e) => {
-    setSeekDate(e.target.value)
-  }
+  // memoize onSeekChange so function remains the same between all re-renders
+  const onSeekChange = useCallback((e) => {
+    setSeekDate(Number(e.target.value)) // make sure the target value is converted to a number instead of being stored as a string, so hook referential equality checks run correctly
+    shouldFilterBySeek.current = true
+  }, [setSeekDate])
+
 
   const lineGraphProps = {
     gridYValues: 5,

@@ -11,6 +11,8 @@ const maxResolution = 1000 // points
 
 const timeUnits = ['day', 'week', 'month', 'year']
 
+const dsColumns = Array.from(Object.keys(content.dataPoints))
+
 const Graphs = ({ openTooltip, samples, units }) => {
   if (!samples) return null
 
@@ -27,7 +29,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
   }
 
   const [max, min] = domain
-  const dsColumns = Array.from(Object.keys(content.dataPoints))
+
   const domainSamples = cutData(samples, 'noaaTime', min, max)
   const dsSamples = downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
 
