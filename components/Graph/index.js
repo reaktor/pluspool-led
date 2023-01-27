@@ -137,7 +137,7 @@ const Graph = ({
         return 100000000
       case 'month':
       case 'week':
-        return 10000000
+        return 6000000
       case 'day':
         return 1000000
     }
@@ -194,25 +194,6 @@ const Graph = ({
             </button>}
         </div>
       </header>
-      <div style={{ display: 'flex', alignItems: 'center'}}>
-        <input
-          id={`${graph.slug}-seeker`}
-          name={`${graph.slug}-seeker`}
-          aria-label={`seek ${graph.label} graph`}
-          style={{ margin: '10px 0 25px 18px', accentColor: graph.color, cursor: 'pointer' }}
-          type='range'
-          role='slider'
-          aria-valuenow={seekDate}
-          aria-valuemin={graph.domain[1]}
-          aria-valuemax={graph.domain[0]}
-          aria-valuetext={dayjs(seekDate).format('MMM D, YYYY')}
-          min={graph.domain[1]}
-          max={graph.domain[0]}
-          onChange={onSeekChange}
-          value={seekDate}
-          step={seekerStep}
-        />
-      </div>
       <div className='graph__graph-wrapper'>
         <LineGraph
           {...graph}
@@ -233,6 +214,28 @@ const Graph = ({
               dataPoint={content.dataPoints[overlayGraph.slug]}
             />
           </div>}
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'nowrap', paddingLeft: '25px', paddingRight: '35px', flexDirection: 'row', alignItems: 'baseline' }}>
+        <label for={`${graph.slug}-seeker`}>
+          Zoom level
+        </label>
+        <input
+          id={`${graph.slug}-seeker`}
+          name={`${graph.slug}-seeker`}
+          aria-label={`seek ${graph.label} graph`}
+          style={{ margin: '10px 0 25px 18px', accentColor: graph.color, cursor: 'pointer', flexGrow: '1' }}
+          type='range'
+          role='slider'
+          aria-valuenow={seekDate}
+          aria-valuemin={graph.domain[1]}
+          aria-valuemax={graph.domain[0]}
+          aria-valuetext={dayjs(seekDate).format('MMM D, YYYY')}
+          min={graph.domain[1]}
+          max={graph.domain[0]}
+          onChange={onSeekChange}
+          value={seekDate}
+          step={seekerStep}
+        />
       </div>
       <div className='graph__legend'>
         {legend && <Legend legend={legend} />}
