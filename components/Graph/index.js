@@ -131,7 +131,6 @@ const Graph = ({
     enableGridY: false
   }), [])
 
-  //
   const seekerStep = useMemo(() => {
     switch (activeUnit) {
       case 'year':
