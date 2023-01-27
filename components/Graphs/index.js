@@ -47,6 +47,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
       key={key}
       setOverlayGraph={setOverlayGraph}
       openTooltip={openTooltip}
+      activeUnit={activeUnit}
       graph={graphProps(key)}
       units={units}
       overlayGraph={overlayGraph && graphProps(overlayGraph)}

@@ -5,7 +5,7 @@ import OverlayData from '../../icons/OverlayData'
 import QuestionMark from '../../icons/QuestionMark'
 import Legend from '../Legend'
 import GraphTooltip from '../GraphTooltip'
-import { cutData, downsampleData, formXYSeries } from '../../helpers/data';
+import { cutData, formXYSeries } from '../../helpers/data';
 import content from '../../content'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
@@ -13,12 +13,6 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import './index.css'
 
 dayjs.extend(relativeTime)
-
-const maxResolution = 1000 // points
-
-const timeUnits = ['day', 'week', 'month', 'year']
-
-const dsColumns = Array.from(Object.keys(content.dataPoints))
 
 const LineGraph = ({
   x,
@@ -68,6 +62,7 @@ const LineGraph = ({
 const Graph = ({
   graph,
   overlayGraph,
+  activeUnit,
   setOverlayGraph,
   openTooltip,
   units
@@ -114,13 +109,13 @@ const Graph = ({
 
   useEffect(() => {
     // update the firstRun reference to false as the component has been mounted and effects above have executed
-    // we can start updating data if date seeking changes or if date range changes in the parent Graphs component
+    // we can start updating data if date seeking changes or if date filter changes in the parent Graphs component
     firstRun.current = false
   }, [])
 
   // memoize onSeekChange so function remains the same between all re-renders
   const onSeekChange = useCallback((e) => {
-    setSeekDate(Number(e.target.value)) // make sure the target value is converted to a number instead of being stored as a string, so hook referential equality checks run correctly
+    setSeekDate(Number(e.target.value)) // target value to string so hook referential equality checks run correctly
     shouldFilterBySeek.current = true
   }, [setSeekDate])
 
@@ -136,16 +131,18 @@ const Graph = ({
     enableGridY: false
   }), [])
 
-  // const lineGraphProps = {
-  //   gridYValues: 5,
-  //   axisLeft: { format: d => `${d}`, tickValues: 5 }
-  // }
-
-  // const overlayGraphProps = {
-  //   axisLeft: null,
-  //   axisRight: { format: d => `${d}` },
-  //   enableGridY: false
-  // }
+  //
+  const seekerStep = useMemo(() => {
+    switch (activeUnit) {
+      case 'year':
+        return 100000000
+      case 'month':
+      case 'week':
+        return 10000000
+      case 'day':
+        return 1000000
+    }
+  }, [activeUnit])
 
   const { legend } = content.dataPoints[graph.slug]
 
@@ -198,20 +195,25 @@ const Graph = ({
             </button>}
         </div>
       </header>
-      {/ *100000000 - year */}
-      {/ *10000000 - month and wekk */}
-      {/ *1000000 - day */}
-      <input
-        id={`${graph.slug}-seeker`}
-        name={`${graph.slug}-seeker`}
-        aria-label={`seek ${graph.label} graph`}
-        style={{ margin: '10px 0 25px 18px', accentColor: graph.color }}
-        type='range'
-        min={graph.domain[1]}
-        max={graph.domain[0]}
-        onChange={onSeekChange}
-        value={seekDate}
-      />
+      <div style={{ display: 'flex', alignItems: 'center'}}>
+        <input
+          id={`${graph.slug}-seeker`}
+          name={`${graph.slug}-seeker`}
+          aria-label={`seek ${graph.label} graph`}
+          style={{ margin: '10px 0 25px 18px', accentColor: graph.color, cursor: 'pointer' }}
+          type='range'
+          role='slider'
+          aria-valuenow={seekDate}
+          aria-valuemin={graph.domain[1]}
+          aria-valuemax={graph.domain[0]}
+          aria-valuetext={dayjs(seekDate).format('MMM D, YYYY')}
+          min={graph.domain[1]}
+          max={graph.domain[0]}
+          onChange={onSeekChange}
+          value={seekDate}
+          step={seekerStep}
+        />
+      </div>
       <div className='graph__graph-wrapper'>
         <LineGraph
           {...graph}
