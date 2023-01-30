@@ -26,7 +26,7 @@
 
 @media (min-width: 560px) {
   .topBar {
-    margin-top: 20px;
+    margin-top: 0;
     margin-bottom: 60px;
     top: var(--navbar--height);  /* graphs date filter topBar becomes sticky at the bottom of the navbar  */
   }
