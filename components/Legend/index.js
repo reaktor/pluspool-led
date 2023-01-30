@@ -17,7 +17,7 @@ const Legend = ({ legend }) => (
                     vector-effect='non-scaling-stroke'
                     fill='transparent'
                     stroke='currentColor'
-                    stroke-width='1'
+                    strokeWidth='1'
                     stroke-linejoin='miter'
                     d='M0,0L10,0'
                   />
@@ -27,7 +27,7 @@ const Legend = ({ legend }) => (
                     vector-effect='non-scaling-stroke'
                     fill='currentColor'
                     stroke='currentColor'
-                    stroke-width='1'
+                    strokeWidth='1'
                     stroke-linejoin='miter'
                     d='M10,5l-5,-5l0,10Z'
                   />
@@ -40,7 +40,7 @@ const Legend = ({ legend }) => (
                   vector-effect='non-scaling-stroke'
                   fill='transparent'
                   stroke='currentColor'
-                  stroke-width='1'
+                  strokeWidth='1'
                   stroke-linejoin='miter'
                   d='M0,0l0,10l10,0l0,-10'
                 />
