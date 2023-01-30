@@ -39,8 +39,8 @@ const Navbar = () => {
               x2='30'
               y2='0'
               stroke='#000000'
-              stroke-width='1'
-              vector-effect='non-scaling-stroke'
+              strokeWidth='1'
+              vectorEffect='non-scaling-stroke'
               style={{
                 '--toggle__line--center-x': '15px',
                 '--toggle__line--center-y': '0px',
@@ -53,8 +53,8 @@ const Navbar = () => {
               x2='30'
               y2='10'
               stroke='#000000'
-              stroke-width='1'
-              vector-effect='non-scaling-stroke'
+              strokeWidth='1'
+              vectorEffect='non-scaling-stroke'
               style={{
                 '--toggle__line--center-x': '15px',
                 '--toggle__line--center-y': '10px',

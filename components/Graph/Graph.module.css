@@ -27,7 +27,7 @@
 .title .circle {
   width: 15px;
   height: 15px;
-  margin-left: -8px;
+  /*margin-left: -8px;*/ /*remove the left margin so it doesn't overflow out of the sticky header*/
   margin-right: 8px;
 }
 
@@ -96,5 +96,5 @@
   .legend {
     padding-left: 40px; /* This is the same value we pass to our graph margin in Graph/index.js */
     padding-right: 40px; /* This is the same value we pass to our graph margin in Graph/index.js */
-  } 
+  }
 }

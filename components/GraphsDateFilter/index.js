@@ -19,7 +19,7 @@ const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {
   };
 
   return (
-    <span className={styles.container}>
+    <span className={styles.container} role='radiogroup'>
       {units.map((unit) => (
         <DateFilter
           key={unit}
@@ -44,8 +44,9 @@ const DateFilter = ({ name, unit, activeUnit, label, onChange }) => {
         value={unit}
         onChange={onChange}
         checked={activeUnit === unit}
+        aria-checked={activeUnit === unit}
       />
-      <label className={styles.label} for={unit}>
+      <label className={styles.label} htmlFor={unit}>
         {label}
       </label>
     </div>
