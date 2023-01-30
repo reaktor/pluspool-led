@@ -67,7 +67,7 @@ const Graph = ({
   openTooltip,
   units
 }) => {
-  if (typeof document === 'undefined') return null
+
 
   const firstRun = useRef(true)
   const shouldFilterBySeek = useRef(false)
@@ -144,6 +144,8 @@ const Graph = ({
   }, [activeUnit])
 
   const { legend } = content.dataPoints[graph.slug]
+
+  if (typeof document === 'undefined') return null
 
   return (
     <section>
