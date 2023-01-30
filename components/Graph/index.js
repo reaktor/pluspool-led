@@ -137,7 +137,7 @@ const Graph = ({
         return 100000000
       case 'month':
       case 'week':
-        return 6000000
+        return 4000000
       case 'day':
         return 1000000
     }
