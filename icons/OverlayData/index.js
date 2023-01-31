@@ -2,8 +2,12 @@
 
 export default () => (
   <svg width='15px' height='14px' viewBox='0 0 15 14'>
-    <g id='UI' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>
-      <g id='B-3-Data' transform='translate(-599.000000, -277.000000)' stroke='#000000'>
+    <g id='UI' stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
+      <g
+        id='B-3-Data'
+        transform='translate(-599.000000, -277.000000)'
+        stroke='#000000'
+      >
         <g id='graph.direction' transform='translate(40.000000, 269.000000)'>
           <g id='header'>
             <g id='direction' transform='translate(427.000000, 0.000000)'>
@@ -17,4 +21,4 @@ export default () => (
       </g>
     </g>
   </svg>
-)
+);

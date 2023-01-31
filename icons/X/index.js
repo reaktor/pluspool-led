@@ -6,7 +6,7 @@ export default () => (
       vector-effect='non-scaling-stroke'
       fill='transparent'
       stroke='#000000'
-      stroke-width='1'
+      strokeWidth='1'
       stroke-linejoin='round'
       d='M0,0l10,10'
     />
@@ -14,9 +14,9 @@ export default () => (
       vector-effect='non-scaling-stroke'
       fill='transparent'
       stroke='#000000'
-      stroke-width='1'
+      strokeWidth='1'
       stroke-linejoin='round'
       d='M10,0l-10,10'
     />
   </svg>
-)
+);

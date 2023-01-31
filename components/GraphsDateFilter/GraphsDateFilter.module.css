@@ -5,8 +5,13 @@
   -webkit-overflow-scrolling: touch;
 }
 
+/*
+Make radio buttons work with tab roving keyboard selections
+ */
 .input {
-  display: none;
+  opacity: 0;
+  height: 0;
+  position: absolute;
 }
 
 /*
