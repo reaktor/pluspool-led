@@ -211,7 +211,7 @@ export default {
     color: '#FFD746',
     label: 'Tide',
     min: 0,
-    max: 4.0,
+    max: 2.0,
     interperet: value => {
       if (value < 3.75) return 'Low'
       return 'High'
