@@ -218,7 +218,7 @@ const Graph = ({
           </div>}
       </div>
       <div style={{ display: 'flex', flexWrap: 'nowrap', paddingLeft: '25px', paddingRight: '35px', flexDirection: 'row', alignItems: 'baseline' }}>
-        <label for={`${graph.slug}-seeker`}>
+        <label htmlFor={`${graph.slug}-seeker`}>
           Zoom level
         </label>
         <input
