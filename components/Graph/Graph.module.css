@@ -27,7 +27,6 @@
 .title .circle {
   width: 15px;
   height: 15px;
-  /*margin-left: -8px;*/ /*remove the left margin so it doesn't overflow out of the sticky header*/
   margin-right: 8px;
 }
 
