@@ -1,4 +1,4 @@
-
+import React from 'react';
 import Tippy from '@tippy.js/react'
 import Legend from '../Legend'
 import TooltipSource from '../TooltipSource'
@@ -52,7 +52,7 @@ const Tooltip = ({ closeTooltip, open, slug, sample, sources, units }) => {
                 maxWidth={285}
                 trigger='click'
               >
-                <button class={styles.disclaimer}>
+                <button className={styles.disclaimer}>
                   <ExclamationCircle />
                 </button>
               </Tippy>
