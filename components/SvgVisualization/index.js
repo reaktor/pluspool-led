@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types'
 import { scale } from '../../helpers/data'
 import content from '../../content'
@@ -49,7 +49,7 @@ const getValues = (sample) => {
       const value = parseFloat(sample[slug]);
       const simplex = simplexNoises[slug];
 
-      const array = new Array(3).fill().map((_val, index) => {
+      const array = new Array(3).fill(null).map((_val, index) => {
         const noiseValue = value + index;
         const radius = scale(simplex(noiseValue, -2), -1, 1, 0.2, 17);
         const x = scale(simplex(noiseValue, 1), -1, 1, -50, 50);
@@ -74,13 +74,19 @@ const SvgVisualization = ({ sample }) => {
   const [drawnSample, setDrawnSample] = useState(sample);
   const [animationState, setAnimationState] = useState(ANIMATION_STATE_START);
   const [drawThrottle, setDrawThrottle] = useState(null);
+  const [drawingData, setDrawingData] = useState([]);
 
   // We need this in a ref in order to grab correct value inside our timeout
   // Without this the timeout would use the sample value from when it was initialized
   const sampleRef = useRef(sample);
   sampleRef.current = sample;
 
-  const drawingData = getValues(drawnSample);
+  // const drawingData = getValues(drawnSample);
+
+  //set the drawingData via effect so it doesn't calculate the same values upon re-renders unless drawnSample changes
+  useEffect(() => {
+    setDrawingData(getValues(drawnSample));
+  },  [setDrawingData, drawnSample])
 
   // When the timestamp of sample changes
   useEffect(() => {
@@ -108,15 +114,22 @@ const SvgVisualization = ({ sample }) => {
     );
   }, [sample.noaaTime]);
 
-  // Sort by radius size. Places larger circles in the back, smaller ones in the front
-  const drawingDataSorted = [...drawingData].sort((a, b) => {
-    return b.radius - a.radius;
-  });
+  //Sort by radius size. Places larger circles in the back, smaller ones in the front
+  // const drawingDataSorted = [...drawingData].sort((a, b) => {
+  //   return b.radius - a.radius;
+  // });
+
+  //memoize the sorted drawing data, so it doesn't re-sort upon re-renders unless drawingData changes
+  const drawingDataSorted = useMemo(() => {
+    return [...drawingData].sort((a, b) => {
+      return b.radius - a.radius;
+    });
+  }, [drawingData])
 
   return (
     <div className={styles.container} data-animate-state={animationState}>
       <svg viewBox={`${SCALE / -2} ${SCALE / -2} ${SCALE} ${SCALE}`}>
-        {drawingDataSorted.map(({ color, slug, x, y, radius, delay }) => {
+        {drawingDataSorted.map(({ color, slug, x, y, radius, delay }, index) => {
           // Ensure that Duration + Delay = Total Duration
           const animationInDuration = DRAW_IN_TOTAL_DURATION * (1 - delay);
           const animationInDelay = DRAW_IN_TOTAL_DURATION * delay;
@@ -126,7 +139,7 @@ const SvgVisualization = ({ sample }) => {
 
           return (
             <g
-              key={slug}
+              key={`${slug}-${index}`}
               className={styles.dataPointPositioningAnimation}
               style={{
                 '--data-point--animation-in-duration': `${animationInDuration}ms`,
