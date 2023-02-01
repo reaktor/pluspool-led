@@ -114,12 +114,8 @@ const SvgVisualization = ({ sample }) => {
     );
   }, [sample.noaaTime]);
 
-  //Sort by radius size. Places larger circles in the back, smaller ones in the front
-  // const drawingDataSorted = [...drawingData].sort((a, b) => {
-  //   return b.radius - a.radius;
-  // });
-
-  //memoize the sorted drawing data, so it doesn't re-sort upon re-renders unless drawingData changes
+  // memoize the sorted drawing data, so it doesn't re-sort upon re-renders unless drawingData changes
+  // Sort by radius size. Places larger circles in the back, smaller ones in the front
   const drawingDataSorted = useMemo(() => {
     return [...drawingData].sort((a, b) => {
       return b.radius - a.radius;
