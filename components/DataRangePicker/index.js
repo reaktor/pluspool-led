@@ -1,19 +1,17 @@
-
-import React from "react";
-import RcSlider from 'rc-slider'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import { throttle } from 'lodash'
-import { scale } from '../../helpers/data'
-import { isMobile } from '../../helpers/layout'
-import 'rc-slider/assets/index.css'
+import React from 'react';
+import RcSlider from 'rc-slider';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { throttle } from 'lodash';
+import { scale } from '../../helpers/data';
+import { isMobile } from '../../helpers/layout';
+import 'rc-slider/assets/index.css';
 import styles from './DataRangePicker.module.css';
 
 dayjs.extend(relativeTime);
 
 const SLIDER_MIN = 0;
 const SLIDER_MAX = 100;
-const RcHandle = RcSlider.Handle;
 
 const handle = ({
   atStart,
@@ -26,28 +24,28 @@ const handle = ({
 }) => {
   const visible = !atStart && !atEnd;
   return (
-    <RcHandle value={value} {...restProps}>
+    <div {...restProps}>
       <div className={styles.handleLabel} data-visible={visible}>
         {label}
       </div>
-    </RcHandle>
+    </div>
   );
 };
 
 class DataRangePicker extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.onChange = throttle(this.onChange, 1000 / 60);
   }
 
-  onChange(value) {
+  onChange (value) {
     const { setTimestamp } = this.props;
     setTimestamp(this.scaleFrom(value));
   }
 
   // Scale from Slider value to our timestamp
-  scaleFrom(value) {
+  scaleFrom (value) {
     const {
       range: { start, end },
     } = this.props;
@@ -59,7 +57,7 @@ class DataRangePicker extends React.Component {
   }
 
   // Scale our timestamp to our Slider value
-  scaleTo(value) {
+  scaleTo (value) {
     const {
       range: { start, end },
     } = this.props;
@@ -70,7 +68,7 @@ class DataRangePicker extends React.Component {
       : scale(value, start, end, SLIDER_MIN, SLIDER_MAX);
   }
 
-  render() {
+  render () {
     const {
       timestamp,
       range: { start, end },
@@ -95,14 +93,12 @@ class DataRangePicker extends React.Component {
             value={this.scaleTo(timestamp)}
             onChange={(value) => this.onChange(value)}
             railStyle={{ width: '100%' }}
-            handle={(props) =>
-              handle({
-                label: formattedDate,
-                atStart,
-                atEnd,
-                ...props,
-              })
-            }
+            handleRender={(node) => handle({
+              label: formattedDate,
+              atStart,
+              atEnd,
+              ...node.props
+            })}
           />
         </div>
         <div className={styles.labels}>
@@ -114,4 +110,4 @@ class DataRangePicker extends React.Component {
   }
 }
 
-export default DataRangePicker
+export default DataRangePicker;
