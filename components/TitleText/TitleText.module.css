@@ -1,10 +1,10 @@
-.title-text {
+.container {
   position: relative;
   z-index: var(--title-text--z-index);
   align-self: flex-start;
 }
 
-.title-text__title {
+.title {
   font-family: 'Styrene A';
   font-size: 24px;
   line-height: 32px;
@@ -14,24 +14,24 @@
 }
 
 @media (min-width: 540px) {
-  .title-text__title {
+  .title {
     font-size: 30px;
     line-height: 38px;
   }
 }
 
 @media (min-width: 1200px) {
-  .title-text__title {
+  .title {
     font-size: 36px;
     line-height: 45px;
   }
 }
 
-.title-text__title > span {
+.title > span {
   display: block;
 }
 
-.title-text__button {
+.button {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -44,14 +44,14 @@
 }
 
 @media (min-width: 560px) {
-  .title-text__button {
+  .button {
     font-size: 24px;
     line-height: 32px;
     margin-top: 40px;
   }
 }
 
-.title-text__button__icon {
+.button .icon {
   width: 24px;
   margin-left: 14px;
 }

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import Graphs from '../components/Graphs'
 import Tooltip from '../components/Tooltip'
-import './index.css'
 
 const DataPage = ({ sources, samples, units }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)

@@ -10,9 +10,9 @@ import content from '../../content'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import './index.css'
+import styles from './Graph.module.css';
 
-dayjs.extend(relativeTime)
+dayjs.extend(relativeTime);
 
 const LineGraph = ({
   x,
@@ -24,16 +24,16 @@ const LineGraph = ({
   domain: [xMin, xMax],
   props,
   overlayGraph,
-  dataPoint
+  dataPoint,
 }) => {
-  const dataRender = [{ id: label, data: formXYSeries(data, x, y) }]
+  const dataRender = [{ id: label, data: formXYSeries(data, x, y) }];
   const defaultProps = {
     curve: 'linear',
     margin: { top: 10, right: 40, bottom: 50, left: 40 },
     xScale: {
       type: 'linear',
       min: xMin,
-      max: xMax
+      max: xMax,
     },
     yScale: {
       type: 'linear',
@@ -44,20 +44,21 @@ const LineGraph = ({
     enableGridX: false,
     lineWidth: 1,
     pointSize: 0,
-    tooltip: props => GraphTooltip({ label, unit, overlayGraph, data, ...props }),
+    tooltip: (props) =>
+      GraphTooltip({ label, unit, overlayGraph, data, ...props }),
     axisBottom: {
-      format: d => dayjs(d).format('MMM D, YYYY'),
+      format: (d) => dayjs(d).format('MMM D, YYYY'),
       tickValues: 3,
       tickSize: 5,
       tickPadding: 5,
-      tickRotation: 30
+      tickRotation: 30,
     },
     data: dataRender,
-    colors: [color]
-  }
+    colors: [color],
+  };
 
-  return (<ResponsiveLineCanvas {...defaultProps} {...props} />)
-}
+  return <ResponsiveLineCanvas {...defaultProps} {...props} />;
+};
 
 const Graph = ({
   graph,
@@ -65,10 +66,8 @@ const Graph = ({
   activeUnit,
   setOverlayGraph,
   openTooltip,
-  units
+  units,
 }) => {
-
-
   const firstRun = useRef(true)
   const shouldFilterBySeek = useRef(false)
   const [seekDate, setSeekDate] = useState(graph.domain[0])
@@ -143,60 +142,62 @@ const Graph = ({
     }
   }, [activeUnit])
 
-  const { legend } = content.dataPoints[graph.slug]
+
+  const { legend } = content.dataPoints[graph.slug];
 
   if (typeof document === 'undefined') return null
 
   return (
     <section>
-      <header className='graph__header'>
-        <h2 className='graph__title'>
-          <div className='graph__title__circle'>
+      <header className={styles.header}>
+        <h2 className={styles.title}>
+          <div className={styles.circle}>
             <Circle fill={graph.color} />
           </div>
-          <span className='graph__title__text'>
+          <span className={styles.titleText}>
             {graph.label} ({units[graph.slug]})
           </span>
         </h2>
-        <div className='graph__header__right'>
-          {overlayGraph && overlayGraph.y !== graph.y &&
+        <div className={styles.right}>
+          {overlayGraph && overlayGraph.y !== graph.y && (
             <button
-              className='graph__overlay-picker-button'
+              className={styles.overlayPickerButton}
               onClick={() => setOverlayGraph(null)}
             >
-              <div className='graph__overlay-picker-button__circle'>
+              <div className={styles.circle}>
                 <Circle fill={overlayGraph.color} />
               </div>
-              <span className='graph__overlay-picker-button__text'>
+              <span className={styles.text}>
                 {overlayGraph.label} ({units[overlayGraph.slug]})
               </span>
-              <div className='graph__overlay-picker-button__close'>
+              <div className={styles.close}>
                 <CloseCircle />
               </div>
-            </button>}
-          {!overlayGraph &&
+            </button>
+          )}
+          {!overlayGraph && (
             <button
-              className='graph__overlay-picker-button'
+              className={styles.overlayPickerButton}
               onClick={() => setOverlayGraph(graph.slug)}
             >
-              <span className='graph__overlay-picker-button__text'>
-                Overlay Data
-              </span>
-              <span className='graph__overlay-picker-button__icon'>
+              <span className={styles.text}>Overlay Data</span>
+              <span className={styles.icon}>
                 <OverlayData />
               </span>
-            </button>}
-          {content.tooltip[graph.slug] &&
+            </button>
+          )}
+          {content.tooltip[graph.slug] && (
             <button
               type='button'
-              className='graph__question-mark'
+              className={styles.questionMark}
               onClick={() => openTooltip(graph.slug)}
             >
               <QuestionMark />
-            </button>}
+            </button>
+          )}
         </div>
       </header>
-      <div className='graph__graph-wrapper'>
+      <div className={styles.graphWrapper}>
         <LineGraph
           {...graph}
           data={data}
@@ -206,8 +207,8 @@ const Graph = ({
           dataPoint={content.dataPoints[graph.slug]}
         />
         {/* do not render an overlayGraph if it's the same graph as the one it's overlaying, causing a double render of the same exact graph */}
-        {overlayGraph && overlayGraph.slug !== graph.slug &&
-          <div className='graph__overlay-graph'>
+        {overlayGraph && overlayGraph.slug !== graph.slug && (
+          <div className={styles.overlayGraph}>
             <LineGraph
               {...overlayGraph}
               data={overlayData}
@@ -215,7 +216,8 @@ const Graph = ({
               props={overlayGraphProps}
               dataPoint={content.dataPoints[overlayGraph.slug]}
             />
-          </div>}
+          </div>
+        )}
       </div>
       <div style={{ display: 'flex', flexWrap: 'nowrap', paddingLeft: '25px', paddingRight: '35px', flexDirection: 'row', alignItems: 'baseline' }}>
         <label htmlFor={`${graph.slug}-seeker`}>
@@ -243,7 +245,7 @@ const Graph = ({
         {legend && <Legend legend={legend} />}
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Graph

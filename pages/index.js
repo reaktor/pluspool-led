@@ -6,7 +6,6 @@ import TitleText from '../components/TitleText'
 import SvgVisualization from '../components/SvgVisualization'
 import Tooltip from '../components/Tooltip'
 import { useSample } from '../hooks/useSamples'
-import './index.css'
 
 const IndexPage = ({ sources, units, samples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)

@@ -1,4 +1,4 @@
-.graph-tooltip {
+.container {
   background: #000000;
   padding: 10px 14px;
   color: #FFFFFF;
@@ -7,6 +7,6 @@
   text-align: center;
 }
 
-.graph-tooltip__date {
+.date {
   color: #808080;
 }

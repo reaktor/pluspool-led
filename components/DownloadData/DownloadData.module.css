@@ -1,15 +1,15 @@
-.download-data {
+.container {
   display: inline-flex;
   margin-left: 20px;
 }
 
 @media (max-width: 559px) {
-  .download-data {
+  .container {
     display: none;
   }
 }
 
-.download-data__icon {
+.icon {
   width: 26px;
   margin-left: 10px;
 }

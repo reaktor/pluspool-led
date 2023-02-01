@@ -1,4 +1,4 @@
-import React from 'react'
+
 import TitleTextTooltip from '../components/TitleTextTooltip'
 
 const tooltipText = 'But even if we say water is great for swimming, we are NOT suggesting that you get in it! This dashboard does not condone unsanctioned swimming and is only an awareness platform. Please don\'t jump in until we have a + POOL!'
