@@ -35,6 +35,6 @@
     "deploy": "next build && next export"
   },
   "engines": {
-    "node": "~v19.4.0"
+    "node": "~v18.13.0"
   }
 }

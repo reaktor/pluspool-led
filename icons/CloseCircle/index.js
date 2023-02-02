@@ -10,7 +10,7 @@ const CloseCircle = () => {
           y2='2'
           stroke='#FFFFFF'
           strokeWidth='1'
-          vector-effect='non-scaling-stroke'
+          vectorEffect='non-scaling-stroke'
         />
         <line
           x1='2'
@@ -19,7 +19,7 @@ const CloseCircle = () => {
           y2='2'
           stroke='#FFFFFF'
           strokeWidth='1'
-          vector-effect='non-scaling-stroke'
+          vectorEffect='non-scaling-stroke'
         />
       </svg>
     </div>
