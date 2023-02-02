@@ -25,6 +25,9 @@
   width: 100%;
 }
 
+/*.customSlider {*/
+/*}*/
+
 .handleLabel {
   position: absolute;
   left: -80px;
@@ -76,3 +79,134 @@
     margin-top: -0.6em;
   }
 }
+
+
+
+/**
+  RC Slider Style Overrides
+  NOTE: .sliderContainer :global(.rc-slider) overwrites the styles of the slider component itself.
+  .customSlider than takes over and overrides the child styles of the rc-slider
+  */
+
+@media (max-width: 559px) {
+  .sliderContainer :global(.rc-slider) {
+    border-radius: 0;
+    padding: 0;
+    height: 85px;
+  }
+
+  .customSlider :global(.rc-slider-handle) {
+    color: #000000;
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    height: 100%;
+    width: 3px;
+    background-color: currentColor;
+    margin: 0 -1px;
+    transition: color 0.1s ease-in-out;
+  }
+
+  /**
+  * This element allows us to make the draggable area
+  * of .rc-slider-handle larger without having to change .rc-slider-handle size.
+  * This makes it easier to make .rc-slider-handle visually 3px tall
+  * and it's draggable area 60px larger.
+  */
+  .customSlider :global(.rc-slider-handle:before) {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: -20px;
+    bottom: 0px;
+    left: -20px;
+  }
+
+
+  .customSlider :global(.rc-slider-track) {
+    border-radius: 0;
+    background: transparent;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .customSlider :global(.rc-slider-rail) {
+    border-radius: 0;
+    background: transparent;
+    background-image: url('../../static/img/bar-lines-mobile.svg');
+    background-position: 0 bottom;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    bottom: 0;
+    height: 100%;
+  }
+
+  .customSlider :global(.rc-slider-mark) {
+    display: none;
+  }
+}
+
+@media (min-width: 560px) {
+  .sliderContainer :global(.rc-slider) {
+    border-radius: 0;
+    padding: 0;
+    width: 85px;
+  }
+
+  .customSlider :global(.rc-slider-handle) {
+    color: #7F7F7F;
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    width: 100%;
+    height: 3px;
+    background-color: currentColor;
+    margin-left: 0;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    transition: color 0.1s ease-in-out;
+  }
+
+  /**
+  * This element allows us to make the draggable area
+  * of .rc-slider-handle larger without having to change .rc-slider-handle size.
+  * This makes it easier to make .rc-slider-handle visually 3px tall
+  * and it's draggable area 60px larger.
+  */
+  .customSlider :global(.rc-slider-handle):before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -130px;
+    bottom: -30px;
+    left: 0px;
+  }
+
+  .customSlider :global(.rc-slider-handle):hover {
+    color: #000000;
+  }
+
+  .customSlider :global(.rc-slider-track) {
+    border-radius: 0;
+    background: transparent;
+    left: 0;
+    width: 100%;
+  }
+
+  .customSlider :global(.rc-slider-rail) {
+    border-radius: 0;
+    background: transparent;
+    background-image: url('../../static/img/bar-lines-desktop.svg');
+    background-position: 0 0;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    left: 0;
+    width: 100%;
+  }
+
+  .customSlider :global(.rc-slider-mark) {
+    display: none;
+  }
+}
+

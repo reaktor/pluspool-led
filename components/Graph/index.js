@@ -11,6 +11,8 @@ import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import styles from './Graph.module.css';
+import RcSlider from 'rc-slider';
+import DataRangePicker from '../DataRangePicker';
 
 dayjs.extend(relativeTime);
 
@@ -74,6 +76,8 @@ const Graph = ({
   const [data, setData] = useState(graph.data)
   const [overlayData, setOverlayData] = useState(overlayGraph ? overlayGraph.data : [])
 
+  console.log(seekDate)
+
   // run and cut data down if the minimum date range changes
   useEffect(() => {
     // do not filter any data on the first run
@@ -113,8 +117,8 @@ const Graph = ({
   }, [])
 
   // memoize onSeekChange so function remains the same between all re-renders
-  const onSeekChange = useCallback((e) => {
-    setSeekDate(Number(e.target.value)) // target value to string so hook referential equality checks run correctly
+  const onSeekChange = useCallback((value) => {
+    setSeekDate(value) // target value to string so hook referential equality checks run correctly
     shouldFilterBySeek.current = true
   }, [setSeekDate])
 
@@ -219,27 +223,35 @@ const Graph = ({
           </div>
         )}
       </div>
-      <div style={{ display: 'flex', flexWrap: 'nowrap', paddingLeft: '25px', paddingRight: '35px', flexDirection: 'row', alignItems: 'baseline' }}>
-        <label htmlFor={`${graph.slug}-seeker`}>
-          Zoom level
-        </label>
-        <input
-          id={`${graph.slug}-seeker`}
-          name={`${graph.slug}-seeker`}
-          aria-label={`seek ${graph.label} graph`}
-          style={{ margin: '10px 0 25px 18px', accentColor: graph.color, cursor: 'pointer', flexGrow: '1' }}
-          type='range'
-          role='slider'
-          aria-valuenow={seekDate}
-          aria-valuemin={graph.domain[1]}
-          aria-valuemax={graph.domain[0]}
-          aria-valuetext={dayjs(seekDate).format('MMM D, YYYY')}
-          min={graph.domain[1]}
-          max={graph.domain[0]}
-          onChange={onSeekChange}
-          value={seekDate}
-          step={seekerStep}
+      <div style={{ paddingLeft: '25px', paddingRight: '35px'}}>
+        <DataRangePicker
+          setTimestamp={setSeekDate}
+          timestamp={seekDate}
+          range={{
+            start: graph.domain[1],
+            end: graph.domain[0]
+          }}
         />
+        {/*<label htmlFor={`${graph.slug}-seeker`}>*/}
+        {/*  Zoom level*/}
+        {/*</label>*/}
+        {/*<input*/}
+        {/*  id={`${graph.slug}-seeker`}*/}
+        {/*  name={`${graph.slug}-seeker`}*/}
+        {/*  aria-label={`seek ${graph.label} graph`}*/}
+        {/*  style={{ margin: '10px 0 25px 18px', accentColor: graph.color, cursor: 'pointer', flexGrow: '1' }}*/}
+        {/*  type='range'*/}
+        {/*  role='slider'*/}
+        {/*  aria-valuenow={seekDate}*/}
+        {/*  aria-valuemin={graph.domain[1]}*/}
+        {/*  aria-valuemax={graph.domain[0]}*/}
+        {/*  aria-valuetext={dayjs(seekDate).format('MMM D, YYYY')}*/}
+        {/*  min={graph.domain[1]}*/}
+        {/*  max={graph.domain[0]}*/}
+        {/*  onChange={onSeekChange}*/}
+        {/*  value={seekDate}*/}
+        {/*  step={seekerStep}*/}
+        {/*/>*/}
       </div>
       <div className='graph__legend'>
         {legend && <Legend legend={legend} />}
