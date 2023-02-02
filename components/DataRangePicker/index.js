@@ -51,7 +51,7 @@ class DataRangePicker extends React.Component {
     } = this.props;
     // On mobile we need to flip our min and max in order to have the slider start from the left
     // Without doing this the slider would put "Today" at the right side
-    return isMobile()
+    return isMobile() && this.props.indexPage
       ? scale(value, SLIDER_MAX, SLIDER_MIN, start, end)
       : scale(value, SLIDER_MIN, SLIDER_MAX, start, end);
   }
@@ -63,7 +63,7 @@ class DataRangePicker extends React.Component {
     } = this.props;
     // On mobile we need to flip our min and max in order to have the slider start from the left
     // Without doing this the slider would put "Today" at the right side
-    return isMobile()
+    return isMobile() && this.props.indexPage
       ? scale(value, start, end, SLIDER_MAX, SLIDER_MIN)
       : scale(value, start, end, SLIDER_MIN, SLIDER_MAX);
   }
@@ -85,10 +85,10 @@ class DataRangePicker extends React.Component {
 
     return (
       <div className={styles.container}>
-        <div className={styles.sliderContainer}>
+        <div className={`${styles.sliderContainer} ${this.props.indexPage ? styles.customSliderContainer : ''}`}>
           <RcSlider
-            className={styles.customSlider}
-            vertical={!isMobile()}
+            className={this.props.indexPage ? styles.customSlider : ''}
+            vertical={!isMobile() && this.props.indexPage}
             min={SLIDER_MIN}
             max={SLIDER_MAX}
             value={this.scaleTo(timestamp)}
@@ -102,10 +102,12 @@ class DataRangePicker extends React.Component {
             })}
           />
         </div>
+        {this.props.indexPage && (
         <div className={styles.labels}>
           <label className={styles.label}>Latest</label>
           <label className={styles.label}>Oldest</label>
         </div>
+        )}
       </div>
     );
   }

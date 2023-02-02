@@ -223,13 +223,13 @@ const Graph = ({
           </div>
         )}
       </div>
-      <div style={{ paddingLeft: '25px', paddingRight: '35px'}}>
+      <div style={{ paddingLeft: '25px', paddingRight: '35px', margin: '10px 0 50px 0'}}>
         <DataRangePicker
-          setTimestamp={setSeekDate}
+          setTimestamp={onSeekChange}
           timestamp={seekDate}
           range={{
-            start: graph.domain[1],
-            end: graph.domain[0]
+            start: graph.domain[0],
+            end: graph.domain[1]
           }}
         />
         {/*<label htmlFor={`${graph.slug}-seeker`}>*/}

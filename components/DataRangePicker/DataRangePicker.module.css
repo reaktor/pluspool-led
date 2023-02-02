@@ -25,9 +25,6 @@
   width: 100%;
 }
 
-/*.customSlider {*/
-/*}*/
-
 .handleLabel {
   position: absolute;
   left: -80px;
@@ -89,7 +86,7 @@
   */
 
 @media (max-width: 559px) {
-  .sliderContainer :global(.rc-slider) {
+  .customSliderContainer :global(.rc-slider) {
     border-radius: 0;
     padding: 0;
     height: 85px;
@@ -148,7 +145,7 @@
 }
 
 @media (min-width: 560px) {
-  .sliderContainer :global(.rc-slider) {
+  .customSliderContainer :global(.rc-slider) {
     border-radius: 0;
     padding: 0;
     width: 85px;
@@ -209,4 +206,3 @@
     display: none;
   }
 }
-

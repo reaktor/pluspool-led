@@ -39,6 +39,7 @@ const IndexPage = ({ sources, units, samples }) => {
         onClick={advanceIntro}
       />
       <DataRangePicker
+        indexPage={true}
         setTimestamp={setTimestamp}
         timestamp={timestamp}
         range={range}
