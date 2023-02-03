@@ -14,7 +14,7 @@ import styles from './Graph.module.css';
 import RcSlider from 'rc-slider';
 import DataRangePicker from '../DataRangePicker';
 
-dayjs.extend(relativeTime);
+// dayjs.extend(relativeTime);
 
 const LineGraph = ({
   x,
@@ -134,6 +134,7 @@ const Graph = ({
     enableGridY: false
   }), [])
 
+  //TODO :: remove this
   const seekerStep = useMemo(() => {
     switch (activeUnit) {
       case 'year':
@@ -223,7 +224,7 @@ const Graph = ({
           </div>
         )}
       </div>
-      <div style={{ paddingLeft: '25px', paddingRight: '35px', margin: '10px 0 50px 0'}}>
+      <div className={styles.seekerContainer}>
         <DataRangePicker
           setTimestamp={onSeekChange}
           timestamp={seekDate}

@@ -14,6 +14,7 @@ const SLIDER_MIN = 0;
 const SLIDER_MAX = 100;
 
 const handle = ({
+  isIndexPage,
   atStart,
   atEnd,
   label,
@@ -22,7 +23,7 @@ const handle = ({
   index,
   ...restProps
 }) => {
-  const visible = !atStart && !atEnd;
+  const visible = !atStart && !atEnd && isIndexPage;
   return (
     <div {...restProps}>
       <div className={styles.handleLabel} data-visible={visible}>
@@ -51,6 +52,7 @@ class DataRangePicker extends React.Component {
     } = this.props;
     // On mobile we need to flip our min and max in order to have the slider start from the left
     // Without doing this the slider would put "Today" at the right side
+    // execute this only on the index page
     return isMobile() && this.props.indexPage
       ? scale(value, SLIDER_MAX, SLIDER_MIN, start, end)
       : scale(value, SLIDER_MIN, SLIDER_MAX, start, end);
@@ -63,6 +65,7 @@ class DataRangePicker extends React.Component {
     } = this.props;
     // On mobile we need to flip our min and max in order to have the slider start from the left
     // Without doing this the slider would put "Today" at the right side
+    // execute this only on the index page
     return isMobile() && this.props.indexPage
       ? scale(value, start, end, SLIDER_MAX, SLIDER_MIN)
       : scale(value, start, end, SLIDER_MIN, SLIDER_MAX);
@@ -83,12 +86,15 @@ class DataRangePicker extends React.Component {
     const endDate = dayjs(end);
     const atEnd = endDate.isSame(timestampDate);
 
+    //apply specific class names only on the index page, others on the data page
+    const isIndexPage = this.props.indexPage;
+
     return (
       <div className={styles.container}>
-        <div className={`${styles.sliderContainer} ${this.props.indexPage ? styles.customSliderContainer : ''}`}>
+        <div className={`${styles.sliderContainer} ${isIndexPage ? styles.customSliderContainer : styles.customSliderContainerData}`}>
           <RcSlider
-            className={this.props.indexPage ? styles.customSlider : ''}
-            vertical={!isMobile() && this.props.indexPage}
+            className={isIndexPage ? styles.customSlider : styles.customSliderData}
+            vertical={!isMobile() && isIndexPage}
             min={SLIDER_MIN}
             max={SLIDER_MAX}
             value={this.scaleTo(timestamp)}
@@ -96,6 +102,7 @@ class DataRangePicker extends React.Component {
             railStyle={{ width: '100%' }}
             handleRender={(node) => handle({
               label: formattedDate,
+              isIndexPage,
               atStart,
               atEnd,
               ...node.props
