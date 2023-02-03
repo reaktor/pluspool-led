@@ -22,6 +22,8 @@ noaa tides and currents - used for speed and direction of water flow
 
 We have credentials in our 1password pluspool vault, ask to be added there
 
+We use google analytics to look at pageviews - ask an existing GA admin to add you as an admin for the dashboard property
+
 ## hosting
 
     s3             for samples data
