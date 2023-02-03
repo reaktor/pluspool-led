@@ -17,8 +17,6 @@ const Graphs = ({ openTooltip, samples, units }) => {
   const [activeUnit, setActiveUnit] = useState('month')
   const latestSampleTimestamp = samples[samples.length -1].noaaTime
 
-  console.log('latest timestamp', latestSampleTimestamp)
-
   const [domain, setDomain] = useState([latestSampleTimestamp, before(activeUnit, latestSampleTimestamp)])
   const [overlayGraph, setOverlayGraph] = useState(null)
 
@@ -48,7 +46,6 @@ const Graphs = ({ openTooltip, samples, units }) => {
       key={key}
       setOverlayGraph={setOverlayGraph}
       openTooltip={openTooltip}
-      activeUnit={activeUnit}
       graph={graphProps(key)}
       units={units}
       overlayGraph={overlayGraph && graphProps(overlayGraph)}

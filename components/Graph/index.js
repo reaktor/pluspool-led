@@ -65,7 +65,6 @@ const LineGraph = ({
 const Graph = ({
   graph,
   overlayGraph,
-  activeUnit,
   setOverlayGraph,
   openTooltip,
   units,
@@ -122,7 +121,8 @@ const Graph = ({
     shouldFilterBySeek.current = true
   }, [setSeekDate])
 
-  // memoize the graph props, so they don't get re-created on each render
+
+  // memoize the graph props, so they don't get re-created on each update
   const lineGraphProps = useMemo(() => ({
     gridYValues: 5,
     axisLeft: { format: d => `${d}`, tickValues: 5 }
@@ -133,20 +133,6 @@ const Graph = ({
     axisRight: { format: d => `${d}` },
     enableGridY: false
   }), [])
-
-  //TODO :: remove this
-  const seekerStep = useMemo(() => {
-    switch (activeUnit) {
-      case 'year':
-        return 100000000
-      case 'month':
-      case 'week':
-        return 4000000
-      case 'day':
-        return 1000000
-    }
-  }, [activeUnit])
-
 
   const { legend } = content.dataPoints[graph.slug];
 
