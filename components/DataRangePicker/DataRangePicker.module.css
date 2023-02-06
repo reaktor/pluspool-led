@@ -256,7 +256,7 @@
   /*background-size: 100% auto;*/
   background-repeat: repeat-x;
   bottom: 0;
-  height: 60%;
+  height: 65%;
 }
 
 .customSliderData :global(.rc-slider-mark) {

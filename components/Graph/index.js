@@ -117,7 +117,7 @@ const Graph = ({
 
   // memoize onSeekChange so function remains the same between all re-renders
   const onSeekChange = useCallback((value) => {
-    setSeekDate(value) // target value to string so hook referential equality checks run correctly
+    setSeekDate(value)
     shouldFilterBySeek.current = true
   }, [setSeekDate])
 
