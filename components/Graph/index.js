@@ -211,6 +211,20 @@ const Graph = ({
         )}
       </div>
       <div className={styles.seekerContainer}>
+        {/*Can set up a Date label for more context by applying the following styles to the seeker container:*/}
+        {/*display: flex;*/}
+        {/*padding: 0 35px 0 25px;*/}
+        {/*margin: 5px 0 20px 0;*/}
+        {/*flex-wrap: nowrap;*/}
+        {/*align-items: self-end;*/}
+
+        {/*applying the following style to the div surrounding the label*/}
+        {/*margin-right: 20px*/}
+        {/*<div>*/}
+        {/*  <label>Date</label>*/}
+        {/*</div>*/}
+
+        {/*And adding a width of 100% to the dateRangePicker container*/}
         <DataRangePicker
           setTimestamp={onSeekChange}
           timestamp={seekDate}
