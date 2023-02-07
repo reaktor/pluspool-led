@@ -227,7 +227,6 @@
   width: 3px;
   background-color: currentColor;
   margin: 0 -1px;
-  transition: color 0.1s ease-in-out;
 }
 
 .customSliderData :global(.rc-slider-handle:before) {
@@ -253,7 +252,6 @@
   background: transparent;
   background-image: url('../../static/img/bar-lines-mobile.svg');
   background-position: 0 bottom;
-  /*background-size: 100% auto;*/
   background-repeat: repeat-x;
   bottom: 0;
   height: 70%;
