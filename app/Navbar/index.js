@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import content from '../../content'
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import content from '../../content';
 import cx from 'classnames';
 import styles from './Navbar.module.css';
 
@@ -81,4 +83,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar
+export default Navbar;
