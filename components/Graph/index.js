@@ -30,16 +30,12 @@ const LineGraph = ({
 }) => {
   const dataRender = [{ id: label, data: formXYSeries(data, x, y) }];
   const latestAvailableDate = dataRender[0].data[dataRender[0].data.length - 1];
-  // console.log(dataRender[0].data.filter(datum => datum['x'] >= xMin).length);
-  // console.log(dataRender[0].data[dataRender[0].data.length - 1]);
-  // console.log(dayjs(xMin).diff(dataRender[0].data[dataRender[0].data.length - 1].x, 'day'));
   const defaultProps = {
     curve: 'linear',
     margin: { top: 10, right: 40, bottom: 50, left: 40 },
     xScale: {
       type: 'linear',
       min: latestAvailableDate ? latestAvailableDate.x : xMin,
-      //dayjs(xMin).diff(dataRender[0].data[dataRender[0].data.length - 1].x, 'day') >= 1 ? dayjs(xMin).add(-1, 'day') : xMin
       max: xMax
     },
     yScale: {
@@ -214,20 +210,6 @@ const Graph = ({
         )}
       </div>
       <div className={styles.seekerContainer}>
-        {/*Can set up a Date label for more context by applying the following styles to the seeker container:*/}
-        {/*display: flex;*/}
-        {/*padding: 0 35px 0 25px;*/}
-        {/*margin: 5px 0 20px 0;*/}
-        {/*flex-wrap: nowrap;*/}
-        {/*align-items: self-end;*/}
-
-        {/*applying the following style to the div surrounding the label*/}
-        {/*margin-right: 20px*/}
-        {/*<div>*/}
-        {/*  <label>Date</label>*/}
-        {/*</div>*/}
-
-        {/*And adding a width of 100% to the dateRangePicker container*/}
         <DataRangePicker
           setTimestamp={onSeekChange}
           timestamp={seekDate}
@@ -236,32 +218,27 @@ const Graph = ({
             end: graph.domain[1]
           }}
         />
-        {/*<label htmlFor={`${graph.slug}-seeker`}>*/}
-        {/*  Zoom level*/}
-        {/*</label>*/}
-        {/*<input*/}
-        {/*  id={`${graph.slug}-seeker`}*/}
-        {/*  name={`${graph.slug}-seeker`}*/}
-        {/*  aria-label={`seek ${graph.label} graph`}*/}
-        {/*  style={{ margin: '10px 0 25px 18px', accentColor: graph.color, cursor: 'pointer', flexGrow: '1' }}*/}
-        {/*  type='range'*/}
-        {/*  role='slider'*/}
-        {/*  aria-valuenow={seekDate}*/}
-        {/*  aria-valuemin={graph.domain[1]}*/}
-        {/*  aria-valuemax={graph.domain[0]}*/}
-        {/*  aria-valuetext={dayjs(seekDate).format('MMM D, YYYY')}*/}
-        {/*  min={graph.domain[1]}*/}
-        {/*  max={graph.domain[0]}*/}
-        {/*  onChange={onSeekChange}*/}
-        {/*  value={seekDate}*/}
-        {/*  step={seekerStep}*/}
-        {/*/>*/}
       </div>
-      <div className='graph__legend'>
-        {legend && <Legend legend={legend} />}
-      </div>
+      {/*<div className='graph__legend'>*/}
+      {/*  {legend && <Legend legend={legend} />}*/}
+      {/*</div>*/}
     </section>
   );
 };
 
 export default Graph
+
+// // Can set up a Date label for more context by applying the following styles to the seeker container:
+// display: flex;
+// padding: 0 35px 0 25px;
+// margin: 5px 0 20px 0;
+// flex-wrap: nowrap;
+// align-items: self-end;
+//
+// // applying the following style to the div surrounding the label
+// margin-right: 20px
+// <div>
+// <label>Date</label>
+// </div>
+//
+// // And adding a width of 100% to the dateRangePicker container
