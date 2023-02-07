@@ -29,13 +29,18 @@ const LineGraph = ({
   dataPoint,
 }) => {
   const dataRender = [{ id: label, data: formXYSeries(data, x, y) }];
+  const latestAvailableDate = dataRender[0].data[dataRender[0].data.length - 1];
+  // console.log(dataRender[0].data.filter(datum => datum['x'] >= xMin).length);
+  // console.log(dataRender[0].data[dataRender[0].data.length - 1]);
+  // console.log(dayjs(xMin).diff(dataRender[0].data[dataRender[0].data.length - 1].x, 'day'));
   const defaultProps = {
     curve: 'linear',
     margin: { top: 10, right: 40, bottom: 50, left: 40 },
     xScale: {
       type: 'linear',
-      min: xMin,
-      max: xMax,
+      min: latestAvailableDate ? latestAvailableDate.x : xMin,
+      //dayjs(xMin).diff(dataRender[0].data[dataRender[0].data.length - 1].x, 'day') >= 1 ? dayjs(xMin).add(-1, 'day') : xMin
+      max: xMax
     },
     yScale: {
       type: 'linear',
@@ -74,8 +79,6 @@ const Graph = ({
   const [seekDate, setSeekDate] = useState(graph.domain[0])
   const [data, setData] = useState(graph.data)
   const [overlayData, setOverlayData] = useState(overlayGraph ? overlayGraph.data : [])
-
-  console.log(seekDate)
 
   // run and cut data down if the minimum date range changes
   useEffect(() => {
