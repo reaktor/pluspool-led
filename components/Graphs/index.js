@@ -69,6 +69,9 @@ const Graphs = ({ openTooltip, samples, units }) => {
           name='span'
         />
         <DownloadData />
+        <div style={{textAlign: 'center',  flexGrow: '1', width: '100%', marginTop: '20px'}}>
+          <p style={{display: 'inline'}}>Disclaimer: Data may show incorrect or missing values due to a damaged/clogged or non-reporting sensor.</p>
+        </div>
       </div>
       <div className={styles.container}>{graphs}</div>
     </>
