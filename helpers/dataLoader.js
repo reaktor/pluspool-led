@@ -15,6 +15,7 @@ const dataFetchParams = {
 
 export const fetchSamplesData = () => fetch(ENDPOINTS.samples, dataFetchParams)
   .then(response => {
+
     if (response.ok) return response.json()
     throw new Error(`Request rejected with status ${response.status}`)
   })
@@ -30,6 +31,7 @@ export const dataFetchProcess = (() => {
     console.log('Fetching new data ...')
     fetchSamplesData().then(data => {
       console.log('New data received. Loading ...')
+      console.log(data);
       update(data)
     })
   }

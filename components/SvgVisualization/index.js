@@ -71,6 +71,7 @@ const getValues = (sample) => {
 };
 
 const SvgVisualization = ({ sample }) => {
+
   const [drawnSample, setDrawnSample] = useState(sample);
   const [animationState, setAnimationState] = useState(ANIMATION_STATE_START);
   const [drawThrottle, setDrawThrottle] = useState(null);
