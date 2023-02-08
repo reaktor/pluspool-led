@@ -49,8 +49,10 @@ export default async function RootLayout({ children }) {
       <GoogleAnalytics />
       <head />
       <body>
-        <Navbar />
-        <DataContextProvider data={data}>{children}</DataContextProvider>
+        <div className='container'>
+          <Navbar />
+          <DataContextProvider data={data}>{children}</DataContextProvider>
+        </div>
       </body>
     </html>
   );
