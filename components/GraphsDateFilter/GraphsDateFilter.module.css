@@ -49,6 +49,12 @@ Make radio buttons work with tab roving keyboard selections
   opacity: 0.8;
 }
 
+@media (max-width: 600px) {
+  .container {
+    justify-content: space-around;
+  }
+}
+
 @media (min-width: 560px) {
   .label  {
     margin-right: 45px;
