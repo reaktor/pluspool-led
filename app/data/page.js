@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import Graphs from '../../components/Graphs';
+import Tooltip from '../../components/Tooltip';
+import { DataContext } from '../../providers/DataProvider';
 
-// import Graphs from '../components/Graphs';
-// import Tooltip from '../components/Tooltip';
+const Data = () => {
+  const { samples, sources, units } = useContext(DataContext);
 
-const Data = ({ sources, samples, units }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [tooltipSlug, setTooltipSlug] = useState(null);
 
@@ -18,7 +20,7 @@ const Data = ({ sources, samples, units }) => {
 
   return (
     <main className='page' data-template='data'>
-      {/* <Tooltip
+      <Tooltip
         open={tooltipOpen}
         slug={tooltipSlug}
         closeTooltip={closeTooltip}
@@ -27,7 +29,7 @@ const Data = ({ sources, samples, units }) => {
       />
       <div className='page__body'>
         <Graphs openTooltip={openTooltip} samples={samples} units={units} />
-      </div> */}
+      </div>
     </main>
   );
 };
