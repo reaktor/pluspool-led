@@ -70,8 +70,7 @@ const getValues = (sample) => {
     }, []);
 };
 
-const SvgVisualization = ({ sample }) => {
-
+const SvgVisualization = ({ sample = {} }) => {
   const [drawnSample, setDrawnSample] = useState(sample);
   const [animationState, setAnimationState] = useState(ANIMATION_STATE_START);
   const [drawThrottle, setDrawThrottle] = useState(null);
@@ -87,7 +86,7 @@ const SvgVisualization = ({ sample }) => {
   //set the drawingData via effect so it doesn't calculate the same values upon re-renders unless drawnSample changes
   useEffect(() => {
     setDrawingData(getValues(drawnSample));
-  },  [setDrawingData, drawnSample])
+  }, [setDrawingData, drawnSample]);
 
   // When the timestamp of sample changes
   useEffect(() => {
@@ -121,47 +120,45 @@ const SvgVisualization = ({ sample }) => {
     return [...drawingData].sort((a, b) => {
       return b.radius - a.radius;
     });
-  }, [drawingData])
+  }, [drawingData]);
 
   return (
     <div className={styles.container} data-animate-state={animationState}>
       <svg viewBox={`${SCALE / -2} ${SCALE / -2} ${SCALE} ${SCALE}`}>
-        {drawingDataSorted.map(({ color, slug, x, y, radius, delay }, index) => {
-          // Ensure that Duration + Delay = Total Duration
-          const animationInDuration = DRAW_IN_TOTAL_DURATION * (1 - delay);
-          const animationInDelay = DRAW_IN_TOTAL_DURATION * delay;
+        {drawingDataSorted.map(
+          ({ color, slug, x, y, radius, delay }, index) => {
+            // Ensure that Duration + Delay = Total Duration
+            const animationInDuration = DRAW_IN_TOTAL_DURATION * (1 - delay);
+            const animationInDelay = DRAW_IN_TOTAL_DURATION * delay;
 
-          const animationOutDuration = DRAW_OUT_TOTAL_DURATION * (1 - delay);
-          const animationOutDelay = DRAW_OUT_TOTAL_DURATION * delay;
+            const animationOutDuration = DRAW_OUT_TOTAL_DURATION * (1 - delay);
+            const animationOutDelay = DRAW_OUT_TOTAL_DURATION * delay;
 
-          return (
-            <g
-              key={`${slug}-${index}`}
-              className={styles.dataPointPositioningAnimation}
-              style={{
-                '--data-point--animation-in-duration': `${animationInDuration}ms`,
-                '--data-point--animation-in-delay': `${animationInDelay}ms`,
-                '--data-point--animation-out-duration': `${animationOutDuration}ms`,
-                '--data-point--animation-out-delay': `${animationOutDelay}ms`,
-                '--data-point--translate-x': `${x}px`,
-                '--data-point--translate-y': `${y}px`,
-                '--data-point--scale': `${radius}`,
-              }}
-            >
-              <g className={styles.dataPointBreathingAnimation}>
-                <circle r='1' fill={color} />
+            return (
+              <g
+                key={`${slug}-${index}`}
+                className={styles.dataPointPositioningAnimation}
+                style={{
+                  '--data-point--animation-in-duration': `${animationInDuration}ms`,
+                  '--data-point--animation-in-delay': `${animationInDelay}ms`,
+                  '--data-point--animation-out-duration': `${animationOutDuration}ms`,
+                  '--data-point--animation-out-delay': `${animationOutDelay}ms`,
+                  '--data-point--translate-x': `${x}px`,
+                  '--data-point--translate-y': `${y}px`,
+                  '--data-point--scale': `${radius}`,
+                }}
+              >
+                <g className={styles.dataPointBreathingAnimation}>
+                  <circle r='1' fill={color} />
+                </g>
               </g>
-            </g>
-          );
-        })}
+            );
+          }
+        )}
       </svg>
     </div>
   );
 };
-
-SvgVisualization.defaultProps = {
-  sample: {}
-}
 
 SvgVisualization.propTypes = {
   sample: PropTypes.object
