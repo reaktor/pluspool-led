@@ -1,5 +1,6 @@
 .container {
   display: inline-flex;
+  flex-grow: 1;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -46,6 +47,12 @@ Make radio buttons work with tab roving keyboard selections
   margin-top: 3px;
   background-color: transparent;
   opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+  .container {
+    justify-content: space-around;
+  }
 }
 
 @media (min-width: 560px) {

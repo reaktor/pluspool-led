@@ -1,0 +1,16 @@
+.container {
+    text-align: center;
+    flex-grow: 1;
+    width: 100%;
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        font-size: 14px;
+    }
+}
+
+.note {
+    display: inline;
+}
