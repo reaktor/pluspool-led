@@ -1,53 +1,71 @@
-import { ENDPOINTS } from './constants'
-import fetch from 'isomorphic-unfetch'
-
-// six seconds
-const updateTime = 6 * 60 * 1000
-
-const dataFetchParams = {
-  method: 'GET',
-  mode: 'cors',
-  cache: 'no-cache',
-  credentials: 'same-origin',
-  headers: { 'Content-Type': 'application/json', 'Accept-Encoding': 'gzip' },
-  referrer: 'no-referrer'
-}
-
-export const fetchSamplesData = () => fetch(ENDPOINTS.samples, dataFetchParams)
-  .then(response => {
-
-    if (response.ok) return response.json()
-    throw new Error(`Request rejected with status ${response.status}`)
-  })
-  .then(json => {
-    if (!json.version) return { samples: json }
-    return json
-  })
-
-export const dataFetchProcess = (() => {
-  let dataFetchProcess = null
-
-  const fetching = update => () => {
-    console.log('Fetching new data ...')
-    fetchSamplesData().then(data => {
-      console.log('New data received. Loading ...')
-      console.log(data);
-      update(data)
-    })
-  }
-
-  const start = update => {
-    if (dataFetchProcess === null) {
-      console.log('Begining data fetching.')
-      const fetcher = fetching(update)
-      fetcher() // first instance
-      dataFetchProcess = setInterval(fetcher, updateTime)
-    } else {
-      console.log('Data fetching already running.')
+export const getData = async () => {
+  const res = await fetch(
+    'https://pluspool-east-river-data.s3.us-east-2.amazonaws.com/2020-04-30T00%3A00%3A46.330Z.json',
+    {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept-Encoding': 'gzip',
+      },
     }
-  }
+  );
 
-  const stop = () => { clearInterval(dataFetchProcess) }
+  return res.json();
+};
 
-  return { start, stop }
-})()
+// import { ENDPOINTS } from './constants'
+// // import fetch from 'isomorphic-unfetch'
+
+// // six seconds
+// const updateTime = 6 * 60 * 1000
+
+// const dataFetchParams = {
+//   method: 'GET',
+//   mode: 'cors',
+//   cache: 'no-cache',
+//   credentials: 'same-origin',
+//   headers: { 'Content-Type': 'application/json', 'Accept-Encoding': 'gzip' },
+//   // referrer: 'no-referrer'
+// };
+
+// export const fetchSamplesData = () =>
+//   fetch(ENDPOINTS.samples, dataFetchParams)
+//     .then((response) => {
+//       if (response.ok) return response.json();
+//       throw new Error(`Request rejected with status ${response.status}`);
+//     })
+//     .then((json) => {
+//       if (!json.version) return { samples: json };
+//       return json;
+//     });
+
+// export const dataFetchProcess = (() => {
+//   let dataFetchProcess = null
+
+//   const fetching = update => () => {
+//     console.log('Fetching new data ...')
+//     fetchSamplesData().then(data => {
+//       console.log('New data received. Loading ...')
+//       console.log(data);
+//       update(data)
+//     })
+//   }
+
+//   const start = update => {
+//     if (dataFetchProcess === null) {
+//       console.log('Begining data fetching.')
+//       const fetcher = fetching(update)
+//       fetcher() // first instance
+//       dataFetchProcess = setInterval(fetcher, updateTime)
+//     } else {
+//       console.log('Data fetching already running.')
+//     }
+//   }
+
+//   const stop = () => { clearInterval(dataFetchProcess) }
+
+//   return { start, stop }
+// })()

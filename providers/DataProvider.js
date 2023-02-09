@@ -1,6 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useInterval } from '../hooks/useInterval';
+import { getData } from '../helpers/dataLoader';
 
 export const DataContext = createContext({
   data: undefined,
@@ -13,6 +15,16 @@ const DataContextProvider = ({ children, data }) => {
   const [samples, setSamples] = useState(data.samples);
   const [units, setUnits] = useState(data.units);
   const [sources, setSources] = useState(data.sources);
+
+  useInterval(async () => {
+    let newData = await getData();
+
+    if (newData) {
+      setSamples(newData.samples);
+      setUnits(newData.units);
+      setSources(newData.sources);
+    }
+  }, 6000);
 
   return (
     <DataContext.Provider
