@@ -19,7 +19,7 @@ const Navbar = () => {
     <div className={styles.container} data-is-open={isOpen}>
       <div className={styles.inner}>
         <h1 className={styles.title}>
-          <Link href='/' className={styles.titleLink}>
+          <Link href='/dashboard' className={styles.titleLink}>
             <div className={styles.logo}>
               <span className={styles.logoText}>{content.nav.titleName}</span>
             </div>
