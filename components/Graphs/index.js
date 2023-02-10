@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { before, cutData, downsampleData } from '../../helpers/data'
-import content from '../../content'
-import Graph from '../Graph'
-import GraphsDateFilter from '../GraphsDateFilter'
-import DownloadData from '../DownloadData'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { before, cutData, downsampleData } from '../../helpers/data';
+import content from '../../content';
+import Graph from '../Graph';
+import GraphsDateFilter from '../GraphsDateFilter';
+import DownloadData from '../DownloadData';
 import styles from './Graphs.module.css';
 import DataDisclaimer from '../DataDisclaimer';
 
@@ -12,7 +12,7 @@ const maxResolution = 1000; // points
 
 const timeUnits = ['day', 'week', 'month', 'year'];
 
-const Graphs = ({ openTooltip, samples, units }) => {
+const Graphs = ({ openTooltip, samples = null, units }) => {
   const [activeUnit, setActiveUnit] = useState('day');
   const latestSampleTimestamp = samples[samples.length - 1].noaaTime;
   const [domain, setDomain] = useState([
@@ -77,12 +77,8 @@ const Graphs = ({ openTooltip, samples, units }) => {
   );
 };
 
-Graphs.defaultProps = {
-  samples: null
-}
-
 Graphs.propTypes = {
-  samples: PropTypes.array
-}
+  samples: PropTypes.array,
+};
 
-export default Graphs
+export default Graphs;

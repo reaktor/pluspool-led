@@ -11,6 +11,7 @@ import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import styles from './Graph.module.css';
+import { useEffect } from 'react';
 
 dayjs.extend(relativeTime);
 
@@ -67,7 +68,9 @@ const Graph = ({
   openTooltip,
   units,
 }) => {
-  if (typeof document === 'undefined') return null;
+  useEffect(() => {
+    if (typeof document === 'undefined') return null;
+  }, []);
 
   const lineGraphProps = {
     gridYValues: 5,
