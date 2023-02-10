@@ -19,7 +19,7 @@ const Data = () => {
   const closeTooltip = () => setTooltipOpen(false);
 
   return (
-    <main className='page' data-template='DataPage'>
+    <main className='page' data-template='data'>
       <Tooltip
         open={tooltipOpen}
         slug={tooltipSlug}

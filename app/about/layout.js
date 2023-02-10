@@ -3,7 +3,7 @@ import '../../styles/globals.css';
 
 export default async function Layout({ children }) {
   return (
-    <div id='AboutPage' className='container'>
+    <div className='container' data-template='AboutPage'>
       <Navbar />
       {children}
     </div>
