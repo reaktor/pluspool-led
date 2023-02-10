@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import Databar from '../components/Databar';
 import DataRangePicker from '../components/DataRangePicker';
@@ -9,10 +9,10 @@ import SvgVisualization from '../components/SvgVisualization';
 import Tooltip from '../components/Tooltip';
 
 import { useSample } from '../hooks/useSamples';
-import { DataContext } from '../providers/DataProvider';
+import { useDataContext } from '../providers/DataProvider';
 
 const Index = () => {
-  const { samples, sources, units } = useContext(DataContext);
+  const { samples, sources, units } = useDataContext();
 
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [tooltipSlug, setTooltipSlug] = useState();

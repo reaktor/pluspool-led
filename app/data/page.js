@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Graphs from '../../components/Graphs';
 import Tooltip from '../../components/Tooltip';
-import { DataContext } from '../../providers/DataProvider';
+import { useDataContext } from '../../providers/DataProvider';
 
 const Data = () => {
-  const { samples, sources, units } = useContext(DataContext);
+  const { samples, sources, units } = useDataContext();
 
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [tooltipSlug, setTooltipSlug] = useState(null);
