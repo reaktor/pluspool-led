@@ -1,5 +1,11 @@
 import ProgressBar from '../components/ProgressBar';
+import Navbar from '../components/Navbar';
 
 export default function Loading() {
-  return <ProgressBar />;
+  return (
+    <div>
+      <Navbar />
+      <ProgressBar />
+    </div>
+  );
 }
