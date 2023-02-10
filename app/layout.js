@@ -1,6 +1,6 @@
 import { GA_TRACKING_ID } from '../helpers/constants';
 import Script from 'next/script';
-import Navbar from '../components/Navbar';
+
 import DataContextProvider from '../providers/DataProvider';
 import { getData } from '../helpers/dataLoader';
 
@@ -31,10 +31,7 @@ export default async function RootLayout({ children }) {
       <GoogleAnalytics />
       <head />
       <body>
-        <div className='container'>
-          <Navbar />
-          <DataContextProvider data={data}>{children}</DataContextProvider>
-        </div>
+        <DataContextProvider data={data}>{children}</DataContextProvider>
       </body>
     </html>
   );

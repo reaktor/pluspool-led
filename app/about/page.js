@@ -9,7 +9,7 @@ const About = () => {
   );
 
   return (
-    <main className='page' data-template='about'>
+    <main className='page' data-template='AboutPage'>
       {content.about.sections.map(aboutSection)}
       <section className='about-credits'>
         <div className='about-credits__wrapper'>{content.about.credits}</div>
