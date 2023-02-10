@@ -26,7 +26,7 @@ const DataContextProvider = ({ children, data }) => {
     }
   }, [setSamples, setUnits, setSources]);
 
-  useInterval(fetchData, 6000);
+  useInterval(fetchData, 600000);
 
   return (
     <DataContext.Provider
