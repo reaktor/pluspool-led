@@ -1,4 +1,3 @@
-
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Arrow from '../../icons/Arrow'
@@ -20,8 +19,8 @@ const levelText = {
   },
 };
 
-function TitleText({ pageState, timestamp, sample, onClick }) {
-  if (pageState === 0) {
+function TitleText({ showBanner, timestamp, sample, onClick }) {
+  if (showBanner) {
     return (
       <button className={styles.container} type='button' onClick={onClick}>
         <h1 className={styles.title}>{content.titleText.introText}</h1>

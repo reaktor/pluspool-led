@@ -18,9 +18,9 @@ const Index = () => {
   const [tooltipSlug, setTooltipSlug] = useState();
 
   const [sample, range, timestamp, setTimestamp] = useSample(samples);
-  const [pageState, setPageState] = useState(0);
+  const [showBanner, setShowBanner] = useState(true);
 
-  const advanceIntro = () => pageState < 1 && setPageState(pageState + 1);
+  const hideBanner = () => setShowBanner(false)
 
   const openTooltip = (slug) => {
     setTooltipSlug(slug);
@@ -29,7 +29,7 @@ const Index = () => {
   const closeTooltip = () => setTooltipOpen(false);
 
   return (
-    <main className='page' data-template='index' data-page-state={pageState}>
+    <main className='page' data-template='index' data-show-banner={showBanner}>
       <Tooltip
         open={tooltipOpen}
         slug={tooltipSlug}
@@ -41,8 +41,8 @@ const Index = () => {
       <TitleText
         timestamp={timestamp}
         sample={sample}
-        pageState={pageState}
-        onClick={advanceIntro}
+        showBanner={showBanner}
+        onClick={hideBanner}
       />
       <DataRangePicker
         setTimestamp={setTimestamp}
