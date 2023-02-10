@@ -1,3 +1,4 @@
+'use client'
 
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
@@ -12,6 +13,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import styles from './Graph.module.css';
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 
 dayjs.extend(relativeTime);
 

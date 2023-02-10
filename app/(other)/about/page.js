@@ -1,5 +1,5 @@
-import AboutSection from '../../components/AboutSection';
-import content from '../../content';
+import AboutSection from '../../../components/AboutSection';
+import content from '../../../content';
 
 const About = () => {
   const aboutSection = (section, index) => (

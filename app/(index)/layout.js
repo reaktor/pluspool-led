@@ -1,10 +1,11 @@
-import { GA_TRACKING_ID } from '../helpers/constants';
+import { GA_TRACKING_ID } from '../../helpers/constants';
 import Script from 'next/script';
 
-import DataContextProvider from '../providers/DataProvider';
-import { getData } from '../helpers/dataLoader';
+import DataContextProvider from '../../providers/DataProvider';
+import { getData } from '../../helpers/dataLoader';
 
-import '../styles/globals.css';
+import '../../styles/globals.css';
+import Navbar from '../../components/Navbar';
 
 const GoogleAnalytics = () => (
   <>
@@ -28,11 +29,14 @@ export default async function RootLayout({ children }) {
   let data = await getData();
   return (
     <html>
-      <GoogleAnalytics />
-      <head />
-      <body>
-        <DataContextProvider data={data}>{children}</DataContextProvider>
-      </body>
+    <GoogleAnalytics/>
+    <head/>
+    <body>
+    <div className="container" data-template="IndexPage">
+      <Navbar/>
+      <DataContextProvider data={data}>{children}</DataContextProvider>
+    </div>
+    </body>
     </html>
   );
 }
