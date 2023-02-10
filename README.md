@@ -18,13 +18,19 @@ datagarrison - used for central park rainfall data, and the sensor in pier 17
 
 noaa tides and currents - used for speed and direction of water flow
 
+## credentials
+
+We have credentials in our 1password pluspool vault, ask to be added there
+
+We use google analytics to look at pageviews - ask an existing GA admin to add you as an admin for the dashboard property
+
 ## hosting
-```
-s3             for samples data
-netlify        for application hosting
-digital ocean  for grabbing all the data and uploading to s3
-mediatemple    ns for water.pluspool.org
-```
+
+    s3             for samples data
+    netlify        for application hosting
+    digital ocean  for grabbing all the data and uploading to s3
+    mediatemple    nameserver for water.pluspool.org
+
 
 # Development
 

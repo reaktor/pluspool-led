@@ -6,6 +6,7 @@ import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
 import DownloadData from '../DownloadData'
 import styles from './Graphs.module.css';
+import DataDisclaimer from '../DataDisclaimer';
 
 const maxResolution = 1000; // points
 
@@ -62,6 +63,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
           name='span'
         />
         <DownloadData />
+        <DataDisclaimer />
       </div>
       <div className={styles.container}>{graphs}</div>
     </>
