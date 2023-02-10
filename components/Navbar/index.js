@@ -2,18 +2,21 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import content from '../../content';
 import cx from 'classnames';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
   const router = useRouter();
+  const currentPathName = usePathname();
   const [isOpen, setIsOpen] = useState();
 
   const toggleIsOpen = () => {
     setIsOpen(!isOpen);
   };
+
+
 
   return (
     <div className={styles.container} data-is-open={isOpen}>
@@ -70,7 +73,7 @@ const Navbar = () => {
               href={pathname}
               key={pathname}
               className={styles.navLink}
-              data-active={router.pathname === pathname}
+              data-active={ currentPathName === pathname}
               onClick={() => setIsOpen(false)}
             >
               {label}
