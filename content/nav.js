@@ -6,20 +6,20 @@ export default {
   links: [
     {
       label: 'Dashboard',
-      pathname: '/'
+      pathname: '/dashboard',
     },
     {
       label: 'Data',
-      pathname: '/data'
+      pathname: '/data',
     },
     {
       label: 'About',
-      pathname: '/about'
+      pathname: '/about',
     },
     {
       label: '+ POOL',
       pathname: 'https://pluspool.org/pool/',
-      icon: <CurvedArrow />
-    }
-  ]
-}
+      icon: <CurvedArrow />,
+    },
+  ],
+};
