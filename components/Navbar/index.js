@@ -2,13 +2,12 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import content from '../../content';
 import cx from 'classnames';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
-  const router = useRouter();
   const currentPathName = usePathname();
   const [isOpen, setIsOpen] = useState();
 
