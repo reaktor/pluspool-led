@@ -68,9 +68,13 @@ const Graph = ({
   openTooltip,
   units,
 }) => {
-  useEffect(() => {
-    if (typeof document === 'undefined') return null;
-  }, []);
+  // const [showGraph, setShowGraph] = useState(true);
+
+  // useEffect(() => {
+  //   if (typeof document === 'undefined') {
+  //     setShowGraph(false);
+  //   }
+  // }, []);
 
   const lineGraphProps = {
     gridYValues: 5,
@@ -85,6 +89,7 @@ const Graph = ({
 
   const { legend } = content.dataPoints[graph.slug];
 
+  // if (showGraph) {
   return (
     <section>
       <header className={styles.header}>
@@ -157,6 +162,9 @@ const Graph = ({
       </div>
     </section>
   );
+  // } else {
+  //   return <div></div>;
+  // }
 };
 
 export default Graph
