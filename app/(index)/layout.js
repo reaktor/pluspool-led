@@ -1,23 +1,14 @@
-import { getData } from '../../helpers/dataLoader';
-import DataContextProvider from '../../providers/DataProvider';
 import Navbar from '../../components/Navbar';
-import GoogleAnalytics from '../googleAnalytics';
 import '../../styles/globals.css';
 
-//Root layout for the index page
-export default async function RootLayout({ children }) {
-  let data = await getData();
+/**
+ * Child layout that wraps the index page -- main page -- with specific styles
+ */
+export default async function Layout({ children }) {
   return (
-    <html>
-    <head>
-      <GoogleAnalytics/>
-    </head>
-    <body>
-    <div className="container" data-template="IndexPage">
-      <Navbar/>
-      <DataContextProvider data={data}>{children}</DataContextProvider>
+    <div className='container' data-template="IndexPage">
+      <Navbar />
+      {children}
     </div>
-    </body>
-    </html>
   );
 }

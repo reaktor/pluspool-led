@@ -1,3 +1,5 @@
+'use client' //use client so the script doesn't get loaded on the server
+
 import React from 'react';
 import Script from 'next/script';
 import { GA_TRACKING_ID } from '../helpers/constants';
