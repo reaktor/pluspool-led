@@ -18,7 +18,7 @@ const Dashboard = () => {
   const [tooltipSlug, setTooltipSlug] = useState();
 
   const [sample, range, timestamp, setTimestamp] = useSample(samples);
-  const [showBanner, setShowBanner] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);
 
   const hideBanner = () => setShowBanner(false);
 
