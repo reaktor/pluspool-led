@@ -145,8 +145,9 @@ const slides = [
   },
 ];
 
-const getConfig = () => {
-  const width = typeof window !== 'undefined' ? window.innerWidth : 1200;
+//get width from the component instead of trying to access it on the server
+//and causing hydration errors
+const getConfig = (width) => {
 
   if (width < 560) {
     return {
@@ -188,6 +189,7 @@ const CarouselSlide = ({ index, children }) => (
   </Slide>
 );
 
+
 class Carousel extends React.Component {
   constructor(props) {
     super(props);
@@ -206,7 +208,7 @@ class Carousel extends React.Component {
   }
 
   onResize() {
-    const config = getConfig();
+    const config = getConfig(window.innerWidth);
     this.setState({ config });
   }
 

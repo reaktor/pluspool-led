@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import content from '../../content';
@@ -9,6 +9,7 @@ import styles from './Navbar.module.css';
 
 const Navbar = () => {
   const currentPathName = usePathname();
+  const [linkName, setLinkName] = useState();
   const [isOpen, setIsOpen] = useState();
 
   const toggleIsOpen = () => {
@@ -17,11 +18,27 @@ const Navbar = () => {
 
 
 
+  //execute when currentPathName from next.js or linkName changes
+  useEffect(() => {
+    //if next.js currentPath name now matches the set linkName, close the navbar in mobile viewport
+    //especially helps if the component within a route segment isn't ready to render yet
+    if(currentPathName === linkName) {
+      setIsOpen(false)
+    }
+  }, [currentPathName, linkName, setIsOpen]);
+
+
+  //set current link name
+  const onNavClick = (e) => {
+    setLinkName(e.target.getAttribute('data-name'))
+    //   setIsOpen(false)
+  }
+
   return (
     <div className={styles.container} data-is-open={isOpen}>
       <div className={styles.inner}>
         <h1 className={styles.title}>
-          <Link href='/' className={styles.titleLink}>
+          <Link href='/' className={styles.titleLink} data-name={content.nav.links[0].pathname}>
             <div className={styles.logo}>
               <span className={styles.logoText}>{content.nav.titleName}</span>
             </div>
@@ -71,9 +88,10 @@ const Navbar = () => {
             <Link
               href={pathname}
               key={pathname}
+              data-name={pathname}
               className={styles.navLink}
               data-active={ currentPathName === pathname}
-              onClick={() => setIsOpen(false)}
+              onClick={onNavClick}
             >
               {label}
               {icon && <div className={styles.icon}>{icon}</div>}
