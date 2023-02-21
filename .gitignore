@@ -11,3 +11,5 @@ yarn-error.log*
 .next
 #jetbrains IDEs
 .idea/
+# Local Netlify folder
+.netlify
