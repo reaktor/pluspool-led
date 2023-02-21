@@ -29,7 +29,7 @@ const displayDatabarItem = ({ openTooltip, sample, slug }) => {
   );
 };
 
-const Databar = ({ sample, openTooltip }) => {
+const Databar = ({ sample = {}, openTooltip }) => {
   return (
     <div className={styles.container}>
       <div>
@@ -47,11 +47,8 @@ const Databar = ({ sample, openTooltip }) => {
 };
 
 Databar.propTypes = {
-  sample: PropTypes.object
-}
+  sample: PropTypes.object,
+};
 
-Databar.defaultProps = {
-  sample: {}
-}
 
 export default Databar

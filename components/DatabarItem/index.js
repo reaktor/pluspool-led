@@ -3,7 +3,14 @@ import PropTypes from 'prop-types'
 import Arrow from '../../icons/Arrow'
 import styles from './DatabarItem.module.css';
 
-const DatabarItem = ({ onClick, label, value, unit, interperet }) => {
+const DatabarItem = ({
+  onClick,
+  label,
+  value,
+  unit,
+  interperet,
+  transform = null,
+}) => {
   const displayValue = interperet ? interperet(value) : `${value} ${unit}`;
 
   return (
@@ -20,9 +27,6 @@ const DatabarItem = ({ onClick, label, value, unit, interperet }) => {
   );
 };
 
-DatabarItem.defaultProps = {
-  transform: null
-}
 
 DatabarItem.propTypes = {
   label: PropTypes.string.isRequired,
