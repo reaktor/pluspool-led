@@ -4,5 +4,5 @@ export default {
   url: BASE_URL,
   title: '+ POOL Water Quality Data Dashboard',
   description: 'A detailed dashboard for visualizing the components of water quality in the + POOL floating pool in the East River of NYC.',
-  imageUrl: `${BASE_URL}/static/img/og-image.png`
+  imageUrl: `${BASE_URL}/img/og-image.png`
 }

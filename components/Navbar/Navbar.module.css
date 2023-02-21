@@ -65,7 +65,7 @@
   width: 14px;
   height: 14px;
   margin-right: 14px;
-  background-image: url('/static/img/logo-mobile@2x.png');
+  background-image: url('/img/logo-mobile@2x.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -73,7 +73,7 @@
 
 @media (min-width: 850px) {
   .logo {
-    background-image: url('/static/img/logo-desktop@2x.png');
+    background-image: url('/img/logo-desktop@2x.png');
     width: 74px;
     height: 14px;
   }
