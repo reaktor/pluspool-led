@@ -31,6 +31,7 @@ const Navbar = () => {
   //set current link name
   const onNavClick = (e) => {
     setLinkName(e.target.getAttribute('data-name'))
+    // can switch back to this if needed
     //   setIsOpen(false)
   }
 
