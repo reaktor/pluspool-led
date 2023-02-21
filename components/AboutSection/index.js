@@ -5,7 +5,7 @@ const AboutSection = ({ side, image, title, body, cta, carousel }) => (
     <div className={styles.container} data-side={side}>
       {image && (
         <div className={styles.image}>
-          <img src={`/static/img/about/${image}`} alt='' />
+          <img src={`/img/about/${image}`} alt='' />
         </div>
       )}
       <div className={styles.text}>

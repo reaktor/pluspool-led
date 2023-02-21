@@ -4,7 +4,7 @@ export const getData = async () => {
   const res = await fetch(ENDPOINTS.samples, {
     method: 'GET',
     mode: 'cors',
-    cache: 'no-cache',
+    // cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',

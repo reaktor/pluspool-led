@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useContext } from 'react';
-import Graphs from '../../components/Graphs';
-import Tooltip from '../../components/Tooltip';
-import { DataContext } from '../../providers/DataProvider';
+import Graphs from '../../../components/Graphs';
+import Tooltip from '../../../components/Tooltip';
+import { DataContext } from '../../../providers/DataProvider';
 
 const Data = () => {
   const { samples, sources, units } = useContext(DataContext);

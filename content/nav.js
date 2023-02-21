@@ -6,7 +6,7 @@ export default {
   links: [
     {
       label: 'Dashboard',
-      pathname: '/dashboard',
+      pathname: '/',
     },
     {
       label: 'Data',

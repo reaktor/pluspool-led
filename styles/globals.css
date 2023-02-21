@@ -3,7 +3,7 @@
   font-weight: 400;
   font-style: normal;
   /* TODO: This is a test version of the woff2 font file. We still need to purchase a real license */
-  src: url('/static/fonts/StyreneA-Regular-Test.woff2') format('woff2');
+  src: url('/fonts/StyreneA-Regular-Test.woff2') format('woff2');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-weight: 400;
   font-style: normal;
   /* TODO: This is a test version of the woff2 font file. We still need to purchase a real license */
-  src: url('/static/fonts/StyreneB-Regular-Test.woff2') format('woff2');
+  src: url('/fonts/StyreneB-Regular-Test.woff2') format('woff2');
 }
 
 :root {
@@ -337,7 +337,7 @@ svg {
   .rc-slider-rail.rc-slider-rail {
     border-radius: 0;
     background: transparent;
-    background-image: url('/static/img/bar-lines-mobile.svg');
+    background-image: url('/img/bar-lines-mobile.svg');
     background-position: 0 bottom;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -400,7 +400,7 @@ svg {
   .rc-slider-rail.rc-slider-rail {
     border-radius: 0;
     background: transparent;
-    background-image: url('/static/img/bar-lines-desktop.svg');
+    background-image: url('/img/bar-lines-desktop.svg');
     background-position: 0 0;
     background-size: auto 100%;
     background-repeat: no-repeat;
