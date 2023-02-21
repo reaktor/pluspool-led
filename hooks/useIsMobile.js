@@ -8,6 +8,7 @@ const breakpoint = 560;
  * and returns true if window width is below breakpoint: 560
  * @returns {boolean}
  */
+
 export default function useIsMobile() {
   const [state, setState] = useState(false);
 
