@@ -7,24 +7,30 @@ We are happy to receive any feedback using [github issues][]
 # Architecture
 
 ## repositories
-```
-reaktor/pluspool-led                   application respository, built in react
-reaktor/pluspool-led-scrape-data       data scraping tool, runs every 6 minutes on a digitalocean box
-jedahan/predicted-mpn                  npm package for turning rainfall data into predicted bacteria amount
-```
+
+    [reaktor/pluspool-led][]                   application respository, built in react
+    [reaktor/pluspool-led-scrape-data][]       data scraping tool, runs every 6 minutes on a digitalocean box
+    [jedahan/predicted-mpn][]                  npm package for turning rainfall data into predicted bacteria amount
+
 ## data sources
 
 datagarrison - used for central park rainfall data, and the sensor in pier 17
 
 noaa tides and currents - used for speed and direction of water flow
 
+## credentials
+
+We have credentials in our 1password pluspool vault, ask to be added there
+
+We use google analytics to look at pageviews - ask an existing GA admin to add you as an admin for the dashboard property
+
 ## hosting
-```
-s3             for samples data
-netlify        for application hosting
-digital ocean  for grabbing all the data and uploading to s3
-mediatemple    ns for water.pluspool.org
-```
+
+    s3             for samples data
+    netlify        for application hosting
+    digital ocean  for grabbing all the data and uploading to s3
+    mediatemple    nameserver for water.pluspool.org
+
 
 # Development
 
@@ -67,3 +73,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 [github issues]: https://github.com/reaktor/pluspool-led/issues
 [the projects board]: https://github.com/reaktor/pluspool-led/projects
+[reaktor/pluspool-led]: https://github.com/reaktor/pluspool-led
+[reaktor/pluspool-led-scrape-data]: https://github.com/reaktor/pluspool-led-scrape-data
+[jedahan/predicted-mpn]: https://github.com/jedahan/predicted-mpn

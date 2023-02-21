@@ -1,26 +1,37 @@
-import React from 'react'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
-import './index.css'
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import styles from './GraphTooltip.module.css';
 
-dayjs.extend(utc)
+dayjs.extend(utc);
 
 const GraphTooltip = (props) => {
-  const { unit, label, overlayGraph, data, point: { data: { x, y }, index } } = props
-  const overlayData = overlayGraph && data[index][overlayGraph.y]
+  const {
+    unit,
+    label,
+    overlayGraph,
+    data,
+    point: {
+      data: { x, y },
+      index,
+    },
+  } = props;
+  const overlayData = overlayGraph && data[index][overlayGraph.y];
 
   return (
-    <div className='graph-tooltip'>
-      <div className='graph-tooltip__date'>{dayjs(x).local().format('MMM DD YYYY HH:mm A')}</div>
-      <div className='graph-tooltip__data'>
+    <div className={styles.container}>
+      <div className={styles.date}>
+        {dayjs(x).local().format('MMM DD YYYY HH:mm A')}
+      </div>
+      <div>
         {label}: {y.toFixed(2)} {unit}
       </div>
-      {overlayData &&
-        <div className='graph-tooltip__data'>
+      {overlayData && (
+        <div>
           {overlayGraph.label}: {overlayData.toFixed(2)} {overlayGraph.unit}
-        </div>}
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default GraphTooltip
+export default GraphTooltip;

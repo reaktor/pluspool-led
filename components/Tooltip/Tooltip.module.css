@@ -1,4 +1,4 @@
-.tooltip {
+.container {
   --tooltip-padding: 20px;
   position: fixed;
   right: 0;
@@ -20,19 +20,19 @@
 }
 
 @media (min-width: 960px) {
-  .tooltip {
+  .container {
     --tooltip-padding: 40px;
     width: 50%;
     top: var(--navbar--height);
   }
 }
 
-.tooltip[data-active="true"] {
+.container[data-active="true"] {
   opacity: 1;
   pointer-events: auto;
 }
 
-.tooltip__inner {
+.inner {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -43,26 +43,26 @@
 }
 
 @media (min-width: 850px) {
-  .tooltip__inner {
+  .inner {
     padding: var(--tooltip-padding) var(--tooltip-padding) var(--tooltip-padding) 0px;
     border: 1px solid #000000;
     border-left: 0;
   }
 }
 
-.tooltip__close-button-wrapper {
+.closeButtonWrapper {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
 }
 
 @media (min-width: 850px) {
-  .tooltip__close-button-wrapper {
+  .closeButtonWrapper {
     margin-bottom: 30px;
   }
 }
 
-.tooltip__close-button {
+.closeButton {
   height: 26px;
   width: 26px;
   display: flex;
@@ -71,44 +71,44 @@
   cursor: pointer;
 }
 
-.tooltip__heading {
+.heading {
   display: flex;
   align-items: center;
 }
 
-.tooltip__header {
+.header {
   margin: 0;
   font-size: 16px;
   font-weight: 400;
 }
 
 @media (min-width: 850px) {
-  .tooltip__header {
+  .header {
     font-size: 24px;
   }
 }
 
-.tooltip__disclaimer {
+.disclaimer {
   width: 27px;
   margin-left: 10px;
 }
 
-.tooltip__legend {
+.legend {
   margin-top: 60px;
 }
 
-.tooltip__value {
+.value {
   margin-left: auto;
   font-size: 16px;
 }
 
 @media (min-width: 850px) {
-  .tooltip__value {
+  .value {
     font-size: 24px;
   }
 }
 
-.tooltip__body {
+.body {
   font-size: 16px;
   line-height: 24px;
   max-width: 37.5em;
@@ -116,18 +116,18 @@
   margin-bottom: 20px;
 }
 
-.tooltip__body h4 {
+.body h4 {
   font-size: 24px;
   line-height: 32px;
   font-weight: 400;
   margin-bottom: 8px;
 }
 
-.tooltip__body h4 + p {
+.body h4 + p {
   margin-top: 0;
 }
 
-.tooltip__link {
+.link {
   display: inline-block;
   margin-top: 16px;
 }

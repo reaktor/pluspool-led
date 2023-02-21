@@ -1,0 +1,111 @@
+.container {
+  --legendItem__value--width: 36px;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  padding-left: 1px; /* fixes the .bar svg from getting cut off */
+}
+
+.legendItem {
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+}
+
+.last {
+  flex: 0;
+}
+
+.bar {
+  height: 10px;
+  padding: 2px;
+  margin-top: 10px;
+}
+
+.legendItem:first-child .bar {
+  padding-left: 0px;
+}
+
+.legendItem:last-child .bar {
+  padding-right: 0px;
+}
+
+.bar svg {
+  overflow: visible;
+  height: 100%;
+  width: 100%;
+}
+
+.label {
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 7px;
+  word-wrap: break-word;
+}
+
+.arrowValue {
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  flex: 1;
+  height: 10px;
+  position: relative;
+  margin-left: var(--legendItem__value--width);
+  margin-right: var(--legendItem__value--width);
+}
+
+.arrow svg {
+  overflow: visible;
+}
+
+.arrow svg:first-child {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.arrow svg:nth-child(2) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 10px;
+  width: 10px;
+}
+
+.value {
+  font-size: 12px;
+  line-height: 15px;
+  width: var(--legendItem__value--width);
+  text-align: center;
+  margin-left: calc(var(--legendItem__value--width) / -2);
+  margin-right: calc(var(--legendItem__value--width) / -2);;
+  position: relative;
+  z-index: 2;
+}
+
+.legendItem:first-child .value {
+  margin-left: 0;
+  margin-right: calc(var(--legendItem__value--width) / -1);
+  text-align: left;
+}
+
+.legendItem:last-child .value {
+  margin-left: calc(var(--legendItem__value--width) / -1);
+  margin-right: 0;
+  text-align: right;
+}
+
+.value span {
+  display: inline-block;
+  background-color: #FFFFFF;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin-left: -4px;
+  margin-right: -4px;
+}

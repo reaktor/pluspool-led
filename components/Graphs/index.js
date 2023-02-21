@@ -5,41 +5,51 @@ import content from '../../content'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
 import DownloadData from '../DownloadData'
-import './index.css'
+import styles from './Graphs.module.css';
+import DataDisclaimer from '../DataDisclaimer';
 
-const maxResolution = 1000 // points
+const maxResolution = 1000; // points
 
-const timeUnits = ['day', 'week', 'month', 'year']
+const timeUnits = ['day', 'week', 'month', 'year'];
 
 const Graphs = ({ openTooltip, samples, units }) => {
-  if (!samples) return null
+  const [activeUnit, setActiveUnit] = useState('day');
+  const latestSampleTimestamp = samples[samples.length - 1].noaaTime;
+  const [domain, setDomain] = useState([
+    latestSampleTimestamp,
+    before(activeUnit, latestSampleTimestamp),
+  ]);
+  const [overlayGraph, setOverlayGraph] = useState(null);
 
-  const [activeUnit, setActiveUnit] = useState('day')
-  const latestSampleTimestamp = samples[samples.length -1].noaaTime
-  const [domain, setDomain] = useState([latestSampleTimestamp, before(activeUnit, latestSampleTimestamp)])
-  const [overlayGraph, setOverlayGraph] = useState(null)
+  const setSpan = (unit) =>
+    setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)]);
+  const filterOnClick = (unit) => {
+    setActiveUnit(unit);
+    setSpan(unit);
+  };
 
-  const setSpan = unit => setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)])
-  const filterOnClick = unit => {
-    setActiveUnit(unit)
-    setSpan(unit)
-  }
+  const [max, min] = domain;
+  const dsColumns = Array.from(Object.keys(content.dataPoints));
+  const domainSamples = cutData(samples, 'noaaTime', min, max);
+  const dsSamples = downsampleData(
+    domainSamples,
+    'noaaTime',
+    dsColumns,
+    maxResolution
+  );
 
-  const [max, min] = domain
-  const dsColumns = Array.from(Object.keys(content.dataPoints))
-  const domainSamples = cutData(samples, 'noaaTime', min, max)
-  const dsSamples = downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
+  if (!samples) return null;
 
-  const graphProps = key => ({
+  const graphProps = (key) => ({
     x: 'noaaTime',
     y: content.dataPoints[key].slug,
     domain: domain,
     data: dsSamples,
     unit: units[content.dataPoints[key].slug],
-    ...content.dataPoints[key]
-  })
+    ...content.dataPoints[key],
+  });
 
-  const graphs = dsColumns.map(key => (
+  const graphs = dsColumns.map((key) => (
     <Graph
       key={key}
       setOverlayGraph={setOverlayGraph}
@@ -48,11 +58,11 @@ const Graphs = ({ openTooltip, samples, units }) => {
       units={units}
       overlayGraph={overlayGraph && graphProps(overlayGraph)}
     />
-  ))
+  ));
 
   return (
     <>
-      <div className='graphs-top-bar'>
+      <div className={styles.topBar}>
         <GraphsDateFilter
           units={timeUnits}
           activeUnit={activeUnit}
@@ -60,11 +70,12 @@ const Graphs = ({ openTooltip, samples, units }) => {
           name='span'
         />
         <DownloadData />
+        <DataDisclaimer />
       </div>
-      <div className='graphs'>{graphs}</div>
+      <div className={styles.container}>{graphs}</div>
     </>
-  )
-}
+  );
+};
 
 Graphs.defaultProps = {
   samples: null

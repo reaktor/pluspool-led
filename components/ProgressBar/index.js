@@ -1,5 +1,4 @@
-import React from 'react'
-import './index.css'
+import styles from './ProgressBar.module.css';
 
 /**
  * Animated Progress Bar Component
@@ -8,10 +7,10 @@ import './index.css'
  */
 const ProgressBar = () => {
   return (
-    <div className='progressBarWrapper'>
-      <div class='progressBar' />
+    <div className={styles.wrapper}>
+      <div className={styles.bar} />
     </div>
-  )
-}
+  );
+};
 
-export default ProgressBar
+export default ProgressBar;

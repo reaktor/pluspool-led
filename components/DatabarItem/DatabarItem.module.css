@@ -1,44 +1,44 @@
-.databar__item {
+.container {
   width: 100%;
   font-size: 16px;
   line-height: 21px;
   pointer-events: auto;
 }
 
-.databar__item + .databar__item {
+.container + .container {
   margin-top: 12px;
 }
 
 @media (min-width: 560px) {
-  .databar__item {
+  .container {
     font-size: 20px;
     line-height: 26px;
   }
 }
 
 @media (min-width: 850px) {
-  .databar__item {
+  .container {
     font-size: 24px;
     line-height: 32px;
   }
 }
 
-.databar__item__wrapper {
+.grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 160px 24px;
   align-items: center;
   grid-column-gap: 14px;
 }
 
-.databar__item__value {
+.value {
   text-align: right;
 }
 
-.databar__item__unit {
+.unit {
   text-align: right;
 }
 
-.databar__item__link {
+.link {
   text-decoration: none;
   color: inherit;
   display: block;
@@ -47,11 +47,11 @@
   align-items: center;
 }
 
-.databar__item__link svg {
+.link svg {
   transform: translate3d(0, 0, 0);
   transition: transform 0.2s;
 }
 
-.databar__item:hover .databar__item__link svg {
+.container:hover .link svg {
   transform: translate3d(25%, 0, 0);
 }

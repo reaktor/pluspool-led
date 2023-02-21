@@ -1,4 +1,4 @@
-.progressBarWrapper {
+.wrapper {
     max-width:var(--site--max-width);
     width: 100%;
     margin:0 auto;
@@ -7,7 +7,7 @@
     position:relative;
     padding:2px;
 }
-.progressBarWrapper:before {
+.wrapper:before {
     content:'';
     border: 1px solid #000000;
     border-radius:2px;
@@ -17,7 +17,7 @@
     bottom:-4px;
     left:-4px;
 }
-.progressBarWrapper .progressBar {
+.wrapper .bar {
     position:absolute;
     border-radius:2px;
     top:0;

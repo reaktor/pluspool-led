@@ -1,16 +1,16 @@
-.about-section {
+.container {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas: "image" "text";
   grid-row-gap: 40px;
 }
 
-.about-section + .about-section {
+.container + .container {
   margin-top: 70px;
 }
 
 @media (min-width: 560px) {
-  .about-section {
+  .container {
     align-items: center;
     /* TODO: This grid should be same as index page grid. anyway to abstract these out? */
     grid-column-gap: 120px;
@@ -19,34 +19,34 @@
     grid-template-areas: "text image";
   }
 
-  .about-section + .about-section {
+  .container + .container {
     margin-top: 165px;
   }
 
-  .about-section[data-side="right"] {
+  .container[data-side="right"] {
     grid-template-areas: "image text";
   }
 }
 
-.about-section__image {
+.image {
   grid-area: image;
 }
 
 @media (min-width: 560px) {
-  .about-section[data-side="left"] .about-section__image {
+  .container[data-side="left"] .image {
     margin-right: -120px;
   }
 
-  .about-section[data-side="right"] .about-section__image {
+  .container[data-side="right"] .image {
     margin-left: -120px;
   }
 }
 
-.about-section__text {
+.text {
   grid-area: text;
 }
 
-.about-section__title {
+.text .title {
   font-family: 'Styrene A';
   font-size: 24px;
   line-height: 32px;
@@ -55,29 +55,13 @@
 }
 
 @media (min-width: 560px) {
-  .about-section__title {
+  .text .title {
     margin-bottom: 28px;
   }
 }
 
-.about-section__body p {
+.body p {
   font-size: 16px;
   line-height: 24px;
 }
 
-.about-section__cta {
-  display: flex;
-  padding: 36px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #000000;
-  font-size: 16px;
-  line-height: 24px;
-  text-decoration: none;
-  color: inherit;
-  margin-top: 38px;
-}
-
-.about-section__cta:hover {
-  border-color: #0098E1;
-}

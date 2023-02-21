@@ -1,0 +1,35 @@
+.container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-row-gap: 60px;
+  grid-column-gap: 45px;
+}
+
+@media (min-width: 560px) {
+  .container {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  position: sticky;
+  background: #FFFFFF;
+  z-index: var(--graphs__date__filter__topBar--z-index);
+  top: var(--navbar--height); /* graphs date filter topBar becomes sticky at the bottom of the navbar  */
+  padding-bottom: 20px;
+}
+
+
+@media (min-width: 560px) {
+  .topBar {
+    margin-top: 0;
+    margin-bottom: 60px;
+    top: var(--navbar--height);  /* graphs date filter topBar becomes sticky at the bottom of the navbar  */
+  }
+}

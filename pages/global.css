@@ -1,0 +1,414 @@
+@font-face {
+  font-family: 'Styrene A';
+  font-weight: 400;
+  font-style: normal;
+  /* TODO: This is a test version of the woff2 font file. We still need to purchase a real license */
+  src: url('/static/fonts/StyreneA-Regular-Test.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Styrene B';
+  font-weight: 400;
+  font-style: normal;
+  /* TODO: This is a test version of the woff2 font file. We still need to purchase a real license */
+  src: url('/static/fonts/StyreneB-Regular-Test.woff2') format('woff2');
+}
+
+:root {
+  /* z-index */
+  --svg-visualization--z-index: 0;
+  --title-text--z-index: 1;
+  --data-range-picker--z-index: 1;
+  --databar--z-index: 1;
+  --navbar__nav--z-index: 3;
+  --navbar--z-index: 4;
+  --graphs__date__filter__topBar--z-index: 3;
+  --tooltip--z-index: 5;
+
+  /* rest */
+  --navbar--height: 62px;
+  --site--max-width: 1800px;
+}
+
+@media (min-width: 560px) {
+  :root {
+    --navbar--height: 105px;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Styrene B', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #FFFFFF;
+  color: #000000;
+  overflow-x: hidden;
+}
+
+button {
+  /* <button /> reset */
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  font-smoothing: inherit;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  text-align: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: #808080;
+}
+
+p {
+  line-height: 1.5;
+  max-width: 48em;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.page {
+  width: 100%;
+  max-width: var(--site--max-width);
+  margin: auto;
+}
+
+.container {
+  --outer-gutter: 20px;
+  padding-left: var(--outer-gutter);
+  padding-right: var(--outer-gutter);
+  padding-bottom: var(--outer-gutter);
+}
+
+@media (min-width: 560px) {
+  .container {
+    --outer-gutter: 40px;
+  }
+}
+
+.container[data-template='IndexPage'] {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.page[data-template='index'] {
+  display: grid;
+  grid-template-areas: "title-text" "scrubber";
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 200px minmax(0, 1fr);
+  position: relative;
+  flex: 1;
+}
+
+@media (min-width: 560px) {
+  .page[data-template='index'] {
+    grid-column-gap: 60px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 300fr) minmax(0, 400fr);
+    grid-template-areas:
+      "title-text databar"
+      "scrubber databar";
+  }
+}
+
+@media (min-width: 1200px) {
+  .page[data-template='index'] {
+    grid-column-gap: 120px;
+  }
+}
+
+.page[data-page-state="0"] {
+  --page-state-1-opacity: 0;
+  --page-state-1-pointer-events: none;
+}
+
+.page[data-page-state="1"] {
+  --page-state-1-opacity: 1;
+  --page-state-1-pointer-events: auto;
+}
+
+.about-credits {
+  background: #000000;
+  color: #FFFFFF;
+  margin-left: calc(var(--outer-gutter) * -1);
+  margin-right: calc(var(--outer-gutter) * -1);
+  margin-bottom: calc(var(--outer-gutter) * -1);
+  padding: var(--outer-gutter);
+  text-align: center;
+}
+
+.about-credits h3 {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: #0073E5;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.about-credits section {
+  margin-top: 4em;
+}
+
+.about-credits ul {
+  padding: 0;
+  list-style: none;
+}
+
+.about-credits__wrapper {
+  max-width: 48em;
+  display: block;
+  margin: auto;
+}
+
+.about-cta {
+  display: flex;
+  padding: 36px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000000;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: none;
+  color: inherit;
+  margin-top: 38px;
+}
+
+.about-cta:hover {
+  border-color: #0098E1;
+}
+
+/* utilities */
+
+@media (max-width: 559px) {
+  .u-hide-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 560px) {
+  .u-hide-desktop {
+    display: none;
+  }
+}
+
+/** Third Party Style Overrides **/
+
+
+.tippy-tooltip.tippy-tooltip {
+  padding: 13px 10px;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  border-radius: 0;
+}
+
+.tippy-backdrop.tippy-backdrop {
+  background-color: #000000;
+}
+
+
+/**
+  RC Slider Style Overrides
+
+  NOTE:
+    The repeating of the className in each selector is intentional.
+
+  TLDR:
+    We need more specificity in order to override default styles that come from RC Slider.
+
+  Why are there repeating classNames in selectors?
+    In order to discuss specificity an online calculator can help us invision things.
+    One can be found here: https://specificity.keegan.st/
+    If we put in the selector `.rc-slider` into that calculator we should see a score of:
+      0 - IDs
+      1 - Classes, attributes and pseudo-classes
+      0 - Elements and pseudo-elements
+
+    The className `.rc-slider` is the selector being used in RC Sliders styles. Our goal is to overwrite some of these.
+    There are a number of ways for us to overwrite this including:
+      1. Put `!important` in our declarations.
+      2. Put our CSS after RC Sliders CSS
+      3. Make our selector more specific
+
+    The technique in 1 was somewhat the standard way of achieving this in the past. It will reliably work
+    but it also throws out all the scaling of specificity. If we have any further styles that interact with these selectors
+    and we used an `!important` it can become quite difficult to be "more specific" when you've thrown the hole scale
+    out of the window.
+
+    The technique in 2 I believed would be hard to ensure. We are using Javascript to bundle our CSS and it's an app with client side routing.
+    I decided that it would be too much of a pain to configure our app to include css bundles in a specific order.
+
+    The technique in 3 is the one in place. If we go back to the online calculator and input `.rc-slider.rc-slider` we should see a score of:
+      0 - IDs
+      2 - Classes, attributes and pseudo-classes
+      0 - Elements and pseudo-elements
+    This score is higher than the score we got when using just 1 className.
+    The trick here is that `.rc-slider.rc-slider` is basically looking for a `.rc-slider` element that also has the className `.rc-slider`.
+    It is NOT asking for an element that has that class twice. Logically it is really no different than just putting the className once
+    however it allows us to up our accessibility score.
+    If RC Slider we using a selector with 3, 4, or 5 elements in it, we could just write our overwriting selector here with one more className
+    than what they are using.
+
+  */
+
+@media (max-width: 559px) {
+  .rc-slider.rc-slider {
+    border-radius: 0;
+    padding: 0;
+    height: 85px;
+  }
+
+  .rc-slider-handle.rc-slider-handle {
+    color: #000000;
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    height: 100%;
+    width: 3px;
+    background-color: currentColor;
+    margin: 0 -1px;
+    transition: color 0.1s ease-in-out;
+  }
+
+  /**
+  * This element allows us to make the draggable area
+  * of .rc-slider-handle larger without having to change .rc-slider-handle size.
+  * This makes it easier to make .rc-slider-handle visually 3px tall
+  * and it's draggable area 60px larger.
+  */
+  .rc-slider-handle.rc-slider-handle:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: -20px;
+    bottom: 0px;
+    left: -20px;
+  }
+
+
+  .rc-slider-track.rc-slider-track {
+    border-radius: 0;
+    background: transparent;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .rc-slider-rail.rc-slider-rail {
+    border-radius: 0;
+    background: transparent;
+    background-image: url('/static/img/bar-lines-mobile.svg');
+    background-position: 0 bottom;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    bottom: 0;
+    height: 100%;
+  }
+
+  .rc-slider-mark.rc-slider-mark {
+    display: none;
+  }
+}
+
+@media (min-width: 560px) {
+  .rc-slider.rc-slider {
+    border-radius: 0;
+    padding: 0;
+    width: 85px;
+  }
+
+  .rc-slider-handle.rc-slider-handle {
+    color: #7F7F7F;
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    width: 100%;
+    height: 3px;
+    background-color: currentColor;
+    margin-left: 0;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    transition: color 0.1s ease-in-out;
+  }
+
+  /**
+  * This element allows us to make the draggable area
+  * of .rc-slider-handle larger without having to change .rc-slider-handle size.
+  * This makes it easier to make .rc-slider-handle visually 3px tall
+  * and it's draggable area 60px larger.
+  */
+  .rc-slider-handle.rc-slider-handle:before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -130px;
+    bottom: -30px;
+    left: 0px;
+  }
+
+  .rc-slider-handle.rc-slider-handle:hover {
+    color: #000000;
+  }
+
+  .rc-slider-track.rc-slider-track {
+    border-radius: 0;
+    background: transparent;
+    left: 0;
+    width: 100%;
+  }
+
+  .rc-slider-rail.rc-slider-rail {
+    border-radius: 0;
+    background: transparent;
+    background-image: url('/static/img/bar-lines-desktop.svg');
+    background-position: 0 0;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    left: 0;
+    width: 100%;
+  }
+
+  .rc-slider-mark.rc-slider-mark {
+    display: none;
+  }
+}
