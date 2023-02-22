@@ -3,18 +3,14 @@ import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import OverlayData from '../../icons/OverlayData'
 import QuestionMark from '../../icons/QuestionMark'
-import Legend from '../Legend'
 import GraphTooltip from '../GraphTooltip'
 import { cutData, formXYSeries } from '../../helpers/data';
 import content from '../../content'
 import { ResponsiveLineCanvas } from '@nivo/line'
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import styles from './Graph.module.css';
-import RcSlider from 'rc-slider';
 import DataRangePicker from '../DataRangePicker';
 
-// dayjs.extend(relativeTime);
 
 const LineGraph = ({
   x,
@@ -135,8 +131,6 @@ const Graph = ({
     enableGridY: false
   }), [])
 
-  const { legend } = content.dataPoints[graph.slug];
-
   if (typeof document === 'undefined') return null
 
   return (
@@ -221,9 +215,6 @@ const Graph = ({
           }}
         />
       </div>
-      {/*<div className='graph__legend'>*/}
-      {/*  {legend && <Legend legend={legend} />}*/}
-      {/*</div>*/}
     </section>
   );
 };
