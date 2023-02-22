@@ -37,7 +37,7 @@ const LineGraph = ({
       type: 'linear',
       min: latestAvailableDate ? latestAvailableDate.x : xMin, // Always use the latest date from the filtered data as the maximum point on the graph -- left side of x-axis.
                                                                // Otherwise, use the provided date from the Graphs date filter or the graph date seeker
-                                                               // This avoids holes in the graph when the latest available date with values is
+                                                               // This avoids holes in the graph when the latest available date with values is up to a day or more behind
       max: xMax
     },
     yScale: {

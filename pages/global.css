@@ -3,7 +3,7 @@
   font-weight: 400;
   font-style: normal;
   /* TODO: This is a test version of the woff2 font file. We still need to purchase a real license */
-  src: url('/static/fonts/StyreneA-Regular-Test.woff2') format('woff2');
+  src: url('/fonts/StyreneA-Regular-Test.woff2') format('woff2');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-weight: 400;
   font-style: normal;
   /* TODO: This is a test version of the woff2 font file. We still need to purchase a real license */
-  src: url('/static/fonts/StyreneB-Regular-Test.woff2') format('woff2');
+  src: url('/fonts/StyreneB-Regular-Test.woff2') format('woff2');
 }
 
 :root {
@@ -249,6 +249,7 @@ svg {
 
 /**
   RC Slider Style Overrides
+  commented out for reference, new global overrides are in components/DataRangePicker
 
   NOTE:
     The repeating of the className in each selector is intentional.

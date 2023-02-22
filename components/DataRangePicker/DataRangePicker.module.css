@@ -131,7 +131,7 @@
   .customSlider :global(.rc-slider-rail) {
     border-radius: 0;
     background: transparent;
-    background-image: url('../../static/img/bar-lines-mobile.svg');
+    background-image: url('/img/bar-lines-mobile.svg');
     background-position: 0 bottom;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -194,7 +194,7 @@
   .customSlider :global(.rc-slider-rail) {
     border-radius: 0;
     background: transparent;
-    background-image: url('../../static/img/bar-lines-desktop.svg');
+    background-image: url('/img/bar-lines-desktop.svg');
     background-position: 0 0;
     background-size: auto 100%;
     background-repeat: no-repeat;
@@ -250,7 +250,7 @@
 .customSliderData :global(.rc-slider-rail) {
   border-radius: 0;
   background: transparent;
-  background-image: url('../../static/img/bar-lines-mobile.svg');
+  background-image: url('/img/bar-lines-mobile.svg');
   background-position: 0 bottom;
   background-repeat: repeat-x;
   bottom: 0;

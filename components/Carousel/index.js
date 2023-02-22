@@ -13,7 +13,7 @@ import styles from './Carousel.module.css';
 
 const slides = [
   {
-    image: '/static/img/about/image-billionoyster.jpg',
+    image: '/img/about/image-billionoyster.jpg',
     description:
       'four people, knee deep in a river, frontmost person smiling and holding a basket full of oysters',
     title: 'Billion Oyster Project',
@@ -29,7 +29,7 @@ const slides = [
     ),
   },
   {
-    image: '/static/img/about/image-nywatertrails.jpg',
+    image: '/img/about/image-nywatertrails.jpg',
     title: 'New York Water Trail Association',
     description:
       'four people, knee deep in a river, frontmost person smiling and holding a basket full of oysters',
@@ -51,7 +51,7 @@ const slides = [
     ),
   },
   {
-    image: '/static/img/about/image-riverkeeper.jpg',
+    image: '/img/about/image-riverkeeper.jpg',
     description: 'a 20-foot boat named riverkeeper',
     title: 'Riverkeeper',
     body: (
@@ -74,7 +74,7 @@ const slides = [
     ),
   },
   {
-    image: '/static/img/about/image-newtoncreek.jpg',
+    image: '/img/about/image-newtoncreek.jpg',
     title: 'Newtown Creek Alliance',
     description: 'a 20-foot boat with the manhattan skyline behind it',
     body: (
@@ -98,7 +98,7 @@ const slides = [
     ),
   },
   {
-    image: '/static/img/about/image-gowanuscanal.jpg',
+    image: '/img/about/image-gowanuscanal.jpg',
     description:
       'a two person kayak, paddling in front of an overpass in the gowanus canal',
     title: 'Gowanus Canal Conservancy',
@@ -120,7 +120,7 @@ const slides = [
     ),
   },
   {
-    image: '/static/img/about/image-bronxalliance.jpg',
+    image: '/img/about/image-bronxalliance.jpg',
     description:
       'Four people in the middle of weeds that are taller than all of them. the rightmost person is leaning on a bird house',
     title: 'Bronx River Alliance',
