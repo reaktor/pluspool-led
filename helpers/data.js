@@ -86,8 +86,6 @@ const formXYSeries = (data, xColumn, yColumn) =>
 
 const formXYData = (data, xColumn, yColumn) => {
   const xLabels = data.map(datum => datum[xColumn]);
-  // console.log(xLabels)
-    //dayjs(datum[xColumn]).format('MMM D, YYYY'));
   const yData = data.map(datum => datum[yColumn]);
 
   return {
@@ -96,6 +94,15 @@ const formXYData = (data, xColumn, yColumn) => {
   }
 }
 
+/**
+ * Formats the timestamp to a specified date format
+ *
+ * @param {number} timestamp
+ * @param {string} [format=MMM D, YYYY]
+ * @returns {string}
+ */
+const formatTimeStamp = (timestamp, format) => dayjs(timestamp).format(format || 'MMM D, YYYY')
+
 
 export {
   before,
@@ -103,5 +110,6 @@ export {
   cutData,
   downsampleData,
   formXYSeries,
-  formXYData
+  formXYData,
+  formatTimeStamp
 }

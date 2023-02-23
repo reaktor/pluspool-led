@@ -12,10 +12,10 @@ import {
   Title,
   Tooltip,
   Legend,
-  TimeScale,
-  TimeSeriesScale
+  // TimeScale,
+  // TimeSeriesScale
 } from "chart.js";
-import { formXYData, formXYSeries } from '../../helpers/data';
+import { formatTimeStamp, formXYData, formXYSeries } from '../../helpers/data';
 // import relativeTime from 'dayjs/plugin/relativeTime';
 // dayjs.extend(relativeTime);
 
@@ -28,8 +28,8 @@ ChartJS.register(
   Tooltip,
   Legend,
   zoomPlugin,
-  TimeScale,
-  TimeSeriesScale
+  // TimeScale,
+  // TimeSeriesScale
 );
 
 const LineGraph = ({
@@ -44,39 +44,41 @@ const LineGraph = ({
   overlayGraph,
   dataPoint,
 }) => {
-  // const xyData = formXYData(data, x, y);
+  const xyData = formXYData(data, x, y);
+  //TODO :: Look into splitting out the X series label forming out to the graphs component itself, so each chart doesn't have to do it, as they Y values are set to the same dates
   //
   // console.log(xyData.labels[0])
-  const xySeries = formXYSeries(data, x, y);
+  // const xySeries = formXYSeries(data, x, y);
   const chartData = {
-    // labels: xyData.labels,
+    labels: xyData.labels,
     datasets: [
       {
-        data: xySeries,
+        // labels: xyData.labels,
+        data: xyData.yData,
         borderColor: color,
-        backgroundColor: color
+        backgroundColor: color,
       }
     ]
   }
 
-  console.log(xySeries[0].x)
-  console.log(xySeries[xySeries.length - 1].x)
+  // console.log(xySeries[0].x)
+  // console.log(xySeries[xySeries.length - 1].x)
   const options = {
     responsive: true,
     maintainAspectRatio: false,
     padding: 10,
     scales: {
       x: {
-        type: 'time',
-        time: {
-          // unit: 'day',
-          tooltipFormat: 'MMM D, hh:mm, YYYY',
-          displayFormats: {
-            day: "MMM D, YYYY",
-            hour: "MMM D, YYYY",
-            minute: 'MMM d, YYYY'
-          },
-        },
+        // type: 'numeric',
+        // time: {
+        //   // unit: 'day',
+        //   tooltipFormat: 'MMM D, hh:mm, YYYY',
+        //   displayFormats: {
+        //     day: "MMM D, YYYY",
+        //     hour: "MMM D, YYYY",
+        //     minute: 'MMM d, YYYY'
+        //   },
+        // },
         reverse: true,
         maxTicksLimit: 10,
         grid: {
@@ -85,18 +87,31 @@ const LineGraph = ({
         ticks: {
           autoSkip: true,
           autoSkipPadding: 40,
-          major: {
-            enabled: true
+          callback: function(value) {
+            const formattedValue = formatTimeStamp(this.getLabelForValue(value));
+              //dayjs(this.getLabelForValue(value)).format('MMM D, YYYY');
+            return formattedValue
           }
         },
-        min: xySeries[0].x,
-        max: xySeries[xySeries.length - 1].x
+        // min: xySeries[0].x,
+        // max: xySeries[xySeries.length - 1].x
       },
       y: {
-        beginAtZero: true,
+        beginAtZero: true
       }
     },
     plugins: {
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return `${context.raw.toFixed(2)} ${unit}`
+          },
+          title: function(context) {
+           const formattedValue = formatTimeStamp(Number(context[0].label), 'MMM DD YYYY hh:mm A');
+           return formattedValue;
+          }
+        }
+      },
       title: {
         display: false,
       },
@@ -110,7 +125,6 @@ const LineGraph = ({
         },
         limits: {
           x: {min: 'original', max: 'original'},
-          x2: {min: 'original', max: 'original'}
         },
         zoom: {
           wheel: {
@@ -119,9 +133,9 @@ const LineGraph = ({
           pinch: {
             enabled: true
           },
-          drag: {
-            enabled: true
-          },
+          // drag: {
+          //   enabled: true
+          // },
           mode: "x",
           sensitivity: 0.1
         }
