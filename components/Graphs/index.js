@@ -8,7 +8,7 @@ import DownloadData from '../DownloadData'
 import styles from './Graphs.module.css';
 import DataDisclaimer from '../DataDisclaimer';
 
-const maxResolution = 1000; // points
+const maxResolution = 350; // points
 
 const timeUnits = ['day', 'week', 'month', 'year'];
 

@@ -84,10 +84,24 @@ const downsampleData = (data, index, columns, resolution) => {
 const formXYSeries = (data, xColumn, yColumn) =>
   data.map(datum => ({ x: datum[xColumn], y: datum[yColumn] }))
 
+const formXYData = (data, xColumn, yColumn) => {
+  const xLabels = data.map(datum => datum[xColumn]);
+  // console.log(xLabels)
+    //dayjs(datum[xColumn]).format('MMM D, YYYY'));
+  const yData = data.map(datum => datum[yColumn]);
+
+  return {
+    labels: xLabels,
+    yData
+  }
+}
+
+
 export {
   before,
   scale,
   cutData,
   downsampleData,
-  formXYSeries
+  formXYSeries,
+  formXYData
 }
