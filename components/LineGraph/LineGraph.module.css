@@ -1,0 +1,9 @@
+.lineGraphWrapper {
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+.lineGraphWrapper.mouseDown {
+    cursor: grabbing;
+}
