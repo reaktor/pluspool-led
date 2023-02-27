@@ -11,9 +11,7 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend,
-  // TimeScale,
-  // TimeSeriesScale
+  Legend
 } from "chart.js";
 import { formatTimeStamp, formXYData } from '../../helpers/data';
 import styles from './LineGraph.module.css';
@@ -29,12 +27,11 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  zoomPlugin,
-  // TimeScale,
-  // TimeSeriesScale
+  zoomPlugin
 );
 
 const LineGraph = ({
+  slug,
   x,
   y,
   label,
@@ -47,14 +44,31 @@ const LineGraph = ({
   dataPoint,
 }) => {
   const [dragging, setDragging] = useState(false);
-  const [xyData, setxyData] = useState(formXYData(data, x, y))
+  // const [xyData, setxyData] = useState({})
+  const [overlayxyData, setoverlayXyData] = useState(null);
   // const xyData = formXYData(data, x, y);
 
-  useEffect(() => {
-    console.log('forming')
-    setxyData(formXYData(data, x, y))
-  }, [data, x, y, setxyData])
+  //TODO :: Look into splitting out the X series label forming out to the graphs component itself, so each chart doesn't have to do it, as the Y values are set to the same dates
+  //TODO :: Then look into switching to only calculating the Y series, here
 
+  // useEffect(() => {
+  //   setxyData(formXYData(data, x, y))
+  // }, [xMax, x, y, setxyData])
+
+  const xyData = useMemo(() => {
+    console.log('running graph')
+    return formXYData(data, x, y)
+  }, [xMax, x, y]);
+
+  //set the overlaygraph data if it's selected and the slug isn't the same as the current graph, to avoid double re-calculation
+  useEffect(() => {
+    if(overlayGraph && overlayGraph.slug !== slug) {
+      setoverlayXyData(formXYData(overlayGraph.data, x, overlayGraph.slug))
+    } else {
+      //otherwise make sure the overlay Y data is null and isn't being used
+      setoverlayXyData(null)
+    }
+  }, [xyData.labels, overlayGraph, x, slug])
 
   const onMouseDown = () => {
     setDragging(true);
@@ -64,8 +78,6 @@ const LineGraph = ({
     setDragging(false)
   }
 
-
-  //TODO :: Look into splitting out the X series label forming out to the graphs component itself, so each chart doesn't have to do it, as the Y values are set to the same dates
 
   // const chartData = {
   //   labels: xyData.labels,
@@ -85,6 +97,7 @@ const LineGraph = ({
     datasets: [
       {
         data: xyData.yData,
+        label,
         borderColor: color,
         backgroundColor: color,
         borderWidth: 2,
@@ -93,78 +106,29 @@ const LineGraph = ({
     ]
   }), [xyData.labels, xyData.yData])
 
-  // const options = {
-  //   responsive: true,
-  //   maintainAspectRatio: false,
-  //   padding: 10,
-  //   scales: {
-  //     x: {
-  //       // type: 'numeric',
-  //       // time: {
-  //       //   // unit: 'day',
-  //       //   tooltipFormat: 'MMM D, hh:mm, YYYY',
-  //       //   displayFormats: {
-  //       //     day: "MMM D, YYYY",
-  //       //     hour: "MMM D, YYYY",
-  //       //     minute: 'MMM d, YYYY'
-  //       //   },
-  //       // },
-  //       reverse: true,
-  //       maxTicksLimit: 10,
-  //       grid: {
-  //         display: false
-  //       },
-  //       ticks: {
-  //         autoSkip: true,
-  //         autoSkipPadding: 40,
-  //         callback: function(value) {
-  //           const formattedValue = formatTimeStamp(this.getLabelForValue(value));
-  //           return formattedValue
-  //         }
-  //       },
-  //     },
-  //     y: {
-  //       beginAtZero: true
-  //     }
-  //   },
-  //   plugins: {
-  //     tooltip: {
-  //       callbacks: {
-  //         label: function(context) {
-  //           return `${label}: ${context.raw.toFixed(2)} ${unit}`
-  //         },
-  //         title: function(context) {
-  //          const formattedValue = formatTimeStamp(Number(context[0].label), 'MMM DD YYYY hh:mm A');
-  //          return formattedValue;
-  //         }
-  //       }
-  //     },
-  //     title: {
-  //       display: false,
-  //     },
-  //     legend: {
-  //       display: false
-  //     },
-  //     zoom: {
-  //       pan: {
-  //         enabled: true,
-  //         mode: "x"
-  //       },
-  //       zoom: {
-  //         wheel: {
-  //           enabled: true
-  //         },
-  //         pinch: {
-  //           enabled: true
-  //         },
-  //         // drag: {
-  //         //   enabled: true
-  //         // },
-  //         mode: "x"
-  //       }
-  //     }
-  //   }
-  // }
+
+  //apply the overlay data as the secondary Y axis
+  const extendedChartData = useMemo(() => {
+    //only extend with the overlay, if the y overlay data is available and the overlay slug isn't the same as the original graph
+    if(overlayxyData && overlayGraph) {
+      return {
+        ...chartData,
+        datasets: [
+          ...chartData.datasets,
+          {
+            yAxisID: 'y2',
+            data: overlayxyData.yData,
+            label: overlayGraph.label,
+            borderColor: overlayGraph.color,
+            backgroundColor: overlayGraph.color,
+            borderWidth: 2,
+            pointRadius: 1
+          }
+        ]
+      }
+    }
+      return chartData;
+    }, [xyData.labels, overlayxyData, overlayGraph, slug])
 
   const options = useMemo(() => ({
       responsive: true,
@@ -179,7 +143,7 @@ const LineGraph = ({
           },
           ticks: {
             autoSkip: true,
-            autoSkipPadding: 40,
+            autoSkipPadding: 50,
             callback: function(value) {
               const formattedValue = formatTimeStamp(this.getLabelForValue(value));
               return formattedValue
@@ -194,7 +158,8 @@ const LineGraph = ({
         tooltip: {
           callbacks: {
             label: function(context) {
-              return `${label}: ${context.raw.toFixed(2)} ${unit}`
+              // console.log(context)
+              return `${context.dataset.label}: ${context.raw.toFixed(2)} ${unit}`
             },
             title: function(context) {
               const formattedValue = formatTimeStamp(Number(context[0].label), 'MMM DD YYYY hh:mm A');
@@ -226,7 +191,27 @@ const LineGraph = ({
       }
   }), [xyData.labels]);
 
-  return <div className={cx(styles.lineGraphWrapper, {[styles.mouseDown]: dragging})} onMouseDown={onMouseDown} onMouseUp={onMouseUp}><Line options={options} data={chartData} /></div>
+  //apply the overlay graph to the secondary Y axis options
+  const extendedOptions = useMemo(() => {
+    if(overlayGraph && overlayGraph.slug !== slug) {
+      return {
+        ...options,
+        scales: {
+          ...options.scales,
+          y2: {
+            position: 'right',
+            beginAtZero: true,
+            grid: {
+              display: false
+            }
+          }
+        }
+      }
+    }
+    return options;
+  }, [overlayGraph, xyData.labels, slug]);
+
+  return <div className={cx(styles.lineGraphWrapper, {[styles.mouseDown]: dragging})} onMouseDown={onMouseDown} onMouseUp={onMouseUp}><Line options={extendedOptions} data={extendedChartData} /></div>
 };
 
 

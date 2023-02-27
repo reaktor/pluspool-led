@@ -20,9 +20,6 @@ const Graph = ({
   openTooltip,
   units,
 }) => {
-  // const [data] = useState(graph.data)
-  // const [overlayData] = useState(overlayGraph ? overlayGraph.data : [])
-
   // memoize the graph props, so they don't get re-created on each update
   const lineGraphProps = useMemo(() => ({
     gridYValues: 5,
@@ -96,18 +93,6 @@ const Graph = ({
           props={lineGraphProps}
           dataPoint={content.dataPoints[graph.slug]}
         />
-        {/* do not render an overlayGraph if it's the same graph as the one it's overlaying, causing a double render of the same exact graph */}
-        {overlayGraph && overlayGraph.slug !== graph.slug && (
-          <div className={styles.overlayGraph}>
-            <LineGraphDynamic
-              {...overlayGraph}
-              data={overlayGraph.data}
-              domain={[overlayGraph.domain[0], overlayGraph.domain[1]]}
-              props={overlayGraphProps}
-              dataPoint={content.dataPoints[overlayGraph.slug]}
-            />
-          </div>
-        )}
       </div>
     </section>
   );

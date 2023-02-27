@@ -31,6 +31,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
 
   const domainSamples = cutData(samples, 'noaaTime', min, max)
   const dsSamples = downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
+
   if (!samples) return null;
 
   const graphProps = (key) => ({
