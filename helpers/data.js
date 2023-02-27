@@ -94,6 +94,11 @@ const formXYData = (data, xColumn, yColumn) => {
   }
 }
 
+const formAxisSeries = (data, column) => {
+  const labels = data.map(datum => datum[column])
+  return labels
+}
+
 /**
  * Formats the timestamp to a specified date format
  *
@@ -111,5 +116,6 @@ export {
   downsampleData,
   formXYSeries,
   formXYData,
+  formAxisSeries,
   formatTimeStamp
 }
