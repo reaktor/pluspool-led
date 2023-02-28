@@ -15,7 +15,7 @@ const timeUnits = ['day', 'week', 'month', 'year'];
 const dsColumns = Array.from(Object.keys(content.dataPoints))
 
 const Graphs = ({ openTooltip, samples, units }) => {
-  const [activeUnit, setActiveUnit] = useState('week')
+  const [activeUnit, setActiveUnit] = useState('day')
   const latestSampleTimestamp = samples[samples.length -1].noaaTime
 
   const [domain, setDomain] = useState([latestSampleTimestamp, before(activeUnit, latestSampleTimestamp)])
