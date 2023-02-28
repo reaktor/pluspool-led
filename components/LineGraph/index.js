@@ -1,5 +1,4 @@
 // import 'chartjs-adapter-dayjs-4';
-import {isEqual} from 'lodash';
 import cx from 'classnames';
 import { Line } from 'react-chartjs-2';
 
@@ -71,7 +70,8 @@ const LineGraph = ({
   const overlayYData = useMemo(() => {
     if(overlayGraph && overlayGraph.slug !== slug) return formAxisSeries(overlayGraph.data, overlayGraph.y)
     return null;
-  }, [xSeries, overlayGraph, x, slug]);
+    //TODO :: look into the need for xSeries here
+  }, [overlayGraph, slug]);
 
   const onMouseDown = () => {
     setDragging(true);
@@ -124,7 +124,7 @@ const LineGraph = ({
       animation: false,
       spanGaps: true,
       maintainAspectRatio: false,
-      padding: 10,
+      // padding: 10,
       scales: {
         x: {
           reverse: true,

@@ -46,7 +46,6 @@ const Graphs = ({ openTooltip, samples, units }) => {
   const graphProps = (key) => ({
     x: 'noaaTime',
     y: content.dataPoints[key].slug,
-    xSeries,
     domain: domain,
     data: dsSamples,
     unit: units[content.dataPoints[key].slug],

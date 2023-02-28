@@ -10,7 +10,7 @@ import dayjs from 'dayjs'
 import styles from './Graph.module.css';
 import { useMemo } from 'react';
 
-
+//dynamically import the LineGraph so Next doesn't try to render it on the server when the component needs to have access to things like the browser window
 const LineGraphDynamic = dynamic(() => import("../LineGraph/index"), {ssr: false})
 
 const Graph = ({
