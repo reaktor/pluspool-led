@@ -66,6 +66,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
 
   return (
     <>
+      {/*<ProgressBar />*/}
       <div className={styles.topBar}>
         <GraphsDateFilter
           units={timeUnits}

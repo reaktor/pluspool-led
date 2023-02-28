@@ -25,29 +25,21 @@
     bottom:0;
     left:0;
     background:#000000;
-    width:0;
-    animation:progressAnim 2s linear infinite;
+    width:25%;
+    animation:progressAnim 1.5s linear infinite;
 }
 
 @keyframes progressAnim {
     0% {
-        left:0;
-        right:100%;
-        width:0;
+        transform: translateX(-50%) scaleX(0);
     }
-    20% {
-        left:0;
-        right:75%;
-        width:25%;
+    10%{
+        transform: translateX(0%) scaleX(1);
     }
-    80% {
-        right:0;
-        left:75%;
-        width:25%;
+    80%{
+        transform: translateX(300%) scaleX(1);
     }
     100% {
-        left:100%;
-        right:0;
-        width:0;
+        transform: translateX(350%) scaleX(0);
     }
 }
