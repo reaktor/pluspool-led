@@ -15,6 +15,7 @@ const LineGraphDynamic = dynamic(() => import("../LineGraph/index"), {ssr: false
 
 const Graph = ({
   graph,
+  activeUnit,
   xSeries,
   overlayGraph,
   setOverlayGraph,
@@ -88,6 +89,7 @@ const Graph = ({
       <div className={styles.graphWrapper}>
         <LineGraphDynamic
           {...graph}
+          activeUnit={activeUnit}
           xSeries={xSeries}
           data={graph.data}
           domain={[graph.domain[0], graph.domain[1]]}

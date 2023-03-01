@@ -13,9 +13,10 @@ import {
   Tooltip,
   Legend
 } from "chart.js";
-import { formatTimeStamp, formAxisSeries, formXYData } from '../../helpers/data';
+import { formatTimeStamp, formAxisSeries } from '../../helpers/data';
 import styles from './LineGraph.module.css';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { DATE_UNITS } from '../../helpers/constants';
 // import relativeTime from 'dayjs/plugin/relativeTime';
 // dayjs.extend(relativeTime);
 
@@ -31,6 +32,7 @@ ChartJS.register(
 );
 
 const LineGraph = ({
+  activeUnit,
   slug,
   x,
   y,
@@ -70,7 +72,6 @@ const LineGraph = ({
   const overlayYData = useMemo(() => {
     if(overlayGraph && overlayGraph.slug !== slug) return formAxisSeries(overlayGraph.data, overlayGraph.y)
     return null;
-    //TODO :: look into the need for xSeries here
   }, [overlayGraph, slug]);
 
   const onMouseDown = () => {
@@ -119,25 +120,34 @@ const LineGraph = ({
       return chartData;
     }, [overlayYData, overlayGraph, chartData])
 
-  const options = useMemo(() => ({
+  const options = useMemo(() => {
+    const setFormat = () => {
+      return activeUnit === DATE_UNITS.DAY ? 'MMM D YY hh:mm A' : undefined
+    }
+    return {
       responsive: true,
       animation: false,
       spanGaps: true,
       maintainAspectRatio: false,
       // padding: 10,
+      // interaction: {
+      //   intersect: true,
+      //   mode: 'nearest',
+      //   axis: 'xy'
+      // },
       scales: {
         x: {
           reverse: true,
-          maxTicksLimit: 10,
           grid: {
             display: false
           },
           ticks: {
             autoSkip: true,
-            autoSkipPadding: 50,
-            callback: function(value) {
-              const formattedValue = formatTimeStamp(this.getLabelForValue(value));
-              return formattedValue
+            autoSkipPadding: activeUnit === DATE_UNITS.WEEK ? 85 : 40,
+            labelOffset: activeUnit === DATE_UNITS.WEEK ? -50 : 0,
+            callback: function (value) {
+              const formattedValue = formatTimeStamp(this.getLabelForValue(value), setFormat());
+              return formattedValue;
             }
           },
         },
@@ -148,10 +158,10 @@ const LineGraph = ({
       plugins: {
         tooltip: {
           callbacks: {
-            label: function(context) {
+            label: function (context) {
               return `${context.dataset.label}: ${context.raw.toFixed(2)} ${unit}`
             },
-            title: function(context) {
+            title: function (context) {
               const formattedValue = formatTimeStamp(Number(context[0].label), 'MMM DD YYYY hh:mm A');
               return formattedValue;
             }
@@ -166,7 +176,8 @@ const LineGraph = ({
         zoom: {
           pan: {
             enabled: true,
-            mode: "x"
+            mode: "x",
+            reverse: true
           },
           zoom: {
             wheel: {
@@ -179,8 +190,9 @@ const LineGraph = ({
           }
         }
       }
+    }
     //eslint-disable-next-line
-  }), [xSeries, unit]); //recompute the graph options when the xSeries changes based on the date filter, so the graph can reset zoom level to the new range, false positive warning on not needing xSeries
+  }, [xSeries, unit, activeUnit]); //recompute the graph options when the xSeries changes based on the date filter, so the graph can reset zoom level to the new range, false positive warning on not needing xSeries
 
   //apply the overlay graph to the secondary Y axis options
   const extendedOptions = useMemo(() => {
