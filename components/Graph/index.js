@@ -3,12 +3,8 @@ import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import OverlayData from '../../icons/OverlayData'
 import QuestionMark from '../../icons/QuestionMark'
-import GraphTooltip from '../GraphTooltip'
-import { cutData, formXYData, formXYSeries } from '../../helpers/data';
 import content from '../../content'
-import dayjs from 'dayjs'
 import styles from './Graph.module.css';
-import { useMemo } from 'react';
 
 //dynamically import the LineGraph so Next doesn't try to render it on the server when the component needs to have access to things like the browser window
 const LineGraphDynamic = dynamic(() => import("../LineGraph/index"), {ssr: false})
@@ -22,17 +18,6 @@ const Graph = ({
   openTooltip,
   units,
 }) => {
-  // memoize the graph props, so they don't get re-created on each update
-  const lineGraphProps = useMemo(() => ({
-    gridYValues: 5,
-    axisLeft: { format: d => `${d}`, tickValues: 5 }
-  }), [])
-
-  const overlayGraphProps = useMemo(() => ({
-    axisLeft: null,
-    axisRight: { format: d => `${d}` },
-    enableGridY: false
-  }), [])
 
   if (typeof document === 'undefined') return null
 
@@ -94,7 +79,6 @@ const Graph = ({
           data={graph.data}
           domain={[graph.domain[0], graph.domain[1]]}
           overlayGraph={overlayGraph}
-          props={lineGraphProps}
           dataPoint={content.dataPoints[graph.slug]}
         />
       </div>

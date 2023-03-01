@@ -1,21 +1,22 @@
 import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types'
-import { before, cutData, downsampleData, formAxisSeries, formXSeries } from '../../helpers/data';
+import { before, cutData, downsampleData, formAxisSeries } from '../../helpers/data';
 import content from '../../content'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
 import DownloadData from '../DownloadData'
 import styles from './Graphs.module.css';
 import DataDisclaimer from '../DataDisclaimer';
+import { DATE_UNITS } from '../../helpers/constants';
 
 const maxResolution = 1000; // points
 
-const timeUnits = ['day', 'week', 'month', 'year'];
+const timeUnits = [DATE_UNITS.DAY, DATE_UNITS.WEEK, DATE_UNITS.MONTH, DATE_UNITS.YEAR]
 
 const dsColumns = Array.from(Object.keys(content.dataPoints))
 
 const Graphs = ({ openTooltip, samples, units }) => {
-  const [activeUnit, setActiveUnit] = useState('week')
+  const [activeUnit, setActiveUnit] = useState(DATE_UNITS.MONTH)
   const latestSampleTimestamp = samples[samples.length -1].noaaTime
 
   const [domain, setDomain] = useState([latestSampleTimestamp, before(activeUnit, latestSampleTimestamp)])

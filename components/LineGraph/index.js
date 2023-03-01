@@ -34,7 +34,6 @@ ChartJS.register(
 const LineGraph = ({
   activeUnit,
   slug,
-  x,
   y,
   label,
   unit,
@@ -42,33 +41,16 @@ const LineGraph = ({
   color,
   xSeries,
   domain: [xMin, xMax],
-  props,
   overlayGraph,
-  dataPoint,
 }) => {
   const [dragging, setDragging] = useState(false);
-  // const [overlayYData, setOverlayYData] = useState(null);
-
-  // useEffect(() => {
-  //   setxyData(formXYData(data, x, y))
-  // }, [xMax, x, y, setxyData])
-
 
   const yData = useMemo(() => {
-    // console.log('running graph' )
     return formAxisSeries(data, y)
   }, [data, y]);
 
-  // //set the overlay graph data if it's selected and the slug isn't the same as the current graph, to avoid double re-computing of the same exact graph
-  // useEffect(() => {
-  //   if(overlayGraph && overlayGraph.slug !== slug) {
-  //     setOverlayYData(formAxisSeries(overlayGraph.data, overlayGraph.y))
-  //   } else {
-  //     //otherwise make sure the overlay Y data is null and isn't being used
-  //     setOverlayYData(null)
-  //   }
-  // }, [xSeries, overlayGraph, x, slug])
 
+  //set the overlay graph data if it's selected and the slug isn't the same as the current graph, to avoid double re-computing of the same exact graph
   const overlayYData = useMemo(() => {
     if(overlayGraph && overlayGraph.slug !== slug) return formAxisSeries(overlayGraph.data, overlayGraph.y)
     return null;
@@ -88,13 +70,14 @@ const LineGraph = ({
       {
         data: yData,
         label,
+        unit,
         borderColor: color,
         backgroundColor: color,
         borderWidth: 2,
         pointRadius: 1
       }
     ]
-  }), [xSeries, yData, label, color, ])
+  }), [xSeries, yData, label, color, unit])
 
 
   //apply the overlay data as the secondary Y axis
@@ -109,6 +92,7 @@ const LineGraph = ({
             yAxisID: 'y2',
             data: overlayYData,
             label: overlayGraph.label,
+            unit: overlayGraph.unit,
             borderColor: overlayGraph.color,
             backgroundColor: overlayGraph.color,
             borderWidth: 2,
@@ -159,7 +143,7 @@ const LineGraph = ({
         tooltip: {
           callbacks: {
             label: function (context) {
-              return `${context.dataset.label}: ${context.raw.toFixed(2)} ${unit}`
+              return `${context.dataset.label}: ${context.raw.toFixed(2)} ${context.dataset.unit}`
             },
             title: function (context) {
               const formattedValue = formatTimeStamp(Number(context[0].label), 'MMM DD YYYY hh:mm A');
@@ -192,7 +176,7 @@ const LineGraph = ({
       }
     }
     //eslint-disable-next-line
-  }, [xSeries, unit, activeUnit]); //recompute the graph options when the xSeries changes based on the date filter, so the graph can reset zoom level to the new range, false positive warning on not needing xSeries
+  }, [xSeries, activeUnit]); //recompute the graph options when the xSeries changes based on the date filter, so the graph can reset zoom level to the new range, false positive warning on not needing xSeries
 
   //apply the overlay graph to the secondary Y axis options
   const extendedOptions = useMemo(() => {
