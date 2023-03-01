@@ -13,7 +13,7 @@ import {
   Tooltip,
   Legend
 } from "chart.js";
-import { formatTimeStamp, formAxisSeries } from '../../helpers/data';
+import { formatTimeStamp, formAxesSeries } from '../../helpers/data';
 import styles from './LineGraph.module.css';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { DATE_UNITS } from '../../helpers/constants';
@@ -46,13 +46,13 @@ const LineGraph = ({
   const [dragging, setDragging] = useState(false);
 
   const yData = useMemo(() => {
-    return formAxisSeries(data, y)
+    return formAxesSeries(data, y)
   }, [data, y]);
 
 
   //set the overlay graph data if it's selected and the slug isn't the same as the current graph, to avoid double re-computing of the same exact graph
   const overlayYData = useMemo(() => {
-    if(overlayGraph && overlayGraph.slug !== slug) return formAxisSeries(overlayGraph.data, overlayGraph.y)
+    if(overlayGraph && overlayGraph.slug !== slug) return formAxesSeries(overlayGraph.data, overlayGraph.y)
     return null;
   }, [overlayGraph, slug]);
 
@@ -105,9 +105,8 @@ const LineGraph = ({
     }, [overlayYData, overlayGraph, chartData])
 
   const options = useMemo(() => {
-    const setFormat = () => {
-      return activeUnit === DATE_UNITS.DAY ? 'MMM D YY hh:mm A' : undefined
-    }
+    const format = activeUnit === DATE_UNITS.DAY ? 'MMM D YY hh:mm A' : null;
+
     return {
       responsive: true,
       animation: false,
@@ -130,7 +129,7 @@ const LineGraph = ({
             autoSkipPadding: activeUnit === DATE_UNITS.WEEK ? 85 : 40,
             labelOffset: activeUnit === DATE_UNITS.WEEK ? -50 : 0,
             callback: function (value) {
-              const formattedValue = formatTimeStamp(this.getLabelForValue(value), setFormat());
+              const formattedValue = formatTimeStamp(this.getLabelForValue(value), format);
               return formattedValue;
             }
           },

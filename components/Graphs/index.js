@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types'
-import { before, cutData, downsampleData, formAxisSeries } from '../../helpers/data';
+import { before, cutData, downsampleData, formAxesSeries } from '../../helpers/data';
 import content from '../../content'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
@@ -37,7 +37,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
 
   const xSeries = useMemo(() => {
     // console.log('running xSeries')
-    const labels = formAxisSeries(dsSamplesData.current, 'noaaTime')
+    const labels = formAxesSeries(dsSamplesData.current, 'noaaTime')
     return labels
     //eslint-disable-next-line
   }, [min]); //only rerun when the minimum value changes from the date filter, otherwise don't compute. false positive eslint warning about removing the min from dependency arr

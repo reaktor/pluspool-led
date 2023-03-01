@@ -94,7 +94,7 @@ const formXYData = (data, xColumn, yColumn) => {
   }
 }
 
-const formAxisSeries = (data, column) => {
+const formAxesSeries = (data, column) => {
   const labels = data.map(datum => datum[column])
   return labels
 }
@@ -116,6 +116,6 @@ export {
   downsampleData,
   formXYSeries,
   formXYData,
-  formAxisSeries,
+  formAxesSeries,
   formatTimeStamp
 }
