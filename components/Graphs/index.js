@@ -36,7 +36,6 @@ const Graphs = ({ openTooltip, samples, units }) => {
   dsSamplesData.current = dsSamples;
 
   const xSeries = useMemo(() => {
-    // console.log('running xSeries')
     const labels = formAxesSeries(dsSamplesData.current, 'noaaTime')
     return labels
     //eslint-disable-next-line

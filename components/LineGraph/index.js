@@ -1,4 +1,3 @@
-// import 'chartjs-adapter-dayjs-4';
 import cx from 'classnames';
 import { Line } from 'react-chartjs-2';
 
@@ -15,10 +14,8 @@ import {
 } from "chart.js";
 import { formatTimeStamp, formAxesSeries } from '../../helpers/data';
 import styles from './LineGraph.module.css';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { DATE_UNITS } from '../../helpers/constants';
-// import relativeTime from 'dayjs/plugin/relativeTime';
-// dayjs.extend(relativeTime);
 
 ChartJS.register(
   CategoryScale,
@@ -114,7 +111,7 @@ const LineGraph = ({
       maintainAspectRatio: false,
       // padding: 10,
       // interaction: {
-      //   intersect: true,
+      //   intersect: false,
       //   mode: 'nearest',
       //   axis: 'xy'
       // },
@@ -127,7 +124,7 @@ const LineGraph = ({
           ticks: {
             autoSkip: true,
             autoSkipPadding: activeUnit === DATE_UNITS.WEEK ? 85 : 40,
-            labelOffset: activeUnit === DATE_UNITS.WEEK ? -50 : 0,
+            labelOffset: activeUnit === DATE_UNITS.WEEK ? -20 : 0,
             callback: function (value) {
               const formattedValue = formatTimeStamp(this.getLabelForValue(value), format);
               return formattedValue;
