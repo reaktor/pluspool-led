@@ -32,6 +32,7 @@ const Graph = ({
         <div className={styles.right}>
           {overlayGraph && overlayGraph.y !== graph.y && (
             <button
+              aria-label={`remove ${overlayGraph.slug} overlay data`}
               className={styles.overlayPickerButton}
               onClick={() => setOverlayGraph(null)}
             >
@@ -48,6 +49,7 @@ const Graph = ({
           )}
           {!overlayGraph && (
             <button
+              aria-label={`overlay ${graph.slug} data`}
               className={styles.overlayPickerButton}
               onClick={() => setOverlayGraph(graph.slug)}
             >
@@ -59,6 +61,7 @@ const Graph = ({
           )}
           {content.tooltip[graph.slug] && (
             <button
+              aria-label={`${graph.slug} details`}
               type='button'
               className={styles.questionMark}
               onClick={() => openTooltip(graph.slug)}
