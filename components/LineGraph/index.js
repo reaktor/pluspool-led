@@ -110,6 +110,7 @@ const LineGraph = ({
         y: {
           beginAtZero: true
         },
+        //settings for the overlay graph
         y2: {
           display: false,
           position: 'right',
@@ -156,26 +157,6 @@ const LineGraph = ({
       }
     }
   }, [activeUnit]); //recompute the graph options only when the activeUnit date filter changes, so the zoom can be properly reset with different allowed ranges. otherwise keep the existing graph options
-
-  //apply the overlay graph to the secondary Y axis options
-  // const extendedOptions = useMemo(() => {
-  //   if(hasOverlay) {
-  //     return {
-  //       ...options,
-  //       scales: {
-  //         ...options.scales,
-  //         y2: {
-  //           position: 'right',
-  //           beginAtZero: true,
-  //           grid: {
-  //             display: false
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  //   return options;
-  // }, [hasOverlay, options]);
 
   // Update the chart without re-rendering by enabling the display of the secondary y axes in place
   // This keeps existing chart options in place, along with values that were calculated by the chart itself, such as zoom and pan without resetting.
