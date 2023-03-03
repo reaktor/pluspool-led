@@ -1,32 +1,9 @@
 import cx from 'classnames';
 import { Line } from 'react-chartjs-2';
-
-import zoomPlugin from 'chartjs-plugin-zoom';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-} from "chart.js";
 import { formatTimeStamp, formAxesSeries } from '../../helpers/data';
 import styles from './LineGraph.module.css';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { DATE_UNITS } from '../../helpers/constants';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  zoomPlugin
-);
 
 const LineGraph = ({
   activeUnit,
@@ -39,8 +16,11 @@ const LineGraph = ({
   xSeries,
   domain: [xMin, xMax],
   overlayGraph,
+  hasOverlay
 }) => {
   const [dragging, setDragging] = useState(false);
+  const chartRef = useRef(null); //set up the reference to the chart
+
 
   const yData = useMemo(() => {
     return formAxesSeries(data, y)
@@ -79,7 +59,7 @@ const LineGraph = ({
 
   //apply the overlay data as the secondary Y axis
   const extendedChartData = useMemo(() => {
-    //only extend with the overlay, if the y overlay data is available and the overlay slug isn't the same as the original graph
+    //only extend with the overlay data, if the y overlay data is available and the overlay slug isn't the same as the original graph
     if(overlayYData && overlayGraph) {
       return {
         ...chartData,
@@ -101,6 +81,7 @@ const LineGraph = ({
       return chartData;
     }, [overlayYData, overlayGraph, chartData])
 
+  //set up the graph options
   const options = useMemo(() => {
     const format = activeUnit === DATE_UNITS.DAY ? 'MMM D YY hh:mm A' : null;
 
@@ -109,12 +90,6 @@ const LineGraph = ({
       animation: false,
       spanGaps: true,
       maintainAspectRatio: false,
-      // padding: 10,
-      // interaction: {
-      //   intersect: false,
-      //   mode: 'nearest',
-      //   axis: 'xy'
-      // },
       scales: {
         x: {
           reverse: true,
@@ -126,6 +101,7 @@ const LineGraph = ({
             autoSkipPadding: activeUnit === DATE_UNITS.WEEK ? 85 : 40,
             labelOffset: activeUnit === DATE_UNITS.WEEK ? -20 : 0,
             callback: function (value) {
+              //label formatting
               const formattedValue = formatTimeStamp(this.getLabelForValue(value), format);
               return formattedValue;
             }
@@ -133,6 +109,14 @@ const LineGraph = ({
         },
         y: {
           beginAtZero: true
+        },
+        y2: {
+          display: false,
+          position: 'right',
+          beginAtZero: true,
+          grid: {
+            display: false
+          }
         }
       },
       plugins: {
@@ -166,35 +150,48 @@ const LineGraph = ({
             pinch: {
               enabled: true
             },
-            mode: "x"
+            mode: "x",
           }
         }
       }
     }
-    //eslint-disable-next-line
-  }, [xSeries, activeUnit]); //recompute the graph options when the xSeries changes based on the date filter, so the graph can reset zoom level to the new range, false positive warning on not needing xSeries
+  }, [activeUnit]); //recompute the graph options only when the activeUnit date filter changes, so the zoom can be properly reset with different allowed ranges. otherwise keep the existing graph options
 
   //apply the overlay graph to the secondary Y axis options
-  const extendedOptions = useMemo(() => {
-    if(overlayGraph && overlayGraph.slug !== slug) {
-      return {
-        ...options,
-        scales: {
-          ...options.scales,
-          y2: {
-            position: 'right',
-            beginAtZero: true,
-            grid: {
-              display: false
-            }
-          }
-        }
-      }
-    }
-    return options;
-  }, [overlayGraph, slug, options]);
+  // const extendedOptions = useMemo(() => {
+  //   if(hasOverlay) {
+  //     return {
+  //       ...options,
+  //       scales: {
+  //         ...options.scales,
+  //         y2: {
+  //           position: 'right',
+  //           beginAtZero: true,
+  //           grid: {
+  //             display: false
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return options;
+  // }, [hasOverlay, options]);
 
-  return <div className={cx(styles.lineGraphWrapper, {[styles.mouseDown]: dragging})} onMouseDown={onMouseDown} onMouseUp={onMouseUp}><Line options={extendedOptions} data={extendedChartData} /></div>
+  // Update the chart without re-rendering by enabling the display of the secondary y axes in place
+  // This keeps existing chart options in place, along with values that were calculated by the chart itself, such as zoom and pan without resetting.
+  useEffect(() => {
+    //use the chart reference to update the chart in place
+    if(chartRef.current && hasOverlay) {
+      chartRef.current.options.scales.y2.display = hasOverlay
+      chartRef.current.update()
+    }
+  }, [hasOverlay])
+
+  return (
+    <div className={cx(styles.lineGraphWrapper, {[styles.mouseDown]: dragging})} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+      <Line ref={chartRef} options={options} data={extendedChartData} />
+    </div>
+  )
 };
 
 

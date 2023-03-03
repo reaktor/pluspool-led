@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
 import { before, cutData, downsampleData, formAxesSeries } from '../../helpers/data';
 import content from '../../content'
@@ -8,6 +8,31 @@ import DownloadData from '../DownloadData'
 import styles from './Graphs.module.css';
 import DataDisclaimer from '../DataDisclaimer';
 import { DATE_UNITS } from '../../helpers/constants';
+
+//Import ChartJs and register all the plugins necessary for our usage
+import zoomPlugin from 'chartjs-plugin-zoom';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  zoomPlugin
+);
+
 
 const maxResolution = 1000; // points
 
@@ -22,7 +47,6 @@ const Graphs = ({ openTooltip, samples, units }) => {
   const [domain, setDomain] = useState([latestSampleTimestamp, before(activeUnit, latestSampleTimestamp)])
   const [overlayGraph, setOverlayGraph] = useState(null)
 
-  const dsSamplesData = useRef([])
   const setSpan = unit => setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)])
   const filterOnClick = unit => {
     setActiveUnit(unit)
@@ -33,13 +57,9 @@ const Graphs = ({ openTooltip, samples, units }) => {
 
   const domainSamples = cutData(samples, 'noaaTime', min, max)
   const dsSamples = downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
-  dsSamplesData.current = dsSamples;
 
-  const xSeries = useMemo(() => {
-    const labels = formAxesSeries(dsSamplesData.current, 'noaaTime')
-    return labels
-    //eslint-disable-next-line
-  }, [min]); //only rerun when the minimum value changes from the date filter, otherwise don't compute. false positive eslint warning about removing the min from dependency arr
+  //re-build the x axes label series when the date filter changes, or new data is loaded in
+  const xSeries = formAxesSeries(dsSamples, 'noaaTime')
 
   if (!samples) return null;
 

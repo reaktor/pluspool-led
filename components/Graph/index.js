@@ -1,13 +1,10 @@
-import dynamic from 'next/dynamic';
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import OverlayData from '../../icons/OverlayData'
 import QuestionMark from '../../icons/QuestionMark'
 import content from '../../content'
 import styles from './Graph.module.css';
-
-//dynamically import the LineGraph so Next doesn't try to render it on the server when the component needs to have access to things like the browser window
-const LineGraphDynamic = dynamic(() => import("../LineGraph/index"), {ssr: false})
+import LineGraph from '../LineGraph';
 
 const Graph = ({
   graph,
@@ -72,13 +69,14 @@ const Graph = ({
         </div>
       </header>
       <div className={styles.graphWrapper}>
-        <LineGraphDynamic
+        <LineGraph
           {...graph}
           activeUnit={activeUnit}
           xSeries={xSeries}
           data={graph.data}
           domain={[graph.domain[0], graph.domain[1]]}
           overlayGraph={overlayGraph}
+          hasOverlay={overlayGraph && overlayGraph.slug !== graph.slug}
           dataPoint={content.dataPoints[graph.slug]}
         />
       </div>
