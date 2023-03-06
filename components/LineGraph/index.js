@@ -169,6 +169,7 @@ const LineGraph = ({
     }
   }, [hasOverlay])
 
+  //wrap the line chart in a div wrapper that takes up the full height of its parent, so the graph takes up the full space without having to modify its own styles
   return (
     <div className={cx(styles.lineGraphWrapper, {[styles.mouseDown]: dragging})} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
       <Line ref={chartRef} options={options} data={extendedChartData} />
