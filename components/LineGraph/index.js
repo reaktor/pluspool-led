@@ -41,6 +41,7 @@ const LineGraph = ({
     setDragging(false)
   }
 
+  //apply the graph data as the original / first Y axes
   const chartData = useMemo(() => ({
     labels: xSeries,
     datasets: [
@@ -57,7 +58,7 @@ const LineGraph = ({
   }), [xSeries, yData, label, color, unit])
 
 
-  //apply the overlay data as the secondary Y axis
+  //apply the overlay data as the secondary Y axes
   const extendedChartData = useMemo(() => {
     //only extend with the overlay data, if the y overlay data is available and the overlay slug isn't the same as the original graph
     if(overlayYData && overlayGraph) {
