@@ -102,12 +102,10 @@ class DataRangePicker extends React.Component {
             })}
           />
         </div>
-        {(
         <div className={styles.labels}>
           <label className={styles.label}>Latest</label>
           <label className={styles.label}>Oldest</label>
         </div>
-        )}
       </div>
     );
   }
