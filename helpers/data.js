@@ -82,12 +82,6 @@ const downsampleData = (data, index, columns, resolution) => {
 }
 
 /**
- * Deprecated
- */
-const formXYSeries = (data, xColumn, yColumn) =>
-  data.map(datum => ({ x: datum[xColumn], y: datum[yColumn] }))
-
-/**
  * Forms the axes series for use in the line chart
  * @param {[object]} data
  * @param {string} column
@@ -120,7 +114,6 @@ export {
   scale,
   cutData,
   downsampleData,
-  formXYSeries,
   formAxesSeries,
   formatTimeStamp
 }
