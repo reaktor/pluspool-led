@@ -87,6 +87,11 @@
   z-index: 1;
 }
 
+.seekerContainer {
+  padding: 0 35px 0 25px;
+  margin: 5px 0 20px 0
+}
+
 .legend {
   margin-top: 20px;
 }

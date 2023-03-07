@@ -1,8 +1,9 @@
 import { ENDPOINTS } from './constants'
 import fetch from 'isomorphic-unfetch'
 
-// six seconds
-const updateTime = 6 * 60 * 1000
+// 10 minutes
+const updateTime = 1000 * 600
+  //6 * 60 * 1000
 
 const dataFetchParams = {
   method: 'GET',
@@ -36,7 +37,7 @@ export const dataFetchProcess = (() => {
 
   const start = update => {
     if (dataFetchProcess === null) {
-      console.log('Begining data fetching.')
+      console.log('Beginning data fetching.')
       const fetcher = fetching(update)
       fetcher() // first instance
       dataFetchProcess = setInterval(fetcher, updateTime)

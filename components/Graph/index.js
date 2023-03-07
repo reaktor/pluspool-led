@@ -1,86 +1,22 @@
-
 import Circle from '../../icons/Circle'
 import CloseCircle from '../../icons/CloseCircle'
 import OverlayData from '../../icons/OverlayData'
 import QuestionMark from '../../icons/QuestionMark'
-import Legend from '../Legend'
-import GraphTooltip from '../GraphTooltip'
-import { formXYSeries } from '../../helpers/data'
 import content from '../../content'
-import { ResponsiveLineCanvas } from '@nivo/line'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import styles from './Graph.module.css';
-
-dayjs.extend(relativeTime);
-
-const LineGraph = ({
-  x,
-  y,
-  label,
-  unit,
-  data,
-  color,
-  domain: [xMin, xMax],
-  props,
-  overlayGraph,
-  dataPoint,
-}) => {
-  const dataRender = [{ id: label, data: formXYSeries(data, x, y) }];
-  const defaultProps = {
-    curve: 'linear',
-    margin: { top: 10, right: 40, bottom: 50, left: 40 },
-    xScale: {
-      type: 'linear',
-      min: xMin,
-      max: xMax,
-    },
-    yScale: {
-      type: 'linear',
-      stacked: false,
-      min: dataPoint.min || 'auto',
-      max: dataPoint.max || 'auto',
-    },
-    enableGridX: false,
-    lineWidth: 1,
-    pointSize: 0,
-    tooltip: (props) =>
-      GraphTooltip({ label, unit, overlayGraph, data, ...props }),
-    axisBottom: {
-      format: (d) => dayjs(d).format('MMM D, YYYY'),
-      tickValues: 3,
-      tickSize: 5,
-      tickPadding: 5,
-      tickRotation: 30,
-    },
-    data: dataRender,
-    colors: [color],
-  };
-
-  return <ResponsiveLineCanvas {...defaultProps} {...props} />;
-};
+import LineGraph from '../LineGraph';
 
 const Graph = ({
   graph,
+  activeDateFilter,
+  xSeries,
   overlayGraph,
   setOverlayGraph,
   openTooltip,
   units,
 }) => {
-  if (typeof document === 'undefined') return null;
 
-  const lineGraphProps = {
-    gridYValues: 5,
-    axisLeft: { format: (d) => `${d}`, tickValues: 5 },
-  };
-
-  const overlayGraphProps = {
-    axisLeft: null,
-    axisRight: { format: (d) => `${d}` },
-    enableGridY: false,
-  };
-
-  const { legend } = content.dataPoints[graph.slug];
+  if (typeof document === 'undefined') return null
 
   return (
     <section>
@@ -96,6 +32,7 @@ const Graph = ({
         <div className={styles.right}>
           {overlayGraph && overlayGraph.y !== graph.y && (
             <button
+              aria-label={`remove ${overlayGraph.slug} overlay data`}
               className={styles.overlayPickerButton}
               onClick={() => setOverlayGraph(null)}
             >
@@ -112,6 +49,7 @@ const Graph = ({
           )}
           {!overlayGraph && (
             <button
+              aria-label={`overlay ${graph.slug} data`}
               className={styles.overlayPickerButton}
               onClick={() => setOverlayGraph(graph.slug)}
             >
@@ -123,6 +61,7 @@ const Graph = ({
           )}
           {content.tooltip[graph.slug] && (
             <button
+              aria-label={`${graph.slug} details`}
               type='button'
               className={styles.questionMark}
               onClick={() => openTooltip(graph.slug)}
@@ -135,22 +74,13 @@ const Graph = ({
       <div className={styles.graphWrapper}>
         <LineGraph
           {...graph}
+          activeDateFilter={activeDateFilter}
+          xSeries={xSeries}
+          data={graph.data}
           overlayGraph={overlayGraph}
-          props={lineGraphProps}
+          hasOverlay={overlayGraph && overlayGraph.slug !== graph.slug}
           dataPoint={content.dataPoints[graph.slug]}
         />
-        {overlayGraph && (
-          <div className={styles.overlayGraph}>
-            <LineGraph
-              {...overlayGraph}
-              props={overlayGraphProps}
-              dataPoint={content.dataPoints[overlayGraph.slug]}
-            />
-          </div>
-        )}
-      </div>
-      <div className={styles.legend}>
-        {legend && <Legend legend={legend} />}
       </div>
     </section>
   );

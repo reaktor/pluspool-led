@@ -1,49 +1,71 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
-import { before, cutData, downsampleData } from '../../helpers/data'
+import { before, cutData, downsampleData, formAxesSeries } from '../../helpers/data';
 import content from '../../content'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
 import DownloadData from '../DownloadData'
 import styles from './Graphs.module.css';
 import DataDisclaimer from '../DataDisclaimer';
+import { DATE_UNITS } from '../../helpers/constants';
+
+//Import ChartJs and register all the plugins necessary for our usage
+import zoomPlugin from 'chartjs-plugin-zoom';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  zoomPlugin
+);
+
 
 const maxResolution = 1000; // points
 
-const timeUnits = ['day', 'week', 'month', 'year'];
+const timeUnits = [DATE_UNITS.DAY, DATE_UNITS.WEEK, DATE_UNITS.MONTH, DATE_UNITS.YEAR]
+
+const dsColumns = Array.from(Object.keys(content.dataPoints))
 
 const Graphs = ({ openTooltip, samples, units }) => {
-  const [activeUnit, setActiveUnit] = useState('day');
-  const latestSampleTimestamp = samples[samples.length - 1].noaaTime;
-  const [domain, setDomain] = useState([
-    latestSampleTimestamp,
-    before(activeUnit, latestSampleTimestamp),
-  ]);
-  const [overlayGraph, setOverlayGraph] = useState(null);
+  const [activeDateFilter, setActiveDateFilter] = useState(DATE_UNITS.WEEK)
+  const latestSampleTimestamp = samples[samples.length -1].noaaTime
 
-  const setSpan = (unit) =>
-    setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)]);
-  const filterOnClick = (unit) => {
-    setActiveUnit(unit);
-    setSpan(unit);
-  };
+  const [domain, setDomain] = useState([latestSampleTimestamp, before(activeDateFilter, latestSampleTimestamp)])
+  const [overlayGraph, setOverlayGraph] = useState(null)
 
-  const [max, min] = domain;
-  const dsColumns = Array.from(Object.keys(content.dataPoints));
-  const domainSamples = cutData(samples, 'noaaTime', min, max);
-  const dsSamples = downsampleData(
-    domainSamples,
-    'noaaTime',
-    dsColumns,
-    maxResolution
-  );
+  const setSpan = unit => setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)])
+  const filterOnClick = unit => {
+    setActiveDateFilter(unit)
+    setSpan(unit)
+  }
+
+  const [max, min] = domain
+
+  const domainSamples = cutData(samples, 'noaaTime', min, max)
+  const dsSamples = downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
+
+  //re-build the x axes label series when the date filter changes, or new data is loaded in
+  const xSeries = formAxesSeries(dsSamples, 'noaaTime')
 
   if (!samples) return null;
 
   const graphProps = (key) => ({
     x: 'noaaTime',
     y: content.dataPoints[key].slug,
-    domain: domain,
     data: dsSamples,
     unit: units[content.dataPoints[key].slug],
     ...content.dataPoints[key],
@@ -52,9 +74,11 @@ const Graphs = ({ openTooltip, samples, units }) => {
   const graphs = dsColumns.map((key) => (
     <Graph
       key={key}
+      activeDateFilter={activeDateFilter}
       setOverlayGraph={setOverlayGraph}
       openTooltip={openTooltip}
       graph={graphProps(key)}
+      xSeries={xSeries}
       units={units}
       overlayGraph={overlayGraph && graphProps(overlayGraph)}
     />
@@ -65,7 +89,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
       <div className={styles.topBar}>
         <GraphsDateFilter
           units={timeUnits}
-          activeUnit={activeUnit}
+          activeDateFilter={activeDateFilter}
           onChange={filterOnClick}
           name='span'
         />

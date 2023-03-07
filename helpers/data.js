@@ -81,13 +81,39 @@ const downsampleData = (data, index, columns, resolution) => {
   return averagedData
 }
 
-const formXYSeries = (data, xColumn, yColumn) =>
-  data.map(datum => ({ x: datum[xColumn], y: datum[yColumn] }))
+/**
+ * Forms the axes series for use in the line chart
+ * @param {[object]} data
+ * @param {string} column
+ * @return {[*]} an array of values from the given column
+ */
+const formAxesSeries = (data, column) => {
+  const series = data.map(datum => datum[column])
+  return series
+}
+
+/**
+ *
+ * Formats the timestamp to a specified date format
+ * @example
+ *
+ * // returns Apr 29, 2020
+ * formatTimeStamp(1588140000000)
+ *
+ * // returns Apr 29 20 05:30 PM
+ * formatTimeStamp(1588203000000, 'MMM D YY hh:mm A')
+ *
+ * @param {number} timestamp - timestamp to be formatted
+ * @param {string} [format=MMM D, YYYY] - string defining the format
+ * @return {string} Formatted timestamp
+ */
+const formatTimeStamp = (timestamp, format) => dayjs(timestamp).format(format || 'MMM D, YYYY')
 
 export {
   before,
   scale,
   cutData,
   downsampleData,
-  formXYSeries
+  formAxesSeries,
+  formatTimeStamp
 }
