@@ -41,15 +41,15 @@ const timeUnits = [DATE_UNITS.DAY, DATE_UNITS.WEEK, DATE_UNITS.MONTH, DATE_UNITS
 const dsColumns = Array.from(Object.keys(content.dataPoints))
 
 const Graphs = ({ openTooltip, samples, units }) => {
-  const [activeUnit, setActiveUnit] = useState(DATE_UNITS.WEEK)
+  const [activeDateFilter, setActiveDateFilter] = useState(DATE_UNITS.WEEK)
   const latestSampleTimestamp = samples[samples.length -1].noaaTime
 
-  const [domain, setDomain] = useState([latestSampleTimestamp, before(activeUnit, latestSampleTimestamp)])
+  const [domain, setDomain] = useState([latestSampleTimestamp, before(activeDateFilter, latestSampleTimestamp)])
   const [overlayGraph, setOverlayGraph] = useState(null)
 
   const setSpan = unit => setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)])
   const filterOnClick = unit => {
-    setActiveUnit(unit)
+    setActiveDateFilter(unit)
     setSpan(unit)
   }
 
@@ -74,7 +74,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
   const graphs = dsColumns.map((key) => (
     <Graph
       key={key}
-      activeUnit={activeUnit}
+      activeDateFilter={activeDateFilter}
       setOverlayGraph={setOverlayGraph}
       openTooltip={openTooltip}
       graph={graphProps(key)}
@@ -89,7 +89,7 @@ const Graphs = ({ openTooltip, samples, units }) => {
       <div className={styles.topBar}>
         <GraphsDateFilter
           units={timeUnits}
-          activeUnit={activeUnit}
+          activeDateFilter={activeDateFilter}
           onChange={filterOnClick}
           name='span'
         />

@@ -1,17 +1,18 @@
+import { DATE_UNITS } from '../../helpers/constants';
 import styles from './GraphsDateFilter.module.css';
 
-const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {
+const GraphsDateFilter = ({ name, units, activeDateFilter, onChange }) => {
   const innerOnChange = ({ target: { value } }) => onChange(value);
 
   const choiceToLabel = (choice) => {
     switch (choice) {
-      case 'day':
+      case DATE_UNITS.DAY:
         return 'Day';
-      case 'week':
+      case DATE_UNITS.WEEK:
         return 'Week';
-      case 'month':
+      case DATE_UNITS.MONTH:
         return 'Month';
-      case 'year':
+      case DATE_UNITS.YEAR:
         return 'Year';
       default:
         return 'Select Date Range';
@@ -25,7 +26,7 @@ const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {
           key={unit}
           name={name}
           unit={unit}
-          activeUnit={activeUnit}
+          activeDateFilter={activeDateFilter}
           label={choiceToLabel(unit)}
           onChange={innerOnChange}
         />
@@ -33,7 +34,7 @@ const GraphsDateFilter = ({ name, units, activeUnit, onChange }) => {
     </span>
   );
 };
-const DateFilter = ({ name, unit, activeUnit, label, onChange }) => {
+const DateFilter = ({ name, unit, activeDateFilter, label, onChange }) => {
   return (
     <div>
       <input
@@ -43,8 +44,8 @@ const DateFilter = ({ name, unit, activeUnit, label, onChange }) => {
         name={name}
         value={unit}
         onChange={onChange}
-        checked={activeUnit === unit}
-        aria-checked={activeUnit === unit}
+        checked={activeDateFilter === unit}
+        aria-checked={activeDateFilter === unit}
       />
       <label className={styles.label} htmlFor={unit}>
         {label}

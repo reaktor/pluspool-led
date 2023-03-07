@@ -8,7 +8,7 @@ import LineGraph from '../LineGraph';
 
 const Graph = ({
   graph,
-  activeUnit,
+  activeDateFilter,
   xSeries,
   overlayGraph,
   setOverlayGraph,
@@ -74,7 +74,7 @@ const Graph = ({
       <div className={styles.graphWrapper}>
         <LineGraph
           {...graph}
-          activeUnit={activeUnit}
+          activeDateFilter={activeDateFilter}
           xSeries={xSeries}
           data={graph.data}
           overlayGraph={overlayGraph}

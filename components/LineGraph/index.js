@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { DATE_UNITS } from '../../helpers/constants';
 
 const LineGraph = ({
-  activeUnit,
+  activeDateFilter,
   slug,
   y,
   label,
@@ -83,7 +83,7 @@ const LineGraph = ({
 
   //set up the graph options
   const options = useMemo(() => {
-    const format = activeUnit === DATE_UNITS.DAY ? 'MMM D YY hh:mm A' : null;
+    const format = activeDateFilter === DATE_UNITS.DAY ? 'MMM D YY hh:mm A' : null;
 
     return {
       responsive: true,
@@ -98,8 +98,8 @@ const LineGraph = ({
           },
           ticks: {
             autoSkip: true,
-            autoSkipPadding: activeUnit === DATE_UNITS.WEEK ? 85 : 40,
-            labelOffset: activeUnit === DATE_UNITS.WEEK ? -20 : 0,
+            autoSkipPadding: activeDateFilter === DATE_UNITS.WEEK ? 85 : 40,
+            labelOffset: activeDateFilter === DATE_UNITS.WEEK ? -20 : 0,
             callback: function (value) {
               //label formatting
               const formattedValue = formatTimeStamp(this.getLabelForValue(value), format);
@@ -156,7 +156,7 @@ const LineGraph = ({
         }
       }
     }
-  }, [activeUnit]); //recompute the graph options only when the activeUnit date filter changes, so the zoom can be properly reset with different allowed ranges. otherwise keep the existing graph options
+  }, [activeDateFilter]); //recompute the graph options only when the activeDateFilter changes, so the zoom can be properly reset with different allowed ranges. otherwise keep the existing graph options
 
   // Update the chart without re-rendering by enabling the display of the secondary y axes in place
   // This keeps existing chart options in place, along with values that were calculated by the chart itself, such as zoom and pan without resetting.
