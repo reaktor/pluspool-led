@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import RcSlider from 'rc-slider';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -85,7 +86,7 @@ class DataRangePicker extends React.Component {
 
     return (
       <div className={styles.container}>
-        <div className={`${styles.sliderContainer} ${styles.customSliderContainer}`}>
+        <div className={cx(styles.sliderContainer, styles.customSliderContainer)}>
           <RcSlider
             className={styles.customSlider}
             vertical={!isMobile()}
