@@ -14,7 +14,6 @@ const LineGraph = ({
   data,
   color,
   xSeries,
-  domain: [xMin, xMax],
   overlayGraph,
   hasOverlay
 }) => {

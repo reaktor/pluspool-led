@@ -77,7 +77,6 @@ const Graph = ({
           activeUnit={activeUnit}
           xSeries={xSeries}
           data={graph.data}
-          domain={[graph.domain[0], graph.domain[1]]}
           overlayGraph={overlayGraph}
           hasOverlay={overlayGraph && overlayGraph.slug !== graph.slug}
           dataPoint={content.dataPoints[graph.slug]}
