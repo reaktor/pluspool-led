@@ -6,6 +6,7 @@ import TitleText from '../components/TitleText'
 import SvgVisualization from '../components/SvgVisualization'
 import Tooltip from '../components/Tooltip'
 import { useSample } from '../hooks/useSamples'
+import PageWrapper, {getStaticProps} from '../components/PageWrapper'
 
 const IndexPage = ({ sources, units, samples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
@@ -53,4 +54,6 @@ const IndexPage = ({ sources, units, samples }) => {
 
 IndexPage.displayName = 'IndexPage'
 
-export default IndexPage
+// export default IndexPage
+export { getStaticProps }
+export default PageWrapper(IndexPage)
