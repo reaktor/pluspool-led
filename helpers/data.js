@@ -56,7 +56,7 @@ const cutData = (data, index, min, max) =>
  * @return {[object]} the downsampled data series
  */
 const downsampleData = (data, index, columns, resolution) => {
-  const dsFactor = Math.ceil(data.length / 165)
+  const dsFactor = Math.ceil(data.length / resolution)
 
   if (data.length < 2 || dsFactor <= 1) return data
 
