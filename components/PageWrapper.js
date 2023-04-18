@@ -47,8 +47,7 @@ export const getStaticProps = async () => {
         ...dsSamples,
         //samples: dsSamples[DATE_UNITS.YEAR]
       },
-      revalidate: 2
-        //60 * 15 // revalidate every 15 minutes
+      revalidate: 60 * 15 // revalidate every 15 minutes
     }
   } catch (err){
     console.log(err)
