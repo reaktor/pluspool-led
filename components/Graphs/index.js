@@ -40,33 +40,35 @@ const timeUnits = [DATE_UNITS.DAY, DATE_UNITS.WEEK, DATE_UNITS.MONTH, DATE_UNITS
 
 const dsColumns = Array.from(Object.keys(content.dataPoints))
 
-const Graphs = ({ openTooltip, samples, units }) => {
+const Graphs = ({ openTooltip, units, samples }) => {
   const [activeDateFilter, setActiveDateFilter] = useState(DATE_UNITS.WEEK)
-  const latestSampleTimestamp = samples[samples.length -1].noaaTime
+  // const latestSampleTimestamp = samples[samples.length -1].noaaTime
 
-  const [domain, setDomain] = useState([latestSampleTimestamp, before(activeDateFilter, latestSampleTimestamp)])
+  // const [domain, setDomain] = useState([latestSampleTimestamp, before(activeDateFilter, latestSampleTimestamp)])
   const [overlayGraph, setOverlayGraph] = useState(null)
 
-  const setSpan = unit => setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)])
+  // const setSpan = unit => setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)])
   const filterOnClick = unit => {
     setActiveDateFilter(unit)
-    setSpan(unit)
+    // setSpan(unit)
   }
 
-  const [max, min] = domain
+  // const [max, min] = domain
 
-  const domainSamples = cutData(samples, 'noaaTime', min, max)
-  const dsSamples = downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
+  // const domainSamples = cutData(samples, 'noaaTime', min, max)
+  // const dsSamples = downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
+
+  const data = samples[activeDateFilter]
 
   //re-build the x axes label series when the date filter changes, or new data is loaded in
-  const xSeries = formAxesSeries(dsSamples, 'noaaTime')
+  const xSeries = formAxesSeries(data, 'noaaTime')
 
-  if (!samples) return null;
+  if (!data) return null;
 
   const graphProps = (key) => ({
     x: 'noaaTime',
     y: content.dataPoints[key].slug,
-    data: dsSamples,
+    data: data,
     unit: units[content.dataPoints[key].slug],
     ...content.dataPoints[key],
   });

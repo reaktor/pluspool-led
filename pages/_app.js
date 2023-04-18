@@ -54,8 +54,6 @@ const PlusPoolApp = ({ Component, pageProps }) => {
   //   dataFetchProcess.start(data => setState({ data }))
   // }, [setState]) // conform to React exhaustive-deps
 
-    // const displayName = Component().type.displayName
-
   return (
     <div className='container' data-template={Component.displayName}>
       <GoogleAnalytics />

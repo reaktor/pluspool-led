@@ -56,10 +56,11 @@ const cutData = (data, index, min, max) =>
  * @return {[object]} the downsampled data series
  */
 const downsampleData = (data, index, columns, resolution) => {
-  const dsFactor = Math.ceil(data.length / resolution)
+  const dsFactor = Math.ceil(data.length / 165)
 
   if (data.length < 2 || dsFactor <= 1) return data
 
+  // console.log(dsFactor)
   const averagedData = []
   let sampleCounter = 0
   let indexValue = data[0][index]

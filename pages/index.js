@@ -7,11 +7,12 @@ import SvgVisualization from '../components/SvgVisualization'
 import Tooltip from '../components/Tooltip'
 import { useSample } from '../hooks/useSamples'
 import PageWrapper, {getStaticProps} from '../components/PageWrapper'
+import { DATE_UNITS } from '../helpers/constants';
 
-const IndexPage = ({ sources, units, samples }) => {
+const IndexPage = ({ sources, units, ...samples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState()
-  const [sample, range, timestamp, setTimestamp] = useSample(samples)
+  const [sample, range, timestamp, setTimestamp] = useSample(samples[DATE_UNITS.YEAR])
   const [pageState, setPageState] = useState(0)
 
   const advanceIntro = () => pageState < 1 && setPageState(pageState + 1)
