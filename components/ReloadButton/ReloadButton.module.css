@@ -1,0 +1,3 @@
+.reloadButton:is(:hover, :focus) {
+    color: #808080;
+}

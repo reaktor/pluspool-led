@@ -8,6 +8,8 @@ import DownloadData from '../DownloadData'
 import styles from './Graphs.module.css';
 import DataDisclaimer from '../DataDisclaimer';
 import { DATE_UNITS } from '../../helpers/constants';
+import ReloadIcon from '../../icons/Reload';
+import { useRouter } from 'next/router';
 
 //Import ChartJs and register all the plugins necessary for our usage
 import zoomPlugin from 'chartjs-plugin-zoom';
@@ -21,6 +23,8 @@ import {
   Tooltip,
   Legend
 } from "chart.js";
+import ReloadButton from '../ReloadButton';
+
 
 ChartJS.register(
   CategoryScale,
@@ -34,14 +38,15 @@ ChartJS.register(
 );
 
 
-const maxResolution = 1000; // points
+// const maxResolution = 1000; // points
 
-const timeUnits = [DATE_UNITS.DAY, DATE_UNITS.WEEK, DATE_UNITS.MONTH, DATE_UNITS.YEAR]
+const timeUnits = Array.from(Object.values(DATE_UNITS))
 
 const dsColumns = Array.from(Object.keys(content.dataPoints))
 
 const Graphs = ({ openTooltip, units, samples }) => {
   const [activeDateFilter, setActiveDateFilter] = useState(DATE_UNITS.WEEK)
+  const router = useRouter()
   // const latestSampleTimestamp = samples[samples.length -1].noaaTime
 
   // const [domain, setDomain] = useState([latestSampleTimestamp, before(activeDateFilter, latestSampleTimestamp)])
@@ -51,6 +56,10 @@ const Graphs = ({ openTooltip, units, samples }) => {
   const filterOnClick = unit => {
     setActiveDateFilter(unit)
     // setSpan(unit)
+  }
+
+  const onRefreshClick = () => {
+    router.reload()
   }
 
   // const [max, min] = domain
@@ -95,6 +104,7 @@ const Graphs = ({ openTooltip, units, samples }) => {
           onChange={filterOnClick}
           name='span'
         />
+        <ReloadButton />
         <DownloadData />
         <DataDisclaimer />
       </div>
@@ -108,7 +118,7 @@ Graphs.defaultProps = {
 }
 
 Graphs.propTypes = {
-  samples: PropTypes.array
+  samples: PropTypes.object
 }
 
 export default Graphs
