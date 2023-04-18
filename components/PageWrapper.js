@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react';
 // import fetch from 'isomorphic-unfetch';
-import { ENDPOINTS } from '../helpers/constants';
+import { DATE_UNITS, ENDPOINTS } from '../helpers/constants';
+import { before, cutData, downsampleData, downSampleDataForDateRange } from '../helpers/data';
 
 const PageWrapper = (Component) => {
   const wrappedComponent = (props) => <Component {...props} />
@@ -22,10 +23,34 @@ export const getStaticProps = async () => {
   try {
     const response = await fetch(ENDPOINTS.samples, dataFetchParams)
     const data = await response.json()
+
+    const latestSampleTimestamp = data.samples[data.samples.length -1].noaaTime
+
+    // const pageData = {
+    //   [DATE_UNITS.DAY]: downSampleDataForDateRange(latestSampleTimestamp, DATE_UNITS.DAY, data.samples),
+    //   [DATE_UNITS.WEEK]: downSampleDataForDateRange(latestSampleTimestamp, DATE_UNITS.WEEK, data.samples),
+    //   [DATE_UNITS.MONTH]: downSampleDataForDateRange(latestSampleTimestamp, DATE_UNITS.MONTH, data.samples),
+    //   [DATE_UNITS.YEAR]: downSampleDataForDateRange(latestSampleTimestamp, DATE_UNITS.YEAR, data.samples)
+    // }
+
+    // build out down sampled data for use in pages out of the Date Units object
+    const dsSamples = Object.entries(DATE_UNITS).reduce((prevPair, nextPair) => {
+      return {
+        ...prevPair,
+        [nextPair[1]]: downSampleDataForDateRange(latestSampleTimestamp, nextPair[1], data.samples)
+      }
+    }, {})
+
+
+    const { samples, ...pageProps} = data;
+
     return {
       props: {
-        ...data
-      }
+        ...pageProps,
+        ...dsSamples,
+        // samples: dsSamples[DATE_UNITS.YEAR]
+      },
+      revalidate: 60 * 15 // revalidate every 15 minutes
     }
   } catch (err){
     console.log(err)

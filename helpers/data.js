@@ -1,4 +1,6 @@
 import dayjs from 'dayjs'
+import { useState } from 'react';
+import content from '../content';
 
 /**
  * Generate a timestamp in the past
@@ -109,11 +111,31 @@ const formAxesSeries = (data, column) => {
  */
 const formatTimeStamp = (timestamp, format) => dayjs(timestamp).format(format || 'MMM D, YYYY')
 
+
+
+const downSampleDataForDateRange = (latestTimeStamp, dateRangeUnit, samples, maxResolution = 1000) => {
+  // const [domain, setDomain] = useState([latestSampleTimestamp, before(activeDateFilter, latestSampleTimestamp)])
+  const dsColumns = Array.from(Object.keys(content.dataPoints))
+  const domain = [latestTimeStamp, before(dateRangeUnit, latestTimeStamp)]
+
+  // const setSpan = unit => setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)])
+  // const filterOnClick = unit => {
+  //   setActiveDateFilter(unit)
+  //   setSpan(unit)
+  // }
+
+  const [max, min] = domain
+
+  const domainSamples = cutData(samples, 'noaaTime', min, max)
+  return downsampleData(domainSamples, 'noaaTime', dsColumns, maxResolution)
+}
+
 export {
   before,
   scale,
   cutData,
   downsampleData,
   formAxesSeries,
-  formatTimeStamp
+  formatTimeStamp,
+  downSampleDataForDateRange
 }
