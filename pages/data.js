@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import Tooltip from '../components/Tooltip'
-import PageWrapper, {getStaticProps} from '../components/PageWrapper';
+import PageWrapper, { getPageData } from '../components/PageWrapper';
 
 //dynamically / lazy load import graphs component without server side rendering as chart.js + zoom and pan requires usage of browser window API
 const DynamicGraphs = dynamic(() => import('../components/Graphs'), {ssr: false})
@@ -30,5 +30,7 @@ const DataPage = ({ sources, units, ...samples }) => {
 DataPage.displayName = 'DataPage'
 
 // export default DataPage
-export { getStaticProps }
+// export { getStaticProps }
+export const getStaticProps = getPageData('data') // returns getStaticProps Next.js function that has access to page argument
+
 export default PageWrapper(DataPage)

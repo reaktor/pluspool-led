@@ -6,10 +6,10 @@ import TitleText from '../components/TitleText'
 import SvgVisualization from '../components/SvgVisualization'
 import Tooltip from '../components/Tooltip'
 import { useSample } from '../hooks/useSamples'
-import PageWrapper, {getStaticProps} from '../components/PageWrapper'
+import PageWrapper, {getPageData} from '../components/PageWrapper'
 import { DATE_UNITS } from '../helpers/constants';
 
-const IndexPage = ({ sources, units, ...samples }) => {
+const IndexPage = ({ sources, units, full, ...samples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState()
   const [sample, range, timestamp, setTimestamp] = useSample(samples[DATE_UNITS.YEAR])
@@ -56,5 +56,6 @@ const IndexPage = ({ sources, units, ...samples }) => {
 IndexPage.displayName = 'IndexPage'
 
 // export default IndexPage
-export { getStaticProps }
+export const getStaticProps = getPageData('index') // returns getStaticProps Next.js function that has access to page argument
+
 export default PageWrapper(IndexPage)
