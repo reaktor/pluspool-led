@@ -25,6 +25,11 @@
   padding-bottom: 20px;
 }
 
+.reloadButtonContainer {
+  position: relative;
+  width: 26px;
+}
+
 
 @media (min-width: 560px) {
   .topBar {

@@ -1,3 +1,16 @@
-.reloadButton:is(:hover, :focus) {
+
+/*Apply a hover color similar to other <a> tags*/
+.reloadButton:hover {
     color: #808080;
+}
+
+/*Apply a url like outline when focused via keyboard*/
+.reloadButton:focus-visible {
+    box-shadow: 0 0 0 2px #0000EE;
+    border-radius: 4px;
+}
+
+/*remove any outline upon click or press*/
+.reloadButton:focus:not(:focus-visible) {
+    outline: none;
 }

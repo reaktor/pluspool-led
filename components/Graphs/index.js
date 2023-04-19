@@ -104,7 +104,9 @@ const Graphs = ({ openTooltip, units, samples }) => {
           onChange={filterOnClick}
           name='span'
         />
-        <ReloadButton />
+        <div className={styles.reloadButtonContainer}>
+          <ReloadButton />
+        </div>
         <DownloadData />
         <DataDisclaimer />
       </div>
