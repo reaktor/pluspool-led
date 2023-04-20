@@ -1,13 +1,9 @@
-import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
-import { dataFetchProcess } from '../helpers/dataLoader'
 import content from '../content'
-import { ENDPOINTS, GA_TRACKING_ID } from '../helpers/constants';
-import ProgressBar from '../components/ProgressBar'
+import { GA_TRACKING_ID } from '../helpers/constants';
 import Script from 'next/script'
 import './global.css';
-import fetch from 'isomorphic-unfetch';
 
 
 const Header = () => (
@@ -47,13 +43,6 @@ const GoogleAnalytics = () => (
 )
 
 const PlusPoolApp = ({ Component, pageProps }) => {
-
-  // const [state, setState] = useState({ data: null })
-
-  // useEffect(() => {
-  //   dataFetchProcess.start(data => setState({ data }))
-  // }, [setState]) // conform to React exhaustive-deps
-
   return (
     <div className='container' data-template={Component.displayName}>
       <GoogleAnalytics />
@@ -61,9 +50,6 @@ const PlusPoolApp = ({ Component, pageProps }) => {
       <Header />
       <Navbar />
       <Component {...pageProps} />
-      {
-        // state.data ? (<Component {...pageProps} {...state.data} />) : <ProgressBar />
-      }
     </div>
   )
 }
