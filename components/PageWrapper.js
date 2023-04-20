@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-// import fetch from 'isomorphic-unfetch';
 import { DATE_UNITS, ENDPOINTS } from '../helpers/constants';
 import { downSampleDataForDateRange } from '../helpers/data';
 
