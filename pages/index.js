@@ -9,7 +9,7 @@ import { useSample } from '../hooks/useSamples'
 import PageWrapper, {getPageData} from '../components/PageWrapper'
 import { DATE_UNITS } from '../helpers/constants';
 
-const IndexPage = ({ sources, units, full, ...samples }) => {
+const IndexPage = ({ sources, units, ...samples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
   const [tooltipSlug, setTooltipSlug] = useState()
   const [sample, range, timestamp, setTimestamp] = useSample(samples[DATE_UNITS.YEAR])
