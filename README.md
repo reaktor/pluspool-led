@@ -57,7 +57,7 @@ To start developing:
 **New:**
 
 Deployments are done with [Vercel](https://vercel.com/plus-pool/). Any pushes to the `stable` branch trigger a deploy.
-Vercel hosts our Next.js app with SSG(Static Site Generation) and ISG (Incremental Static Regeneration).
+Vercel hosts our Next.js app with SSG(Static Site Generation) and ISR (Incremental Static Regeneration).
 
 **AWS CDK Step function worfklow also triggers a site deploy via deploy hook everytime data scraping completes based on its cron schedule**
 
