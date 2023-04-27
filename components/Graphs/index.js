@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types'
-import { before, cutData, downsampleData, formAxesSeries } from '../../helpers/data';
+import { formAxesSeries } from '../../helpers/data';
 import content from '../../content'
 import Graph from '../Graph'
 import GraphsDateFilter from '../GraphsDateFilter'
@@ -8,7 +8,6 @@ import DownloadData from '../DownloadData'
 import styles from './Graphs.module.css';
 import DataDisclaimer from '../DataDisclaimer';
 import { DATE_UNITS } from '../../helpers/constants';
-import ReloadIcon from '../../icons/Reload';
 import { useRouter } from 'next/router';
 
 //Import ChartJs and register all the plugins necessary for our usage
