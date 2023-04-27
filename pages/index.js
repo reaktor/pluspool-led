@@ -55,7 +55,6 @@ const IndexPage = ({ sources, units, ...samples }) => {
 
 IndexPage.displayName = 'IndexPage'
 
-// export default IndexPage
 export const getStaticProps = getPageData('index') // returns getStaticProps Next.js function that has access to page argument
 
 export default PageWrapper(IndexPage)

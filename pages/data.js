@@ -29,8 +29,6 @@ const DataPage = ({ sources, units, ...samples }) => {
 
 DataPage.displayName = 'DataPage'
 
-// export default DataPage
-// export { getStaticProps }
 export const getStaticProps = getPageData('data') // returns getStaticProps Next.js function that has access to page argument
 
 export default PageWrapper(DataPage)
