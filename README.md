@@ -74,14 +74,14 @@ can be found [here](https://nextjs.org/docs#static-html-export).
 
 For info on the S3 configuration for the data files look [here](https://github.com/reaktor/pluspool-led-scrape-data).
 
-## Configuration for Netlify
+## Configuration for Vercel
 
 ### Build settings
 
 - Repository: `github.com/reaktor/pluspool-led`
 - Base directory: `Not set`
-- Build command: `npm run deploy`
-- Publish directory: `/out`
+- Build command: `npm run build`
+- Output directory: `Next.js default`
 
 ### Deploy contexts
 
@@ -91,7 +91,7 @@ For info on the S3 configuration for the data files look [here](https://github.c
 
 # Technology
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project built with Next.js
 
 
 [github issues]: https://github.com/reaktor/pluspool-led/issues
