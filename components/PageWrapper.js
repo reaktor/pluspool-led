@@ -60,7 +60,7 @@ export const getPageData = (page) => {
           //samples: data.samples // non-sampled data
           //samples: dsSamples[DATE_UNITS.YEAR] // example of returning a set of samples for a specific date unit
         },
-        revalidate: 60 * 15 // revalidate every 15 minutes
+        revalidate: 60 * 15 // revalidate every 15 minutes <- provides Incremental Static Regeneration
       };
     } catch (err) {
       console.log(err);
