@@ -115,15 +115,8 @@ const formatTimeStamp = (timestamp, format) => dayjs(timestamp).format(format ||
 
 
 const downSampleDataForDateRange = (latestTimeStamp, dateRangeUnit, samples, maxResolution = 1000) => {
-  // const [domain, setDomain] = useState([latestSampleTimestamp, before(activeDateFilter, latestSampleTimestamp)])
   const dsColumns = Array.from(Object.keys(content.dataPoints))
   const domain = [latestTimeStamp, before(dateRangeUnit, latestTimeStamp)]
-
-  // const setSpan = unit => setDomain([latestSampleTimestamp, before(unit, latestSampleTimestamp)])
-  // const filterOnClick = unit => {
-  //   setActiveDateFilter(unit)
-  //   setSpan(unit)
-  // }
 
   const [max, min] = domain
 
