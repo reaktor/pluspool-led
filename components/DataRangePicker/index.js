@@ -6,6 +6,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { throttle } from 'lodash';
 import { scale } from '../../helpers/data';
 import { isMobile } from '../../helpers/layout';
+import useIsMobile from '../../hooks/useIsMobile';
 import 'rc-slider/assets/index.css';
 import styles from './DataRangePicker.module.css';
 
@@ -33,83 +34,69 @@ const handle = ({
   );
 };
 
-class DataRangePicker extends React.Component {
-  constructor (props) {
-    super(props);
+const DataRangePicker = (props) => {
+  const isMobile = useIsMobile();
 
-    this.onChange = throttle(this.onChange, 1000 / 60);
-  }
+  const { timestamp, range: { start, end }} = props
 
-  onChange (value) {
-    const { setTimestamp } = this.props;
-    setTimestamp(this.scaleFrom(value));
-  }
-
-  // Scale from Slider value to our timestamp
-  scaleFrom (value) {
-    const {
-      range: { start, end },
-    } = this.props;
+  const scaleFrom = (value) => {
     // On mobile we need to flip our min and max in order to have the slider start from the left
     // Without doing this the slider would put "Today" at the right side
-    return isMobile()
+    return isMobile
       ? scale(value, SLIDER_MAX, SLIDER_MIN, start, end)
       : scale(value, SLIDER_MIN, SLIDER_MAX, start, end);
   }
 
-  // Scale our timestamp to our Slider value
-  scaleTo (value) {
-    const {
-      range: { start, end },
-    } = this.props;
+  const scaleTo = (value) => {
     // On mobile we need to flip our min and max in order to have the slider start from the left
     // Without doing this the slider would put "Today" at the right side
-    return isMobile()
+    return isMobile
       ? scale(value, start, end, SLIDER_MAX, SLIDER_MIN)
       : scale(value, start, end, SLIDER_MIN, SLIDER_MAX);
   }
 
-  render () {
-    const {
-      timestamp,
-      range: { start, end },
-    } = this.props;
-
-    const timestampDate = dayjs(timestamp);
-    const formattedDate = dayjs(timestamp).format('ddd MMM D, YYYY');
-
-    const startDate = dayjs(start);
-    const atStart = startDate.isSame(timestampDate);
-
-    const endDate = dayjs(end);
-    const atEnd = endDate.isSame(timestampDate);
-
-    return (
-      <div className={styles.container}>
-        <div className={cx(styles.sliderContainer, styles.customSliderContainer)}>
-          <RcSlider
-            className={styles.customSlider}
-            vertical={!isMobile()}
-            min={SLIDER_MIN}
-            max={SLIDER_MAX}
-            value={this.scaleTo(timestamp)}
-            onChange={(value) => this.onChange(value)}
-            railStyle={{ width: '100%' }}
-            handleRender={(node) => handle({
-              label: formattedDate,
-              atStart,
-              atEnd,
-              ...node.props
-            })}
-          />
-        </div>
-        <div className={styles.labels}>
-          <label className={styles.label}>Latest</label>
-          <label className={styles.label}>Oldest</label>
-        </div>
-      </div>
-    );
+  const throttledOnchange = (value) => {
+    const { setTimestamp } = props;
+    setTimestamp(scaleFrom(value));
   }
+
+  const onChange = throttle(throttledOnchange, 1000 / 600)
+
+  const timestampDate = dayjs(timestamp);
+  const formattedDate = dayjs(timestamp).format('ddd MMM D, YYYY');
+
+  const startDate = dayjs(start);
+  const atStart = startDate.isSame(timestampDate);
+
+  const endDate = dayjs(end);
+  const atEnd = endDate.isSame(timestampDate);
+
+  return (
+    <div className={styles.container}>
+      <div className={cx(styles.sliderContainer, styles.customSliderContainer)}>
+        <RcSlider
+          className={styles.customSlider}
+          vertical={!isMobile}
+          min={SLIDER_MIN}
+          max={SLIDER_MAX}
+          value={scaleTo(timestamp)}
+          onChange={(value) => onChange(value)}
+          railStyle={{ width: '100%' }}
+          handleRender={(node) => handle({
+            label: formattedDate,
+            atStart,
+            atEnd,
+            ...node.props
+          })}
+        />
+      </div>
+      <div className={styles.labels}>
+        <label className={styles.label}>Latest</label>
+        <label className={styles.label}>Oldest</label>
+      </div>
+    </div>
+  );
+
 }
 
-export default DataRangePicker;
+export default DataRangePicker
