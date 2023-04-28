@@ -5,7 +5,7 @@ const tooltipText = 'But even if we say water is great for swimming, we are NOT 
 
 export default {
   introText: <><span>We tracked the water in the NYC harbor at Pier 17.</span></>,
-  introCta: 'Click here see the results.',
+  introCta: 'Click here to see the results.',
   bacteriaText: {
     acceptable: <>great for <TitleTextTooltip tooltipText={tooltipText}>swimming</TitleTextTooltip>.</>,
     unacceptablePersist: <>not great for <TitleTextTooltip tooltipText={tooltipText}>swimming</TitleTextTooltip> if levels persist.</>,
