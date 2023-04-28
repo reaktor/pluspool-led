@@ -1,7 +1,5 @@
 This is a water quality data visualization and exploration tool. You can view it on https://water.pluspool.org.
 
-Vercel and latest version: https://beta.pluspool.org/
-
 If you are interested in helping out, check [the projects board][] and reach out in #pluspool and via pluspool@reaktor.com.
 
 We are happy to receive any feedback using [github issues][]
@@ -63,7 +61,7 @@ Vercel hosts our Next.js app with SSG(Static Site Generation) and ISR (Increment
 
 __
 
-**Legacy:**
+**Legacy:** site settings can still be viewed, but dns zones are deleted and repository link disabled.
 
 Deployments are done with [Netlify](https://www.netlify.com/). Any pushes to the `stable` branch trigger a deploy. 
 Netlify is a static site hosting service therefore `npm run deploy` runs `next build` as well as `next export`.
@@ -72,7 +70,7 @@ can be found [here](https://nextjs.org/docs#static-html-export).
 
 ## Configuration for S3
 
-For info on the S3 configuration for the data files look [here](https://github.com/reaktor/pluspool-led-scrape-data).
+For info on the S3 configuration for the data files look [here](https://github.com/reaktor/pluspool-serverless).
 
 ## Configuration for Vercel
 
