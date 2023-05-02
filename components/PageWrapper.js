@@ -17,7 +17,7 @@ export const getPageData = (page) => {
   //this function will be the getStaticProps
   return async (context) => {
 
-    console.log(page); // currently just logs the page name, but can be used to dynamically change what happens during getStaticProps
+    //page param can be used to dynamically change what happens during getStaticProps, as shown below
 
     const dataFetchParams = {
       method: 'GET',
@@ -42,23 +42,24 @@ export const getPageData = (page) => {
         // nextPair[1] = value of the current DATE_UNITS[key]
         return {
           ...prevPair,
-          [nextPair[1]]: downSampleDataForDateRange(latestSampleTimestamp, nextPair[1], data.samples)
+          [nextPair[1]]: downSampleDataForDateRange(latestSampleTimestamp, nextPair[1], data.samples, nextPair[1] === DATE_UNITS.YEAR && page === 'index' ? 500 : undefined)
+                                                                                                                  // down sample the yearly data for the index page further; it doesn't show a graph and can have much
+                                                                                                                  // fewer data points to deal with while getting the point across and having better performance than before.
+                                                                                                                  // DownSampleDataForDateRange resolution can be customized pear each date unit, as seen above.
+                                                                                                                  // EX: providing a resolution number that is the count of samples will have full resolution
         };
       }, {});
 
       // omit unsampled data and use down sampled data, instead
       const { samples, ...pageProps } = data;
 
-      // potential TODO:
-      // look into returning only a day of sampled data to the index page, so it's not burdened by all other samples and doesn't have to show a full year of samples, but rather most recent info for the last day with potentially full resolution.
-      // samples for the last 24 hours(day) can also be made to have full resolution -- downSampleDataForDateRange resolution can be customized pear each date unit, above -- by providing the resolution number that is the count of samples
-      // data page can take care of showing a year's worth of sample data
+      // index page has further down sampled yearly data, so it's not burdened by all other date unit samples or more detailed yearly data it doesn't need.
+      // data page can take care of showing a more detailed breakdown of the sampled data across date ranges.
       return {
         props: {
           ...pageProps,
-          ...dsSamples,
-          //samples: data.samples // non-sampled data
-          //samples: dsSamples[DATE_UNITS.YEAR] // example of returning a set of samples for a specific date unit
+          ...(page === 'index' ? {samples: dsSamples[DATE_UNITS.YEAR]} : {...dsSamples}),
+          //samples: data.samples // EX: non-sampled data
         },
         revalidate: 60 * 15 // revalidate every 15 minutes <- provides Incremental Static Regeneration
       };
