@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import Tooltip from '../components/Tooltip'
 import PageWrapper, { getPageData } from '../components/PageWrapper';
+import ProgressBar from '../components/ProgressBar';
 
 //dynamically / lazy load import graphs component without server side rendering as chart.js + zoom and pan requires usage of browser window API
-const DynamicGraphs = dynamic(() => import('../components/Graphs'), {ssr: false}) // can now add <ProgressBar /> to the loading prop of the options to simulate loading, if needed.
+const DynamicGraphs = dynamic(() => import('../components/Graphs'), {ssr: false, loading: () => <ProgressBar />}) // simulate loading of the graphs
 
 const DataPage = ({ sources, units, ...samples }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
