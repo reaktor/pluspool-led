@@ -1,30 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import Databar from '../components/Databar'
-import DataRangePicker from '../components/DataRangePicker'
-import TitleText from '../components/TitleText'
-import SvgVisualization from '../components/SvgVisualization'
-import Tooltip from '../components/Tooltip'
-import { useSample } from '../hooks/useSamples'
-import PageWrapper, {getPageData} from '../components/PageWrapper'
-import { DATE_UNITS } from '../helpers/constants';
+import Databar from "../components/Databar";
+import DataRangePicker from "../components/DataRangePicker";
+import TitleText from "../components/TitleText";
+import SvgVisualization from "../components/SvgVisualization";
+import Tooltip from "../components/Tooltip";
+import { useSample } from "../hooks/useSamples";
+import PageWrapper, { getPageData } from "../components/PageWrapper";
+// import { DATE_UNITS } from "../helpers/constants";
+
+import sampledata from "../sampledata";
 
 const IndexPage = ({ sources, units, samples }) => {
-  const [tooltipOpen, setTooltipOpen] = useState(false)
-  const [tooltipSlug, setTooltipSlug] = useState()
-  const [sample, range, timestamp, setTimestamp] = useSample(samples)
-  const [pageState, setPageState] = useState(0)
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [tooltipSlug, setTooltipSlug] = useState();
+  const [sample, range, timestamp, setTimestamp] = useSample(sampledata);
+  const [pageState, setPageState] = useState(0);
 
-  const advanceIntro = () => pageState < 1 && setPageState(pageState + 1)
+  console.log(sampledata);
+  const advanceIntro = () => pageState < 1 && setPageState(pageState + 1);
 
-  const openTooltip = slug => {
-    setTooltipSlug(slug)
-    setTooltipOpen(true)
-  }
-  const closeTooltip = () => setTooltipOpen(false)
+  const openTooltip = (slug) => {
+    setTooltipSlug(slug);
+    setTooltipOpen(true);
+  };
+  const closeTooltip = () => setTooltipOpen(false);
 
   return (
-    <main className='page' data-template='index' data-page-state={pageState}>
+    <main className="page" data-template="index" data-page-state={pageState}>
       <Tooltip
         open={tooltipOpen}
         slug={tooltipSlug}
@@ -44,17 +47,14 @@ const IndexPage = ({ sources, units, samples }) => {
         timestamp={timestamp}
         range={range}
       />
-      <Databar
-        openTooltip={openTooltip}
-        sample={sample}
-      />
+      <Databar openTooltip={openTooltip} sample={sample} />
       <SvgVisualization sample={sample} />
     </main>
-  )
-}
+  );
+};
 
-IndexPage.displayName = 'IndexPage'
+IndexPage.displayName = "IndexPage";
 
-export const getStaticProps = getPageData('index') // returns getStaticProps Next.js function that has access to page argument
+export const getStaticProps = getPageData("index"); // returns getStaticProps Next.js function that has access to page argument
 
-export default PageWrapper(IndexPage)
+export default PageWrapper(IndexPage);
