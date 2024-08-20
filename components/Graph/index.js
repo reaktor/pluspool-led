@@ -1,10 +1,10 @@
-import Circle from '../../icons/Circle'
-import CloseCircle from '../../icons/CloseCircle'
-import OverlayData from '../../icons/OverlayData'
-import QuestionMark from '../../icons/QuestionMark'
-import content from '../../content'
-import styles from './Graph.module.css';
-import LineGraph from '../LineGraph';
+import Circle from "../../icons/Circle";
+import CloseCircle from "../../icons/CloseCircle";
+import OverlayData from "../../icons/OverlayData";
+import QuestionMark from "../../icons/QuestionMark";
+import content from "../../content";
+import styles from "./Graph.module.css";
+import LineGraph from "../LineGraph";
 
 const Graph = ({
   graph,
@@ -15,8 +15,7 @@ const Graph = ({
   openTooltip,
   units,
 }) => {
-
-  if (typeof document === 'undefined') return null
+  if (typeof document === "undefined") return null;
 
   return (
     <section>
@@ -62,7 +61,7 @@ const Graph = ({
           {content.tooltip[graph.slug] && (
             <button
               aria-label={`${graph.slug} details`}
-              type='button'
+              type="button"
               className={styles.questionMark}
               onClick={() => openTooltip(graph.slug)}
             >
@@ -86,4 +85,4 @@ const Graph = ({
   );
 };
 
-export default Graph
+export default Graph;
