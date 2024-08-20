@@ -1,5 +1,8 @@
-import { DATE_UNITS, ENDPOINTS } from '../helpers/constants';
-import { downSampleDataForDateRange } from '../helpers/data';
+import { DATE_UNITS, ENDPOINTS } from "../helpers/constants";
+import { downSampleDataForDateRange } from "../helpers/data";
+
+// For testing only
+import sampleData from "../sampledata.json";
 
 const PageWrapper = (Component) => {
   const wrappedComponent = (props) => <Component {...props} />;
@@ -16,39 +19,56 @@ const PageWrapper = (Component) => {
 export const getPageData = (page) => {
   //this function will be the getStaticProps
   return async (context) => {
-
     //page param can be used to dynamically change what happens during getStaticProps, as shown below
 
     const dataFetchParams = {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json', 'Accept-Encoding': 'gzip' }
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept-Encoding": "gzip",
+      },
       // referrer: 'no-referrer'
     };
 
     try {
-      const response = await fetch(ENDPOINTS.samples, dataFetchParams);
-      const data = await response.json();
+      // UNCOMMENT BELOW - Sample data for testing only
 
-      const latestSampleTimestamp = data.samples[data.samples.length - 1].noaaTime;
+      // const response = await fetch(ENDPOINTS.samples, dataFetchParams);
+      // const data = await response.json();
+
+      const data = sampleData;
+
+      const latestSampleTimestamp =
+        data.samples[data.samples.length - 1].noaaTime;
 
       // build out down sampled data for use in pages out of the Date Units object
-      const dsSamples = Object.entries(DATE_UNITS).reduce((prevPair, nextPair) => {
-        // at start:
-        // prevPair empty object
-        // nextPair is the first key value pair out of DATE_UNITS obj
-        // nextPair[1] = value of the current DATE_UNITS[key]
-        return {
-          ...prevPair,
-          [nextPair[1]]: downSampleDataForDateRange(latestSampleTimestamp, nextPair[1], data.samples, nextPair[1] === DATE_UNITS.YEAR && page === 'index' ? 500 : undefined)
-                                                                                                                  // down sample the yearly data for the index page further; it doesn't show a graph and can have much
-                                                                                                                  // fewer data points to deal with while getting the point across and having better performance than before.
-                                                                                                                  // DownSampleDataForDateRange resolution can be customized pear each date unit, as seen above.
-                                                                                                                  // EX: providing a resolution number that is the count of samples will have full resolution
-        };
-      }, {});
+      const dsSamples = Object.entries(DATE_UNITS).reduce(
+        (prevPair, nextPair) => {
+          // at start:
+          // prevPair empty object
+          // nextPair is the first key value pair out of DATE_UNITS obj
+          // nextPair[1] = value of the current DATE_UNITS[key]
+          return {
+            ...prevPair,
+            [nextPair[1]]: downSampleDataForDateRange(
+              latestSampleTimestamp,
+              nextPair[1],
+              data.samples,
+              nextPair[1] === DATE_UNITS.YEAR && page === "index"
+                ? 500
+                : undefined
+            ),
+            // down sample the yearly data for the index page further; it doesn't show a graph and can have much
+            // fewer data points to deal with while getting the point across and having better performance than before.
+            // DownSampleDataForDateRange resolution can be customized pear each date unit, as seen above.
+            // EX: providing a resolution number that is the count of samples will have full resolution
+          };
+        },
+        {}
+      );
 
       // omit unsampled data and use down sampled data, instead
       const { samples, ...pageProps } = data;
@@ -58,10 +78,12 @@ export const getPageData = (page) => {
       return {
         props: {
           ...pageProps,
-          ...(page === 'index' ? {samples: dsSamples[DATE_UNITS.YEAR]} : {...dsSamples}),
+          ...(page === "index"
+            ? { samples: dsSamples[DATE_UNITS.YEAR] }
+            : { ...dsSamples }),
           //samples: data.samples // EX: non-sampled data
         },
-        revalidate: 60 * 15 // revalidate every 15 minutes <- provides Incremental Static Regeneration
+        revalidate: 60 * 15, // revalidate every 15 minutes <- provides Incremental Static Regeneration
       };
     } catch (err) {
       console.log(err);
