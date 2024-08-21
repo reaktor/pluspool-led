@@ -2,9 +2,6 @@ import { DATE_UNITS, ENDPOINTS } from "../helpers/constants";
 import { downSampleDataForDateRange } from "../helpers/data";
 import { removeInvalidSamples } from "../helpers/removeInvalidSamples";
 
-// For testing only
-import sampleData from "../sampledata.json";
-
 const PageWrapper = (Component) => {
   const wrappedComponent = (props) => <Component {...props} />;
 
@@ -35,14 +32,8 @@ export const getPageData = (page) => {
     };
 
     try {
-      // UNCOMMENT BELOW - Sample data for testing only
-
-      // const response = await fetch(ENDPOINTS.samples, dataFetchParams);
-      // const data = await response.json();
-
-      console.log(sampleData.samples.length);
-      const data = removeInvalidSamples(sampleData);
-      console.log(data.samples.length);
+      const response = await fetch(ENDPOINTS.samples, dataFetchParams);
+      const data = removeInvalidSamples(await response.json());
 
       const latestSampleTimestamp =
         data.samples[data.samples.length - 1].noaaTime;
