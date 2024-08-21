@@ -1,6 +1,6 @@
 const ENDPOINTS = {
   samples:
-    "https://pluspoolserverlessstack-databucketa7e4f76c-1o43g6j698ys.s3.us-east-2.amazonaws.com/2020-04-30T00_00_46.330Z.json",
+    "https://pluspoolserverlessstack-databucketa7e4f76c-1o43g6j698ys.s3.us-east-2.amazonaws.com/samples.json",
 };
 
 const DIRECTIONS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
