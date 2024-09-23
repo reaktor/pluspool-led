@@ -202,15 +202,7 @@ export default {
           >
             Arup Engineering
           </a>{' '}
-          for creating a lab, and{' '}
-          <a
-            target='_BLANK'
-            rel='noopener noreferrer'
-            href='https://www.pier17ny.com/'
-          >
-            Pier 17
-          </a>{' '}
-          for letting us sample.
+          for creating a lab, and Pier 35 for letting us sample.
         </p>
         <p>
           This project is supported in part by an award from the National

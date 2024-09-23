@@ -14,7 +14,7 @@ We are happy to receive any feedback using [github issues][]
 
 ## data sources
 
-datagarrison - used for central park rainfall data, and the sensor in pier 17
+datagarrison - used for central park rainfall data, and the sensor in Pier 35
 
 noaa tides and currents - used for speed and direction of water flow
 

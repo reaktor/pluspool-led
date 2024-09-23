@@ -14,7 +14,8 @@ const DATE_UNITS = {
   MONTH: 'month',
   YEAR: 'year'
 }
-const DATA_DISCLAIMER = 'Disclaimer: Down sampled data may have missing or incorrect values due to possible issues such as a damaged, clogged or non-reporting sensor.'
+const DATA_DISCLAIMER =
+  'Disclaimer: Data may have missing or incorrect values due to damaged, clogged or non-reporting sensors. Friends of + POOL makes every effort to remedy sensors onsite swiftly when data is not being logged.';
 
 export { DIRECTIONS, ENDPOINTS, BASE_URL, GA_TRACKING_ID, DATA_DISCLAIMER, DATE_UNITS }
 
