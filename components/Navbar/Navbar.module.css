@@ -10,6 +10,7 @@
   padding-left: var(--outer-gutter);
   padding-right: var(--outer-gutter);
   height: var(--navbar--height);
+  min-height: var(--navbar--height);
 }
 
 @media (max-width: 849px) {

@@ -6,10 +6,8 @@ const tooltipText = 'But even if we say water is great for swimming, we are NOT 
 export default {
   introText: (
     <>
-      <span>
-        We’re tracking water quality of the river at Pier 35, the future site of
-        NYC’s first water-filtering floating swimming pool.
-      </span>
+      We’re tracking water quality of the river at Pier 35, the future site of
+      NYC’s first water-filtering floating swimming pool.
     </>
   ),
   introCta: 'Click here to see the results.',
