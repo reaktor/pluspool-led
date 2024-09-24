@@ -19,12 +19,20 @@ const slides = [
     title: 'Billion Oyster Project',
     body: (
       <p>
-        The Billion Oyster Project of the New York Harbor School is teaching
-        students to cultivate oysters, which naturally filter the river, with
-        the goal of cultivating one billion oysters by 2030. Volunteer with the
-        Billion Oyster Project! Work alongside staff and students to build
-        oyster reef structures, prepare recycled shell for new oysters, sort and
-        count baby oysters, and much more.
+        The{' '}
+        <a
+          target='_BLANK'
+          rel='noopener noreferrer'
+          href='https://www.billionoysterproject.org/'
+        >
+          Billion Oyster Project
+        </a>{' '}
+        of the New York Harbor School is teaching students to cultivate oysters,
+        which naturally filter the river, with the goal of cultivating one
+        billion oysters by 2030. Volunteer with the Billion Oyster Project! Work
+        alongside staff and students to build oyster reef structures, prepare
+        recycled shell for new oysters, sort and count baby oysters, and much
+        more.
       </p>
     ),
   },
@@ -42,7 +50,7 @@ const slides = [
         <a
           target='_BLANK'
           rel='noopener noreferrer'
-          href='http://www.nycwatertrail.org/index.html'
+          href='http://www.nycwatertrail.org'
         >
           here
         </a>
