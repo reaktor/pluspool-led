@@ -111,79 +111,55 @@ export default {
         </ul>
       </section>
       <section>
-        <h3>Sonde Installation</h3>
+        <h3>Data Collection</h3>
+        <ul>
+          <li>
+            <a
+              target='_BLANK'
+              rel='noopener noreferrer'
+              href='https://noaa.gov'
+            >
+              National Oceanic and Atmospheric Administration
+            </a>
+          </li>
+          <li>
+            {' '}
+            <a
+              target='_BLANK'
+              rel='noopener noreferrer'
+              href='https://xylem.com'
+            >
+              Xylem
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h3>Data Analysis</h3>
+        <ul>
+          <li>
+            <a
+              target='_BLANK'
+              rel='noopener noreferrer'
+              href='https://www.iec-nynjct.org/'
+            >
+              Interstate Environmental Commission
+            </a>
+          </li>
+          <li>Evelyn Powers</li>
+          <li>Jovan Snyder</li>
+          <li>Samantha Wilder</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Advisors</h3>
         <ul>
           <li>Rob Buchanan</li>
-          <li>Wade McGillis</li>
-          <li>Haokai Zhao</li>
-        </ul>
-      </section>
-      <section>
-        <h3>Lab Testing</h3>
-        <ul>
-          <li>Aaniyla Allen-Sutherland</li>
-        </ul>
-      </section>
-      <section>
-        <h3>Data Collection &amp; Analysis</h3>
-        <ul>
-          <li>
-            <a
-              target='_BLANK'
-              rel='noopener noreferrer'
-              href='https://www.columbia.edu/'
-            >
-              Columbia University
-            </a>
-          </li>
-          <li>
-            <a
-              target='_BLANK'
-              rel='noopener noreferrer'
-              href='https://www.ldeo.columbia.edu/'
-            >
-              Lamont-Doherty Earth Observatory
-            </a>
-          </li>
-          <li>Wade McGillis</li>
-          <li>
-            <a
-              target='_BLANK'
-              rel='noopener noreferrer'
-              href='http://www.mit.edu/'
-            >
-              Massachusetts Institute of Technology
-            </a>
-          </li>
-          <li>
-            <a
-              target='_BLANK'
-              rel='noopener noreferrer'
-              href='https://www.whoi.edu/'
-            >
-              Woods Hole Oceanographic Institution
-            </a>
-          </li>
+          <li>Dr. Wade McGillis</li>
           <li>Shawnee Taylor</li>
         </ul>
       </section>
-      <section>
-        <h3>Microbiology Early Warning ALERT Instrumentation</h3>
-        <ul>
-          <li>
-            <a
-              target='_BLANK'
-              rel='noopener noreferrer'
-              href='http://fluidion.com/en'
-            >
-              Fluidion
-            </a>
-          </li>
-          <li>Dan Angelescu</li>
-          <li>Andreas Hausot</li>
-          <li>Joyce Wong</li>
-        </ul>
-      </section>
+
       <section>
         <p>
           Special thanks to{' '}

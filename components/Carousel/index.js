@@ -97,7 +97,7 @@ const slides = [
         <a
           target='_BLANK'
           rel='noopener noreferrer'
-          href='http://www.newtowncreekalliance.org/eyes-on-the-creek/'
+          href='https://www.newtowncreekalliance.org/enforcement'
         >
           Eye on the Creek
         </a>{' '}
