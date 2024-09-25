@@ -149,6 +149,32 @@ const slides = [
       </p>
     ),
   },
+  {
+    image: '/img/about/image-iec.jpg',
+    description:
+      'Person in waders taking a water sample from the edge of a river',
+    body: (
+      <p>
+        The{' '}
+        <a
+          target='_BLANK'
+          rel='noopener noreferrer'
+          href='https://www.iec-nynjct.org'
+        >
+          Interstate Environmental Commission’s (IEC)
+        </a>{' '}
+        mission is to protect and enhance environmental quality through
+        cooperation, regulation, coordination, and mutual dialogue between
+        government and citizens in the Tri-State Region. IEC fosters: foster
+        improved understanding of the condition of District waters through
+        long-term and short-term ambient water quality monitoring surveys;
+        provides member states with compliance assistance through inspections,
+        monitoring and analyses; and facilitates dialogue and education on
+        interstate water pollution issues with regional agencies, organizations
+        and the public.
+      </p>
+    ),
+  },
 ];
 
 const getConfig = () => {
