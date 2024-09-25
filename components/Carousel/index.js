@@ -153,6 +153,7 @@ const slides = [
     image: '/img/about/image-iec.jpg',
     description:
       'Person in waders taking a water sample from the edge of a river',
+    title: 'Interstate Environmental Commission',
     body: (
       <p>
         The{' '}
