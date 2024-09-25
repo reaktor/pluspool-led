@@ -99,7 +99,7 @@ const slides = [
           rel='noopener noreferrer'
           href='https://www.newtowncreekalliance.org/enforcement'
         >
-          Eye on the Creek
+          Eyes on the Creek
         </a>{' '}
         Program.
       </p>
