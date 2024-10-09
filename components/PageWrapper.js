@@ -77,7 +77,8 @@ export const getPageData = (page) => {
             : { ...dsSamples }),
           //samples: data.samples // EX: non-sampled data
         },
-        revalidate: 60 * 15, // revalidate every 15 minutes <- provides Incremental Static Regeneration
+        revalidate: false
+          //60 * 15, // revalidate every 15 minutes <- provides Incremental Static Regeneration
       };
     } catch (err) {
       console.log(err);
