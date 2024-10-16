@@ -1,34 +1,35 @@
 import { DIRECTIONS } from "../helpers/constants";
 
 export default {
-  // bacteria: {
-  //   slug: 'bacteria',
-  //   color: '#F2BAD2',
-  //   label: 'Pathogens',
-  //   min: 0,
-  //   max: 300,
-  //   interperet: value => {
-  //     if (value < 35) return 'Good'
-  //     if (value < 104) return 'Bad'
-  //     return 'Ugly'
-  //   },
-  //   legend: [
-  //     {
-  //       value: 0,
-  //       label: 'Good'
-  //     },
-  //     {
-  //       value: 35,
-  //       label: 'Bad'
-  //     },
-  //     {
-  //       value: 104,
-  //       label: 'Ugly'
-  //     }
-  //   ],
-  //   disclaimerText: 'Since this is the main parameter the Health Department tracks when determining whether a body of water is safe for swimming, it is the only parameter we use to track whether the water is great (or not so great) for swimming. Of course all the other parameters listed here (like temperature!) impact your swimming experience!',
-  //   showNumber: false
-  // },
+  bacteria: {
+    slug: 'bacteria',
+    color: '#F2BAD2',
+    label: 'Pathogens',
+    min: 0,
+    max: 300,
+    interperet: (value) => {
+      if (value < 35) return 'Good';
+      if (value < 104) return 'Bad';
+      return 'Ugly';
+    },
+    legend: [
+      {
+        value: 0,
+        label: 'Good',
+      },
+      {
+        value: 35,
+        label: 'Bad',
+      },
+      {
+        value: 104,
+        label: 'Ugly',
+      },
+    ],
+    disclaimerText:
+      'Since this is the main parameter the Health Department tracks when determining whether a body of water is safe for swimming, it is the only parameter we use to track whether the water is great (or not so great) for swimming. Of course all the other parameters listed here (like temperature!) impact your swimming experience!',
+    showNumber: false,
+  },
   oxygen: {
     slug: 'oxygen',
     color: '#1443A7',

@@ -1,6 +1,8 @@
 const ENDPOINTS = {
+  testSamples:
+    'https://pluspool-east-river-data.s3.us-east-2.amazonaws.com/sampledata.json',
   samples:
-    "https://pluspoolserverlessstack-databucketa7e4f76c-1o43g6j698ys.s3.us-east-2.amazonaws.com/samples.json",
+    'https://pluspoolserverlessstack-databucketa7e4f76c-1o43g6j698ys.s3.us-east-2.amazonaws.com/samples.json',
 };
 
 const DIRECTIONS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];

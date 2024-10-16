@@ -20,20 +20,27 @@ export const getPageData = (page) => {
     //page param can be used to dynamically change what happens during getStaticProps, as shown below
 
     const dataFetchParams = {
-      method: "GET",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
+      method: 'GET',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
       headers: {
-        "Content-Type": "application/json",
-        "Accept-Encoding": "gzip",
+        'Content-Type': 'application/json',
+        'Accept-Encoding': 'gzip',
       },
       // referrer: 'no-referrer'
     };
 
     try {
-      const response = await fetch(ENDPOINTS.samples, dataFetchParams);
+      const samplesUri =
+        process.env.NODE_ENV === 'development'
+          ? ENDPOINTS.testSamples
+          : ENDPOINTS.samples;
+
+      const response = await fetch(samplesUri, dataFetchParams);
       const data = removeInvalidSamples(await response.json());
+
+      console.log(data);
 
       const latestSampleTimestamp =
         data.samples[data.samples.length - 1].noaaTime;
@@ -51,7 +58,7 @@ export const getPageData = (page) => {
               latestSampleTimestamp,
               nextPair[1],
               data.samples,
-              nextPair[1] === DATE_UNITS.YEAR && page === "index"
+              nextPair[1] === DATE_UNITS.YEAR && page === 'index'
                 ? 500
                 : undefined
             ),
@@ -72,7 +79,7 @@ export const getPageData = (page) => {
       return {
         props: {
           ...pageProps,
-          ...(page === "index"
+          ...(page === 'index'
             ? { samples: dsSamples[DATE_UNITS.YEAR] }
             : { ...dsSamples }),
           //samples: data.samples // EX: non-sampled data
