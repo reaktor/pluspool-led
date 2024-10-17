@@ -40,8 +40,6 @@ export const getPageData = (page) => {
       const response = await fetch(samplesUri, dataFetchParams);
       const data = removeInvalidSamples(await response.json());
 
-      console.log(data);
-
       const latestSampleTimestamp =
         data.samples[data.samples.length - 1].noaaTime;
 
