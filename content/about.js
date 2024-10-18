@@ -93,7 +93,7 @@ export default {
     <>
       <h2>Commissioned by Friends of + POOL, Inc.</h2>
       <section>
-        <h3>Designers</h3>
+        <h3>Design + Development</h3>
         <ul>
           <li>
             <a
@@ -104,10 +104,12 @@ export default {
               Reaktor Inc
             </a>
           </li>
+          <li>Stephen Cronin</li>
           <li>Jonathan Dahan</li>
+          <li>Anna Harrington</li>
+          <li>Amir Kaudinov</li>
           <li>Ross Langley</li>
           <li>Savas Ozay</li>
-          <li>Stephen Cronin</li>
         </ul>
       </section>
       <section>
