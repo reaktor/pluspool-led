@@ -32,10 +32,7 @@ export const getPageData = (page) => {
     };
 
     try {
-      const samplesUri =
-        process.env.NODE_ENV === 'development'
-          ? ENDPOINTS.testSamples
-          : ENDPOINTS.samples;
+      const samplesUri = ENDPOINTS.samples;
 
       const response = await fetch(samplesUri, dataFetchParams);
       const data = removeInvalidSamples(await response.json());
