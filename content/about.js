@@ -110,6 +110,7 @@ export default {
           <li>Amir Kaudinov</li>
           <li>Ross Langley</li>
           <li>Savas Ozay</li>
+          <li>Emma Smith</li>
         </ul>
       </section>
       <section>
