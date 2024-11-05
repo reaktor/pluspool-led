@@ -30,7 +30,7 @@ export default {
     </>
   ),
   speed: (
-    <p>Speed affects how fast (or how slow!) an area of water changes. Not related to the Keanue Reeves film(s)!</p>
+    <p>Speed affects how fast (or how slow!) an area of water changes. Not related to the Keanu Reeves film(s)!</p>
   ),
   direction: (
     <>
